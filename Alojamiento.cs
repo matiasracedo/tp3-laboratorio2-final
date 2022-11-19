@@ -17,7 +17,7 @@ namespace TP_II
         protected Image[] imagenes;
         int a;
         int b;
-     
+        int c;
         public Alojamiento(string direccion)
         {
             this.direccion = direccion;
