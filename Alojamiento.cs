@@ -16,13 +16,12 @@ namespace TP_II
         protected List<Reserva> reservas = new List<Reserva>();
         protected Image[] imagenes; 
      
-
         public Alojamiento(string direccion)
         {
             this.direccion = direccion;
             alta = true;
         }
-
+               
         public DateTime[] IntervaloFechasReservadas()
         {
             List<DateTime> retorno = new List<DateTime>();
