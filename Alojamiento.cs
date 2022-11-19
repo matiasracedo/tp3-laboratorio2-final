@@ -15,9 +15,8 @@ namespace TP_II
         
         protected List<Reserva> reservas = new List<Reserva>();
         protected Image[] imagenes;
-        int a;
-        int b;
-        int c;
+
+
         public Alojamiento(string direccion)
         {
             this.direccion = direccion;
