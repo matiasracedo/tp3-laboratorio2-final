@@ -14,7 +14,8 @@ namespace TP_II
         private bool alta;
         
         protected List<Reserva> reservas = new List<Reserva>();
-        protected Image[] imagenes; 
+        protected Image[] imagenes;
+        int a;
      
         public Alojamiento(string direccion)
         {
