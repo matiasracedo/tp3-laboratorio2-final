@@ -17,6 +17,7 @@ namespace TP_II
         protected Image[] imagenes;
 
         //prueba
+        //escritorio
         public Alojamiento(string direccion)
         {
             this.direccion = direccion;
