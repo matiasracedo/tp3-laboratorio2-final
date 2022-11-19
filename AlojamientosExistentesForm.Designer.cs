@@ -34,19 +34,23 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(2, 1);
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(3, 1);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(485, 251);
+            this.listBox1.Size = new System.Drawing.Size(645, 308);
             this.listBox1.TabIndex = 0;
             // 
             // AlojamientosExistentesForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(485, 252);
+            this.ClientSize = new System.Drawing.Size(647, 310);
             this.Controls.Add(this.listBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AlojamientosExistentesForm";
-            this.Text = "AlojamientosExistentesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Alojamientos";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AlojamientosExistentesForm_FormClosed);
             this.Load += new System.EventHandler(this.AlojamientosExistentesForm_Load);
             this.ResumeLayout(false);

@@ -1,0 +1,8 @@
+direccion; minDias; camas; precioBaseCasa; s1; s2; s3; s4; s5; s6 //Para casas
+direccion, nombre, tresEstrellas, cantSimples, cantDobles, cantTriples //Para Hoteles
+Chubut 2290;5;10;4000;Cochera;Pileta;WI-FI;Limpieza;Desayuno;Admite Mascota
+Catamarca 456;4;5;6000;Pileta;Desayuno;Admite Mascota;;;
+Jujuy 789;4;5;6000;Admite Mascota;;;;;
+Ibicuy 2222;Gran Hotel I;true;10;10;10
+Los Álamos 34;Álamo;true;35;20;10
+Los Álamos 3245;Puesta Del Sol;false;35;20;10

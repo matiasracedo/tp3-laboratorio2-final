@@ -54,12 +54,10 @@
             this.consultarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verListaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reservasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.modificarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.consultarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.verListaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
@@ -77,9 +75,10 @@
             // 
             // btnAgregarAloj
             // 
-            this.btnAgregarAloj.Location = new System.Drawing.Point(350, 29);
+            this.btnAgregarAloj.Location = new System.Drawing.Point(467, 36);
+            this.btnAgregarAloj.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAgregarAloj.Name = "btnAgregarAloj";
-            this.btnAgregarAloj.Size = new System.Drawing.Size(75, 46);
+            this.btnAgregarAloj.Size = new System.Drawing.Size(100, 57);
             this.btnAgregarAloj.TabIndex = 0;
             this.btnAgregarAloj.Text = "Agregar Alojamiento";
             this.btnAgregarAloj.UseVisualStyleBackColor = true;
@@ -87,9 +86,10 @@
             // 
             // btnConsultaAloj
             // 
-            this.btnConsultaAloj.Location = new System.Drawing.Point(512, 29);
+            this.btnConsultaAloj.Location = new System.Drawing.Point(683, 36);
+            this.btnConsultaAloj.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnConsultaAloj.Name = "btnConsultaAloj";
-            this.btnConsultaAloj.Size = new System.Drawing.Size(75, 46);
+            this.btnConsultaAloj.Size = new System.Drawing.Size(100, 57);
             this.btnConsultaAloj.TabIndex = 1;
             this.btnConsultaAloj.Text = "Consultar Alojamiento";
             this.btnConsultaAloj.UseVisualStyleBackColor = true;
@@ -97,9 +97,10 @@
             // 
             // btnModificarAloj
             // 
-            this.btnModificarAloj.Location = new System.Drawing.Point(431, 29);
+            this.btnModificarAloj.Location = new System.Drawing.Point(575, 36);
+            this.btnModificarAloj.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModificarAloj.Name = "btnModificarAloj";
-            this.btnModificarAloj.Size = new System.Drawing.Size(75, 46);
+            this.btnModificarAloj.Size = new System.Drawing.Size(100, 57);
             this.btnModificarAloj.TabIndex = 2;
             this.btnModificarAloj.Text = "Modificar Alojamiento";
             this.btnModificarAloj.UseVisualStyleBackColor = true;
@@ -110,9 +111,10 @@
             this.cbAlojamientos.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbAlojamientos.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbAlojamientos.FormattingEnabled = true;
-            this.cbAlojamientos.Location = new System.Drawing.Point(22, 29);
+            this.cbAlojamientos.Location = new System.Drawing.Point(29, 36);
+            this.cbAlojamientos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbAlojamientos.Name = "cbAlojamientos";
-            this.cbAlojamientos.Size = new System.Drawing.Size(311, 21);
+            this.cbAlojamientos.Size = new System.Drawing.Size(413, 24);
             this.cbAlojamientos.TabIndex = 3;
             this.cbAlojamientos.SelectedIndexChanged += new System.EventHandler(this.cbAlojamientos_SelectedIndexChanged);
             this.cbAlojamientos.TextChanged += new System.EventHandler(this.cbAlojamientos_TextChanged);
@@ -121,26 +123,30 @@
             // 
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.btnBusqueda);
-            this.groupBox1.Location = new System.Drawing.Point(28, 266);
+            this.groupBox1.Location = new System.Drawing.Point(37, 327);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(607, 115);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(809, 142);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Consulta general";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(22, 24);
+            this.pictureBox1.Location = new System.Drawing.Point(29, 30);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(158, 72);
+            this.pictureBox1.Size = new System.Drawing.Size(211, 89);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
             // btnBusqueda
             // 
-            this.btnBusqueda.Location = new System.Drawing.Point(512, 50);
+            this.btnBusqueda.Location = new System.Drawing.Point(683, 62);
+            this.btnBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBusqueda.Name = "btnBusqueda";
-            this.btnBusqueda.Size = new System.Drawing.Size(75, 46);
+            this.btnBusqueda.Size = new System.Drawing.Size(100, 57);
             this.btnBusqueda.TabIndex = 5;
             this.btnBusqueda.Text = "Buscar Alojamiento";
             this.btnBusqueda.UseVisualStyleBackColor = true;
@@ -151,18 +157,21 @@
             this.gBreservas.Controls.Add(this.btnModificarReserva);
             this.gBreservas.Controls.Add(this.btnAgregarReserva);
             this.gBreservas.Controls.Add(this.cbReservas);
-            this.gBreservas.Location = new System.Drawing.Point(28, 146);
+            this.gBreservas.Location = new System.Drawing.Point(37, 180);
+            this.gBreservas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBreservas.Name = "gBreservas";
-            this.gBreservas.Size = new System.Drawing.Size(607, 93);
+            this.gBreservas.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBreservas.Size = new System.Drawing.Size(809, 114);
             this.gBreservas.TabIndex = 5;
             this.gBreservas.TabStop = false;
             this.gBreservas.Text = "Reservas";
             // 
             // btnConsultaReserva
             // 
-            this.btnConsultaReserva.Location = new System.Drawing.Point(512, 33);
+            this.btnConsultaReserva.Location = new System.Drawing.Point(683, 41);
+            this.btnConsultaReserva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnConsultaReserva.Name = "btnConsultaReserva";
-            this.btnConsultaReserva.Size = new System.Drawing.Size(75, 46);
+            this.btnConsultaReserva.Size = new System.Drawing.Size(100, 57);
             this.btnConsultaReserva.TabIndex = 6;
             this.btnConsultaReserva.Text = "Consultar Reserva";
             this.btnConsultaReserva.UseVisualStyleBackColor = true;
@@ -170,9 +179,10 @@
             // 
             // btnModificarReserva
             // 
-            this.btnModificarReserva.Location = new System.Drawing.Point(431, 33);
+            this.btnModificarReserva.Location = new System.Drawing.Point(575, 41);
+            this.btnModificarReserva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModificarReserva.Name = "btnModificarReserva";
-            this.btnModificarReserva.Size = new System.Drawing.Size(75, 46);
+            this.btnModificarReserva.Size = new System.Drawing.Size(100, 57);
             this.btnModificarReserva.TabIndex = 2;
             this.btnModificarReserva.Text = "Modoficar Reserva";
             this.btnModificarReserva.UseVisualStyleBackColor = true;
@@ -180,9 +190,10 @@
             // 
             // btnAgregarReserva
             // 
-            this.btnAgregarReserva.Location = new System.Drawing.Point(350, 33);
+            this.btnAgregarReserva.Location = new System.Drawing.Point(467, 41);
+            this.btnAgregarReserva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAgregarReserva.Name = "btnAgregarReserva";
-            this.btnAgregarReserva.Size = new System.Drawing.Size(75, 46);
+            this.btnAgregarReserva.Size = new System.Drawing.Size(100, 57);
             this.btnAgregarReserva.TabIndex = 1;
             this.btnAgregarReserva.Text = "Agregar Reserva";
             this.btnAgregarReserva.UseVisualStyleBackColor = true;
@@ -193,9 +204,10 @@
             this.cbReservas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbReservas.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbReservas.FormattingEnabled = true;
-            this.cbReservas.Location = new System.Drawing.Point(22, 33);
+            this.cbReservas.Location = new System.Drawing.Point(29, 41);
+            this.cbReservas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbReservas.Name = "cbReservas";
-            this.cbReservas.Size = new System.Drawing.Size(311, 21);
+            this.cbReservas.Size = new System.Drawing.Size(413, 24);
             this.cbReservas.TabIndex = 0;
             this.cbReservas.SelectedIndexChanged += new System.EventHandler(this.cbReservas_SelectedIndexChanged);
             this.cbReservas.TextChanged += new System.EventHandler(this.cbReservas_TextChanged);
@@ -206,15 +218,18 @@
             this.groupBox2.Controls.Add(this.btnAgregarAloj);
             this.groupBox2.Controls.Add(this.btnModificarAloj);
             this.groupBox2.Controls.Add(this.btnConsultaAloj);
-            this.groupBox2.Location = new System.Drawing.Point(28, 26);
+            this.groupBox2.Location = new System.Drawing.Point(37, 32);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(607, 100);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(809, 123);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Alojamientos";
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.opciones,
             this.alojamientosStripMenu,
@@ -222,7 +237,7 @@
             this.acercaDeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(649, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(865, 28);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -233,14 +248,14 @@
             this.restarToolStripMenuItem,
             this.precioBaseToolStripMenuItem});
             this.opciones.Name = "opciones";
-            this.opciones.Size = new System.Drawing.Size(69, 20);
+            this.opciones.Size = new System.Drawing.Size(85, 24);
             this.opciones.Text = "Opciones";
             // 
             // guardarToolStripMenuItem
             // 
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
             this.guardarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.guardarToolStripMenuItem.Text = "Guardar";
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
@@ -248,7 +263,7 @@
             // 
             this.restarToolStripMenuItem.Name = "restarToolStripMenuItem";
             this.restarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.restarToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.restarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.restarToolStripMenuItem.Text = "Restar...";
             this.restarToolStripMenuItem.Click += new System.EventHandler(this.restarToolStripMenuItem_Click);
             // 
@@ -257,7 +272,7 @@
             this.precioBaseToolStripMenuItem.Name = "precioBaseToolStripMenuItem";
             this.precioBaseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
             this.precioBaseToolStripMenuItem.ShowShortcutKeys = false;
-            this.precioBaseToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.precioBaseToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.precioBaseToolStripMenuItem.Text = "Precio Base";
             this.precioBaseToolStripMenuItem.Click += new System.EventHandler(this.precioBaseToolStripMenuItem_Click);
             // 
@@ -268,17 +283,16 @@
             this.modificarToolStripMenuItem,
             this.consultarToolStripMenuItem,
             this.importarToolStripMenuItem,
-            this.exportarToolStripMenuItem,
-            this.verListaToolStripMenuItem});
+            this.exportarToolStripMenuItem});
             this.alojamientosStripMenu.Name = "alojamientosStripMenu";
-            this.alojamientosStripMenu.Size = new System.Drawing.Size(89, 20);
+            this.alojamientosStripMenu.Size = new System.Drawing.Size(111, 24);
             this.alojamientosStripMenu.Text = "Alojamientos";
             // 
             // agregarAlojStripMenu
             // 
             this.agregarAlojStripMenu.Name = "agregarAlojStripMenu";
             this.agregarAlojStripMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.agregarAlojStripMenu.Size = new System.Drawing.Size(180, 22);
+            this.agregarAlojStripMenu.Size = new System.Drawing.Size(224, 26);
             this.agregarAlojStripMenu.Text = "Agregar...";
             this.agregarAlojStripMenu.Click += new System.EventHandler(this.agregarAlojStripMenu_Click);
             // 
@@ -286,14 +300,14 @@
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
             this.modificarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.modificarToolStripMenuItem.Text = "Modificar...";
             this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
             // 
             // consultarToolStripMenuItem
             // 
             this.consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.consultarToolStripMenuItem.Text = "Consultar...";
             this.consultarToolStripMenuItem.Click += new System.EventHandler(this.consultarToolStripMenuItem_Click);
             // 
@@ -301,7 +315,7 @@
             // 
             this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
             this.importarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.importarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.importarToolStripMenuItem.Text = "Importar...";
             this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
             // 
@@ -309,33 +323,25 @@
             // 
             this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
             this.exportarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.exportarToolStripMenuItem.Text = "Exportar...";
             this.exportarToolStripMenuItem.Click += new System.EventHandler(this.exportarToolStripMenuItem_Click);
-            // 
-            // verListaToolStripMenuItem
-            // 
-            this.verListaToolStripMenuItem.Name = "verListaToolStripMenuItem";
-            this.verListaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.verListaToolStripMenuItem.Text = "Ver Lista";
-            this.verListaToolStripMenuItem.Click += new System.EventHandler(this.verListaToolStripMenuItem_Click);
             // 
             // reservasToolStripMenuItem
             // 
             this.reservasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarToolStripMenuItem1,
             this.modificarToolStripMenuItem1,
-            this.consultarToolStripMenuItem1,
-            this.verListaToolStripMenuItem1});
+            this.consultarToolStripMenuItem1});
             this.reservasToolStripMenuItem.Name = "reservasToolStripMenuItem";
-            this.reservasToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.reservasToolStripMenuItem.Size = new System.Drawing.Size(80, 24);
             this.reservasToolStripMenuItem.Text = "Reservas";
             // 
             // agregarToolStripMenuItem1
             // 
             this.agregarToolStripMenuItem1.Name = "agregarToolStripMenuItem1";
             this.agregarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.agregarToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
+            this.agregarToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.agregarToolStripMenuItem1.Text = "Agregar...";
             this.agregarToolStripMenuItem1.Click += new System.EventHandler(this.agregarToolStripMenuItem1_Click);
             // 
@@ -343,51 +349,46 @@
             // 
             this.modificarToolStripMenuItem1.Name = "modificarToolStripMenuItem1";
             this.modificarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
-            this.modificarToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
+            this.modificarToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.modificarToolStripMenuItem1.Text = "Modificar...";
             this.modificarToolStripMenuItem1.Click += new System.EventHandler(this.modificarToolStripMenuItem1_Click);
             // 
             // consultarToolStripMenuItem1
             // 
             this.consultarToolStripMenuItem1.Name = "consultarToolStripMenuItem1";
-            this.consultarToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
+            this.consultarToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.consultarToolStripMenuItem1.Text = "Consultar...";
             this.consultarToolStripMenuItem1.Click += new System.EventHandler(this.consultarToolStripMenuItem1_Click);
-            // 
-            // verListaToolStripMenuItem1
-            // 
-            this.verListaToolStripMenuItem1.Name = "verListaToolStripMenuItem1";
-            this.verListaToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
-            this.verListaToolStripMenuItem1.Text = "Ver Lista";
-            this.verListaToolStripMenuItem1.Click += new System.EventHandler(this.verListaToolStripMenuItem1_Click);
             // 
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.informacionToolStripMenuItem});
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(98, 24);
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             // 
             // informacionToolStripMenuItem
             // 
             this.informacionToolStripMenuItem.Name = "informacionToolStripMenuItem";
             this.informacionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
-            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.informacionToolStripMenuItem.Text = "Informacion";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 258);
+            this.ClientSize = new System.Drawing.Size(865, 318);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gBreservas);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
-            this.Text = "Reservas 1.0";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Reservas 3.7";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -427,12 +428,10 @@
         private System.Windows.Forms.ToolStripMenuItem exportarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem verListaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reservasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem agregarToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem verListaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem precioBaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem informacionToolStripMenuItem;

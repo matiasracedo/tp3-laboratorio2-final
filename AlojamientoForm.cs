@@ -84,7 +84,5 @@ namespace TP_II
             fechas = ((Hotel)aConsultar).IntervaloFechasHabitacion(nroHabitacion);
             Calendario.BoldedDates = fechas;//pintar calendario habitacion
         }
-
-
     }
 }

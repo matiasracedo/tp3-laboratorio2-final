@@ -67,18 +67,20 @@
             // checkBoxCasa
             // 
             this.checkBoxCasa.AutoSize = true;
-            this.checkBoxCasa.Location = new System.Drawing.Point(17, 28);
+            this.checkBoxCasa.Location = new System.Drawing.Point(23, 34);
+            this.checkBoxCasa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBoxCasa.Name = "checkBoxCasa";
-            this.checkBoxCasa.Size = new System.Drawing.Size(50, 17);
+            this.checkBoxCasa.Size = new System.Drawing.Size(61, 20);
             this.checkBoxCasa.TabIndex = 0;
             this.checkBoxCasa.Text = "Casa";
             this.checkBoxCasa.UseVisualStyleBackColor = true;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(586, 248);
+            this.btnBuscar.Location = new System.Drawing.Point(781, 305);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(110, 36);
+            this.btnBuscar.Size = new System.Drawing.Size(147, 44);
             this.btnBuscar.TabIndex = 1;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -87,9 +89,10 @@
             // checkBoxHotel
             // 
             this.checkBoxHotel.AutoSize = true;
-            this.checkBoxHotel.Location = new System.Drawing.Point(99, 29);
+            this.checkBoxHotel.Location = new System.Drawing.Point(132, 36);
+            this.checkBoxHotel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBoxHotel.Name = "checkBoxHotel";
-            this.checkBoxHotel.Size = new System.Drawing.Size(51, 17);
+            this.checkBoxHotel.Size = new System.Drawing.Size(61, 20);
             this.checkBoxHotel.TabIndex = 2;
             this.checkBoxHotel.Text = "Hotel";
             this.checkBoxHotel.UseVisualStyleBackColor = true;
@@ -98,34 +101,38 @@
             // lbFechaInicio
             // 
             this.lbFechaInicio.AutoSize = true;
-            this.lbFechaInicio.Location = new System.Drawing.Point(72, 34);
+            this.lbFechaInicio.Location = new System.Drawing.Point(96, 42);
+            this.lbFechaInicio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFechaInicio.Name = "lbFechaInicio";
-            this.lbFechaInicio.Size = new System.Drawing.Size(68, 13);
+            this.lbFechaInicio.Size = new System.Drawing.Size(82, 16);
             this.lbFechaInicio.TabIndex = 3;
             this.lbFechaInicio.Text = "Fecha Inicio:";
             // 
             // lbFechaFinal
             // 
             this.lbFechaFinal.AutoSize = true;
-            this.lbFechaFinal.Location = new System.Drawing.Point(301, 34);
+            this.lbFechaFinal.Location = new System.Drawing.Point(401, 42);
+            this.lbFechaFinal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFechaFinal.Name = "lbFechaFinal";
-            this.lbFechaFinal.Size = new System.Drawing.Size(65, 13);
+            this.lbFechaFinal.Size = new System.Drawing.Size(80, 16);
             this.lbFechaFinal.TabIndex = 4;
             this.lbFechaFinal.Text = "Fecha Final:";
             // 
             // dtPickerInicio
             // 
-            this.dtPickerInicio.Location = new System.Drawing.Point(155, 31);
+            this.dtPickerInicio.Location = new System.Drawing.Point(207, 38);
+            this.dtPickerInicio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtPickerInicio.Name = "dtPickerInicio";
-            this.dtPickerInicio.Size = new System.Drawing.Size(126, 20);
+            this.dtPickerInicio.Size = new System.Drawing.Size(167, 22);
             this.dtPickerInicio.TabIndex = 5;
             this.dtPickerInicio.Value = new System.DateTime(2022, 11, 1, 0, 0, 0, 0);
             // 
             // dtPickerFinal
             // 
-            this.dtPickerFinal.Location = new System.Drawing.Point(386, 32);
+            this.dtPickerFinal.Location = new System.Drawing.Point(515, 39);
+            this.dtPickerFinal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtPickerFinal.Name = "dtPickerFinal";
-            this.dtPickerFinal.Size = new System.Drawing.Size(126, 20);
+            this.dtPickerFinal.Size = new System.Drawing.Size(167, 22);
             this.dtPickerFinal.TabIndex = 6;
             this.dtPickerFinal.Value = new System.DateTime(2022, 11, 30, 0, 0, 0, 0);
             // 
@@ -134,18 +141,21 @@
             this.gBoxFecha.Controls.Add(this.checkB3Estrellas);
             this.gBoxFecha.Controls.Add(this.checkBoxCasa);
             this.gBoxFecha.Controls.Add(this.checkBoxHotel);
-            this.gBoxFecha.Location = new System.Drawing.Point(12, 12);
+            this.gBoxFecha.Location = new System.Drawing.Point(16, 15);
+            this.gBoxFecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxFecha.Name = "gBoxFecha";
-            this.gBoxFecha.Size = new System.Drawing.Size(274, 64);
+            this.gBoxFecha.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxFecha.Size = new System.Drawing.Size(365, 79);
             this.gBoxFecha.TabIndex = 7;
             this.gBoxFecha.TabStop = false;
             // 
             // checkB3Estrellas
             // 
             this.checkB3Estrellas.AutoSize = true;
-            this.checkB3Estrellas.Location = new System.Drawing.Point(181, 29);
+            this.checkB3Estrellas.Location = new System.Drawing.Point(241, 36);
+            this.checkB3Estrellas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkB3Estrellas.Name = "checkB3Estrellas";
-            this.checkB3Estrellas.Size = new System.Drawing.Size(74, 17);
+            this.checkB3Estrellas.Size = new System.Drawing.Size(91, 20);
             this.checkB3Estrellas.TabIndex = 3;
             this.checkB3Estrellas.Text = "3 Estrellas";
             this.checkB3Estrellas.UseVisualStyleBackColor = true;
@@ -164,10 +174,12 @@
             this.columnaEstrellas,
             this.columnaCapacidad,
             this.minDias});
-            this.dataGridDisponibles.Location = new System.Drawing.Point(12, 315);
+            this.dataGridDisponibles.Location = new System.Drawing.Point(16, 388);
+            this.dataGridDisponibles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridDisponibles.Name = "dataGridDisponibles";
             this.dataGridDisponibles.RowHeadersVisible = false;
-            this.dataGridDisponibles.Size = new System.Drawing.Size(684, 242);
+            this.dataGridDisponibles.RowHeadersWidth = 51;
+            this.dataGridDisponibles.Size = new System.Drawing.Size(912, 298);
             this.dataGridDisponibles.TabIndex = 8;
             this.dataGridDisponibles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDisponibles_CellContentClick);
             this.dataGridDisponibles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDisponibles_CellDoubleClick);
@@ -175,53 +187,68 @@
             // columnaTipo
             // 
             this.columnaTipo.HeaderText = "Tipo";
+            this.columnaTipo.MinimumWidth = 6;
             this.columnaTipo.Name = "columnaTipo";
             this.columnaTipo.ReadOnly = true;
+            this.columnaTipo.Width = 125;
             // 
             // columnaDirección
             // 
             this.columnaDirección.HeaderText = "Dirección";
+            this.columnaDirección.MinimumWidth = 6;
             this.columnaDirección.Name = "columnaDirección";
             this.columnaDirección.ReadOnly = true;
+            this.columnaDirección.Width = 125;
             // 
             // columnaNombre
             // 
             this.columnaNombre.HeaderText = "Nombre";
+            this.columnaNombre.MinimumWidth = 6;
             this.columnaNombre.Name = "columnaNombre";
             this.columnaNombre.ReadOnly = true;
+            this.columnaNombre.Width = 125;
             // 
             // columnaEstrellas
             // 
             this.columnaEstrellas.HeaderText = "Status";
+            this.columnaEstrellas.MinimumWidth = 6;
             this.columnaEstrellas.Name = "columnaEstrellas";
             this.columnaEstrellas.ReadOnly = true;
+            this.columnaEstrellas.Width = 125;
             // 
             // columnaCapacidad
             // 
             this.columnaCapacidad.HeaderText = "Capacidad";
+            this.columnaCapacidad.MinimumWidth = 6;
             this.columnaCapacidad.Name = "columnaCapacidad";
             this.columnaCapacidad.ReadOnly = true;
+            this.columnaCapacidad.Width = 125;
             // 
             // minDias
             // 
             this.minDias.HeaderText = "Mínimo de días";
+            this.minDias.MinimumWidth = 6;
             this.minDias.Name = "minDias";
+            this.minDias.Width = 125;
             // 
             // gBoxCasa
             // 
             this.gBoxCasa.Controls.Add(this.numUDcamasCasa);
             this.gBoxCasa.Controls.Add(this.lbCamasCasa);
             this.gBoxCasa.Controls.Add(this.gBoxServicios);
-            this.gBoxCasa.Location = new System.Drawing.Point(12, 83);
+            this.gBoxCasa.Location = new System.Drawing.Point(16, 102);
+            this.gBoxCasa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxCasa.Name = "gBoxCasa";
-            this.gBoxCasa.Size = new System.Drawing.Size(684, 147);
+            this.gBoxCasa.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxCasa.Size = new System.Drawing.Size(912, 181);
             this.gBoxCasa.TabIndex = 12;
             this.gBoxCasa.TabStop = false;
             this.gBoxCasa.Text = "Filtro Casa";
             // 
             // numUDcamasCasa
             // 
-            this.numUDcamasCasa.Location = new System.Drawing.Point(118, 35);
+            this.numUDcamasCasa.Location = new System.Drawing.Point(157, 43);
+            this.numUDcamasCasa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numUDcamasCasa.Maximum = new decimal(new int[] {
             20,
             0,
@@ -233,7 +260,7 @@
             0,
             0});
             this.numUDcamasCasa.Name = "numUDcamasCasa";
-            this.numUDcamasCasa.Size = new System.Drawing.Size(52, 20);
+            this.numUDcamasCasa.Size = new System.Drawing.Size(69, 22);
             this.numUDcamasCasa.TabIndex = 10;
             this.numUDcamasCasa.Value = new decimal(new int[] {
             1,
@@ -244,9 +271,10 @@
             // lbCamasCasa
             // 
             this.lbCamasCasa.AutoSize = true;
-            this.lbCamasCasa.Location = new System.Drawing.Point(14, 38);
+            this.lbCamasCasa.Location = new System.Drawing.Point(19, 47);
+            this.lbCamasCasa.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCamasCasa.Name = "lbCamasCasa";
-            this.lbCamasCasa.Size = new System.Drawing.Size(98, 13);
+            this.lbCamasCasa.Size = new System.Drawing.Size(124, 16);
             this.lbCamasCasa.TabIndex = 9;
             this.lbCamasCasa.Text = "Cantidad de camas";
             // 
@@ -258,9 +286,11 @@
             this.gBoxServicios.Controls.Add(this.checkBMascota);
             this.gBoxServicios.Controls.Add(this.checkBPileta);
             this.gBoxServicios.Controls.Add(this.checkBCochera);
-            this.gBoxServicios.Location = new System.Drawing.Point(210, 19);
+            this.gBoxServicios.Location = new System.Drawing.Point(280, 23);
+            this.gBoxServicios.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxServicios.Name = "gBoxServicios";
-            this.gBoxServicios.Size = new System.Drawing.Size(317, 112);
+            this.gBoxServicios.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxServicios.Size = new System.Drawing.Size(423, 138);
             this.gBoxServicios.TabIndex = 8;
             this.gBoxServicios.TabStop = false;
             this.gBoxServicios.Text = "Servicios";
@@ -268,9 +298,10 @@
             // checkBWiFi
             // 
             this.checkBWiFi.AutoSize = true;
-            this.checkBWiFi.Location = new System.Drawing.Point(25, 81);
+            this.checkBWiFi.Location = new System.Drawing.Point(33, 100);
+            this.checkBWiFi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBWiFi.Name = "checkBWiFi";
-            this.checkBWiFi.Size = new System.Drawing.Size(52, 17);
+            this.checkBWiFi.Size = new System.Drawing.Size(60, 20);
             this.checkBWiFi.TabIndex = 12;
             this.checkBWiFi.Text = "WI-FI";
             this.checkBWiFi.UseVisualStyleBackColor = true;
@@ -278,9 +309,10 @@
             // checkBLimpieza
             // 
             this.checkBLimpieza.AutoSize = true;
-            this.checkBLimpieza.Location = new System.Drawing.Point(192, 19);
+            this.checkBLimpieza.Location = new System.Drawing.Point(256, 23);
+            this.checkBLimpieza.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBLimpieza.Name = "checkBLimpieza";
-            this.checkBLimpieza.Size = new System.Drawing.Size(67, 17);
+            this.checkBLimpieza.Size = new System.Drawing.Size(83, 20);
             this.checkBLimpieza.TabIndex = 11;
             this.checkBLimpieza.Text = "Limpieza";
             this.checkBLimpieza.UseVisualStyleBackColor = true;
@@ -288,9 +320,10 @@
             // checkBDesayuno
             // 
             this.checkBDesayuno.AutoSize = true;
-            this.checkBDesayuno.Location = new System.Drawing.Point(192, 50);
+            this.checkBDesayuno.Location = new System.Drawing.Point(256, 62);
+            this.checkBDesayuno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBDesayuno.Name = "checkBDesayuno";
-            this.checkBDesayuno.Size = new System.Drawing.Size(74, 17);
+            this.checkBDesayuno.Size = new System.Drawing.Size(91, 20);
             this.checkBDesayuno.TabIndex = 10;
             this.checkBDesayuno.Text = "Desayuno";
             this.checkBDesayuno.UseVisualStyleBackColor = true;
@@ -298,9 +331,10 @@
             // checkBMascota
             // 
             this.checkBMascota.AutoSize = true;
-            this.checkBMascota.Location = new System.Drawing.Point(192, 81);
+            this.checkBMascota.Location = new System.Drawing.Point(256, 100);
+            this.checkBMascota.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBMascota.Name = "checkBMascota";
-            this.checkBMascota.Size = new System.Drawing.Size(102, 17);
+            this.checkBMascota.Size = new System.Drawing.Size(126, 20);
             this.checkBMascota.TabIndex = 9;
             this.checkBMascota.Text = "Admite Mascota";
             this.checkBMascota.UseVisualStyleBackColor = true;
@@ -308,9 +342,10 @@
             // checkBPileta
             // 
             this.checkBPileta.AutoSize = true;
-            this.checkBPileta.Location = new System.Drawing.Point(25, 50);
+            this.checkBPileta.Location = new System.Drawing.Point(33, 62);
+            this.checkBPileta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBPileta.Name = "checkBPileta";
-            this.checkBPileta.Size = new System.Drawing.Size(52, 17);
+            this.checkBPileta.Size = new System.Drawing.Size(63, 20);
             this.checkBPileta.TabIndex = 8;
             this.checkBPileta.Text = "Pileta";
             this.checkBPileta.UseVisualStyleBackColor = true;
@@ -318,9 +353,10 @@
             // checkBCochera
             // 
             this.checkBCochera.AutoSize = true;
-            this.checkBCochera.Location = new System.Drawing.Point(25, 19);
+            this.checkBCochera.Location = new System.Drawing.Point(33, 23);
+            this.checkBCochera.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBCochera.Name = "checkBCochera";
-            this.checkBCochera.Size = new System.Drawing.Size(66, 17);
+            this.checkBCochera.Size = new System.Drawing.Size(80, 20);
             this.checkBCochera.TabIndex = 7;
             this.checkBCochera.Text = "Cochera";
             this.checkBCochera.UseVisualStyleBackColor = true;
@@ -331,9 +367,11 @@
             this.gBoxFiltroFecha.Controls.Add(this.dtPickerInicio);
             this.gBoxFiltroFecha.Controls.Add(this.dtPickerFinal);
             this.gBoxFiltroFecha.Controls.Add(this.lbFechaFinal);
-            this.gBoxFiltroFecha.Location = new System.Drawing.Point(13, 237);
+            this.gBoxFiltroFecha.Location = new System.Drawing.Point(17, 292);
+            this.gBoxFiltroFecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxFiltroFecha.Name = "gBoxFiltroFecha";
-            this.gBoxFiltroFecha.Size = new System.Drawing.Size(526, 60);
+            this.gBoxFiltroFecha.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxFiltroFecha.Size = new System.Drawing.Size(701, 74);
             this.gBoxFiltroFecha.TabIndex = 14;
             this.gBoxFiltroFecha.TabStop = false;
             this.gBoxFiltroFecha.Text = "Filtro Fecha";
@@ -342,9 +380,10 @@
             // 
             this.chechBoxFiltrarPorFecha.AutoSize = true;
             this.chechBoxFiltrarPorFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chechBoxFiltrarPorFecha.Location = new System.Drawing.Point(597, 59);
+            this.chechBoxFiltrarPorFecha.Location = new System.Drawing.Point(796, 73);
+            this.chechBoxFiltrarPorFecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chechBoxFiltrarPorFecha.Name = "chechBoxFiltrarPorFecha";
-            this.chechBoxFiltrarPorFecha.Size = new System.Drawing.Size(99, 17);
+            this.chechBoxFiltrarPorFecha.Size = new System.Drawing.Size(130, 21);
             this.chechBoxFiltrarPorFecha.TabIndex = 15;
             this.chechBoxFiltrarPorFecha.Text = "Filtrar por fecha";
             this.chechBoxFiltrarPorFecha.UseVisualStyleBackColor = true;
@@ -352,16 +391,18 @@
             // 
             // ConsultaForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(710, 569);
+            this.ClientSize = new System.Drawing.Size(947, 700);
             this.Controls.Add(this.chechBoxFiltrarPorFecha);
             this.Controls.Add(this.gBoxFiltroFecha);
             this.Controls.Add(this.gBoxCasa);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.dataGridDisponibles);
             this.Controls.Add(this.gBoxFecha);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ConsultaForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta";
             this.Load += new System.EventHandler(this.ConsultaForm_Load);
             this.gBoxFecha.ResumeLayout(false);

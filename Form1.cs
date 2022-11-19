@@ -27,7 +27,11 @@ namespace TP_II
             btnModificarAloj.Enabled = false;
             btnModificarReserva.Enabled = false;
             btnConsultaAloj.Enabled = false;
-            btnConsultaReserva.Enabled = false;    
+            btnConsultaReserva.Enabled = false;
+            //ImageList imageList1 = new ImageList();
+            //empresa = new Empresa();
+            //foreach (Alojamiento a in empresa.Alojamientos)
+            //imageList1.ImageStream =a.Imagenes ;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -40,11 +44,17 @@ namespace TP_II
                 BinaryFormatter bf = new BinaryFormatter();
 
                 empresa = (Empresa)bf.Deserialize(fs);
-                Reserva.cont = empresa.cbackUpcont;
-
                 fs.Close();
                 ActualizarListas();
-               
+                //foreach (Alojamiento a in empresa.Alojamientos)
+                //{
+                //    cbAlojamientos.Items.Add(a.ToString());
+                //}
+                //cbReservas.Items.Clear();
+                //foreach (Reserva r in empresa.Reservas)
+                //{
+                //    cbReservas.Items.Add(r.ToString());
+                //}
             }
             else
             {
@@ -98,7 +108,7 @@ namespace TP_II
             {
                 FileStream archivo = new FileStream(nombreArchivo, FileMode.Create, FileAccess.Write);
                 BinaryFormatter bf = new BinaryFormatter();
-                empresa.cbackUpcont = Reserva.cont;
+
                 bf.Serialize(archivo, empresa);
                 archivo.Close();
             }
@@ -209,6 +219,7 @@ namespace TP_II
             ventanaABM.btnAltaBaja.Visible = false;
             // Manejo evento click del boton "Importar fotos" en ventana ABM
             ventanaABM.btnFotos.Click += new System.EventHandler(this.btnFotos_Click);
+            ventanaABM.tbNumCasa.Text = numCasa.ToString();
 
             if (ventanaABM.ShowDialog() == DialogResult.OK)
             {
@@ -229,7 +240,7 @@ namespace TP_II
                 }
                 else
                 {
-                    ventanaABM.tbNumCasa.Text = numCasa.ToString();
+                    
                     cantCamas = Convert.ToInt32(ventanaABM.numUDcamasCasa.Value);
                     minDias = Convert.ToInt32(ventanaABM.numUDminimo.Value);
                     precioBase = Convert.ToDouble(ventanaABM.tbPrecio.Text);
@@ -269,6 +280,7 @@ namespace TP_II
             //Permitir al usuario seleccionar multiples archivos
             openImageFile.Multiselect = true;
             openImageFile.Title = "Fotos del alojamiento";
+            openImageFile.InitialDirectory = @"C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\Imagenes";
 
             if (openImageFile.ShowDialog() == DialogResult.OK)
             {
@@ -406,11 +418,12 @@ namespace TP_II
         {
             AlojamientoForm vAlojomiento = new AlojamientoForm();
             vAlojomiento.btnCancelarReserva.Visible = false;
+            vAlojomiento.btnImprimir.Visible = false;
             string[] campos = new string[2];
             campos = cbAlojamientos.Text.Split('-');
             string direccion = campos[1].TrimEnd(' ').TrimStart(' ');
 
-            Alojamiento aBuscar = new Casa(direccion, 1, 1,null, 1.0);
+            Alojamiento aBuscar = new Casa(direccion, 1, 1, null, 1.0);
             aBuscar = (Alojamiento)this.BuscarAlojamiento(aBuscar);
             DateTime[] fechas;
             vAlojomiento.SetAlojamiento(aBuscar);
@@ -432,7 +445,7 @@ namespace TP_II
                 {
                     int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
                     DateTime inicio = vAlojomiento.Calendario.SelectionStart;
-                    DateTime fin = inicio.AddDays(dias-1);
+                    DateTime fin = inicio.AddDays(dias - 1);
                     if (!casa.CheckFecha(inicio, fin))
                         MessageBox.Show("Rango de fecha invalido");
                     else
@@ -514,6 +527,7 @@ namespace TP_II
 
 
             }
+            ActualizarListas();
         }
 
         private void btnAgregarReserva_Click(object sender, EventArgs e)
@@ -831,9 +845,7 @@ namespace TP_II
         public void ActualizarListas()
         {
             cbAlojamientos.Items.Clear();
-            cbAlojamientos.ResetText();
             cbReservas.Items.Clear();
-            cbReservas.ResetText();
             foreach (Alojamiento a in empresa.Alojamientos)
                 cbAlojamientos.Items.Add(a.ToString());
             foreach (Reserva r in empresa.Reservas)
@@ -1061,10 +1073,10 @@ namespace TP_II
             
         }
 
-        private void verListaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        //private void verListaToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
 
-        }
+        //}
 
 
         //MENU STRIP RESERVA:::::
@@ -1096,10 +1108,10 @@ namespace TP_II
 
         }
         */
-        private void verListaToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
+        //private void verListaToolStripMenuItem1_Click(object sender, EventArgs e)
+        //{
 
-        }
+        //}
 
 
         //MENU STRIP ACERCADE - INFO:::::

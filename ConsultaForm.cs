@@ -145,7 +145,7 @@ namespace TP_II
                 vAlojomiento.lbDescripcion.Text = "Tipo Habitación:";
                 vAlojomiento.cBoxTipoHab.Enabled = true;
                 vAlojomiento.cBoxNroHabitaciones.Enabled = true;
-                
+
 
                 if (vAlojomiento.ShowDialog() == DialogResult.OK)
                 {

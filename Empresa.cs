@@ -10,10 +10,11 @@ namespace TP_II
    public class Empresa
     {
         List<Reserva> reservas = new List<Reserva>();
-        List<Alojamiento> alojamientos = new List<Alojamiento>();    
+        List<Alojamiento> alojamientos = new List<Alojamiento>();
+
         List<Casa> casas = new List<Casa>();
         List<Hotel> hoteles= new List<Hotel>();
-        public int cbackUpcont;
+
         private bool preguntar=true;
 
         private double precioBaseHotel;
@@ -49,7 +50,9 @@ namespace TP_II
             {
                 foreach(Alojamiento a in alojamientos)
                     a.Reservas.Sort();
-            }               
+            }    
+
+            
         }
         public Reserva this[int id]
         {
@@ -126,7 +129,15 @@ namespace TP_II
         public List<Alojamiento> FiltrarHoteles(bool tresEstrellas)
         {
             List<Alojamiento> filtrados = new List<Alojamiento>();
-            if(tresEstrellas)
+
+            foreach (Hotel h in hoteles)
+            {
+                if (h.Alta && ((tresEstrellas && h.TresEstrellas) || tresEstrellas==false ))
+                    filtrados.Add(h);
+            }
+
+            /*
+            if (tresEstrellas)
             {
                 foreach (Hotel h in hoteles)
                 {
@@ -142,7 +153,7 @@ namespace TP_II
                         filtrados.Add(h);
                 }
             }
-            
+            */
             return filtrados;
         }
         public List<Alojamiento> FiltrarFechaRango(List<Alojamiento> rango, DateTime fechaInicio, DateTime fechaFinal)

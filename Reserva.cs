@@ -9,8 +9,7 @@ namespace TP_II
     [Serializable]
     public class Reserva:IComparable
     {
-        
-        public static int cont = 1000;
+        private static int cont = 1000;
         private Cliente cliente;
         private Alojamiento alojamiento;
         private List<Habitacion> habitaciones = new List<Habitacion>();
@@ -18,9 +17,11 @@ namespace TP_II
         private DateTime egreso;
         private TimeSpan periodo;
         private List<Cliente> pasajeros =new List<Cliente>();
+
         double precioBaseReserva;
         double precioDia;
         string[] comprobante = new string[7];
+
         private readonly int id;
 
         public Reserva(Cliente cliente, Alojamiento alojamiento,DateTime ingreso, DateTime egreso,double precioBase,Habitacion h)
@@ -84,6 +85,7 @@ namespace TP_II
                 datos[1] += ((Casa)Alojamiento).Camas;
             else
                 datos[1] = habitaciones[0].Tipo.ToString();
+
 
             comprobante = datos;
         }

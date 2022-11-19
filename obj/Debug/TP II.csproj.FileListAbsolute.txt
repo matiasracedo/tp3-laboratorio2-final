@@ -1,0 +1,167 @@
+C:\Users\migue\Desktop\UTN\TUP\Laboratorio de computacion II\TP 2\TP II\TP II\bin\Debug\TP II.exe.config
+C:\Users\migue\Desktop\UTN\TUP\Laboratorio de computacion II\TP 2\TP II\TP II\bin\Debug\TP II.exe
+C:\Users\migue\Desktop\UTN\TUP\Laboratorio de computacion II\TP 2\TP II\TP II\bin\Debug\TP II.pdb
+C:\Users\migue\Desktop\UTN\TUP\Laboratorio de computacion II\TP 2\TP II\TP II\obj\Debug\TP II.csproj.AssemblyReference.cache
+C:\Users\migue\Desktop\UTN\TUP\Laboratorio de computacion II\TP 2\TP II\TP II\obj\Debug\TP II.csproj.SuggestedBindingRedirects.cache
+C:\Users\migue\Desktop\UTN\TUP\Laboratorio de computacion II\TP 2\TP II\TP II\obj\Debug\TP_II.Form1.resources
+C:\Users\migue\Desktop\UTN\TUP\Laboratorio de computacion II\TP 2\TP II\TP II\obj\Debug\TP_II.Properties.Resources.resources
+C:\Users\migue\Desktop\UTN\TUP\Laboratorio de computacion II\TP 2\TP II\TP II\obj\Debug\TP II.csproj.GenerateResource.cache
+C:\Users\migue\Desktop\UTN\TUP\Laboratorio de computacion II\TP 2\TP II\TP II\obj\Debug\TP II.csproj.CoreCompileInputs.cache
+C:\Users\migue\Desktop\UTN\TUP\Laboratorio de computacion II\TP 2\TP II\TP II\obj\Debug\TP II.exe
+C:\Users\migue\Desktop\UTN\TUP\Laboratorio de computacion II\TP 2\TP II\TP II\obj\Debug\TP II.pdb
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\bin\Debug\TP II.exe.config
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\bin\Debug\TP II.exe
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\bin\Debug\TP II.pdb
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.csproj.AssemblyReference.cache
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.csproj.SuggestedBindingRedirects.cache
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.ABMAlojamientosForm.resources
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.AlojamientoForm.resources
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.ConsultaForm.resources
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.Form1.resources
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.PrecioBaseForm.resources
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.Properties.Resources.resources
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.csproj.GenerateResource.cache
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.csproj.CoreCompileInputs.cache
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.exe
+C:\Users\migue\Downloads\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.pdb
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\bin\Debug\TP II.exe.config
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\bin\Debug\TP II.exe
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\bin\Debug\TP II.pdb
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.csproj.AssemblyReference.cache
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.csproj.SuggestedBindingRedirects.cache
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.ABMAlojamientosForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.AlojamientoForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.ConsultaForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.Form1.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.PrecioBaseForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.Properties.Resources.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.csproj.GenerateResource.cache
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.csproj.CoreCompileInputs.cache
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.exe
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.pdb
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\bin\Debug\TP II.exe.config
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\bin\Debug\TP II.exe
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\bin\Debug\TP II.pdb
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.csproj.AssemblyReference.cache
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.csproj.SuggestedBindingRedirects.cache
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.ABMAlojamientosForm.resources
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.AlojamientoForm.resources
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.ConsultaForm.resources
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.Form1.resources
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.PrecioBaseForm.resources
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.Properties.Resources.resources
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.csproj.GenerateResource.cache
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.csproj.CoreCompileInputs.cache
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.exe
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP II.pdb
+C:\Users\migue\Desktop\TP II-20221020T193232Z-001\TP II\obj\Debug\TP_II.DatosClienteForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP II.csproj.AssemblyReference.cache
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP II.csproj.SuggestedBindingRedirects.cache
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP_II.ABMAlojamientosForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP_II.AlojamientoForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP_II.ConsultaForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP_II.DatosClienteForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP_II.Form1.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP_II.PrecioBaseForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP_II.Properties.Resources.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP II.csproj.GenerateResource.cache
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP II.csproj.CoreCompileInputs.cache
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP II.exe
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP II.pdb
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\bin\Debug\TP II.exe.config
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\bin\Debug\TP II.exe
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\bin\Debug\TP II.pdb
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.3\TP II\obj\Debug\TP_II.RestartConfirmationForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\bin\Debug\TP II.exe.config
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\bin\Debug\TP II.exe
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\bin\Debug\TP II.pdb
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP II.csproj.AssemblyReference.cache
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP II.csproj.SuggestedBindingRedirects.cache
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP_II.ABMAlojamientosForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP_II.AlojamientoForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP_II.ConsultaForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP_II.DatosClienteForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP_II.Form1.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP_II.PrecioBaseForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP_II.Properties.Resources.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP_II.RestartConfirmationForm.resources
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP II.csproj.GenerateResource.cache
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP II.csproj.CoreCompileInputs.cache
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP II.exe
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP II.pdb
+D:\Documentos (D)\Facu\UTN\.TUP\Primer año\2do cuatrimestre\Lab de computación II\TPS\TP2\TP II 3.4\TP II\obj\Debug\TP_II.AlojamientosExistentesForm.resources
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP II.csproj.AssemblyReference.cache
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP II.csproj.SuggestedBindingRedirects.cache
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP_II.ABMAlojamientosForm.resources
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP_II.AlojamientoForm.resources
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP_II.AlojamientosExistentesForm.resources
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP_II.ConsultaForm.resources
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP_II.DatosClienteForm.resources
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP_II.Form1.resources
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP_II.PrecioBaseForm.resources
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP_II.Properties.Resources.resources
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP_II.RestartConfirmationForm.resources
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP II.csproj.GenerateResource.cache
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP II.csproj.CoreCompileInputs.cache
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP II.exe
+C:\Users\matia\Desktop\TP II 3.4\TP II\obj\Debug\TP II.pdb
+C:\Users\matia\Desktop\TP II 3.4\TP II\bin\Debug\TP II.exe.config
+C:\Users\matia\Desktop\TP II 3.4\TP II\bin\Debug\TP II.exe
+C:\Users\matia\Desktop\TP II 3.4\TP II\bin\Debug\TP II.pdb
+C:\Users\matia\Desktop\TP II 3.5\TP II\bin\Debug\TP II.exe.config
+C:\Users\matia\Desktop\TP II 3.5\TP II\bin\Debug\TP II.exe
+C:\Users\matia\Desktop\TP II 3.5\TP II\bin\Debug\TP II.pdb
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP II.csproj.AssemblyReference.cache
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP II.csproj.SuggestedBindingRedirects.cache
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP_II.ABMAlojamientosForm.resources
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP_II.AlojamientoForm.resources
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP_II.AlojamientosExistentesForm.resources
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP_II.ComprobanteForm.resources
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP_II.ConsultaForm.resources
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP_II.DatosClienteForm.resources
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP_II.Form1.resources
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP_II.PrecioBaseForm.resources
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP_II.Properties.Resources.resources
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP_II.RestartConfirmationForm.resources
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP II.csproj.GenerateResource.cache
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP II.csproj.CoreCompileInputs.cache
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP II.exe
+C:\Users\matia\Desktop\TP II 3.5\TP II\obj\Debug\TP II.pdb
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\bin\Debug\TP II.exe.config
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\bin\Debug\TP II.exe
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\bin\Debug\TP II.pdb
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP II.csproj.AssemblyReference.cache
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP II.csproj.SuggestedBindingRedirects.cache
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP_II.ABMAlojamientosForm.resources
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP_II.AlojamientoForm.resources
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP_II.AlojamientosExistentesForm.resources
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP_II.ComprobanteForm.resources
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP_II.ConsultaForm.resources
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP_II.DatosClienteForm.resources
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP_II.Form1.resources
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP_II.PrecioBaseForm.resources
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP_II.Properties.Resources.resources
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP_II.RestartConfirmationForm.resources
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP II.csproj.GenerateResource.cache
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP II.csproj.CoreCompileInputs.cache
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP II.exe
+C:\Users\migue\Desktop\TP II 3.6\TP II 3.6\TP II\obj\Debug\TP II.pdb
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\bin\Debug\TP II.exe.config
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\bin\Debug\TP II.exe
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\bin\Debug\TP II.pdb
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP II.csproj.AssemblyReference.cache
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP II.csproj.SuggestedBindingRedirects.cache
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP_II.ABMAlojamientosForm.resources
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP_II.AlojamientoForm.resources
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP_II.AlojamientosExistentesForm.resources
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP_II.ComprobanteForm.resources
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP_II.ConsultaForm.resources
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP_II.DatosClienteForm.resources
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP_II.Form1.resources
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP_II.PrecioBaseForm.resources
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP_II.Properties.Resources.resources
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP_II.RestartConfirmationForm.resources
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP II.csproj.GenerateResource.cache
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP II.csproj.CoreCompileInputs.cache
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP II.exe
+C:\Users\TUP\Desktop\TP II 3.7\TP II 3.7\TP II 3.6\TP II\obj\Debug\TP II.pdb
