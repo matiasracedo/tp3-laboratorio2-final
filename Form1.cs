@@ -40,7 +40,9 @@ namespace TP_II
                 BinaryFormatter bf = new BinaryFormatter();
 
                 empresa = (Empresa)bf.Deserialize(fs);
-                Reserva.cont = empresa.cbackUpcont;
+                Reserva.contIdReservas = empresa.contBackReservas;
+                Cliente.ContIdCliente = empresa.contBackCliente;
+                Alojamiento.ContIdAlojamiento = empresa.contBackAlojamientos;
 
                 fs.Close();
                 ActualizarListas();
@@ -98,7 +100,9 @@ namespace TP_II
             {
                 FileStream archivo = new FileStream(nombreArchivo, FileMode.Create, FileAccess.Write);
                 BinaryFormatter bf = new BinaryFormatter();
-                empresa.cbackUpcont = Reserva.cont;
+                empresa.contBackReservas = Reserva.ContIdReservas;
+                empresa.contBackCliente = Cliente.ContIdCliente;
+                empresa.contBackAlojamientos = Alojamiento.ContIdAlojamiento;
                 bf.Serialize(archivo, empresa);
                 archivo.Close();
             }
@@ -1133,6 +1137,8 @@ namespace TP_II
             vInicio.Dispose();
         }
 
-       
+        private void importarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

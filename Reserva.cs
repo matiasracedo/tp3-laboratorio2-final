@@ -10,7 +10,7 @@ namespace TP_II
     public class Reserva:IComparable
     {
         
-        public static int cont = 1000;
+        private static int contIdReservas = 1000;
         private Cliente cliente;
         private Alojamiento alojamiento;
         private List<Habitacion> habitaciones = new List<Habitacion>();
@@ -18,9 +18,9 @@ namespace TP_II
         private DateTime egreso;
         private TimeSpan periodo;
         private List<Cliente> pasajeros =new List<Cliente>();
-        double precioBaseReserva;
-        double precioDia;
-        string[] comprobante = new string[7];
+        private double precioBaseReserva;
+        private double precioDia;
+        private string[] comprobante = new string[7];
         private readonly int id;
 
         public Reserva(Cliente cliente, Alojamiento alojamiento,DateTime ingreso, DateTime egreso,double precioBase,Habitacion h)
@@ -32,10 +32,12 @@ namespace TP_II
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
             this.precioBaseReserva=precioBase;
             habitaciones.Add(h);
-            id = cont;
-            cont++;
+            id = contIdReservas;
+            contIdReservas++;
+            Cliente.ContIdCliente++;
             CalcularPrecioDia();
             GenerarComprobante();
+
         }
 
         public Reserva(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, double precioBase)
@@ -46,8 +48,9 @@ namespace TP_II
             this.egreso = egreso;
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
             this.precioBaseReserva = precioBase;
-            id = cont;
-            cont++;
+            this.id = contIdReservas;
+            contIdReservas++;
+            Cliente.ContIdCliente++;
             CalcularPrecioDia();
             GenerarComprobante();
         }
@@ -91,7 +94,14 @@ namespace TP_II
         public Reserva Modificar(Cliente cliente,DateTime ingreso, DateTime egreso)
         {
             string fecha = comprobante[3];
+
+            ////////////         PARA MANTENER EL MISMO ID ORIGINAL
+            int idOriginal = this.cliente.IDcliente;
             this.cliente = cliente;
+            cliente.IDcliente = idOriginal;
+            Cliente.ContIdCliente--;
+            ///////////
+
             this.ingreso = ingreso;
             this.egreso = egreso;
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
@@ -136,5 +146,6 @@ namespace TP_II
         public List<Cliente> Pasajeros { get { return pasajeros; } }
 
         public string[] DatosComprobante { get { return comprobante; } }
+        public static int ContIdReservas { get { return contIdReservas; } set { contIdReservas = value; } }
     }
 }

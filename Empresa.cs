@@ -13,7 +13,11 @@ namespace TP_II
         List<Alojamiento> alojamientos = new List<Alojamiento>();    
         List<Casa> casas = new List<Casa>();
         List<Hotel> hoteles= new List<Hotel>();
-        public int cbackUpcont;
+
+        public int contBackReservas;
+        public int contBackCliente;
+        public int contBackAlojamientos;
+
         private bool preguntar=true;
 
         private double precioBaseHotel;
