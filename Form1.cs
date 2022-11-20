@@ -40,7 +40,9 @@ namespace TP_II
                 BinaryFormatter bf = new BinaryFormatter();
 
                 empresa = (Empresa)bf.Deserialize(fs);
-                Reserva.cont = empresa.cbackUpcont;
+                Reserva.ContIdReservas = empresa.contBackReservas;
+                Cliente.ContIdCliente = empresa.contBackCliente;
+                Alojamiento.ContIdAlojamiento = empresa.contBackAlojamientos;
 
                 fs.Close();
                 ActualizarListas();
@@ -98,7 +100,9 @@ namespace TP_II
             {
                 FileStream archivo = new FileStream(nombreArchivo, FileMode.Create, FileAccess.Write);
                 BinaryFormatter bf = new BinaryFormatter();
-                empresa.cbackUpcont = Reserva.cont;
+                empresa.contBackReservas = Reserva.ContIdReservas;
+                empresa.contBackCliente = Cliente.ContIdCliente;
+                empresa.contBackAlojamientos = Alojamiento.ContIdAlojamiento;
                 bf.Serialize(archivo, empresa);
                 archivo.Close();
             }
@@ -901,7 +905,23 @@ namespace TP_II
                     this.Close();  // en el closing se usa el restart
                 }
             }
+        }
 
+        private void precioBaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrecioBaseForm vInicio = new PrecioBaseForm();
+            vInicio.Text = "Modificar Precio Base de Hoteles";
+
+            vInicio.rbSi.Checked = true;
+            vInicio.btnContinuar.Enabled = false;
+
+            if (vInicio.ShowDialog() == DialogResult.OK)
+            {
+                empresa.Preguntar = !vInicio.cbPreguntar.Checked;
+                if (vInicio.rbSi.Checked)
+                    empresa.PrecioBaseHotel = Convert.ToDouble(vInicio.tbPrecio.Text);
+            }
+            vInicio.Dispose();
         }
 
         //MENU STRIP ALOJAMIENTO:::::
@@ -1065,7 +1085,20 @@ namespace TP_II
 
         private void verListaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            AlojamientosExistentesForm listaForm = new AlojamientosExistentesForm();
 
+            List<Alojamiento> lista = empresa.Alojamientos;
+            if (lista.Count > 0)
+            {
+                foreach (Alojamiento a in lista)
+                    listaForm.listBox1.Items.Add(a.ToString());
+            }
+            else
+                listaForm.listBox1.Items.Add("No hay Alojamientos registrados");
+
+            listaForm.ShowDialog();
+
+            listaForm.Dispose();
         }
 
 
@@ -1104,6 +1137,188 @@ namespace TP_II
         }
 
 
+
+        //MENUSTRIP CLIENTE
+        //MENUSTRIP CLIENTE
+        //MENUSTRIP CLIENTE
+        //MENUSTRIP CLIENTE
+        
+        private void importarToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ///CLIENTE
+            ///
+            string path = Application.StartupPath;
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.InitialDirectory = path;
+            ofd.DefaultExt = ".txt"; ofd.AddExtension = true;
+            //ofd.Filter = "texto |.txt";
+
+            FileStream fs;
+            StreamReader sr;
+
+
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                fs=new FileStream(ofd.FileName, FileMode.Open,FileAccess.Read);
+                sr=new StreamReader(fs);
+
+                sr.ReadLine();
+                int contLinea = 1;
+
+                List<String> lineasErroresCampos=new List<String>();
+;
+                Dictionary<int,Cliente> lineasErroresRepetidos = new Dictionary<int, Cliente>();
+                List<int> dniUsadosActuales=new List<int>();
+
+                List<Cliente> clientesNuevos= new List<Cliente>();
+
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    string[] campos = line.Split(',');
+
+                    int id; //se utiliza solo para informar error
+                    string nombre;
+                    string apellido;
+                    int dni;
+                    int edad;
+
+
+                    if(campos.Length==5)
+                    {
+                        id = Convert.ToInt16(campos[0]);
+                        nombre=campos[1];
+                        apellido=campos[2];
+                        dni= Convert.ToInt32(campos[3]);
+                        edad=Convert.ToInt32(campos[4]);
+
+                        Cliente nuevo=new Cliente(nombre,apellido,dni,edad);
+
+                        int index=-1;
+                        if (empresa.GetClientesHistoricos.Count > 0)
+                        {
+                            empresa.GetClientesHistoricos.Sort();
+                            index = empresa.GetClientesHistoricos.BinarySearch(nuevo);       
+                        }
+
+                        if (index < 0 && !dniUsadosActuales.Contains(dni))
+                        {
+                            clientesNuevos.Add(nuevo);
+                            dniUsadosActuales.Add(dni);
+                        }
+                        else
+                        {
+                            nuevo.IDcliente = id;
+                            lineasErroresRepetidos.Add(contLinea,nuevo);
+                        }
+                    }
+                    else
+                    {
+                        lineasErroresCampos.Add("línea " + contLinea);
+                    }
+                    contLinea++;
+                }
+
+                if(clientesNuevos!=null&&clientesNuevos.Count>0)
+                    empresa.ImportarClientes(clientesNuevos);
+
+                AlojamientosExistentesForm ventanaExistentes = new AlojamientosExistentesForm();
+
+                string erroresCampos=null;
+                if(lineasErroresCampos.Count>0)
+                {
+                    ventanaExistentes.listBox1.Items.Add("SE HAN ENCONTRADO LOS SIGUIENTES ERRORES DE CAMPO: ");
+                    ventanaExistentes.listBox1.Items.Add("");
+
+                    foreach (string lineaNro in lineasErroresCampos)
+                    {
+                        erroresCampos = "Error en la " + lineaNro;
+                        ventanaExistentes.listBox1.Items.Add(lineaNro);
+                    }
+                    ventanaExistentes.listBox1.Items.Add("");
+                    ventanaExistentes.listBox1.Items.Add("");
+                }
+
+                string erroresRepetidos=null;
+                if(lineasErroresRepetidos.Count>0)
+                {
+                    ventanaExistentes.listBox1.Items.Add("SE HAN ENCONTRADO LOS SIGUIENTES CLIENTES REPETIDOS: ");
+                    ventanaExistentes.listBox1.Items.Add("");
+
+                    foreach (KeyValuePair<int, Cliente> pair in lineasErroresRepetidos)
+                    {
+                       erroresRepetidos = "Línea "+ pair.Key.ToString()+" - " + pair.Value.ToString();
+                        ventanaExistentes.listBox1.Items.Add(erroresRepetidos);
+                    }
+                }
+               
+                if(erroresCampos!=null||erroresRepetidos!=null)
+                {
+                    ventanaExistentes.Show();
+                }
+
+                if(contLinea-1==lineasErroresRepetidos.Count)
+                    MessageBox.Show("Todos los clientes ya estaban cargados");
+                else
+                    MessageBox.Show("Carga Exitosa!");
+
+                sr.Close();
+                fs.Close();
+            }
+        }
+
+        private void exportarToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            string path = Application.StartupPath;
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.InitialDirectory = path;
+            sfd.DefaultExt = ".txt"; sfd.AddExtension = true;
+            //ofd.Filter = "texto |.txt";
+            FileStream fs;
+            StreamWriter sw;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                fs = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write);
+                sw = new StreamWriter(fs);
+                sw.WriteLine("ID , NOMBRE , APELLIDO , DNI , EDAD");
+
+                if(empresa.GetClientesHistoricos.Count>0)
+                {
+                    foreach(Cliente c in empresa.GetClientesHistoricos)
+                    {
+                        string linea = null;
+                        string[] campos= c.Exportar();
+
+                        linea = campos[0] + ","+campos[1] + ","+campos[2] + ","+campos[3] + ","+campos[4];
+                        sw.WriteLine(linea);
+                    }
+                }
+                sw.Close();
+                fs.Close();
+            }
+        }
+
+        private void verListaToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            AlojamientosExistentesForm listaForm= new AlojamientosExistentesForm();
+
+            List<Cliente> lista = empresa.GetClientesHistoricos;
+            if (lista.Count> 0)
+            {
+                foreach (Cliente cliente in lista)
+                    listaForm.listBox1.Items.Add(cliente.ToString());
+            }
+            else
+                listaForm.listBox1.Items.Add("No hay clientes registrados");
+
+            listaForm.ShowDialog();
+
+            listaForm.Dispose();
+        }
+
         //MENU STRIP ACERCADE - INFO:::::
         //MENU STRIP ACERCADE - INFO:::::
         //MENU STRIP ACERCADE - INFO:::::
@@ -1114,25 +1329,5 @@ namespace TP_II
 
         }
         */
-
-
-        private void precioBaseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PrecioBaseForm vInicio = new PrecioBaseForm();
-            vInicio.Text = "Modificar Precio Base de Hoteles";
-
-            vInicio.rbSi.Checked = true;
-            vInicio.btnContinuar.Enabled = false;
-
-            if (vInicio.ShowDialog() == DialogResult.OK)
-            {
-                empresa.Preguntar = !vInicio.cbPreguntar.Checked;
-                if (vInicio.rbSi.Checked)
-                    empresa.PrecioBaseHotel = Convert.ToDouble(vInicio.tbPrecio.Text);
-            }
-            vInicio.Dispose();
-        }
-
-       
     }
 }

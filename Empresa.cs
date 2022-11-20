@@ -9,11 +9,16 @@ namespace TP_II
     [Serializable]
    public class Empresa
     {
-        List<Reserva> reservas = new List<Reserva>();
-        List<Alojamiento> alojamientos = new List<Alojamiento>();    
-        List<Casa> casas = new List<Casa>();
-        List<Hotel> hoteles= new List<Hotel>();
-        public int cbackUpcont;
+        private List<Reserva> reservas = new List<Reserva>();
+        private List<Alojamiento> alojamientos = new List<Alojamiento>();    
+        private List<Casa> casas = new List<Casa>();
+        private List<Hotel> hoteles= new List<Hotel>();
+        private List<Cliente> clientesHistorico= new List<Cliente>();
+
+        public int contBackReservas;
+        public int contBackCliente;
+        public int contBackAlojamientos;
+
         private bool preguntar=true;
 
         private double precioBaseHotel;
@@ -31,8 +36,12 @@ namespace TP_II
 
         public void AgregarReservas(Reserva nueva)
         {
-                reservas.Add(nueva);
-                nueva.Alojamiento.Reservas.Add(nueva);
+            reservas.Add(nueva);
+            nueva.Alojamiento.Reservas.Add(nueva);
+     
+            if(!clientesHistorico.Contains(nueva.getCliente))
+                clientesHistorico.Add(nueva.getCliente);
+               
         }
         public void CancelarReserva(int id)
         {
@@ -68,38 +77,6 @@ namespace TP_II
                 return devolver;
             }
         }
-        //public bool ModificarAlojamiento(Alojamiento modificado)
-        //{
-        //    bool encontrado=false;
-        //    int cont = 0;
-        //    Alojamiento comparador;
-
-        //    while (encontrado==false && cont<alojamientos.Count)
-        //    {
-        //        comparador=alojamientos[cont];
-
-        //        if (comparador.Direccion == modificado.Direccion)
-        //        {
-        //            int index=alojamientos.IndexOf(comparador);
-        //            alojamientos.RemoveAt(index);
-        //            alojamientos.Insert(index, modificado);
-
-        //            if(modificado is Casa)
-        //            {
-        //                casas.Remove(comparador as Casa);
-        //                casas.Add(modificado as Casa);
-        //            }
-        //            else
-        //            {
-        //                hoteles.Remove(comparador as Hotel);
-        //                hoteles.Add(modificado as Hotel);
-        //            }
-        //            encontrado=true;
-        //        }
-        //        cont++;
-        //    }
-        //    return encontrado;
-        //}
 
         public string AltaYBaja(string direccion)
         {
@@ -192,10 +169,29 @@ namespace TP_II
         {
             return reserva.DatosComprobante;
         }
-        public double PrecioBaseHotel{ get { return precioBaseHotel; } set { precioBaseHotel = value; } }
-       
+        public double PrecioBaseHotel{ get { return precioBaseHotel; } set { precioBaseHotel = value; } }   
         public bool Preguntar { get { return preguntar; } set { preguntar = value; } }
-
         public int NumeroCasaSiguiente { get { return Casa.ContCasa; } }
+        public List<Cliente> GetClientesHistoricos { get { return clientesHistorico; } }
+        public List<Cliente> GetClientesActuales
+        {
+            get
+            {
+                List<Cliente> ret=new List<Cliente>();
+                foreach (Reserva r in reservas)
+                    ret.Add(r.getCliente);
+                return ret;
+            }
+        }
+
+        public void ImportarClientes(List<Cliente> clientesNuevos)
+        {
+            foreach (Cliente cliente in clientesNuevos)
+            {
+                cliente.IDcliente = Cliente.ContIdCliente;
+                Cliente.ContIdCliente++;
+                clientesHistorico.Add(cliente);
+            }        
+        }
     }
 }

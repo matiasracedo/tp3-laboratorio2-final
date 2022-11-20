@@ -58,6 +58,7 @@
             this.Controls.Add(this.lbComprobante);
             this.Controls.Add(this.btnAceptar);
             this.Name = "ComprobanteForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Su Comprobante";
             this.Load += new System.EventHandler(this.ComprobanteForm_Load);
             this.ResumeLayout(false);
