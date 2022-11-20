@@ -71,6 +71,7 @@
             this.Controls.Add(this.btnSi);
             this.Controls.Add(this.lbTexto);
             this.Name = "RestartConfirmationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reset";
             this.ResumeLayout(false);
             this.PerformLayout();

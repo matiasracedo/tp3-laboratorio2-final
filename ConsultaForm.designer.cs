@@ -362,6 +362,7 @@
             this.Controls.Add(this.dataGridDisponibles);
             this.Controls.Add(this.gBoxFecha);
             this.Name = "ConsultaForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta";
             this.Load += new System.EventHandler(this.ConsultaForm_Load);
             this.gBoxFecha.ResumeLayout(false);

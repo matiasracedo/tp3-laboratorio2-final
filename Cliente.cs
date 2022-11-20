@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TP_II
 {
     [Serializable]
-    public class Cliente
+    public class Cliente:IComparable
     {
         private string nombre;
         private string apellido;
@@ -18,8 +18,8 @@ namespace TP_II
 
         public Cliente(string nombre,string apellido, int dni, int edad)
         {
-            this.nombre = nombre;
-            this.apellido = apellido;
+            this.nombre = nombre.TrimEnd(' ').TrimStart(' ');
+            this.apellido = apellido.TrimEnd(' ').TrimStart(' ');
             this.dni = dni;
             this.edad = edad;
             idCliente = contIdCliente;//el contador se incrementa en solo en la creacion de la reserva
@@ -36,6 +36,21 @@ namespace TP_II
         {
             return string.Format("ID: {0} -- Nombre: {1} -- DNI: {2} -- Edad: {3} años",IDcliente,NombreCompleto,DNI,Edad);
             //return NombreCompleto +", DNI "+ dni+ ", "+edad + " años.";
+        }
+        public string[] Exportar()
+        {
+            string[] ret = new string[5];
+            ret[0] =idCliente.ToString();
+            ret[1] = nombre;
+            ret[2] = Apellido;
+            ret[3] = DNI.ToString();
+            ret[4] = edad.ToString();
+
+            return ret;
+        }
+        public int CompareTo(object o)
+        {
+            return this.DNI.CompareTo(((Cliente)o).DNI);
         }
     }
 }

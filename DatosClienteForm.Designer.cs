@@ -153,6 +153,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbNombre);
             this.Name = "DatosClienteForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Datos Cliente";
             this.ResumeLayout(false);
             this.PerformLayout();

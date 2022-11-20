@@ -173,6 +173,7 @@
             this.Controls.Add(this.btnReservar);
             this.Controls.Add(this.Calendario);
             this.Name = "AlojamientoForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta Alojamiento";
             this.Load += new System.EventHandler(this.AlojamientoForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudDias)).EndInit();
