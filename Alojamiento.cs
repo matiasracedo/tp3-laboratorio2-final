@@ -15,14 +15,18 @@ namespace TP_II
         
         protected List<Reserva> reservas = new List<Reserva>();
         protected Image[] imagenes;
-     
+        private int idAlojamiento;
+        private static int contIdAlojamiento = 1;
+
 
         public Alojamiento(string direccion)
         {
             this.direccion = direccion;
             alta = true;
+            idAlojamiento=contIdAlojamiento;
+            contIdAlojamiento++;
         }
-
+               
         public DateTime[] IntervaloFechasReservadas()
         {
             List<DateTime> retorno = new List<DateTime>();
@@ -72,6 +76,7 @@ namespace TP_II
             }
         }
         public Image[] Imagenes { get { return imagenes; } set { imagenes = value; } }
-
+        public static int ContIdAlojamiento { get { return contIdAlojamiento; } set { contIdAlojamiento = value; } }
+        public int IDalojamiento { get { return idAlojamiento; } }
     }
 }

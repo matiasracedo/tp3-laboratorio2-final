@@ -38,7 +38,7 @@
             this.tbDni = new System.Windows.Forms.TextBox();
             this.bnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnAcompaniantes = new System.Windows.Forms.Button();
+            this.btnPasajeros = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbNombre
@@ -127,21 +127,21 @@
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             // 
-            // btnAcompaniantes
+            // btnPasajeros
             // 
-            this.btnAcompaniantes.Location = new System.Drawing.Point(12, 209);
-            this.btnAcompaniantes.Name = "btnAcompaniantes";
-            this.btnAcompaniantes.Size = new System.Drawing.Size(132, 23);
-            this.btnAcompaniantes.TabIndex = 10;
-            this.btnAcompaniantes.Text = "Agregar pasajeros";
-            this.btnAcompaniantes.UseVisualStyleBackColor = true;
+            this.btnPasajeros.Location = new System.Drawing.Point(12, 209);
+            this.btnPasajeros.Name = "btnPasajeros";
+            this.btnPasajeros.Size = new System.Drawing.Size(132, 23);
+            this.btnPasajeros.TabIndex = 10;
+            this.btnPasajeros.Text = "Agregar pasajeros";
+            this.btnPasajeros.UseVisualStyleBackColor = true;
             // 
             // DatosClienteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(167, 312);
-            this.Controls.Add(this.btnAcompaniantes);
+            this.Controls.Add(this.btnPasajeros);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.bnAceptar);
             this.Controls.Add(this.label4);
@@ -153,6 +153,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbNombre);
             this.Name = "DatosClienteForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Datos Cliente";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -170,6 +171,6 @@
         public System.Windows.Forms.TextBox tbDni;
         private System.Windows.Forms.Button bnAceptar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnAcompaniantes;
+        public System.Windows.Forms.Button btnPasajeros;
     }
 }

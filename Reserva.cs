@@ -10,17 +10,17 @@ namespace TP_II
     public class Reserva:IComparable
     {
         
-        public static int cont = 1000;
+        private static int contIdReservas = 1000;
         private Cliente cliente;
         private Alojamiento alojamiento;
         private List<Habitacion> habitaciones = new List<Habitacion>();
         private DateTime ingreso;
         private DateTime egreso;
         private TimeSpan periodo;
-        private List<Cliente> pasajeros =new List<Cliente>();
-        double precioBaseReserva;
-        double precioDia;
-        string[] comprobante = new string[7];
+        private List<Cliente> pasajeros = new List<Cliente>();
+        private double precioBaseReserva;
+        private double precioDia;
+        private string[] comprobante;
         private readonly int id;
 
         public Reserva(Cliente cliente, Alojamiento alojamiento,DateTime ingreso, DateTime egreso,double precioBase,Habitacion h)
@@ -32,10 +32,12 @@ namespace TP_II
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
             this.precioBaseReserva=precioBase;
             habitaciones.Add(h);
-            id = cont;
-            cont++;
+            id = contIdReservas;
+            contIdReservas++;
+            Cliente.ContIdCliente++;
             CalcularPrecioDia();
             GenerarComprobante();
+
         }
 
         public Reserva(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, double precioBase)
@@ -46,10 +48,47 @@ namespace TP_II
             this.egreso = egreso;
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
             this.precioBaseReserva = precioBase;
-            id = cont;
-            cont++;
+            this.id = contIdReservas;
+            contIdReservas++;
+            Cliente.ContIdCliente++;
             CalcularPrecioDia();
             GenerarComprobante();
+        }
+
+        public Reserva(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, double precioBase, List<Cliente> p)
+        {
+            this.cliente = cliente;
+            this.alojamiento = alojamiento;
+            this.ingreso = ingreso;
+            this.egreso = egreso;
+            this.periodo = egreso.AddDays(1).Subtract(ingreso);
+            this.precioBaseReserva = precioBase;
+            if (p.Count > 0)
+                p.ForEach(acomp => pasajeros.Add(acomp));
+            id = contIdReservas;
+            contIdReservas++;
+            Cliente.ContIdCliente++;
+            CalcularPrecioDia();
+            GenerarComprobante();
+
+        }
+
+        public Reserva(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, double precioBase, Habitacion h, List<Cliente> p)
+            {
+            this.cliente = cliente;
+            this.alojamiento = alojamiento;
+            this.ingreso = ingreso;
+            this.egreso = egreso;
+            this.periodo = egreso.AddDays(1).Subtract(ingreso);
+            this.precioBaseReserva = precioBase;
+            p.ForEach(acomp => pasajeros.Add(acomp));
+            habitaciones.Add(h);
+            id = contIdReservas;
+            contIdReservas++;
+            Cliente.ContIdCliente++;
+            CalcularPrecioDia();
+            GenerarComprobante();
+
         }
 
         public void AgregarHabitacion(Habitacion habitacion)
@@ -70,7 +109,7 @@ namespace TP_II
 
         public void GenerarComprobante()
         {
-            string[] datos = new string[7];
+            string[] datos = new string[8];
             DateTime fecha = DateTime.Now;
 
             datos[0] = Alojamiento.ToString();
@@ -80,6 +119,16 @@ namespace TP_II
             datos[5] = PrecioDia.ToString();
             datos[6] = PrecioTotal.ToString();
 
+            if (pasajeros.Count > 0)
+            {
+                foreach (Cliente p in pasajeros)
+                    datos[7] += String.Format("{0}-", p.NombreCompleto);
+                //datos[7] += String.Format("{0}\n\r", p.ToString());
+
+            }
+            else
+                datos[7] = "-";
+
             if (Alojamiento is Casa)
                 datos[1] += ((Casa)Alojamiento).Camas;
             else
@@ -88,13 +137,21 @@ namespace TP_II
             comprobante = datos;
         }
 
-        public Reserva Modificar(Cliente cliente,DateTime ingreso, DateTime egreso)
+        public Reserva Modificar(Cliente cliente,DateTime ingreso, DateTime egreso, List<Cliente> pasajeros)
         {
             string fecha = comprobante[3];
+
+            ////////////         PARA MANTENER EL MISMO ID ORIGINAL
+            int idOriginal = this.cliente.IDcliente;
             this.cliente = cliente;
+            cliente.IDcliente = idOriginal;
+            // Cliente.ContIdCliente--;
+            ///////////
+
             this.ingreso = ingreso;
             this.egreso = egreso;
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
+            this.pasajeros = pasajeros;
 
             CalcularPrecioDia();
             GenerarComprobante();
@@ -102,15 +159,60 @@ namespace TP_II
             return this;
         }
 
-        public void AgregarPasajero()
+        public void AgregarPasajero(Cliente pasajero)
         {
+            pasajeros.Add(pasajero);
+        }
 
+        public void RemoverPasajero(Cliente pasajero)
+        {
+            pasajeros.Add(pasajero);
+            //pasajeros.Remove(pasajero);
         }
         public override string ToString()
         {
-            return String.Format("ID:{0} - {1} - Alojamiento: {2}",id,cliente.NombreCompleto,alojamiento.ToString());
+            if(alojamiento is Casa)
+                return String.Format("IDR:{0} - {1}: {2} - Alojamiento: {3}",id , cliente.IDcliente , cliente.NombreCompleto , alojamiento.ToString());
+            else
+                return String.Format("IDR:{0} - {1}: {2} - Alojamiento: {3} - NroHabitacion: {4}",id , cliente.IDcliente , cliente.NombreCompleto , alojamiento.ToString(), habitaciones[0].ToString());
         }
+        public string[] ExportarCasa()
+        {
+            string[] ret = new string[5];
+            ret[0] = cliente.DNI.ToString();
+            ret[1] = alojamiento.IDalojamiento.ToString();
+            ret[2] = ingreso.ToString();
+            ret[3] = egreso.ToString();
 
+            if (pasajeros.Count > 0)
+            {
+                foreach (Cliente p in pasajeros)
+                    ret[4] += String.Format("{0}-", p.NombreCompleto);
+            }
+            else
+                ret[4] = "-";
+
+            return ret;
+        }
+        public string[] ExportarHotel()
+        {
+            string[] ret = new string[6];
+            ret[0] = cliente.DNI.ToString();
+            ret[1] = alojamiento.IDalojamiento.ToString();
+            ret[2] = ingreso.ToString();
+            ret[3] = egreso.ToString();
+            ret[4] = habitaciones[0].Numero.ToString();
+
+            if (pasajeros.Count > 0)
+            {
+                foreach (Cliente p in pasajeros)
+                    ret[5] += String.Format("{0}-", p.NombreCompleto);
+            }
+            else
+                ret[5] = "-";
+
+            return ret;
+        }
         public int CompareTo(object o)
         {
             return this.id.CompareTo(((Reserva)o).id);
@@ -136,5 +238,6 @@ namespace TP_II
         public List<Cliente> Pasajeros { get { return pasajeros; } }
 
         public string[] DatosComprobante { get { return comprobante; } }
+        public static int ContIdReservas { get { return contIdReservas; } set { contIdReservas = value; } }
     }
 }

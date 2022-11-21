@@ -108,6 +108,7 @@
             this.Controls.Add(this.tbPrecio);
             this.Controls.Add(this.label1);
             this.Name = "PrecioBaseForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bienvenido!";
             this.ResumeLayout(false);
             this.PerformLayout();
