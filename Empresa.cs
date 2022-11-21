@@ -183,7 +183,109 @@ namespace TP_II
                 return ret;
             }
         }
+        public bool HayReservasCasas
+        {
+           
+            get
+            {
+                bool hay = false;
+                int cont = 0;
 
+                while(hay==false&&cont<reservas.Count)
+                {
+                    if(reservas[cont].Alojamiento is Casa)
+                        hay = true;
+
+                    cont++;
+                }
+                
+                return hay;
+            }
+        }
+        public bool HayReservasHoteles
+        {
+
+            get
+            {
+                bool hay = false;
+                int cont = 0;
+
+                while (hay == false && cont < reservas.Count)
+                {
+                    if (reservas[cont].Alojamiento is Hotel)
+                        hay = true;
+
+                    cont++;
+                }
+
+                return hay;
+            }
+        }
+        public bool ExisteCliente(ref Cliente cliente)
+        {
+            bool ret=false;
+
+            if(clientesHistorico.Count>0)
+            {
+                clientesHistorico.Sort();
+                int index = clientesHistorico.BinarySearch(cliente);
+
+                if (index > -1)
+                {
+                    ret = true;
+                    cliente = clientesHistorico[index];
+                }
+            }
+            
+            return ret; 
+        }
+        public bool ExisteAlojamiento(int id , ref Alojamiento buscado)
+        {
+            bool encontrado = false;
+            int cont = 0;
+            int max=alojamientos.Count;
+
+            if(max>0)
+            {
+                while(encontrado==false&&cont<max)
+                {
+                    if(alojamientos[cont].IDalojamiento==id)
+                    {
+                        encontrado = true;
+                        buscado = alojamientos[cont];
+                    }
+                    cont++; 
+                }
+            }
+
+            return encontrado;  
+
+        }
+
+        public bool ExisteReservaCasa(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso)
+        {
+            bool ret = false;
+            foreach(Reserva r in alojamiento.Reservas)
+            {
+                if(cliente.CompareTo(r.getCliente)==0 && DateTime.Compare(ingreso,r.Ingreso)==0 && DateTime.Compare(egreso, r.Egreso) == 0)
+                {
+                    ret=true;
+                }
+            }
+            return ret;
+        }
+        public bool ExisteReservaHotel(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, int nroHabitacion)
+        {
+            bool ret = false;
+            foreach (Reserva r in alojamiento.Reservas)
+            {
+                if (cliente.CompareTo(r.getCliente) == 0 && DateTime.Compare(ingreso, r.Ingreso) == 0 && DateTime.Compare(egreso, r.Egreso) == 0)
+                {
+                    ret = true;
+                }
+            }
+            return ret;
+        }
         public void ImportarClientes(List<Cliente> clientesNuevos)
         {
             foreach (Cliente cliente in clientesNuevos)

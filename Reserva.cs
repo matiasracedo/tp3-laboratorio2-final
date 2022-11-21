@@ -63,7 +63,8 @@ namespace TP_II
             this.egreso = egreso;
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
             this.precioBaseReserva = precioBase;
-            p.ForEach(acomp => pasajeros.Add(acomp));
+            if (p.Count > 0)
+                p.ForEach(acomp => pasajeros.Add(acomp));
             id = contIdReservas;
             contIdReservas++;
             Cliente.ContIdCliente++;
@@ -118,8 +119,15 @@ namespace TP_II
             datos[5] = PrecioDia.ToString();
             datos[6] = PrecioTotal.ToString();
 
-            foreach (Cliente p in pasajeros)
-                datos[7] += String.Format("{0}\n\r", p.ToString());
+            if (pasajeros.Count > 0)
+            {
+                foreach (Cliente p in pasajeros)
+                    datos[7] += String.Format("{0}-", p.NombreCompleto);
+                //datos[7] += String.Format("{0}\n\r", p.ToString());
+
+            }
+            else
+                datos[7] = "-";
 
             if (Alojamiento is Casa)
                 datos[1] += ((Casa)Alojamiento).Camas;
@@ -159,12 +167,52 @@ namespace TP_II
         public void RemoverPasajero(Cliente pasajero)
         {
             pasajeros.Add(pasajero);
+            //pasajeros.Remove(pasajero);
         }
         public override string ToString()
         {
-            return String.Format("ID:{0} - {1} - Alojamiento: {2}",id,cliente.NombreCompleto,alojamiento.ToString());
+            if(alojamiento is Casa)
+                return String.Format("IDR:{0} - {1}: {2} - Alojamiento: {3}",id , cliente.IDcliente , cliente.NombreCompleto , alojamiento.ToString());
+            else
+                return String.Format("IDR:{0} - {1}: {2} - Alojamiento: {3} - NroHabitacion: {4}",id , cliente.IDcliente , cliente.NombreCompleto , alojamiento.ToString(), habitaciones[0].ToString());
         }
+        public string[] ExportarCasa()
+        {
+            string[] ret = new string[5];
+            ret[0] = cliente.DNI.ToString();
+            ret[1] = alojamiento.IDalojamiento.ToString();
+            ret[2] = ingreso.ToString();
+            ret[3] = egreso.ToString();
 
+            if (pasajeros.Count > 0)
+            {
+                foreach (Cliente p in pasajeros)
+                    ret[4] += String.Format("{0}-", p.NombreCompleto);
+            }
+            else
+                ret[4] = "-";
+
+            return ret;
+        }
+        public string[] ExportarHotel()
+        {
+            string[] ret = new string[6];
+            ret[0] = cliente.DNI.ToString();
+            ret[1] = alojamiento.IDalojamiento.ToString();
+            ret[2] = ingreso.ToString();
+            ret[3] = egreso.ToString();
+            ret[4] = habitaciones[0].Numero.ToString();
+
+            if (pasajeros.Count > 0)
+            {
+                foreach (Cliente p in pasajeros)
+                    ret[5] += String.Format("{0}-", p.NombreCompleto);
+            }
+            else
+                ret[5] = "-";
+
+            return ret;
+        }
         public int CompareTo(object o)
         {
             return this.id.CompareTo(((Reserva)o).id);

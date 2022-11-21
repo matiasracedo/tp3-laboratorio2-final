@@ -65,7 +65,6 @@
             this.exportarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.casasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.hotelesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ambosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verListaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -381,21 +380,21 @@
             // casasToolStripMenuItem
             // 
             this.casasToolStripMenuItem.Name = "casasToolStripMenuItem";
-            this.casasToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.casasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.casasToolStripMenuItem.Text = "Casas";
+            this.casasToolStripMenuItem.Click += new System.EventHandler(this.casasToolStripMenuItem_Click);
             // 
             // hotelesToolStripMenuItem
             // 
             this.hotelesToolStripMenuItem.Name = "hotelesToolStripMenuItem";
-            this.hotelesToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.hotelesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.hotelesToolStripMenuItem.Text = "Hoteles";
             // 
             // exportarToolStripMenuItem1
             // 
             this.exportarToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.casasToolStripMenuItem1,
-            this.hotelesToolStripMenuItem1,
-            this.ambosToolStripMenuItem});
+            this.hotelesToolStripMenuItem1});
             this.exportarToolStripMenuItem1.Name = "exportarToolStripMenuItem1";
             this.exportarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
             this.exportarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
@@ -404,20 +403,16 @@
             // casasToolStripMenuItem1
             // 
             this.casasToolStripMenuItem1.Name = "casasToolStripMenuItem1";
-            this.casasToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.casasToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.casasToolStripMenuItem1.Text = "Casas";
+            this.casasToolStripMenuItem1.Click += new System.EventHandler(this.casasToolStripMenuItem1_Click);
             // 
             // hotelesToolStripMenuItem1
             // 
             this.hotelesToolStripMenuItem1.Name = "hotelesToolStripMenuItem1";
-            this.hotelesToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.hotelesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.hotelesToolStripMenuItem1.Text = "Hoteles";
-            // 
-            // ambosToolStripMenuItem
-            // 
-            this.ambosToolStripMenuItem.Name = "ambosToolStripMenuItem";
-            this.ambosToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.ambosToolStripMenuItem.Text = "Ambos...";
+            this.hotelesToolStripMenuItem1.Click += new System.EventHandler(this.hotelesToolStripMenuItem1_Click);
             // 
             // verListaToolStripMenuItem1
             // 
@@ -439,21 +434,21 @@
             // importarToolStripMenuItem2
             // 
             this.importarToolStripMenuItem2.Name = "importarToolStripMenuItem2";
-            this.importarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.importarToolStripMenuItem2.Size = new System.Drawing.Size(129, 22);
             this.importarToolStripMenuItem2.Text = "Importar...";
             this.importarToolStripMenuItem2.Click += new System.EventHandler(this.importarToolStripMenuItem2_Click);
             // 
             // exportarToolStripMenuItem2
             // 
             this.exportarToolStripMenuItem2.Name = "exportarToolStripMenuItem2";
-            this.exportarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.exportarToolStripMenuItem2.Size = new System.Drawing.Size(129, 22);
             this.exportarToolStripMenuItem2.Text = "Exportar...";
             this.exportarToolStripMenuItem2.Click += new System.EventHandler(this.exportarToolStripMenuItem2_Click);
             // 
             // verListaToolStripMenuItem2
             // 
             this.verListaToolStripMenuItem2.Name = "verListaToolStripMenuItem2";
-            this.verListaToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.verListaToolStripMenuItem2.Size = new System.Drawing.Size(129, 22);
             this.verListaToolStripMenuItem2.Text = "Ver lista";
             this.verListaToolStripMenuItem2.Click += new System.EventHandler(this.verListaToolStripMenuItem2_Click);
             // 
@@ -543,7 +538,6 @@
         private System.Windows.Forms.ToolStripMenuItem hotelesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem casasToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem hotelesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem ambosToolStripMenuItem;
     }
 }
 
