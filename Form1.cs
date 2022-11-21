@@ -910,7 +910,23 @@ namespace TP_II
             comprobante.lbComprobante.Items.Add("Pasajeros admitidos: "+ datos[1]);
             comprobante.lbComprobante.Items.Add("");
             comprobante.lbComprobante.Items.Add("Acompañantes: ");
-            comprobante.lbComprobante.Items.Add(datos[7]);
+
+            string acom = datos[7].TrimEnd('-');
+            if (acom != null)
+            {
+                
+                List<string> nombres = new List<string>();
+                if (acom.Contains('-'))
+                    nombres.AddRange(acom.Split('-'));
+                else
+                    nombres.Add(acom);
+
+                foreach (string s in nombres)
+                    comprobante.lbComprobante.Items.Add("             -" + s);
+            }
+            else
+                comprobante.lbComprobante.Items.Add("          --- No hay --");
+            //comprobante.lbComprobante.Items.Add(datos[7]);
             comprobante.lbComprobante.Items.Add("");
             comprobante.lbComprobante.Items.Add(datos[4]);
             comprobante.lbComprobante.Items.Add("");

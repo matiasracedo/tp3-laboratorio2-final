@@ -63,7 +63,8 @@ namespace TP_II
             this.egreso = egreso;
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
             this.precioBaseReserva = precioBase;
-            p.ForEach(acomp => pasajeros.Add(acomp));
+            if (p.Count > 0)
+                p.ForEach(acomp => pasajeros.Add(acomp));
             id = contIdReservas;
             contIdReservas++;
             Cliente.ContIdCliente++;
@@ -118,8 +119,13 @@ namespace TP_II
             datos[5] = PrecioDia.ToString();
             datos[6] = PrecioTotal.ToString();
 
-            foreach (Cliente p in pasajeros)
-                datos[7] += String.Format("{0}\n\r", p.ToString());
+            if (pasajeros.Count > 0)
+            {
+                foreach (Cliente p in pasajeros)
+                    datos[7] += String.Format("{0}-", p.NombreCompleto);
+               //datos[7] += String.Format("{0}\n\r", p.ToString());
+
+            }
 
             if (Alojamiento is Casa)
                 datos[1] += ((Casa)Alojamiento).Camas;
@@ -154,6 +160,7 @@ namespace TP_II
         public void AgregarPasajero(Cliente pasajero)
         {
             pasajeros.Add(pasajero);
+            //pasajeros.Remove(pasajero);
         }
 
         public void RemoverPasajero(Cliente pasajero)
