@@ -160,12 +160,12 @@ namespace TP_II
         public void AgregarPasajero(Cliente pasajero)
         {
             pasajeros.Add(pasajero);
-            //pasajeros.Remove(pasajero);
         }
 
         public void RemoverPasajero(Cliente pasajero)
         {
             pasajeros.Add(pasajero);
+            //pasajeros.Remove(pasajero);
         }
         public override string ToString()
         {
