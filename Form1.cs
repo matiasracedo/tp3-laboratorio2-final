@@ -20,7 +20,8 @@ namespace TP_II
         ConsultaForm vConsulta = null;
         string nombreArchivo = Application.StartupPath + @"\persistencia.dat";
         bool restart = false;
-        Image[] imagenes;
+        Image[] imagenes; // Imagenes de un alojamiento
+        List<Cliente> pasajeros = new List<Cliente>(); // Pasajeros adicionales reserva
         public Form1()
         {
             InitializeComponent();
@@ -299,8 +300,6 @@ namespace TP_II
             openImageFile.Dispose();
         }
 
-        // Aca va nuevo boton
-
         private void btnModificarAloj_Click(object sender, EventArgs e)
         {
             ABMAlojamientosForm vModificacion = new ABMAlojamientosForm();
@@ -411,6 +410,23 @@ namespace TP_II
             vModificacion.Dispose();
         }
 
+        //Evento click boton Agregar pasajeros ventana DatosCliente
+        public void btnPasajeros_Click(object sender, EventArgs e)
+        {
+            DatosClienteForm vPasajero = new DatosClienteForm();
+            vPasajero.btnPasajeros.Visible = false;
+
+            if (vPasajero.ShowDialog() == DialogResult.OK)
+            {
+                string nombre = vPasajero.tbNombre.Text;
+                string apellido = vPasajero.tbApellido.Text;
+                int dni = Convert.ToInt32(vPasajero.tbDni.Text);
+                int edad = Convert.ToInt32(vPasajero.tbEdad.Text);
+                Cliente cliente = new Cliente(nombre, apellido, dni, edad);
+                pasajeros.Add(cliente);
+            }
+        }
+
         private void btnConsultaAloj_Click(object sender, EventArgs e)
         {
             AlojamientoForm vAlojomiento = new AlojamientoForm();
@@ -447,7 +463,9 @@ namespace TP_II
                     else
                     {
                         DatosClienteForm vCliente = new DatosClienteForm();
-                        //DatosClienteForm vPasajero = new DatosClienteForm();
+                        
+                        // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
+                        vCliente.btnPasajeros.Click += new System.EventHandler(this.btnPasajeros_Click);
 
                         if (vCliente.ShowDialog() == DialogResult.OK)
                         {
@@ -456,10 +474,20 @@ namespace TP_II
                             int dni = Convert.ToInt32(vCliente.tbDni.Text);
                             int edad = Convert.ToInt32(vCliente.tbEdad.Text);
                             Cliente cliente = new Cliente(nombre, apellido, dni, edad);
-                            Reserva reserva = new Reserva(cliente, casa, inicio, fin, casa.PrecioBaseCasa);
+                            Reserva reserva;
+                            if (pasajeros.Count > 0)
+                            {
+                                reserva = new Reserva(cliente, casa, inicio, fin, casa.PrecioBaseCasa, pasajeros);
+                                pasajeros.Clear();
+                            }
+                            else
+                                reserva = new Reserva(cliente, casa, inicio, fin, casa.PrecioBaseCasa);
                             this.AgregarReserva(reserva);
                             EmitirComprobante(reserva);
                         }
+
+                        // Quito evento click del boton "Agregar pasajeros" en ventana DatosCliente
+                        vCliente.btnPasajeros.Click -= new System.EventHandler(this.btnPasajeros_Click);
                     }
                 }
             }
@@ -490,6 +518,10 @@ namespace TP_II
                         else
                         {
                             DatosClienteForm vCliente = new DatosClienteForm();
+
+                            // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
+                            vCliente.btnPasajeros.Click += new System.EventHandler(this.btnPasajeros_Click);
+
                             if (vCliente.ShowDialog() == DialogResult.OK)
                             {
                                 string nombre = vCliente.tbNombre.Text;
@@ -501,7 +533,14 @@ namespace TP_II
                                 {
                                     Habitacion reservada = hotel.GetHabitacion(nroHabitacion);
                                     Cliente cliente = new Cliente(nombre, apellido, dni, edad);
-                                    Reserva reserva = new Reserva(cliente, hotel, inicio, fin, GetPrecioBaseHoteles(), reservada);
+                                    Reserva reserva;
+                                    if (pasajeros.Count > 0)
+                                    {
+                                        reserva = new Reserva(cliente, hotel, inicio, fin, GetPrecioBaseHoteles(), reservada, pasajeros);
+                                        pasajeros.Clear();
+                                    }
+                                    else
+                                        reserva = new Reserva(cliente, hotel, inicio, fin, GetPrecioBaseHoteles(), reservada);
                                     hotel.AgregarReserva(nroHabitacion, reserva);
                                     AgregarReserva(reserva);
                                     EmitirComprobante(reserva);
@@ -513,6 +552,8 @@ namespace TP_II
                                 }
 
                             }
+                            // Quito evento click del boton "Agregar pasajeros" en ventana DatosCliente
+                            vCliente.btnPasajeros.Click -= new System.EventHandler(this.btnPasajeros_Click);
                             vCliente.Dispose();
                         }
                     }
@@ -597,6 +638,7 @@ namespace TP_II
             int indice = cbReservas.SelectedIndex;
             Reserva unaReserva = empresa.Reservas[indice];
             Alojamiento unAlojamiento = unaReserva.Alojamiento;
+            List<Cliente> acomp = unaReserva.Pasajeros;
 
             AlojamientoForm vAlojomiento = new AlojamientoForm();
             vAlojomiento.btnCancelarReserva.Enabled = true;
@@ -642,6 +684,8 @@ namespace TP_II
                     else
                     {
                         DatosClienteForm vCliente = new DatosClienteForm();
+                        vCliente.btnPasajeros.Visible = false;
+
                         vCliente.tbNombre.Text = unaReserva.getCliente.Nombre;
                         vCliente.tbApellido.Text = unaReserva.getCliente.Apellido;
                         vCliente.tbDni.Text = unaReserva.getCliente.DNI.ToString();
@@ -653,11 +697,11 @@ namespace TP_II
                             string apellido = vCliente.tbApellido.Text;
                             int dni = Convert.ToInt32(vCliente.tbDni.Text);
                             int edad = Convert.ToInt32(vCliente.tbEdad.Text);
+                            
                             Cliente cliente = new Cliente(nombre, apellido, dni, edad);
 
-                            unaReserva.Modificar(cliente, inicio, fin);
+                            unaReserva.Modificar(cliente, inicio, fin, acomp);
                             this.AgregarReserva(unaReserva);
-                            unaReserva.GenerarComprobante();
                             EmitirComprobante(unaReserva);
                         }
                         vCliente.Dispose();
@@ -719,6 +763,7 @@ namespace TP_II
                     else
                     {
                         DatosClienteForm vCliente = new DatosClienteForm();
+                        vCliente.btnPasajeros.Visible = false;
 
                         vCliente.tbNombre.Text = unaReserva.getCliente.Nombre;
                         vCliente.tbApellido.Text = unaReserva.getCliente.Apellido;
@@ -734,7 +779,7 @@ namespace TP_II
 
 
                             Cliente cliente = new Cliente(nombre, apellido, dni, edad);
-                            unaReserva.Modificar(cliente, inicio, fin);
+                            unaReserva.Modificar(cliente, inicio, fin, acomp);
 
                             if (numHabitacionAnterior != nroHabitacionNuevo)
                             {
@@ -864,6 +909,9 @@ namespace TP_II
             comprobante.lbComprobante.Items.Add("");
             comprobante.lbComprobante.Items.Add("Pasajeros admitidos: "+ datos[1]);
             comprobante.lbComprobante.Items.Add("");
+            comprobante.lbComprobante.Items.Add("Acompañantes: ");
+            comprobante.lbComprobante.Items.Add(datos[7]);
+            comprobante.lbComprobante.Items.Add("");
             comprobante.lbComprobante.Items.Add(datos[4]);
             comprobante.lbComprobante.Items.Add("");
             comprobante.lbComprobante.Items.Add("Costo por dia "+ String.Format("${0:C2}", datos[5]));
@@ -874,7 +922,13 @@ namespace TP_II
             comprobante.Dispose();
         }
 
-
+        public List<Cliente> GetPasajeros()
+        {
+            List<Cliente> resultado = new List<Cliente>();
+            pasajeros.ForEach(acomp => resultado.Add(acomp));
+            pasajeros.Clear();
+            return resultado;
+        }
 
 
 
