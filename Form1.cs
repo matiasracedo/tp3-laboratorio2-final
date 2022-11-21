@@ -912,7 +912,7 @@ namespace TP_II
             comprobante.lbComprobante.Items.Add("Acompañantes: ");
 
             string acom = datos[7].TrimEnd('-');
-            if (acom != null)
+            if (acom != "")
             {
                 
                 List<string> nombres = new List<string>();
@@ -1194,6 +1194,238 @@ namespace TP_II
         {
             btnConsultaReserva.PerformClick();
         }
+        private void casasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = Application.StartupPath;
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.InitialDirectory = path;
+            ofd.DefaultExt = ".txt"; ofd.AddExtension = true;
+            //ofd.Filter = "texto |.txt";
+
+            FileStream fs;
+            StreamReader sr;
+
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                fs = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
+                sr = new StreamReader(fs);
+
+                sr.ReadLine();
+                int contLinea = 1;
+
+                List<int> lineasErroresCampos = new List<int>();
+                
+                Dictionary<int, string> errorClientesInexistentes = new Dictionary<int, string>();
+                Dictionary<int, string> errorAlojamientosInexistentes = new Dictionary<int, string>();
+                Dictionary<int, string> errorReservaExistentes = new Dictionary<int, string>();
+                Dictionary<int, string> errorFechaOcupada = new Dictionary<int, string>();
+                Dictionary<int, string> errorMinimoDias = new Dictionary<int, string>();
+                Dictionary<int, string> errorCapacidadMaxima = new Dictionary<int, string>();
+
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    string[] campos = line.Split(',');
+
+                    int dni; //se utiliza solo para informar error
+                    int idAlojamiento;
+                    DateTime ingreso;
+                    DateTime egreso;
+                    List<Cliente> acompaniantes= new List<Cliente>();
+
+
+                    if (campos.Length == 5)
+                    {
+                        dni = Convert.ToInt32(campos[0]);
+                        idAlojamiento = Convert.ToInt32(campos[1]);
+                        ingreso = DateTime.Parse(campos[2]);
+                        egreso = DateTime.Parse(campos[3]);
+
+                        string linea=campos[4].TrimEnd('-');
+                        if(linea!="")
+                        {
+                            string[] campos2 = linea.Split('-');
+                            string[] nombreApellido;
+                            Cliente pasajero;
+                            foreach (string acom in campos2)
+                            {
+                               nombreApellido =acom.Split(' ');
+                               pasajero= new Cliente(nombreApellido[0],nombreApellido[1]);
+                               acompaniantes.Add(pasajero);
+                            }           
+                        }
+
+
+                        Reserva nuevaReserva;
+                        Cliente cliente = new Cliente("", "", dni, 1);
+
+                        if(empresa.ExisteCliente(ref cliente)) //se actualiza por referencia en el método
+                        {
+                            Alojamiento buscado = new Casa("", 1, 1, null, 1);
+                            Casa casita;
+                            if (empresa.ExisteAlojamiento(idAlojamiento, ref buscado)) //si existe actualiza por referencia en el método
+                            {
+                                 casita= buscado as Casa;
+                                int diasReserva=egreso.AddDays(1).Subtract(ingreso).Days;
+                                if(diasReserva>=casita.MinDias)
+                                {
+                                    if (acompaniantes.Count + 1 <= casita.Camas)
+                                    {
+                                        if (empresa.ExisteReservaCasa(cliente, buscado, ingreso, egreso))
+                                            errorReservaExistentes.Add(contLinea, line);
+                                        else
+                                        {
+                                            if (buscado.CheckFecha(ingreso, egreso))
+                                            {
+                                                if (acompaniantes.Count > 0)
+                                                    nuevaReserva = new Reserva(cliente, buscado, ingreso, egreso, casita.PrecioBaseCasa, acompaniantes);
+                                                else
+                                                    nuevaReserva = new Reserva(cliente, buscado, ingreso, egreso, casita.PrecioBaseCasa);
+
+                                                this.AgregarReserva(nuevaReserva);
+                                            }
+                                            else
+                                                errorFechaOcupada.Add(contLinea, line);
+                                        }
+                                    }
+                                    else
+                                        errorCapacidadMaxima.Add(contLinea, "Casa ID: " + casita.IDalojamiento + " - Camas: " + casita.Camas + " - Solicitadas: " + pasajeros.Count+1);
+                                }
+                                else
+                                    errorMinimoDias.Add(contLinea, "Casa ID: "+ casita.IDalojamiento + " - Minimo: "+ casita.MinDias + " - Solicitado: "+ diasReserva);
+                            }
+                            else
+                                errorAlojamientosInexistentes.Add(contLinea,idAlojamiento.ToString());
+                        }
+                        else
+                            errorClientesInexistentes.Add(contLinea, dni.ToString());     
+                    }
+                    else
+                    {
+                        lineasErroresCampos.Add(contLinea);
+                    }
+                    contLinea++;
+                }
+
+
+                AlojamientosExistentesForm ventanaExistentes = new AlojamientosExistentesForm();
+
+                string lineaShowErrores = null;
+
+                if (lineasErroresCampos.Count > 0)
+                {
+                    ventanaExistentes.listBox1.Items.Add("SE HAN ENCONTRADO LOS SIGUIENTES ERRORES DE CAMPO: ");
+                    ventanaExistentes.listBox1.Items.Add("");
+
+                    foreach (int a in lineasErroresCampos)
+                    {
+                        lineaShowErrores = "LINEA NRO: " + a;
+                        ventanaExistentes.listBox1.Items.Add(lineaShowErrores);
+                    }
+                    ventanaExistentes.listBox1.Items.Add("");
+                    ventanaExistentes.listBox1.Items.Add("");
+                }
+
+                if (errorClientesInexistentes.Count > 0)
+                {
+                    ventanaExistentes.listBox1.Items.Add("SE HAN ENCONTRADO LOS SIGUIENTES CLIENTES NO REGISTRADOS: ");
+                    ventanaExistentes.listBox1.Items.Add("");
+
+                    foreach (KeyValuePair<int, string> pair in errorClientesInexistentes)
+                    {
+                        lineaShowErrores = "LINEA NRO: " + pair.Key.ToString() + " - DNI: " + pair.Value.ToString();
+                        ventanaExistentes.listBox1.Items.Add(lineaShowErrores);
+                    }
+                    ventanaExistentes.listBox1.Items.Add("");
+                    ventanaExistentes.listBox1.Items.Add("");
+                }
+
+                if (errorAlojamientosInexistentes.Count > 0)
+                {
+                    ventanaExistentes.listBox1.Items.Add("SE HAN ENCONTRADO LOS SIGUIENTES ALOJAMIENTOS NO REGISTRADOS: ");
+                    ventanaExistentes.listBox1.Items.Add("");
+
+                    foreach (KeyValuePair<int, string> pair in errorAlojamientosInexistentes)
+                    {
+                        lineaShowErrores = "LINEA NRO: " + pair.Key.ToString() + " - IDalojamiento: " + pair.Value.ToString();
+                        ventanaExistentes.listBox1.Items.Add(lineaShowErrores);
+                    }
+                    ventanaExistentes.listBox1.Items.Add("");
+                    ventanaExistentes.listBox1.Items.Add("");
+                }
+
+                if (errorReservaExistentes.Count > 0)
+                {
+                    ventanaExistentes.listBox1.Items.Add("SE HAN DETECTADO RESERVAS YA REGISTRADAS: ");
+                    ventanaExistentes.listBox1.Items.Add("");
+
+                    foreach (KeyValuePair<int, string> pair in errorReservaExistentes)
+                    {
+                        lineaShowErrores = "LINEA NRO: " + pair.Key.ToString() + " - " + pair.Value.ToString();
+                        ventanaExistentes.listBox1.Items.Add(lineaShowErrores);
+                    }
+                    ventanaExistentes.listBox1.Items.Add("");
+                    ventanaExistentes.listBox1.Items.Add("");
+                }
+
+                if (errorFechaOcupada.Count > 0)
+                {
+                    ventanaExistentes.listBox1.Items.Add("SE HAN DETECTADO FECHAS NO DISPONIBLES: ");
+                    ventanaExistentes.listBox1.Items.Add("");
+
+                    foreach (KeyValuePair<int, string> pair in errorFechaOcupada)
+                    {
+                        lineaShowErrores = "LINEA NRO: " + pair.Key.ToString() + " - " + pair.Value.ToString();
+                        ventanaExistentes.listBox1.Items.Add(lineaShowErrores);
+                    }
+                    ventanaExistentes.listBox1.Items.Add("");
+                    ventanaExistentes.listBox1.Items.Add("");
+                }
+                if (errorCapacidadMaxima.Count > 0)
+                {
+                    ventanaExistentes.listBox1.Items.Add("SE HAN DETECTADO ERRORES DE CAPACIDAD DE PASAJEROS: ");
+                    ventanaExistentes.listBox1.Items.Add("");
+
+                    foreach (KeyValuePair<int, string> pair in errorCapacidadMaxima)
+                    {
+                        lineaShowErrores = "LINEA NRO: " + pair.Key.ToString() + " - " + pair.Value.ToString();
+                        ventanaExistentes.listBox1.Items.Add(lineaShowErrores);
+                    }
+                    ventanaExistentes.listBox1.Items.Add("");
+                    ventanaExistentes.listBox1.Items.Add("");
+                }
+                if (errorMinimoDias.Count > 0)
+                {
+                    ventanaExistentes.listBox1.Items.Add("SE HAN DETECTADO ERRORES DE CANTIDAD DE DIAS DE RESERVA: ");
+                    ventanaExistentes.listBox1.Items.Add("");
+
+                    foreach (KeyValuePair<int, string> pair in errorMinimoDias)
+                    {
+                        lineaShowErrores = "LINEA NRO: " + pair.Key.ToString() + " - " + pair.Value.ToString();
+                        ventanaExistentes.listBox1.Items.Add(lineaShowErrores);
+                    }
+                    ventanaExistentes.listBox1.Items.Add("");
+                    ventanaExistentes.listBox1.Items.Add("");
+                }
+
+
+                if (lineaShowErrores != null)
+                {
+                    ventanaExistentes.Show();
+                }
+
+                if (contLinea - 1 == errorReservaExistentes.Count)
+                    MessageBox.Show("Todas las reservas ya estaban cargadas");
+                else
+                    MessageBox.Show("Carga Exitosa!");
+
+                sr.Close();
+                fs.Close();
+                ActualizarListas();
+            }
+        }
 
         private void casasToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -1211,7 +1443,7 @@ namespace TP_II
                 {
                     fs = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write);
                     sw = new StreamWriter(fs);
-                    sw.WriteLine("IDCLIENTE , IDALOJAMIENTO , CHECKIN , CHECKOUT");
+                    sw.WriteLine("DNICLIENTE , IDALOJAMIENTO , CHECKIN , CHECKOUT , ACOMPANIANTES");
 
                     foreach (Reserva r in empresa.Reservas)
                     {
@@ -1220,7 +1452,7 @@ namespace TP_II
                             string linea = null;
                             string[] campos = r.ExportarCasa();
 
-                            linea = campos[0] + "," + campos[1] + "," + campos[2] + "," + campos[3];
+                            linea = campos[0] + "," + campos[1] + "," + campos[2] + "," + campos[3] + "," + campos[4];
                             sw.WriteLine(linea);
                         }
                     }
@@ -1250,7 +1482,7 @@ namespace TP_II
                 {
                     fs = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write);
                     sw = new StreamWriter(fs);
-                    sw.WriteLine("IDCLIENTE , IDALOJAMIENTO , CHECKIN , CHECKOUT , NROHABITACION");
+                    sw.WriteLine("DNICLIENTE , IDALOJAMIENTO , CHECKIN , CHECKOUT , NROHABITACION , ACOMPANIANTES");
 
 
                     foreach (Reserva r in empresa.Reservas)
@@ -1260,7 +1492,7 @@ namespace TP_II
                             string linea = null;
                             string[] campos = r.ExportarHotel();
 
-                            linea = campos[0] + "," + campos[1] + "," + campos[2] + "," + campos[3] + "," + campos[4];
+                            linea = campos[0] + "," + campos[1] + "," + campos[2] + "," + campos[3] + "," + campos[4] + "," + campos[5];
                             sw.WriteLine(linea);
                         }
                     }
@@ -1473,6 +1705,8 @@ namespace TP_II
         }
 
         
+
+
 
 
 

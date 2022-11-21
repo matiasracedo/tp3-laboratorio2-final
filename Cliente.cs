@@ -24,6 +24,14 @@ namespace TP_II
             this.edad = edad;
             idCliente = contIdCliente;//el contador se incrementa en solo en la creacion de la reserva
         }
+        public Cliente(string nombre,string apellido)
+        {
+            this.nombre = nombre.TrimEnd(' ').TrimStart(' ');
+            this.apellido = apellido.TrimEnd(' ').TrimStart(' ');
+            this.dni = 0;
+            this.edad = 0;
+            idCliente = contIdCliente;
+        }
 
         public string Nombre { get { return nombre; } }
         public string Apellido { get { return apellido; } }

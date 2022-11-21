@@ -123,9 +123,11 @@ namespace TP_II
             {
                 foreach (Cliente p in pasajeros)
                     datos[7] += String.Format("{0}-", p.NombreCompleto);
-               //datos[7] += String.Format("{0}\n\r", p.ToString());
+                //datos[7] += String.Format("{0}\n\r", p.ToString());
 
             }
+            else
+                datos[7] = "-";
 
             if (Alojamiento is Casa)
                 datos[1] += ((Casa)Alojamiento).Camas;
@@ -176,22 +178,38 @@ namespace TP_II
         }
         public string[] ExportarCasa()
         {
-            string[] ret = new string[4];
-            ret[0] = cliente.IDcliente.ToString();
+            string[] ret = new string[5];
+            ret[0] = cliente.DNI.ToString();
             ret[1] = alojamiento.IDalojamiento.ToString();
             ret[2] = ingreso.ToString();
             ret[3] = egreso.ToString();
+
+            if (pasajeros.Count > 0)
+            {
+                foreach (Cliente p in pasajeros)
+                    ret[4] += String.Format("{0}-", p.NombreCompleto);
+            }
+            else
+                ret[4] = "-";
 
             return ret;
         }
         public string[] ExportarHotel()
         {
-            string[] ret = new string[5];
-            ret[0] = cliente.IDcliente.ToString();
+            string[] ret = new string[6];
+            ret[0] = cliente.DNI.ToString();
             ret[1] = alojamiento.IDalojamiento.ToString();
             ret[2] = ingreso.ToString();
             ret[3] = egreso.ToString();
             ret[4] = habitaciones[0].Numero.ToString();
+
+            if (pasajeros.Count > 0)
+            {
+                foreach (Cliente p in pasajeros)
+                    ret[5] += String.Format("{0}-", p.NombreCompleto);
+            }
+            else
+                ret[5] = "-";
 
             return ret;
         }
