@@ -17,10 +17,10 @@ namespace TP_II
         private DateTime ingreso;
         private DateTime egreso;
         private TimeSpan periodo;
-        private List<Cliente> pasajeros =new List<Cliente>();
+        private List<Cliente> pasajeros = new List<Cliente>();
         private double precioBaseReserva;
         private double precioDia;
-        private string[] comprobante = new string[7];
+        private string[] comprobante;
         private readonly int id;
 
         public Reserva(Cliente cliente, Alojamiento alojamiento,DateTime ingreso, DateTime egreso,double precioBase,Habitacion h)
@@ -55,6 +55,41 @@ namespace TP_II
             GenerarComprobante();
         }
 
+        public Reserva(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, double precioBase, List<Cliente> p)
+        {
+            this.cliente = cliente;
+            this.alojamiento = alojamiento;
+            this.ingreso = ingreso;
+            this.egreso = egreso;
+            this.periodo = egreso.AddDays(1).Subtract(ingreso);
+            this.precioBaseReserva = precioBase;
+            p.ForEach(acomp => pasajeros.Add(acomp));
+            id = contIdReservas;
+            contIdReservas++;
+            Cliente.ContIdCliente++;
+            CalcularPrecioDia();
+            GenerarComprobante();
+
+        }
+
+        public Reserva(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, double precioBase, Habitacion h, List<Cliente> p)
+            {
+            this.cliente = cliente;
+            this.alojamiento = alojamiento;
+            this.ingreso = ingreso;
+            this.egreso = egreso;
+            this.periodo = egreso.AddDays(1).Subtract(ingreso);
+            this.precioBaseReserva = precioBase;
+            p.ForEach(acomp => pasajeros.Add(acomp));
+            habitaciones.Add(h);
+            id = contIdReservas;
+            contIdReservas++;
+            Cliente.ContIdCliente++;
+            CalcularPrecioDia();
+            GenerarComprobante();
+
+        }
+
         public void AgregarHabitacion(Habitacion habitacion)
         {
             habitaciones.Add(habitacion);
@@ -73,7 +108,7 @@ namespace TP_II
 
         public void GenerarComprobante()
         {
-            string[] datos = new string[7];
+            string[] datos = new string[8];
             DateTime fecha = DateTime.Now;
 
             datos[0] = Alojamiento.ToString();
@@ -83,6 +118,9 @@ namespace TP_II
             datos[5] = PrecioDia.ToString();
             datos[6] = PrecioTotal.ToString();
 
+            foreach (Cliente p in pasajeros)
+                datos[7] += String.Format("{0}\n\r", p.ToString());
+
             if (Alojamiento is Casa)
                 datos[1] += ((Casa)Alojamiento).Camas;
             else
@@ -91,7 +129,7 @@ namespace TP_II
             comprobante = datos;
         }
 
-        public Reserva Modificar(Cliente cliente,DateTime ingreso, DateTime egreso)
+        public Reserva Modificar(Cliente cliente,DateTime ingreso, DateTime egreso, List<Cliente> pasajeros)
         {
             string fecha = comprobante[3];
 
@@ -99,12 +137,13 @@ namespace TP_II
             int idOriginal = this.cliente.IDcliente;
             this.cliente = cliente;
             cliente.IDcliente = idOriginal;
-            Cliente.ContIdCliente--;
+            // Cliente.ContIdCliente--;
             ///////////
 
             this.ingreso = ingreso;
             this.egreso = egreso;
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
+            this.pasajeros = pasajeros;
 
             CalcularPrecioDia();
             GenerarComprobante();
@@ -112,9 +151,14 @@ namespace TP_II
             return this;
         }
 
-        public void AgregarPasajero()
+        public void AgregarPasajero(Cliente pasajero)
         {
+            pasajeros.Add(pasajero);
+        }
 
+        public void RemoverPasajero(Cliente pasajero)
+        {
+            pasajeros.Add(pasajero);
         }
         public override string ToString()
         {

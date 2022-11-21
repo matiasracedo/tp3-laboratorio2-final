@@ -10,6 +10,7 @@ namespace TP_II
 {
     public interface IInterectuable
     {
+        List<Cliente> GetPasajeros();
         ArrayList ActualizarConsulta();
         object BuscarAlojamiento(object aBuscar);
         void AgregarReserva(object r);
@@ -18,6 +19,8 @@ namespace TP_II
         double GetPrecioBaseHoteles();
 
         void EmitirComprobante(Reserva reserva);
+
+        void btnPasajeros_Click(object sender, EventArgs e);
 
     }
 }
