@@ -150,6 +150,8 @@ namespace TP_II
             }
             ArrayList a = new ArrayList();
             a.AddRange(nuevos);
+
+            c.Dispose();
             return a;
         }
         public object BuscarAlojamiento(object unAlojameinto)
@@ -294,6 +296,7 @@ namespace TP_II
                     }
                 }
             }
+            openImageFile.Dispose();
         }
 
         // Aca va nuevo boton
@@ -510,6 +513,7 @@ namespace TP_II
                                 }
 
                             }
+                            vCliente.Dispose();
                         }
                     }
                     catch (Exception)
@@ -517,9 +521,9 @@ namespace TP_II
                         MessageBox.Show("Error en el Ingreso de datos para la reserva");
                     }
                 }
-
-
             }
+            vAlojomiento.Dispose();
+            ActualizarListas();
         }
 
         private void btnAgregarReserva_Click(object sender, EventArgs e)
@@ -1121,19 +1125,98 @@ namespace TP_II
             btnConsultaReserva.PerformClick();
         }
 
-        /*private void importarToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void casasToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            string path = Application.StartupPath;
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.InitialDirectory = path;
+            sfd.DefaultExt = ".txt"; sfd.AddExtension = true;
+            //ofd.Filter = "texto |.txt";
+            FileStream fs;
+            StreamWriter sw;
+            if (empresa.HayReservasCasas)
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    fs = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write);
+                    sw = new StreamWriter(fs);
+                    sw.WriteLine("IDCLIENTE , IDALOJAMIENTO , CHECKIN , CHECKOUT");
+
+                    foreach (Reserva r in empresa.Reservas)
+                    {
+                        if (r.Alojamiento is Casa)
+                        {
+                            string linea = null;
+                            string[] campos = r.ExportarCasa();
+
+                            linea = campos[0] + "," + campos[1] + "," + campos[2] + "," + campos[3];
+                            sw.WriteLine(linea);
+                        }
+                    }
+
+                    sw.Close();
+                    fs.Close();
+                }
+            }
+            else
+                MessageBox.Show("No hay reservas registradas");
 
         }
-
-        private void exportarToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void hotelesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            string path = Application.StartupPath;
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.InitialDirectory = path;
+            sfd.DefaultExt = ".txt"; sfd.AddExtension = true;
+            //ofd.Filter = "texto |.txt";
+            FileStream fs;
+            StreamWriter sw;
+
+            if (empresa.HayReservasHoteles)
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    fs = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write);
+                    sw = new StreamWriter(fs);
+                    sw.WriteLine("IDCLIENTE , IDALOJAMIENTO , CHECKIN , CHECKOUT , NROHABITACION");
+
+
+                    foreach (Reserva r in empresa.Reservas)
+                    {
+                        if (r.Alojamiento is Hotel)
+                        {
+                            string linea = null;
+                            string[] campos = r.ExportarHotel();
+
+                            linea = campos[0] + "," + campos[1] + "," + campos[2] + "," + campos[3] + "," + campos[4];
+                            sw.WriteLine(linea);
+                        }
+                    }
+                    sw.Close();
+                    fs.Close();
+                }
+            }
+            else
+                MessageBox.Show("No hay reservas registradas");
 
         }
-        */
         private void verListaToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            AlojamientosExistentesForm listaForm = new AlojamientosExistentesForm();
 
+            List<Reserva> lista = empresa.Reservas;
+            if (lista.Count > 0)
+            {
+                foreach (Reserva r in lista)
+                    listaForm.listBox1.Items.Add(r.ToString());
+            }
+            else
+                listaForm.listBox1.Items.Add("No hay Reservas registradas");
+
+            listaForm.ShowDialog();
+            listaForm.Dispose();
         }
 
 
@@ -1318,6 +1401,12 @@ namespace TP_II
 
             listaForm.Dispose();
         }
+
+        
+
+
+
+
 
         //MENU STRIP ACERCADE - INFO:::::
         //MENU STRIP ACERCADE - INFO:::::

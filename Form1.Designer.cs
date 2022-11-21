@@ -404,19 +404,21 @@
             // casasToolStripMenuItem1
             // 
             this.casasToolStripMenuItem1.Name = "casasToolStripMenuItem1";
-            this.casasToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.casasToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.casasToolStripMenuItem1.Text = "Casas";
+            this.casasToolStripMenuItem1.Click += new System.EventHandler(this.casasToolStripMenuItem1_Click);
             // 
             // hotelesToolStripMenuItem1
             // 
             this.hotelesToolStripMenuItem1.Name = "hotelesToolStripMenuItem1";
-            this.hotelesToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.hotelesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.hotelesToolStripMenuItem1.Text = "Hoteles";
+            this.hotelesToolStripMenuItem1.Click += new System.EventHandler(this.hotelesToolStripMenuItem1_Click);
             // 
             // ambosToolStripMenuItem
             // 
             this.ambosToolStripMenuItem.Name = "ambosToolStripMenuItem";
-            this.ambosToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.ambosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ambosToolStripMenuItem.Text = "Ambos...";
             // 
             // verListaToolStripMenuItem1
@@ -439,21 +441,21 @@
             // importarToolStripMenuItem2
             // 
             this.importarToolStripMenuItem2.Name = "importarToolStripMenuItem2";
-            this.importarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.importarToolStripMenuItem2.Size = new System.Drawing.Size(129, 22);
             this.importarToolStripMenuItem2.Text = "Importar...";
             this.importarToolStripMenuItem2.Click += new System.EventHandler(this.importarToolStripMenuItem2_Click);
             // 
             // exportarToolStripMenuItem2
             // 
             this.exportarToolStripMenuItem2.Name = "exportarToolStripMenuItem2";
-            this.exportarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.exportarToolStripMenuItem2.Size = new System.Drawing.Size(129, 22);
             this.exportarToolStripMenuItem2.Text = "Exportar...";
             this.exportarToolStripMenuItem2.Click += new System.EventHandler(this.exportarToolStripMenuItem2_Click);
             // 
             // verListaToolStripMenuItem2
             // 
             this.verListaToolStripMenuItem2.Name = "verListaToolStripMenuItem2";
-            this.verListaToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.verListaToolStripMenuItem2.Size = new System.Drawing.Size(129, 22);
             this.verListaToolStripMenuItem2.Text = "Ver lista";
             this.verListaToolStripMenuItem2.Click += new System.EventHandler(this.verListaToolStripMenuItem2_Click);
             // 

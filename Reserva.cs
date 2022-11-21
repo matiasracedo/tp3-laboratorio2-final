@@ -118,9 +118,32 @@ namespace TP_II
         }
         public override string ToString()
         {
-            return String.Format("ID:{0} - {1} - Alojamiento: {2}",id,cliente.NombreCompleto,alojamiento.ToString());
+            if(alojamiento is Casa)
+                return String.Format("IDR:{0} - {1}: {2} - Alojamiento: {3}",id , cliente.IDcliente , cliente.NombreCompleto , alojamiento.ToString());
+            else
+                return String.Format("IDR:{0} - {1}: {2} - Alojamiento: {3} - NroHabitacion: {4}",id , cliente.IDcliente , cliente.NombreCompleto , alojamiento.ToString(), habitaciones[0].ToString());
         }
+        public string[] ExportarCasa()
+        {
+            string[] ret = new string[4];
+            ret[0] = cliente.IDcliente.ToString();
+            ret[1] = alojamiento.IDalojamiento.ToString();
+            ret[2] = ingreso.ToString();
+            ret[3] = egreso.ToString();
 
+            return ret;
+        }
+        public string[] ExportarHotel()
+        {
+            string[] ret = new string[5];
+            ret[0] = cliente.IDcliente.ToString();
+            ret[1] = alojamiento.IDalojamiento.ToString();
+            ret[2] = ingreso.ToString();
+            ret[3] = egreso.ToString();
+            ret[4] = habitaciones[0].Numero.ToString();
+
+            return ret;
+        }
         public int CompareTo(object o)
         {
             return this.id.CompareTo(((Reserva)o).id);

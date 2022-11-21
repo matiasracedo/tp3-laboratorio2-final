@@ -183,7 +183,44 @@ namespace TP_II
                 return ret;
             }
         }
+        public bool HayReservasCasas
+        {
+           
+            get
+            {
+                bool hay = false;
+                int cont = 0;
 
+                while(hay==false&&cont<reservas.Count)
+                {
+                    if(reservas[cont].Alojamiento is Casa)
+                        hay = true;
+
+                    cont++;
+                }
+                
+                return hay;
+            }
+        }
+        public bool HayReservasHoteles
+        {
+
+            get
+            {
+                bool hay = false;
+                int cont = 0;
+
+                while (hay == false && cont < reservas.Count)
+                {
+                    if (reservas[cont].Alojamiento is Hotel)
+                        hay = true;
+
+                    cont++;
+                }
+
+                return hay;
+            }
+        }
         public void ImportarClientes(List<Cliente> clientesNuevos)
         {
             foreach (Cliente cliente in clientesNuevos)
