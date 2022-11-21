@@ -123,17 +123,32 @@ namespace TP_II
                     else
                     {
                         DatosClienteForm vCliente = new DatosClienteForm();
-                        if(vCliente.ShowDialog()==DialogResult.OK)
+
+                        // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
+                        vCliente.btnPasajeros.Click += new System.EventHandler(form1.btnPasajeros_Click);
+
+                        if (vCliente.ShowDialog()==DialogResult.OK)
                         {
                             string nombre = vCliente.tbNombre.Text;
                             string apellido = vCliente.tbApellido.Text;
                             int dni = Convert.ToInt32(vCliente.tbDni.Text);
                             int edad = Convert.ToInt32(vCliente.tbEdad.Text);
                             Cliente cliente = new Cliente(nombre,apellido,dni, edad);
-                            Reserva reserva = new Reserva(cliente,casa,inicio,fin,casa.PrecioBaseCasa);
+                            List<Cliente> pasajeros = form1.GetPasajeros();
+
+                            Reserva reserva;
+                            if (pasajeros.Count > 0)
+                            {
+                                reserva = new Reserva(cliente, casa, inicio, fin, casa.PrecioBaseCasa,pasajeros);
+                            }
+                            else
+                                reserva = new Reserva(cliente, casa, inicio, fin, casa.PrecioBaseCasa);
                             form1.AgregarReserva(reserva);
                             form1.EmitirComprobante(reserva);
-                        }                      
+                        }
+
+                        // Quito evento click del boton "Agregar pasajeros" en ventana DatosCliente
+                        vCliente.btnPasajeros.Click -= new System.EventHandler(form1.btnPasajeros_Click);
                     }
                 }
             }    
@@ -164,6 +179,10 @@ namespace TP_II
                         else
                         {
                             DatosClienteForm vCliente = new DatosClienteForm();
+
+                            // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
+                            vCliente.btnPasajeros.Click += new System.EventHandler(form1.btnPasajeros_Click);
+
                             if (vCliente.ShowDialog() == DialogResult.OK)
                             {
                                 string nombre = vCliente.tbNombre.Text;
@@ -175,7 +194,14 @@ namespace TP_II
                                 {
                                     Habitacion reservada = hotel.GetHabitacion(nroHabitacion);
                                     Cliente cliente = new Cliente(nombre, apellido, dni, edad);
-                                    Reserva reserva = new Reserva(cliente, hotel, inicio, fin, form1.GetPrecioBaseHoteles(), reservada);
+                                    List<Cliente> pasajeros = form1.GetPasajeros();
+                                    Reserva reserva;
+                                    if (pasajeros.Count > 0)
+                                    {
+                                        reserva = new Reserva(cliente, hotel, inicio, fin, form1.GetPrecioBaseHoteles(), reservada, pasajeros);
+                                    }
+                                    else
+                                        reserva = new Reserva(cliente, hotel, inicio, fin, form1.GetPrecioBaseHoteles(), reservada);
                                     hotel.AgregarReserva(nroHabitacion, reserva);
                                     form1.AgregarReserva(reserva);
                                     form1.EmitirComprobante(reserva);
@@ -187,6 +213,8 @@ namespace TP_II
                                 }
 
                             }
+                            // Quito evento click del boton "Agregar pasajeros" en ventana DatosCliente
+                            vCliente.btnPasajeros.Click -= new System.EventHandler(form1.btnPasajeros_Click);
                         }
                     }
                     catch (Exception)
