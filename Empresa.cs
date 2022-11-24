@@ -259,7 +259,35 @@ namespace TP_II
             }
 
             return encontrado;  
+        }
+        public bool ExisteAlojamiento(int id, ref Alojamiento buscado, int nroHabitacion)
+        {
+            bool encontrado = false;
+            int cont = 0;
+            int max = alojamientos.Count;
 
+            if (max > 0)
+            {
+                Alojamiento aloj;
+                while (encontrado == false && cont < max)
+                {                 
+                    aloj = alojamientos[cont];
+
+                    if(aloj is Hotel)
+                    {
+                        Hotel actual = aloj as Hotel;
+                        if (actual.IDalojamiento == id && actual.GetHabitacion(nroHabitacion)!=null)
+                        {
+                            encontrado = true;
+                            buscado = alojamientos[cont];
+                        }
+
+                    }                    
+                    cont++;
+                }
+            }
+
+            return encontrado;
         }
 
         public bool ExisteReservaCasa(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso)
@@ -274,15 +302,17 @@ namespace TP_II
             }
             return ret;
         }
-        public bool ExisteReservaHotel(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, int nroHabitacion)
+        public bool ExisteReservaHotel(Cliente cliente, Hotel hotel, DateTime ingreso, DateTime egreso, int nroHabitacion)
         {
             bool ret = false;
-            foreach (Reserva r in alojamiento.Reservas)
+            List<Reserva> reservas = hotel.GetReservasDeHabitacion(nroHabitacion);
+            if(reservas.Count > 0)
             {
-                if (cliente.CompareTo(r.getCliente) == 0 && DateTime.Compare(ingreso, r.Ingreso) == 0 && DateTime.Compare(egreso, r.Egreso) == 0)
+                foreach (Reserva r in reservas)
                 {
-                    ret = true;
-                }
+                    if (cliente.CompareTo(r.getCliente) == 0 && DateTime.Compare(ingreso, r.Ingreso) == 0 && DateTime.Compare(egreso, r.Egreso) == 0)
+                        ret = true;
+                }  
             }
             return ret;
         }

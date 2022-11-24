@@ -48,7 +48,7 @@ namespace TP_II
         public string[] Exportar()
         {
             string[] ret = new string[5];
-            ret[0] =idCliente.ToString();
+            ret[0] = idCliente.ToString();
             ret[1] = nombre;
             ret[2] = Apellido;
             ret[3] = DNI.ToString();

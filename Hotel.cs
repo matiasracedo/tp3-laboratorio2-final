@@ -188,7 +188,6 @@ namespace TP_II
             {
                 foreach (DateTime diaEvaluar in diasCheck)
                 {
-                    //if(dia.CompareTo(diaEvaluar)==0)
                     if(DateTime.Compare(dia,diaEvaluar)==0)
                         disponible = false;
                 }
