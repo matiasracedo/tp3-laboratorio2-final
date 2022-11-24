@@ -14,10 +14,11 @@ namespace TP_II
         private Cliente cliente;
         private Alojamiento alojamiento;
         private List<Habitacion> habitaciones = new List<Habitacion>();
+        private List<Cliente> pasajeros = new List<Cliente>();
         private DateTime ingreso;
         private DateTime egreso;
         private TimeSpan periodo;
-        private List<Cliente> pasajeros = new List<Cliente>();
+       
         private double precioBaseReserva;
         private double precioDia;
         private string[] comprobante;
@@ -74,7 +75,7 @@ namespace TP_II
         }
 
         public Reserva(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, double precioBase, Habitacion h, List<Cliente> p)
-            {
+        {
             this.cliente = cliente;
             this.alojamiento = alojamiento;
             this.ingreso = ingreso;
@@ -82,7 +83,7 @@ namespace TP_II
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
             this.precioBaseReserva = precioBase;
             p.ForEach(acomp => pasajeros.Add(acomp));
-            habitaciones.Add(h);
+            habitaciones.Add(h);          
             id = contIdReservas;
             contIdReservas++;
             Cliente.ContIdCliente++;
@@ -212,6 +213,28 @@ namespace TP_II
                 ret[5] = "-";
 
             return ret;
+        }
+        public string[] ExportarDatosReserva()
+        {
+            string[] retorno = new string[6];
+            retorno[0] = cliente.DNI.ToString();
+            retorno[1] = alojamiento.IDalojamiento.ToString();
+            retorno[2] = ingreso.ToString();
+            retorno[3] = egreso.ToString();
+
+            if(alojamiento is Casa)
+                retorno[4]="0";
+            else
+                retorno[4] = habitaciones[0].Numero.ToString();
+
+            if (pasajeros.Count > 0)
+            {
+                foreach (Cliente p in pasajeros)
+                    retorno[5] += String.Format("{0}-", p.NombreCompleto);
+            }
+            else
+                retorno[5] = "-";
+            return retorno;
         }
         public int CompareTo(object o)
         {

@@ -152,7 +152,7 @@ namespace TP_II
             ArrayList a = new ArrayList();
             a.AddRange(nuevos);
 
-            c.Dispose();
+            //c.Dispose();
             return a;
         }
         public object BuscarAlojamiento(object unAlojameinto)
@@ -215,7 +215,7 @@ namespace TP_II
             ventanaABM.labEstado.Visible = false;
             ventanaABM.btnAltaBaja.Visible = false;
             // Manejo evento click del boton "Importar fotos" en ventana ABM
-            ventanaABM.btnFotos.Click += new System.EventHandler(this.btnFotos_Click);
+            ventanaABM.btnFotos.Click += new System.EventHandler(this.btnFotos_Click);       
 
             if (ventanaABM.ShowDialog() == DialogResult.OK)
             {
@@ -299,7 +299,7 @@ namespace TP_II
             }
             openImageFile.Dispose();
         }
-
+     
         private void btnModificarAloj_Click(object sender, EventArgs e)
         {
             ABMAlojamientosForm vModificacion = new ABMAlojamientosForm();
@@ -308,7 +308,10 @@ namespace TP_II
             imagenes = new Image[5];
             // Manejo evento click del boton "Importar fotos" en ventana ABM
             vModificacion.btnFotos.Click += new System.EventHandler(this.btnFotos_Click);
-
+            // Manejo evento click del boton "Exportar Reservas" en ventana ABM
+            vModificacion.btnExportarR.Click += new System.EventHandler(this.btnExportarR_Click);
+            // Manejo evento click del boton "Exportar Reservas" en ventana ABM
+            vModificacion.btnImportarR.Click += new System.EventHandler(this.btnImportarR_Click);
 
             if (alojamiento is Hotel)
             {
@@ -400,14 +403,91 @@ namespace TP_II
                     unaCasa.MinDias = Convert.ToInt32(vModificacion.numUDminimo.Value);
                     unaCasa.PrecioBaseCasa = Convert.ToInt32(vModificacion.tbPrecio.Text);
                 }
-                ActualizarListas();
-
-                cbAlojamientos.ResetText();
-                cbAlojamientos.SelectedIndex = -1;
+                
             }
+            ActualizarListas();
+            cbAlojamientos.ResetText();
+            cbAlojamientos.SelectedIndex = -1;
             // Quito evento click del boton "Importar fotos" en ventana ABM
             vModificacion.btnFotos.Click -= new System.EventHandler(this.btnFotos_Click);
+            // Quito evento click del boton "Exportar Reservas" en ventana ABM
+            vModificacion.btnExportarR.Click -= new System.EventHandler(this.btnExportarR_Click);
+            // Quito evento click del boton "Importar Reservas" en ventana ABM
+            vModificacion.btnImportarR.Click -= new System.EventHandler(this.btnImportarR_Click);
             vModificacion.Dispose();
+        }
+
+        //Evento click boton Exportar Reservas ventana ABM Alojamientos
+        private void btnExportarR_Click(object sender, EventArgs e)
+        {
+            int indice = cbAlojamientos.SelectedIndex;
+            Alojamiento alojamiento = empresa.Alojamientos[indice];
+
+            string path;
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Application.StartupPath;
+            sfd.DefaultExt = ".txt";
+            sfd.AddExtension = true;
+            if (alojamiento is Hotel)
+                sfd.FileName = string.Format("Hotel-{0}-{1}", ((Hotel)alojamiento).Nombre, ((Hotel)alojamiento).Direccion);
+            else
+                sfd.FileName = string.Format("Casa-{0}-{1}", ((Casa)alojamiento).Numero, ((Casa)alojamiento).Direccion);
+            
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    path = sfd.FileName;
+                    empresa.ExportarReservasDeAlojamiento(alojamiento, path);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        //Evento click boton Importar Reservas ventana ABM Alojamientos
+        private void btnImportarR_Click(object sender, EventArgs e)
+        {
+            Dictionary<int, string> d=new Dictionary<int, string>();
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = Application.StartupPath;
+            ofd.DefaultExt = ".txt";
+            ofd.AddExtension = true;
+
+            string path;
+
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    path = ofd.FileName;
+                    d=empresa.ImportarReservasDeAlojamiento(path);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    ofd.Dispose();
+                }     
+                AlojamientosExistentesForm vInforme = new AlojamientosExistentesForm();
+                if(d.Count > 0)
+                {
+                    vInforme.listBox1.Items.Add("SE HAN ENCONTRADO LOS SIGUIENTES ERRORES");
+                    vInforme.listBox1.Items.Add("");
+                    foreach (KeyValuePair<int, string> error in d)
+                        vInforme.listBox1.Items.Add(string.Format("Error en Linea: {0} ----- {1}",error.Key,error.Value));
+                }
+                else
+                    vInforme.listBox1.Items.Add("Carga Exitosa, no se encontraron errores");
+                vInforme.ShowDialog();
+                vInforme.Dispose();
+            }
         }
 
         //Evento click boton Agregar pasajeros ventana DatosCliente
@@ -621,7 +701,7 @@ namespace TP_II
                 vAlojomiento.cBoxNroHabitaciones.Text = habitacionReservada.Numero.ToString();
 
                 DateTime[] intervaloPintar = hotel.IntervaloFechasHabitacion(habitacionReservada.Numero);
-                vAlojomiento.Calendario.BoldedDates = intervaloPintar;// REVISAR
+                vAlojomiento.Calendario.BoldedDates = intervaloPintar;
 
                 vAlojomiento.nudDias.Value = unaReserva.Dias;
                 vAlojomiento.nudDias.Minimum = 1;
@@ -648,7 +728,7 @@ namespace TP_II
             DateTime[] fechasPintar;
             vAlojomiento.Calendario.SetDate(unaReserva.Ingreso);
             vAlojomiento.Calendario.SelectionStart = unaReserva.Ingreso;
-
+            
             DialogResult dialogResult= DialogResult.Ignore;//No hace nada
 
             if (unAlojamiento is Casa)
@@ -720,8 +800,7 @@ namespace TP_II
                 }
                 empresa.OrdenarReservasPorId();
                 ActualizarListas();
-                cbReservas.ResetText();
-
+                
             }// esto si era casa
             else
             {
@@ -741,13 +820,13 @@ namespace TP_II
 
                 hotel.QuitarReserva(numHabitacionAnterior, unaReserva);//SE QUITA MOMENTANEAMENTE
 
-                DateTime[] intervaloPintar = hotel.IntervaloFechasHabitacion(habitacionReservada.Numero);
-                vAlojomiento.Calendario.BoldedDates = intervaloPintar;// REVISAR
+                //DateTime[] intervaloPintar = hotel.IntervaloFechasHabitacion(habitacionReservada.Numero);
+                //vAlojomiento.Calendario.BoldedDates = intervaloPintar;// REVISAR
 
                 vAlojomiento.nudDias.Value = unaReserva.Dias;
                 vAlojomiento.nudDias.Minimum = 1;
-
-                if (vAlojomiento.ShowDialog() == DialogResult.OK)
+                DialogResult resultado = vAlojomiento.ShowDialog();
+                if ( resultado == DialogResult.OK)
                 {
                     int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
                     int nroHabitacionNuevo = Convert.ToInt32(vAlojomiento.cBoxNroHabitaciones.Text);
@@ -794,7 +873,7 @@ namespace TP_II
                 }
                 else
                 {
-                    if (dialogResult != DialogResult.Abort)
+                    if (resultado == DialogResult.Abort)
                     {
                         unaReserva.QuitarHabitacion(habitacionReservada);
                         empresa.CancelarReserva(unaReserva.ID);

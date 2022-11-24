@@ -51,10 +51,8 @@ namespace TP_II
                 labEstado.Text = "Activado";
                 labEstado.Enabled = true;
             }
-                
-
-
         }
 
+        
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace TP_II
 {
@@ -34,14 +35,16 @@ namespace TP_II
                 hoteles.Add(nuevo as Hotel);    
         }
 
-        public void AgregarReservas(Reserva nueva)
+        public void AgregarReservas(Reserva r)
         {
-            reservas.Add(nueva);
-            nueva.Alojamiento.Reservas.Add(nueva);
-     
-            if(!clientesHistorico.Contains(nueva.getCliente))
-                clientesHistorico.Add(nueva.getCliente);
-               
+            Alojamiento a = r.Alojamiento;
+            reservas.Add(r);
+            r.Alojamiento.Reservas.Add(r);
+            if (r.Alojamiento is Hotel)
+                ((Hotel)a).AgregarReserva(r.Habitaciones[0].Numero, r); 
+    
+            if(clientesHistorico!=null && !clientesHistorico.Contains(r.getCliente))
+                clientesHistorico.Add(r.getCliente);     
         }
         public void CancelarReserva(int id)
         {
@@ -239,6 +242,16 @@ namespace TP_II
             
             return ret; 
         }
+        public Cliente ExisteCliente(int dni)
+        {
+            Cliente retorno = null;
+            clientesHistorico.Sort();
+            Cliente c =  new Cliente("a","a",dni,1);
+            int indice = clientesHistorico.BinarySearch(c);
+            if (indice > -1)
+                retorno = clientesHistorico[indice];
+            return retorno;
+        }
         public bool ExisteAlojamiento(int id , ref Alojamiento buscado)
         {
             bool encontrado = false;
@@ -257,10 +270,26 @@ namespace TP_II
                     cont++; 
                 }
             }
-
             return encontrado;  
-
         }
+        public Alojamiento ExisteAlojamiento(int id)
+        {
+            bool encontrado = false;
+            Alojamiento retorno=null;
+            int cont = 0;
+
+            while (!encontrado && cont < alojamientos.Count)
+            {
+                if (alojamientos[cont].IDalojamiento == id)
+                {
+                    encontrado = true;
+                    retorno = alojamientos[cont];
+                }    
+                cont++;
+            }
+            return retorno;
+        }
+
 
         public bool ExisteReservaCasa(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso)
         {
@@ -286,6 +315,26 @@ namespace TP_II
             }
             return ret;
         }
+
+        public Reserva ExisteReserva(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, int nroHabitacion)
+        {
+            Reserva retorno = null;
+            bool encontrado = false;
+            int cont = 0;
+            while (!encontrado && cont<alojamiento.Reservas.Count)
+            {
+
+                if (cliente.CompareTo(alojamiento.Reservas[cont].getCliente) == 0 &&
+                    DateTime.Compare(ingreso, alojamiento.Reservas[cont].Ingreso) == 0 &&
+                    DateTime.Compare(egreso, alojamiento.Reservas[cont].Egreso) == 0)
+                {
+                    retorno = alojamiento.Reservas[cont];
+                    encontrado = true;
+                }
+                cont++;
+            }
+            return retorno;
+        }
         public void ImportarClientes(List<Cliente> clientesNuevos)
         {
             foreach (Cliente cliente in clientesNuevos)
@@ -294,6 +343,148 @@ namespace TP_II
                 Cliente.ContIdCliente++;
                 clientesHistorico.Add(cliente);
             }        
+        }
+
+        // Metodos de Importacion / Exportacion para Reservas
+        public void ExportarReservasDeAlojamiento(Alojamiento alojamiento, string path)
+        {
+
+            FileStream fs = null;
+            StreamWriter sw = null;
+
+            try
+            {
+                fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+                sw = new StreamWriter(fs);
+                sw.WriteLine("DNICLIENTE , IDALOJAMIENTO , CHECKIN , CHECKOUT , NROHABITACION , ACOMPANIANTES");
+                string linea = null;
+                string[] campos = null;
+
+                foreach(Reserva r in alojamiento.Reservas)
+                {
+                    campos = r.ExportarDatosReserva();
+                    linea = campos[0] + "," + campos[1] + "," + campos[2] + "," + campos[3] + "," + campos[4] + "," + campos[5];
+                    sw.WriteLine(linea);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error en la Exportacion: " + ex.Message);
+            }
+            finally
+            {
+                if (fs != null)
+                {
+                    sw.Close();
+                    fs.Close();
+                }
+            }
+        }
+
+        public Dictionary<int,string> ImportarReservasDeAlojamiento(string path)
+        {
+            Dictionary<int, string> d = new Dictionary<int, string>();
+            FileStream fs = null;
+            StreamReader sr = null;
+            int contLinea=1;
+            string[] campos;
+
+            try
+            {
+                fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+                sr = new StreamReader(fs);
+
+                int dni;
+                int id;
+                DateTime ingreso;
+                DateTime egreso;
+                int nroHabitacion;
+                List<Cliente> acompañantes = new List<Cliente>();
+
+                sr.ReadLine();
+
+                while (!sr.EndOfStream)
+                {
+                    campos = sr.ReadLine().Split(',');
+                    //DNICLIENTE , IDALOJAMIENTO , CHECKIN , CHECKOUT , NROHABITACION , ACOMPANIANTES
+                    dni = Convert.ToInt32(campos[0]);
+                    id = Convert.ToInt32(campos[1]);
+                    ingreso = DateTime.Parse(campos[2]);
+                    egreso = DateTime.Parse(campos[3]);
+                    nroHabitacion = Convert.ToInt32(campos[4]);
+                    string linea = campos[5].TrimEnd('-');
+                    if (linea != "")
+                    {
+                        string[] nombreApellido = linea.Split('-');
+                        string[] aux;
+                        Cliente pasajero;
+                        foreach (string s in nombreApellido)
+                        {
+                            aux = s.Split(' ');
+                            pasajero = new Cliente(aux[0], aux[1]);
+                            acompañantes.Add(pasajero);
+                        }
+                    }
+
+                    Alojamiento a = null;
+                    Habitacion h = null;
+                    Cliente c = null;
+                    Reserva r = null;
+
+                    a = ExisteAlojamiento(id);
+                    if (a != null) // si existe
+                    {
+                        c = ExisteCliente(dni);
+                        if (c != null) // si existe
+                        {
+                            r = ExisteReserva(c, a, ingreso, egreso, nroHabitacion);
+                            if (r == null) //No existe
+                            {
+                                if (nroHabitacion != 0)
+                                {
+                                    h = ((Hotel)a).GetHabitacion(nroHabitacion);
+                                    if (!h.GetEstado())
+                                    {
+                                        r = new Reserva(c, a, ingreso, egreso, precioBaseHotel, h, acompañantes);
+                                        AgregarReservas(r);
+                                    }
+                                    else
+                                        d.Add(contLinea, "La Habitacion se encuentra ocupada");
+                                }
+                                else
+                                {
+                                    r = new Reserva(c, a, ingreso, egreso, precioBaseHotel, acompañantes);
+                                    AgregarReservas(r);
+                                }
+
+                            }
+                            else
+                                d.Add(contLinea, "La Reserva ya Existe");
+                        }
+                        else
+                            d.Add(contLinea, "El Cliente No Existe");
+                    }
+                    else
+                        d.Add(contLinea, "El Alojamiento No Existe");
+                    contLinea++;
+                        
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error en la Importacion: " + ex.Message);
+            }
+            finally
+            {
+                if(fs!=null)
+                {
+                    sr.Close();
+                    fs.Close();
+                }
+            }
+            return d;
         }
     }
 }
