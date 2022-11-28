@@ -3,35 +3,58 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace TP_II
 {
     [Serializable]
-   public class Empresa
+    public class Empresa
     {
         private List<Reserva> reservas = new List<Reserva>();
-        private List<Alojamiento> alojamientos = new List<Alojamiento>();    
+        private List<Alojamiento> alojamientos = new List<Alojamiento>();
         private List<Casa> casas = new List<Casa>();
-        private List<Hotel> hoteles= new List<Hotel>();
-        private List<Cliente> clientesHistorico= new List<Cliente>();
+        private List<Hotel> hoteles = new List<Hotel>();
+        private List<Cliente> clientesHistorico = new List<Cliente>();
 
         public int contBackReservas;
         public int contBackCliente;
         public int contBackAlojamientos;
+        public int contBackCasas;
 
-        private bool preguntar=true;
+        private bool preguntar = true;
 
         private double precioBaseHotel;
+        private SortedList<string,List<string>> lugares = new SortedList<string,List<string>>(); // son objects
 
-        
+        public Empresa(List<string> lugares)
+        {
+            foreach (string l in lugares)
+                this.lugares.Add(l,new List<string>());         
+        }
+        public Empresa()
+        {
+            string[] jurisdicciones = {"Buenos Aires","Ciudad Autónoma de Buenos Aires","Catamarca","Chaco","Chubut","Córdoba","Corrientes",
+                                    "Entre Ríos","Formosa","Jujuy","La Pampa","La Rioja","Mendoza","Misiones",
+                                    "Neuquén","Río Negro","Salta","San Juan","San Luis","Santa Cruz","Santa Fe",
+                                    "Santiago del Estero","Tierra del Fuego","Tucumán"};
 
+            foreach (string s in jurisdicciones)
+                lugares.Add(s, new List<string>());
+        }
         public void AgregarAlojamiento(Alojamiento nuevo)
         {
             alojamientos.Add(nuevo);
             if(nuevo is Casa)
                 casas.Add(nuevo as Casa);
             else
-                hoteles.Add(nuevo as Hotel);    
+                hoteles.Add(nuevo as Hotel);
+
+            AgregarLugar(nuevo.Jurisdiccion, nuevo.Ciudad);
+        }
+        public void AgregarLugar(string jurisdiccion,string ciudad)
+        {
+            if(!lugares[jurisdiccion].Contains(ciudad))
+                lugares[jurisdiccion].Add(ciudad);
         }
 
         public void AgregarReservas(Reserva nueva)
@@ -324,6 +347,21 @@ namespace TP_II
                 Cliente.ContIdCliente++;
                 clientesHistorico.Add(cliente);
             }        
+        }
+        public List<string> Jurisdicciones
+        {
+            get
+            {
+                List<string> ret = new List<string>();
+                foreach(string s in lugares.Keys)
+                    ret.Add(s);
+
+                return ret;
+            }
+        }
+        public List<string> Ciudades(string jurisdiccion)
+        {
+                return lugares[jurisdiccion];
         }
     }
 }

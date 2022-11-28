@@ -22,5 +22,6 @@ namespace TP_II
 
         void btnPasajeros_Click(object sender, EventArgs e);
 
+        string[] ActualizarComboBoxCiudades(string jurisdiccion);
     }
 }

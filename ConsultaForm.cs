@@ -95,7 +95,7 @@ namespace TP_II
             int indiceC = 1;
             int indeceR = e.RowIndex;           
             string direccion = dataGridDisponibles[indiceC, indeceR].Value.ToString();
-            Alojamiento aBuscar = new Casa(direccion, 1, 1, null, 1.0);
+            Alojamiento aBuscar = new Casa(direccion,"","", 1, 1, null, 1.0);
             aBuscar=(Alojamiento)form1.BuscarAlojamiento(aBuscar);
             DateTime[] fechas;
 
@@ -237,9 +237,6 @@ namespace TP_II
                 gBoxFiltroFecha.Enabled= false;
         }
 
-        private void dataGridDisponibles_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
     }
 }

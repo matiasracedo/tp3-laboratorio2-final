@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.gbCasaHotel = new System.Windows.Forms.GroupBox();
+            this.cBoxCiudad = new System.Windows.Forms.ComboBox();
+            this.cBoxProvincia = new System.Windows.Forms.ComboBox();
+            this.lbCiudad = new System.Windows.Forms.Label();
+            this.lbProvincia = new System.Windows.Forms.Label();
             this.btnFotos = new System.Windows.Forms.Button();
             this.btnAltaBaja = new System.Windows.Forms.Button();
             this.labEstado = new System.Windows.Forms.Label();
@@ -78,6 +82,10 @@
             // 
             // gbCasaHotel
             // 
+            this.gbCasaHotel.Controls.Add(this.cBoxCiudad);
+            this.gbCasaHotel.Controls.Add(this.cBoxProvincia);
+            this.gbCasaHotel.Controls.Add(this.lbCiudad);
+            this.gbCasaHotel.Controls.Add(this.lbProvincia);
             this.gbCasaHotel.Controls.Add(this.btnFotos);
             this.gbCasaHotel.Controls.Add(this.btnAltaBaja);
             this.gbCasaHotel.Controls.Add(this.labEstado);
@@ -87,9 +95,45 @@
             this.gbCasaHotel.Controls.Add(this.Direccion);
             this.gbCasaHotel.Location = new System.Drawing.Point(43, 21);
             this.gbCasaHotel.Name = "gbCasaHotel";
-            this.gbCasaHotel.Size = new System.Drawing.Size(547, 97);
+            this.gbCasaHotel.Size = new System.Drawing.Size(547, 152);
             this.gbCasaHotel.TabIndex = 0;
             this.gbCasaHotel.TabStop = false;
+            // 
+            // cBoxCiudad
+            // 
+            this.cBoxCiudad.FormattingEnabled = true;
+            this.cBoxCiudad.Location = new System.Drawing.Point(345, 112);
+            this.cBoxCiudad.Name = "cBoxCiudad";
+            this.cBoxCiudad.Size = new System.Drawing.Size(182, 21);
+            this.cBoxCiudad.TabIndex = 11;
+            // 
+            // cBoxProvincia
+            // 
+            this.cBoxProvincia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxProvincia.FormattingEnabled = true;
+            this.cBoxProvincia.Location = new System.Drawing.Point(80, 112);
+            this.cBoxProvincia.Name = "cBoxProvincia";
+            this.cBoxProvincia.Size = new System.Drawing.Size(182, 21);
+            this.cBoxProvincia.TabIndex = 10;
+            this.cBoxProvincia.SelectedValueChanged += new System.EventHandler(this.cBoxProvincia_SelectedValueChanged);
+            // 
+            // lbCiudad
+            // 
+            this.lbCiudad.AutoSize = true;
+            this.lbCiudad.Location = new System.Drawing.Point(289, 115);
+            this.lbCiudad.Name = "lbCiudad";
+            this.lbCiudad.Size = new System.Drawing.Size(40, 13);
+            this.lbCiudad.TabIndex = 9;
+            this.lbCiudad.Text = "Ciudad";
+            // 
+            // lbProvincia
+            // 
+            this.lbProvincia.AutoSize = true;
+            this.lbProvincia.Location = new System.Drawing.Point(18, 115);
+            this.lbProvincia.Name = "lbProvincia";
+            this.lbProvincia.Size = new System.Drawing.Size(51, 13);
+            this.lbProvincia.TabIndex = 8;
+            this.lbProvincia.Text = "Provincia";
             // 
             // btnFotos
             // 
@@ -171,7 +215,7 @@
             this.gBoxHotel.Controls.Add(this.checkB3Estrellas);
             this.gBoxHotel.Controls.Add(this.label2);
             this.gBoxHotel.Controls.Add(this.tbNombre);
-            this.gBoxHotel.Location = new System.Drawing.Point(43, 133);
+            this.gBoxHotel.Location = new System.Drawing.Point(43, 179);
             this.gBoxHotel.Name = "gBoxHotel";
             this.gBoxHotel.Size = new System.Drawing.Size(547, 145);
             this.gBoxHotel.TabIndex = 1;
@@ -317,7 +361,7 @@
             this.gBoxCasa.Controls.Add(this.numUDcamasCasa);
             this.gBoxCasa.Controls.Add(this.lbCamasCasa);
             this.gBoxCasa.Controls.Add(this.gBoxServicios);
-            this.gBoxCasa.Location = new System.Drawing.Point(43, 284);
+            this.gBoxCasa.Location = new System.Drawing.Point(43, 330);
             this.gBoxCasa.Name = "gBoxCasa";
             this.gBoxCasa.Size = new System.Drawing.Size(547, 147);
             this.gBoxCasa.TabIndex = 13;
@@ -370,6 +414,7 @@
             // 
             this.tbNumCasa.Location = new System.Drawing.Point(74, 29);
             this.tbNumCasa.Name = "tbNumCasa";
+            this.tbNumCasa.ReadOnly = true;
             this.tbNumCasa.Size = new System.Drawing.Size(102, 20);
             this.tbNumCasa.TabIndex = 12;
             // 
@@ -491,7 +536,7 @@
             // btnGuardar
             // 
             this.btnGuardar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnGuardar.Location = new System.Drawing.Point(154, 455);
+            this.btnGuardar.Location = new System.Drawing.Point(154, 501);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 14;
@@ -501,7 +546,7 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(345, 455);
+            this.btnCancelar.Location = new System.Drawing.Point(345, 501);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 15;
@@ -512,7 +557,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 497);
+            this.ClientSize = new System.Drawing.Size(629, 533);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.gBoxCasa);
@@ -521,6 +566,7 @@
             this.Name = "ABMAlojamientosForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Altas, Bajas, Modificaciones";
+            this.Load += new System.EventHandler(this.ABMAlojamientosForm_Load);
             this.gbCasaHotel.ResumeLayout(false);
             this.gbCasaHotel.PerformLayout();
             this.gBoxHotel.ResumeLayout(false);
@@ -576,5 +622,9 @@
         public System.Windows.Forms.Label label7;
         public System.Windows.Forms.TextBox tbPrecio;
         public System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lbCiudad;
+        private System.Windows.Forms.Label lbProvincia;
+        public System.Windows.Forms.ComboBox cBoxProvincia;
+        public System.Windows.Forms.ComboBox cBoxCiudad;
     }
 }

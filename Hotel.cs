@@ -34,8 +34,8 @@ namespace TP_II
         private string nombre;
         bool tresEstrellas = false;
 
-        public Hotel(string direccion, string nombre, bool tresEstrellas, int cantSimples,int cantDobles, int cantTriples)
-            :base(direccion.TrimEnd(' ').TrimStart(' '))
+        public Hotel(string direccion,string jurisdiccion,string ciudad, string nombre, bool tresEstrellas, int cantSimples,int cantDobles, int cantTriples)
+            :base(direccion.TrimEnd(' ').TrimStart(' '), jurisdiccion, ciudad.TrimEnd(' ').TrimStart(' '))
         {
             this.nombre = nombre.TrimEnd(' ').TrimStart(' ');
             this.tresEstrellas = tresEstrellas;

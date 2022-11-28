@@ -17,8 +17,8 @@ namespace TP_II
         double precioBaseCasa;
 
 
-        public Casa(string direccion, int minDias, int camas, string[] servicios, double precioBaseCasa)
-            : base(direccion.TrimEnd(' ').TrimStart(' '))
+        public Casa(string direccion, string jurisdiccion, string ciudad, int minDias, int camas, string[] servicios, double precioBaseCasa)
+            : base(direccion.TrimEnd(' ').TrimStart(' '), jurisdiccion,ciudad.TrimEnd(' ').TrimStart(' '))
         {
             this.minDias = minDias;
             this.camas = camas;

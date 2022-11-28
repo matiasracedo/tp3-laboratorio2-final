@@ -44,6 +44,7 @@ namespace TP_II
                 Reserva.ContIdReservas = empresa.contBackReservas;
                 Cliente.ContIdCliente = empresa.contBackCliente;
                 Alojamiento.ContIdAlojamiento = empresa.contBackAlojamientos;
+                Casa.ContCasa = empresa.contBackCasas;
 
                 fs.Close();
                 ActualizarListas();
@@ -104,10 +105,10 @@ namespace TP_II
                 empresa.contBackReservas = Reserva.ContIdReservas;
                 empresa.contBackCliente = Cliente.ContIdCliente;
                 empresa.contBackAlojamientos = Alojamiento.ContIdAlojamiento;
+                empresa.contBackCasas = Casa.ContCasa;
                 bf.Serialize(archivo, empresa);
                 archivo.Close();
             }
-
         }
 
         ///------------------------------------------------------------------------------------------------
@@ -195,6 +196,7 @@ namespace TP_II
         private void btnAgregarAloj_Click(object sender, EventArgs e)
         {
             ABMAlojamientosForm ventanaABM = new ABMAlojamientosForm();
+            ventanaABM.setInteractor(this);
 
             bool hotel;
             string direccion;
@@ -209,6 +211,8 @@ namespace TP_II
             double precioBase;
             string[] servicios;
             imagenes = new Image[5];
+            string jurisdiccion;
+            string ciudad;
 
             // Visibilidad controles estado
             ventanaABM.labEstado.Visible = false;
@@ -216,12 +220,18 @@ namespace TP_II
             // Manejo evento click del boton "Importar fotos" en ventana ABM
             ventanaABM.btnFotos.Click += new System.EventHandler(this.btnFotos_Click);
 
+            ventanaABM.cBoxProvincia.Items.AddRange(empresa.Jurisdicciones.ToArray());
+            ventanaABM.tbNumCasa.Text = numCasa.ToString();
+        
+
             if (ventanaABM.ShowDialog() == DialogResult.OK)
             {
                 Alojamiento alojamiento;
 
                 direccion = ventanaABM.tBdireccion.Text;
                 hotel = ventanaABM.rbHotel.Checked;
+                jurisdiccion = ventanaABM.cBoxProvincia.Text;
+                ciudad = ventanaABM.cBoxCiudad.Text;
 
                 if (hotel)
                 {
@@ -230,7 +240,7 @@ namespace TP_II
                     simples = Convert.ToInt32(ventanaABM.nUsimples.Value);
                     dobles = Convert.ToInt32(ventanaABM.nUdobles.Value);
                     triples = Convert.ToInt32(ventanaABM.nUtriples.Value);
-                    alojamiento = new Hotel(direccion, nombre, tresEstrellas, simples, dobles, triples);
+                    alojamiento = new Hotel(direccion,jurisdiccion,ciudad, nombre, tresEstrellas, simples, dobles, triples);
 
                 }
                 else
@@ -253,7 +263,7 @@ namespace TP_II
                     servicios = new string[s.Count];
                     for (int i = 0; i < s.Count; i++)
                         servicios[i] = s[i];
-                    alojamiento = new Casa(direccion, minDias, cantCamas, servicios, precioBase);
+                    alojamiento = new Casa(direccion,jurisdiccion,ciudad, minDias, cantCamas, servicios, precioBase);
                 }
                 alojamiento.Imagenes = imagenes;
 
@@ -302,12 +312,19 @@ namespace TP_II
         private void btnModificarAloj_Click(object sender, EventArgs e)
         {
             ABMAlojamientosForm vModificacion = new ABMAlojamientosForm();
+            vModificacion.setInteractor(this);
+
             int indice = cbAlojamientos.SelectedIndex;
             Alojamiento alojamiento = empresa.Alojamientos[indice];
             imagenes = new Image[5];
             // Manejo evento click del boton "Importar fotos" en ventana ABM
             vModificacion.btnFotos.Click += new System.EventHandler(this.btnFotos_Click);
 
+            vModificacion.cBoxProvincia.Items.AddRange(empresa.Jurisdicciones.ToArray());
+            vModificacion.cBoxCiudad.Items.AddRange(empresa.Ciudades(alojamiento.Jurisdiccion).ToArray());
+
+            vModificacion.cBoxProvincia.Text = alojamiento.Jurisdiccion;
+            vModificacion.cBoxCiudad.Text = alojamiento.Ciudad;
 
             if (alojamiento is Hotel)
             {
@@ -354,6 +371,8 @@ namespace TP_II
             vModificacion.nUsimples.Enabled = false;
             vModificacion.nUdobles.Enabled = false;
             vModificacion.nUtriples.Enabled = false;
+          
+            // ESTE AGREGA EL EVENTO MISMO PARA QUE VUELVA A ACTUALIZAR DE NUEVO EL cBoxCiudad
 
             if (vModificacion.ShowDialog() == DialogResult.OK)
             {
@@ -368,13 +387,22 @@ namespace TP_II
                 else
                     alojamiento.Alta = false;
 
+                string jurisd = vModificacion.cBoxProvincia.Text;
+                string ciudad = vModificacion.cBoxCiudad.Text;
+
+                if (jurisd != "")
+                    alojamiento.Jurisdiccion =jurisd;
+                if(ciudad!="")
+                    alojamiento.Ciudad= ciudad;
+
+                empresa.AgregarLugar(jurisd,ciudad);// si se repite lo resuelve el método
+
                 if (esHotel)
                 {
                     Hotel unHotel = (Hotel)alojamiento;
                     unHotel.Direccion = vModificacion.tBdireccion.Text;
                     unHotel.Nombre = vModificacion.tbNombre.Text;
                     unHotel.TresEstrellas = vModificacion.checkB3Estrellas.Checked;
-
                 }
                 else
                 {
@@ -434,7 +462,7 @@ namespace TP_II
             campos = cbAlojamientos.Text.Split('-');
             string direccion = campos[1].TrimEnd(' ').TrimStart(' ');
 
-            Alojamiento aBuscar = new Casa(direccion, 1, 1,null, 1.0);
+            Alojamiento aBuscar = new Casa(direccion,"","", 1, 1,null, 1.0);
             aBuscar = (Alojamiento)this.BuscarAlojamiento(aBuscar);
             DateTime[] fechas;
             vAlojomiento.SetAlojamiento(aBuscar);
@@ -945,7 +973,10 @@ namespace TP_II
             return resultado;
         }
 
-
+        public string[] ActualizarComboBoxCiudades(string jurisdiccion)
+        {
+            return empresa.Ciudades(jurisdiccion).ToArray();
+        }
 
 
         //MENU STRIP OPTIONS:::::
@@ -1062,7 +1093,7 @@ namespace TP_II
                         }
                         servicios=linea.Trim(';').Split(';');
 
-                        nuevo= new Casa(direc,minDias,camas,servicios,precioBaseCasa);
+                        nuevo= new Casa(direc,"","",minDias,camas,servicios,precioBaseCasa);
                     }
                     if(campos.Length==6)
                     {
@@ -1073,7 +1104,7 @@ namespace TP_II
                         int cantDobles= Convert.ToInt32(campos[4]);
                         int cantTriples= Convert.ToInt32(campos[5]);
 
-                        nuevo = new Hotel(direc, nombre, tresEstrellas, cantSimples, cantDobles, cantTriples);
+                        nuevo = new Hotel(direc,"","", nombre, tresEstrellas, cantSimples, cantDobles, cantTriples);
                     }
 
                     Alojamiento comparador = empresa[nuevo.Direccion];
@@ -1262,7 +1293,7 @@ namespace TP_II
 
                         if(empresa.ExisteCliente(ref cliente)) //se actualiza por referencia en el método
                         {
-                            Alojamiento buscado = new Casa("", 1, 1, null, 1);
+                            Alojamiento buscado = new Casa("","","", 1, 1, null, 1);
                             Casa casita;
                             if (empresa.ExisteAlojamiento(idAlojamiento, ref buscado)) //si existe actualiza por referencia en el método
                             {
@@ -1495,7 +1526,7 @@ namespace TP_II
 
                         if (empresa.ExisteCliente(ref cliente)) //se actualiza por referencia en el método
                         {
-                            Alojamiento buscado = new Hotel("","", false, 1, 1, 1);
+                            Alojamiento buscado = new Hotel("","","","", false, 1, 1, 1);
                             Hotel hotelcito;
                             if (empresa.ExisteAlojamiento(idAlojamiento, ref buscado, nroHabitacion)) //si existe actualiza por referencia en el método
                             {
