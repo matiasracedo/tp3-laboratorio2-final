@@ -18,13 +18,16 @@ namespace TP_II
         private int idAlojamiento;
         private static int contIdAlojamiento = 1;
 
+        private string[] lugar=new string[2];
 
-        public Alojamiento(string direccion)
+        public Alojamiento(string direccion, string jurisdiccion, string ciudad)
         {
             this.direccion = direccion;
             alta = true;
             idAlojamiento=contIdAlojamiento;
             contIdAlojamiento++;
+
+            lugar[0] = jurisdiccion; lugar[1] = ciudad;
         }
                
         public DateTime[] IntervaloFechasReservadas()
@@ -78,5 +81,7 @@ namespace TP_II
         public Image[] Imagenes { get { return imagenes; } set { imagenes = value; } }
         public static int ContIdAlojamiento { get { return contIdAlojamiento; } set { contIdAlojamiento = value; } }
         public int IDalojamiento { get { return idAlojamiento; } }
+        public string Jurisdiccion { get { return lugar[0]; } set { lugar[0] = value; } }
+        public string Ciudad { get { return lugar[1]; } set { lugar[1] = value; } }
     }
 }

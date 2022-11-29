@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 using System.IO;
 using System.Windows.Forms;
 using System.Drawing; 
@@ -21,13 +22,29 @@ namespace TP_II
         public int contBackReservas;
         public int contBackCliente;
         public int contBackAlojamientos;
+        public int contBackCasas;
 
         private bool preguntar = true;
 
         private double precioBaseHotel;
+        private SortedList<string,List<string>> lugares = new SortedList<string,List<string>>(); // son objects
+
+        public Empresa(List<string> lugares)
+        {
+            foreach (string l in lugares)
+                this.lugares.Add(l,new List<string>());         
+        }
+        public Empresa()
+        {
+            string[] jurisdicciones = {"Buenos Aires","Ciudad Autónoma de Buenos Aires","Catamarca","Chaco","Chubut","Córdoba","Corrientes",
+                                    "Entre Ríos","Formosa","Jujuy","La Pampa","La Rioja","Mendoza","Misiones",
+                                    "Neuquén","Río Negro","Salta","San Juan","San Luis","Santa Cruz","Santa Fe",
+                                    "Santiago del Estero","Tierra del Fuego","Tucumán"};
 
 
-
+            foreach (string s in jurisdicciones)
+                lugares.Add(s, new List<string>());
+        }
         public void AgregarAlojamiento(Alojamiento nuevo)
         {
             alojamientos.Add(nuevo);
@@ -35,6 +52,14 @@ namespace TP_II
                 casas.Add(nuevo as Casa);
             else
                 hoteles.Add(nuevo as Hotel);
+
+            AgregarLugar(nuevo.Jurisdiccion, nuevo.Ciudad);
+        }
+        public void AgregarLugar(string jurisdiccion,string ciudad)
+        {
+            if(!lugares[jurisdiccion].Contains(ciudad))
+                lugares[jurisdiccion].Add(ciudad);
+
         }
 
         public void AgregarReservas(Reserva r)
@@ -278,7 +303,6 @@ namespace TP_II
             bool encontrado = false;
             Alojamiento retorno = null;
             int cont = 0;
-
             while (!encontrado && cont < alojamientos.Count)
             {
                 if (alojamientos[cont].IDalojamiento == id)
@@ -289,6 +313,37 @@ namespace TP_II
                 cont++;
             }
             return retorno;
+
+        }
+        
+        public bool ExisteAlojamiento(int id, ref Alojamiento buscado, int nroHabitacion)
+        {
+            bool encontrado = false;
+            int cont = 0;
+            int max = alojamientos.Count;
+
+            if (max > 0)
+            {
+                Alojamiento aloj;
+                while (encontrado == false && cont < max)
+                {                 
+                    aloj = alojamientos[cont];
+
+                    if(aloj is Hotel)
+                    {
+                        Hotel actual = aloj as Hotel;
+                        if (actual.IDalojamiento == id && actual.GetHabitacion(nroHabitacion)!=null)
+                        {
+                            encontrado = true;
+                            buscado = alojamientos[cont];
+                        }
+
+                    }                    
+                    cont++;
+                }
+            }
+
+            return encontrado;
         }
 
 
@@ -304,15 +359,17 @@ namespace TP_II
             }
             return ret;
         }
-        public bool ExisteReservaHotel(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, int nroHabitacion)
+        public bool ExisteReservaHotel(Cliente cliente, Hotel hotel, DateTime ingreso, DateTime egreso, int nroHabitacion)
         {
             bool ret = false;
-            foreach (Reserva r in alojamiento.Reservas)
+            List<Reserva> reservas = hotel.GetReservasDeHabitacion(nroHabitacion);
+            if(reservas.Count > 0)
             {
-                if (cliente.CompareTo(r.getCliente) == 0 && DateTime.Compare(ingreso, r.Ingreso) == 0 && DateTime.Compare(egreso, r.Egreso) == 0)
+                foreach (Reserva r in reservas)
                 {
-                    ret = true;
-                }
+                    if (cliente.CompareTo(r.getCliente) == 0 && DateTime.Compare(ingreso, r.Ingreso) == 0 && DateTime.Compare(egreso, r.Egreso) == 0)
+                        ret = true;
+                }  
             }
             return ret;
         }
@@ -592,6 +649,21 @@ namespace TP_II
                 pair.Value[1] = Math.Round((pair.Value[0] * 100.0) / contClientes, 2);
             }
             return retorno;
+        }
+        public List<string> Jurisdicciones
+        {
+            get
+            {
+                List<string> ret = new List<string>();
+                foreach(string s in lugares.Keys)
+                    ret.Add(s);
+
+                return ret;
+            }
+        }
+        public List<string> Ciudades(string jurisdiccion)
+        {
+                return lugares[jurisdiccion];
         }
     }
 }

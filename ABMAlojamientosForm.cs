@@ -16,7 +16,7 @@ namespace TP_II
         {
             InitializeComponent();
         }
-        
+        IInterectuable form;
         private void rbCasa_CheckedChanged(object sender, EventArgs e)
         {
             if(rbCasa.Checked)
@@ -26,7 +26,10 @@ namespace TP_II
             }
                
         }
-
+        public void setInteractor(Form form)
+        {
+            this.form = form as IInterectuable;
+        }
         private void rbHotel_CheckedChanged(object sender, EventArgs e)
         {
             if(rbHotel.Checked)
@@ -51,8 +54,23 @@ namespace TP_II
                 labEstado.Text = "Activado";
                 labEstado.Enabled = true;
             }
+
+        }
+        public void cBoxProvincia_SelectedValueChanged(object sender, EventArgs e)
+        {
+            cBoxCiudad.Items.Clear();
+            cBoxCiudad.SelectedIndex = -1;
+            cBoxCiudad.Text = "";
+            cBoxCiudad.Items.AddRange(form.ActualizarComboBoxCiudades(cBoxProvincia.Text));
+
+            if (cBoxCiudad.Items.Count > 0)
+                cBoxCiudad.SelectedIndex = 0;
         }
 
-        
+        private void ABMAlojamientosForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

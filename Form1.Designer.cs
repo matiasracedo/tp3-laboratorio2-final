@@ -399,6 +399,7 @@
             this.hotelesToolStripMenuItem.Name = "hotelesToolStripMenuItem";
             this.hotelesToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.hotelesToolStripMenuItem.Text = "Hoteles";
+            this.hotelesToolStripMenuItem.Click += new System.EventHandler(this.hotelesToolStripMenuItem_Click);
             // 
             // exportarToolStripMenuItem1
             // 

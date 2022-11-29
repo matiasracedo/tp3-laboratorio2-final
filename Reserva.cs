@@ -38,7 +38,6 @@ namespace TP_II
             Cliente.ContIdCliente++;
             CalcularPrecioDia();
             GenerarComprobante();
-
         }
 
         public Reserva(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, double precioBase)

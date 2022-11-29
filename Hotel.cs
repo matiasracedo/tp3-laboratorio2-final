@@ -34,8 +34,8 @@ namespace TP_II
         private string nombre;
         bool tresEstrellas = false;
 
-        public Hotel(string direccion, string nombre, bool tresEstrellas, int cantSimples,int cantDobles, int cantTriples)
-            :base(direccion.TrimEnd(' ').TrimStart(' '))
+        public Hotel(string direccion,string jurisdiccion,string ciudad, string nombre, bool tresEstrellas, int cantSimples,int cantDobles, int cantTriples)
+            :base(direccion.TrimEnd(' ').TrimStart(' '), jurisdiccion, ciudad.TrimEnd(' ').TrimStart(' '))
         {
             this.nombre = nombre.TrimEnd(' ').TrimStart(' ');
             this.tresEstrellas = tresEstrellas;
@@ -191,7 +191,6 @@ namespace TP_II
             {
                 foreach (DateTime diaEvaluar in diasCheck)
                 {
-                    //if(dia.CompareTo(diaEvaluar)==0)
                     if(DateTime.Compare(dia,diaEvaluar)==0)
                         disponible = false;
                 }
