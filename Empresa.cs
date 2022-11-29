@@ -4,47 +4,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
+using System.Drawing; 
 
 namespace TP_II
 {
     [Serializable]
-   public class Empresa
+    public class Empresa
     {
         private List<Reserva> reservas = new List<Reserva>();
-        private List<Alojamiento> alojamientos = new List<Alojamiento>();    
+        private List<Alojamiento> alojamientos = new List<Alojamiento>();
         private List<Casa> casas = new List<Casa>();
-        private List<Hotel> hoteles= new List<Hotel>();
-        private List<Cliente> clientesHistorico= new List<Cliente>();
+        private List<Hotel> hoteles = new List<Hotel>();
+        private List<Cliente> clientesHistorico = new List<Cliente>();
 
         public int contBackReservas;
         public int contBackCliente;
         public int contBackAlojamientos;
 
-        private bool preguntar=true;
+        private bool preguntar = true;
 
         private double precioBaseHotel;
 
-        
+
 
         public void AgregarAlojamiento(Alojamiento nuevo)
         {
             alojamientos.Add(nuevo);
-            if(nuevo is Casa)
+            if (nuevo is Casa)
                 casas.Add(nuevo as Casa);
             else
-                hoteles.Add(nuevo as Hotel);    
+                hoteles.Add(nuevo as Hotel);
         }
 
         public void AgregarReservas(Reserva r)
         {
             Alojamiento a = r.Alojamiento;
             reservas.Add(r);
-            r.Alojamiento.Reservas.Add(r);
+            a.Reservas.Add(r);
             if (r.Alojamiento is Hotel)
-                ((Hotel)a).AgregarReserva(r.Habitaciones[0].Numero, r); 
-    
-            if(clientesHistorico!=null && !clientesHistorico.Contains(r.getCliente))
-                clientesHistorico.Add(r.getCliente);     
+                ((Hotel)a).AgregarReserva(r.HabitacionReservada.Numero, r);
+
+            if (clientesHistorico != null && !clientesHistorico.Contains(r.getCliente))
+                clientesHistorico.Add(r.getCliente);
         }
         public void CancelarReserva(int id)
         {
@@ -57,23 +59,23 @@ namespace TP_II
         public void OrdenarReservasPorId()
         {
             reservas.Sort();
-            if(alojamientos.Count>0)
+            if (alojamientos.Count > 0)
             {
-                foreach(Alojamiento a in alojamientos)
+                foreach (Alojamiento a in alojamientos)
                     a.Reservas.Sort();
-            }               
+            }
         }
         public Reserva this[int id]
         {
-            get 
+            get
             {
                 Reserva devolver = null;
 
-                if(reservas.Count>0)
+                if (reservas.Count > 0)
                 {
-                    foreach(Reserva reserva in reservas)
+                    foreach (Reserva reserva in reservas)
                     {
-                        if(reserva.ID==id)
+                        if (reserva.ID == id)
                             devolver = reserva;
                     }
                 }
@@ -86,17 +88,17 @@ namespace TP_II
             Alojamiento actualizable = this[direccion];
             if (actualizable != null)
             {
-                actualizable.Alta=!actualizable.Alta;
+                actualizable.Alta = !actualizable.Alta;
             }
             return actualizable.Estado;
         }
 
 
-        public List<Alojamiento> FiltrarCasas(int cantCamas,String[] servicios)
+        public List<Alojamiento> FiltrarCasas(int cantCamas, String[] servicios)
         {
             List<Alojamiento> filtrados = new List<Alojamiento>();
 
-            foreach(Casa a in casas)
+            foreach (Casa a in casas)
             {
                 if (a.Alta && a.FiltrarCasa(cantCamas, servicios))
                     filtrados.Add(a);
@@ -106,7 +108,7 @@ namespace TP_II
         public List<Alojamiento> FiltrarHoteles(bool tresEstrellas)
         {
             List<Alojamiento> filtrados = new List<Alojamiento>();
-            if(tresEstrellas)
+            if (tresEstrellas)
             {
                 foreach (Hotel h in hoteles)
                 {
@@ -122,17 +124,17 @@ namespace TP_II
                         filtrados.Add(h);
                 }
             }
-            
+
             return filtrados;
         }
         public List<Alojamiento> FiltrarFechaRango(List<Alojamiento> rango, DateTime fechaInicio, DateTime fechaFinal)
         {
-            Alojamiento[] copia= new Alojamiento[rango.Count];
+            Alojamiento[] copia = new Alojamiento[rango.Count];
             rango.CopyTo(copia);
 
             foreach (Alojamiento a in copia)
             {
-                if (a.CheckFecha(fechaInicio, fechaFinal)==false)
+                if (a.CheckFecha(fechaInicio, fechaFinal) == false)
                     rango.Remove(a);
             }
             return rango;
@@ -141,7 +143,7 @@ namespace TP_II
         {
             Casa.ContCasa--;
         }
-        public List<Reserva> Reservas { get { return reservas; } }
+        public List<Reserva> ListaDeReservas { get { return reservas; } }
         public List<Alojamiento> Alojamientos { get { return alojamientos; } }
         public Alojamiento this[string direccion]
         {
@@ -150,7 +152,7 @@ namespace TP_II
                 bool encontrado = false;
                 int cont = 0;
                 Alojamiento comparador;
-                
+
                 // int indice = empresa.Alojamientos.BinarySearch(unAlojameinto); OTRA OPCION DE BUSQUEDA
 
                 while (encontrado == false && cont < alojamientos.Count)
@@ -172,7 +174,7 @@ namespace TP_II
         {
             return reserva.DatosComprobante;
         }
-        public double PrecioBaseHotel{ get { return precioBaseHotel; } set { precioBaseHotel = value; } }   
+        public double PrecioBaseHotel { get { return precioBaseHotel; } set { precioBaseHotel = value; } }
         public bool Preguntar { get { return preguntar; } set { preguntar = value; } }
         public int NumeroCasaSiguiente { get { return Casa.ContCasa; } }
         public List<Cliente> GetClientesHistoricos { get { return clientesHistorico; } }
@@ -180,7 +182,7 @@ namespace TP_II
         {
             get
             {
-                List<Cliente> ret=new List<Cliente>();
+                List<Cliente> ret = new List<Cliente>();
                 foreach (Reserva r in reservas)
                     ret.Add(r.getCliente);
                 return ret;
@@ -188,20 +190,20 @@ namespace TP_II
         }
         public bool HayReservasCasas
         {
-           
+
             get
             {
                 bool hay = false;
                 int cont = 0;
 
-                while(hay==false&&cont<reservas.Count)
+                while (hay == false && cont < reservas.Count)
                 {
-                    if(reservas[cont].Alojamiento is Casa)
+                    if (reservas[cont].Alojamiento is Casa)
                         hay = true;
 
                     cont++;
                 }
-                
+
                 return hay;
             }
         }
@@ -226,9 +228,9 @@ namespace TP_II
         }
         public bool ExisteCliente(ref Cliente cliente)
         {
-            bool ret=false;
+            bool ret = false;
 
-            if(clientesHistorico.Count>0)
+            if (clientesHistorico.Count > 0)
             {
                 clientesHistorico.Sort();
                 int index = clientesHistorico.BinarySearch(cliente);
@@ -239,43 +241,42 @@ namespace TP_II
                     cliente = clientesHistorico[index];
                 }
             }
-            
-            return ret; 
+            return ret;
         }
         public Cliente ExisteCliente(int dni)
         {
             Cliente retorno = null;
             clientesHistorico.Sort();
-            Cliente c =  new Cliente("a","a",dni,1);
+            Cliente c = new Cliente("a", "a", dni, 1);
             int indice = clientesHistorico.BinarySearch(c);
             if (indice > -1)
                 retorno = clientesHistorico[indice];
             return retorno;
         }
-        public bool ExisteAlojamiento(int id , ref Alojamiento buscado)
+        public bool ExisteAlojamiento(int id, ref Alojamiento buscado)
         {
             bool encontrado = false;
             int cont = 0;
-            int max=alojamientos.Count;
+            int max = alojamientos.Count;
 
-            if(max>0)
+            if (max > 0)
             {
-                while(encontrado==false&&cont<max)
+                while (encontrado == false && cont < max)
                 {
-                    if(alojamientos[cont].IDalojamiento==id)
+                    if (alojamientos[cont].IDalojamiento == id)
                     {
                         encontrado = true;
                         buscado = alojamientos[cont];
                     }
-                    cont++; 
+                    cont++;
                 }
             }
-            return encontrado;  
+            return encontrado;
         }
         public Alojamiento ExisteAlojamiento(int id)
         {
             bool encontrado = false;
-            Alojamiento retorno=null;
+            Alojamiento retorno = null;
             int cont = 0;
 
             while (!encontrado && cont < alojamientos.Count)
@@ -284,7 +285,7 @@ namespace TP_II
                 {
                     encontrado = true;
                     retorno = alojamientos[cont];
-                }    
+                }
                 cont++;
             }
             return retorno;
@@ -294,11 +295,11 @@ namespace TP_II
         public bool ExisteReservaCasa(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso)
         {
             bool ret = false;
-            foreach(Reserva r in alojamiento.Reservas)
+            foreach (Reserva r in alojamiento.Reservas)
             {
-                if(cliente.CompareTo(r.getCliente)==0 && DateTime.Compare(ingreso,r.Ingreso)==0 && DateTime.Compare(egreso, r.Egreso) == 0)
+                if (cliente.CompareTo(r.getCliente) == 0 && DateTime.Compare(ingreso, r.Ingreso) == 0 && DateTime.Compare(egreso, r.Egreso) == 0)
                 {
-                    ret=true;
+                    ret = true;
                 }
             }
             return ret;
@@ -321,15 +322,17 @@ namespace TP_II
             Reserva retorno = null;
             bool encontrado = false;
             int cont = 0;
-            while (!encontrado && cont<alojamiento.Reservas.Count)
+            while (!encontrado && cont < ListaDeReservas.Count)
             {
-
-                if (cliente.CompareTo(alojamiento.Reservas[cont].getCliente) == 0 &&
+                if(nroHabitacion == ListaDeReservas[cont].HabitacionReservada.Numero)
+                {
+                    if (cliente.CompareTo(alojamiento.Reservas[cont].getCliente) == 0 &&
                     DateTime.Compare(ingreso, alojamiento.Reservas[cont].Ingreso) == 0 &&
                     DateTime.Compare(egreso, alojamiento.Reservas[cont].Egreso) == 0)
-                {
-                    retorno = alojamiento.Reservas[cont];
-                    encontrado = true;
+                    {
+                        retorno = alojamiento.Reservas[cont];
+                        encontrado = true;
+                    }
                 }
                 cont++;
             }
@@ -342,7 +345,7 @@ namespace TP_II
                 cliente.IDcliente = Cliente.ContIdCliente;
                 Cliente.ContIdCliente++;
                 clientesHistorico.Add(cliente);
-            }        
+            }
         }
 
         // Metodos de Importacion / Exportacion para Reservas
@@ -360,7 +363,7 @@ namespace TP_II
                 string linea = null;
                 string[] campos = null;
 
-                foreach(Reserva r in alojamiento.Reservas)
+                foreach (Reserva r in alojamiento.Reservas)
                 {
                     campos = r.ExportarDatosReserva();
                     linea = campos[0] + "," + campos[1] + "," + campos[2] + "," + campos[3] + "," + campos[4] + "," + campos[5];
@@ -382,12 +385,12 @@ namespace TP_II
             }
         }
 
-        public Dictionary<int,string> ImportarReservasDeAlojamiento(string path)
+        public Dictionary<int, string> ImportarReservasDeAlojamiento(string path)
         {
             Dictionary<int, string> d = new Dictionary<int, string>();
             FileStream fs = null;
             StreamReader sr = null;
-            int contLinea=1;
+            int contLinea = 1;
             string[] campos;
 
             try
@@ -441,7 +444,7 @@ namespace TP_II
                             r = ExisteReserva(c, a, ingreso, egreso, nroHabitacion);
                             if (r == null) //No existe
                             {
-                                if (nroHabitacion != 0)
+                                if (nroHabitacion >= 0)
                                 {
                                     h = ((Hotel)a).GetHabitacion(nroHabitacion);
                                     if (!h.GetEstado())
@@ -454,7 +457,8 @@ namespace TP_II
                                 }
                                 else
                                 {
-                                    r = new Reserva(c, a, ingreso, egreso, precioBaseHotel, acompañantes);
+                                    h = new Habitacion(-1, Habitacion.Tipos.Simple);
+                                    r = new Reserva(c, a, ingreso, egreso, precioBaseHotel, h, acompañantes);
                                     AgregarReservas(r);
                                 }
 
@@ -468,7 +472,7 @@ namespace TP_II
                     else
                         d.Add(contLinea, "El Alojamiento No Existe");
                     contLinea++;
-                        
+
                 }
             }
             catch (Exception ex)
@@ -478,13 +482,116 @@ namespace TP_II
             }
             finally
             {
-                if(fs!=null)
+                if (fs != null)
                 {
                     sr.Close();
                     fs.Close();
                 }
             }
             return d;
+        }
+
+        public double[] DatosGraficoAlojamientos()
+        {
+            int cantReservados = 0;
+            int cantHoteles = 0;
+            int cantCasas = 0;
+            double[] retorno = new double[3];
+
+            foreach (Casa c in casas)
+            {
+                if (c.Reservas.Count > 0)
+                {
+                    cantReservados++;
+                    cantCasas++;
+                }
+            }
+            foreach (Hotel h in hoteles)
+            {
+                if (h.Reservas.Count > 0)
+                {
+                    cantReservados++;
+                    cantHoteles++;
+                }
+            }
+
+            retorno[0] = Math.Round((cantReservados * 100.0) / alojamientos.Count, 2);
+            retorno[1] = Math.Round((cantCasas * 100.0) / alojamientos.Count, 2);
+            retorno[2] = Math.Round((cantHoteles * 100.0) / alojamientos.Count, 2);
+            return retorno;
+        }
+        public Dictionary<int, double[]> DatosGraficoClientes()
+        {
+            //    key    -----    value
+            //  Clientes -----  [Cant]-[%]
+            Dictionary<int, double[]> retorno = new Dictionary<int, double[]>();
+            double[] aux = { 0, 0 };
+            int contClientes = 0;
+
+            for (int i = 1; i < 8; i++)
+                retorno.Add(i, new double[] {0,0});
+
+            foreach (Reserva r in reservas)
+            {
+                contClientes += r.Pasajeros.Count + 1;
+                switch (r.Pasajeros.Count)
+                {
+                    case 0:
+                        {
+                            aux = retorno[1];
+                            aux[0] += 1;
+                            //retorno[1] = aux;
+                        }
+                        break;
+                    case 1:
+                        {
+                            aux = retorno[2];
+                            aux[0] += 1;
+                            //retorno[2] = aux;
+                        }
+                        break;
+                    case 2:
+                        {
+                            aux = retorno[3];
+                            aux[0] += 1;
+                            //retorno[3] = aux;
+                        }
+                        break;
+                    case 3:
+                        {
+                            aux = retorno[4];
+                            aux[0] += 1;
+                            //retorno[4] = aux;
+                        }
+                        break;
+                    case 4:
+                        {
+                            aux = retorno[5];
+                            aux[0] += 1;
+                            //retorno[5] = aux;
+                        }
+                        break;
+                    case 5:
+                        {
+                            aux = retorno[6];
+                            aux[0] += 1;
+                            //retorno[6] = aux;
+                        }
+                        break;
+                    default:
+                        {
+                            aux = retorno[6];
+                            aux[0] += 1;
+                            //retorno[6] = aux;
+                        }
+                        break;
+                }
+            }
+            foreach (KeyValuePair<int, double[]> pair in retorno)
+            {
+                pair.Value[1] = Math.Round((pair.Value[0] * 100.0) / contClientes, 2);
+            }
+            return retorno;
         }
     }
 }

@@ -64,13 +64,14 @@ namespace TP_II
 
         public override double PrecioDia(Reserva r)
         {
-            double retorno = 0;
-            if (r.Habitaciones.Count > 0)
-            {
-                foreach (Habitacion h in r.Habitaciones)
-                    retorno += PrecioHabitacion(h.Tipo, r.PrecioBaseReserva);
-            }
-            return retorno;
+            //double retorno = 0;
+            //if (r.Habitaciones.Count > 0)
+            //{
+            //    foreach (Habitacion h in r.Habitaciones)
+            //        retorno += PrecioHabitacion(h.Tipo, r.PrecioBaseReserva);
+            //}
+            //return retorno;
+            return PrecioHabitacion(r.HabitacionReservada.Tipo, r.PrecioBaseReserva);
         }
 
         public double PrecioHabitacion(int tipo,double precioBase)

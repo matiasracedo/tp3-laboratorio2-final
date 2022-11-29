@@ -22,6 +22,7 @@ namespace TP_II
         bool restart = false;
         Image[] imagenes; // Imagenes de un alojamiento
         List<Cliente> pasajeros = new List<Cliente>(); // Pasajeros adicionales reserva
+        GraficoForm vGrafico;
         public Form1()
         {
             InitializeComponent();
@@ -660,7 +661,7 @@ namespace TP_II
         private void btnConsultaReserva_Click(object sender, EventArgs e)
         {
             int indice = cbReservas.SelectedIndex;
-            Reserva unaReserva = empresa.Reservas[indice];
+            Reserva unaReserva = empresa.ListaDeReservas[indice];
             Alojamiento unAlojamiento = unaReserva.Alojamiento;
             AlojamientoForm vAlojomiento = new AlojamientoForm();
             vAlojomiento.btnCancelarReserva.Enabled = false;
@@ -691,7 +692,7 @@ namespace TP_II
                 Hotel hotel = (Hotel)unAlojamiento;
                 vAlojomiento.SetAlojamiento(hotel);
                 vAlojomiento.SetConsultor(this);
-                Habitacion habitacionReservada = unaReserva.Habitaciones[0];
+                Habitacion habitacionReservada = unaReserva.HabitacionReservada;
 
                 vAlojomiento.lbDescripcion.Text = "Tipo Habitación:";
                 vAlojomiento.cBoxTipoHab.Enabled = true;
@@ -716,7 +717,7 @@ namespace TP_II
         {
            
             int indice = cbReservas.SelectedIndex;
-            Reserva unaReserva = empresa.Reservas[indice];
+            Reserva unaReserva = empresa.ListaDeReservas[indice];
             Alojamiento unAlojamiento = unaReserva.Alojamiento;
             List<Cliente> acomp = unaReserva.Pasajeros;
 
@@ -808,7 +809,7 @@ namespace TP_II
                 vAlojomiento.SetConsultor(this);
                 vAlojomiento.SetAlojamiento(hotel);
 
-                Habitacion habitacionReservada = unaReserva.Habitaciones[0];
+                Habitacion habitacionReservada = unaReserva.HabitacionReservada;
                 int numHabitacionAnterior = habitacionReservada.Numero;
 
                 vAlojomiento.lbDescripcion.Text = "Tipo Habitación:";
@@ -970,7 +971,7 @@ namespace TP_II
             cbReservas.ResetText();
             foreach (Alojamiento a in empresa.Alojamientos)
                 cbAlojamientos.Items.Add(a.ToString());
-            foreach (Reserva r in empresa.Reservas)
+            foreach (Reserva r in empresa.ListaDeReservas)
                 cbReservas.Items.Add(r.ToString());
 
         }
@@ -1524,7 +1525,7 @@ namespace TP_II
                     sw = new StreamWriter(fs);
                     sw.WriteLine("DNICLIENTE , IDALOJAMIENTO , CHECKIN , CHECKOUT , ACOMPANIANTES");
 
-                    foreach (Reserva r in empresa.Reservas)
+                    foreach (Reserva r in empresa.ListaDeReservas)
                     {
                         if (r.Alojamiento is Casa)
                         {
@@ -1564,7 +1565,7 @@ namespace TP_II
                     sw.WriteLine("DNICLIENTE , IDALOJAMIENTO , CHECKIN , CHECKOUT , NROHABITACION , ACOMPANIANTES");
 
 
-                    foreach (Reserva r in empresa.Reservas)
+                    foreach (Reserva r in empresa.ListaDeReservas)
                     {
                         if (r.Alojamiento is Hotel)
                         {
@@ -1587,7 +1588,7 @@ namespace TP_II
         {
             AlojamientosExistentesForm listaForm = new AlojamientosExistentesForm();
 
-            List<Reserva> lista = empresa.Reservas;
+            List<Reserva> lista = empresa.ListaDeReservas;
             if (lista.Count > 0)
             {
                 foreach (Reserva r in lista)
@@ -1782,24 +1783,106 @@ namespace TP_II
 
             listaForm.Dispose();
         }
-
-        
-
-
-
-
-
-
-
-        //MENU STRIP ACERCADE - INFO:::::
-        //MENU STRIP ACERCADE - INFO:::::
-        //MENU STRIP ACERCADE - INFO:::::
-        //MENU STRIP ACERCADE - INFO:::::
-        /*
-        private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
+       private void graficoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            vGrafico = new GraficoForm();
+            vGrafico.Size = new Size(688,355);
+            vGrafico.pb.Size = new Size(650,300);
+            vGrafico.pb.Paint += new PaintEventHandler(DibujarGraficoAlojamientos);
+            vGrafico.ShowDialog();
+            vGrafico.Dispose();
         }
-        */
-    }
+        private void graficoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            vGrafico = new GraficoForm();
+            vGrafico.Size = new Size(1100, 355);
+            vGrafico.pb.Size = new Size(1050, 300);
+            vGrafico.pb.Paint += new PaintEventHandler(DibujarGraficoClientes);
+            vGrafico.ShowDialog();
+            vGrafico.Dispose();
+        }
+
+        private void DibujarGraficoAlojamientos(object sender, PaintEventArgs e)
+        {
+            double[] datos = empresa.DatosGraficoAlojamientos();
+            Brush relleno;
+            Font letra = new Font("Times New Roman", 13, FontStyle.Bold);
+            int alto;
+            int ancho = 150;
+            string texto;
+            Point p;
+
+            //barra de Casas
+            relleno = new SolidBrush(Color.LightGreen);
+            alto = (int)(vGrafico.Height * datos[1]) / 100;
+            e.Graphics.FillRectangle(relleno, 50, vGrafico.pb.Height-alto, ancho, alto);         
+            relleno = new SolidBrush(Color.Black);
+            p = new Point(70, vGrafico.pb.Height - (alto/2));
+            texto = string.Format("Casas : {0} %", datos[1]);
+            e.Graphics.DrawString(texto, letra, relleno, p);
+
+            //barra de Hotel
+            relleno = new SolidBrush(Color.LightBlue);
+            alto = (int)(vGrafico.Height * datos[2]) / 100;
+            e.Graphics.FillRectangle(relleno, 250, vGrafico.pb.Height - alto, ancho, alto);
+            relleno = new SolidBrush(Color.Black);
+            p = new Point(270, vGrafico.pb.Height - (alto / 2));
+            texto = string.Format("Hoteles : {0} %", datos[2]);
+            e.Graphics.DrawString(texto, letra, relleno, p);
+
+            //barra Total
+            relleno = new SolidBrush(Color.LightSalmon);
+            alto = (int)(vGrafico.Height * datos[0]) / 100;
+            e.Graphics.FillRectangle(relleno, 450, vGrafico.pb.Height - alto, ancho, alto);
+            relleno = new SolidBrush(Color.Black);
+            p = new Point(470, vGrafico.pb.Height - (alto / 2));
+            texto = string.Format("Total : {0} %", datos[0]);
+            e.Graphics.DrawString(texto, letra, relleno, p);
+
+            relleno.Dispose();
+        }
+
+        private void DibujarGraficoClientes(object sender, PaintEventArgs e)
+        {
+            Dictionary<int, double[]> d = empresa.DatosGraficoClientes();
+            Brush relleno = new SolidBrush(Color.LightBlue);
+            Font letra = new Font("Times New Roman", 13, FontStyle.Bold);
+            int alto;
+            int ancho = 150;
+            string texto;
+            Point p;
+            double[] datos;
+            int[] puntero = {50,0};
+
+            foreach (KeyValuePair<int, double[]> pair in d)
+            {
+                datos = pair.Value;
+                relleno = new SolidBrush(Color.LightBlue);
+                alto = (int)(vGrafico.Height * datos[1]) / 100;
+                puntero[1] = vGrafico.pb.Height - alto;
+                e.Graphics.FillRectangle(relleno, puntero[0], puntero[1], ancho, alto);
+                relleno = new SolidBrush(Color.Black);
+                p = new Point(puntero[0]+20, vGrafico.pb.Height - (alto / 2));
+                texto = string.Format("{0} Cliente",pair.Key);
+                e.Graphics.DrawString(texto, letra, relleno, p);
+                p = new Point(puntero[0] + 20, (vGrafico.pb.Height - (alto / 2)) + 15);
+                texto = string.Format("Cant: {0} - {1}%", datos[0], datos[1]);
+                e.Graphics.DrawString(texto, letra, relleno, p);
+                puntero[0] += 200;
+            }
+            relleno.Dispose();
+            
+        }
+
+            //MENU STRIP ACERCADE - INFO:::::
+            //MENU STRIP ACERCADE - INFO:::::
+            //MENU STRIP ACERCADE - INFO:::::
+            //MENU STRIP ACERCADE - INFO:::::
+            /*
+            private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
+            {
+
+            }
+            */
+        }
 }

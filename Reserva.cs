@@ -13,7 +13,7 @@ namespace TP_II
         private static int contIdReservas = 1000;
         private Cliente cliente;
         private Alojamiento alojamiento;
-        private List<Habitacion> habitaciones = new List<Habitacion>();
+        private Habitacion habitacionReservada;
         private List<Cliente> pasajeros = new List<Cliente>();
         private DateTime ingreso;
         private DateTime egreso;
@@ -32,7 +32,7 @@ namespace TP_II
             this.egreso = egreso;
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
             this.precioBaseReserva=precioBase;
-            habitaciones.Add(h);
+            habitacionReservada = h;
             id = contIdReservas;
             contIdReservas++;
             Cliente.ContIdCliente++;
@@ -49,6 +49,7 @@ namespace TP_II
             this.egreso = egreso;
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
             this.precioBaseReserva = precioBase;
+            habitacionReservada = new Habitacion(-1, Habitacion.Tipos.Simple);
             this.id = contIdReservas;
             contIdReservas++;
             Cliente.ContIdCliente++;
@@ -64,6 +65,7 @@ namespace TP_II
             this.egreso = egreso;
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
             this.precioBaseReserva = precioBase;
+            habitacionReservada =  new Habitacion(-1, Habitacion.Tipos.Simple);
             if (p.Count > 0)
                 p.ForEach(acomp => pasajeros.Add(acomp));
             id = contIdReservas;
@@ -71,7 +73,6 @@ namespace TP_II
             Cliente.ContIdCliente++;
             CalcularPrecioDia();
             GenerarComprobante();
-
         }
 
         public Reserva(Cliente cliente, Alojamiento alojamiento, DateTime ingreso, DateTime egreso, double precioBase, Habitacion h, List<Cliente> p)
@@ -83,7 +84,7 @@ namespace TP_II
             this.periodo = egreso.AddDays(1).Subtract(ingreso);
             this.precioBaseReserva = precioBase;
             p.ForEach(acomp => pasajeros.Add(acomp));
-            habitaciones.Add(h);          
+            habitacionReservada = h;          
             id = contIdReservas;
             contIdReservas++;
             Cliente.ContIdCliente++;
@@ -94,13 +95,13 @@ namespace TP_II
 
         public void AgregarHabitacion(Habitacion habitacion)
         {
-            habitaciones.Add(habitacion);
-            comprobante[0] += " - " + Habitaciones[0].ToString();
-            comprobante[1] += Habitaciones[0].Tipo;
+            habitacionReservada = habitacion;
+            comprobante[0] += " - " + habitacionReservada.ToString();
+            comprobante[1] += habitacionReservada.Tipo;
         }
         public void QuitarHabitacion(Habitacion habitacion)
         {
-            habitaciones.Remove(habitacion);
+            habitacionReservada = null;
         }
 
         public void CalcularPrecioDia()
@@ -133,7 +134,7 @@ namespace TP_II
             if (Alojamiento is Casa)
                 datos[1] += ((Casa)Alojamiento).Camas;
             else
-                datos[1] = habitaciones[0].Tipo.ToString();
+                datos[1] = habitacionReservada.Tipo.ToString();
 
             comprobante = datos;
         }
@@ -175,7 +176,7 @@ namespace TP_II
             if(alojamiento is Casa)
                 return String.Format("IDR:{0} - {1}: {2} - Alojamiento: {3}",id , cliente.IDcliente , cliente.NombreCompleto , alojamiento.ToString());
             else
-                return String.Format("IDR:{0} - {1}: {2} - Alojamiento: {3} - NroHabitacion: {4}",id , cliente.IDcliente , cliente.NombreCompleto , alojamiento.ToString(), habitaciones[0].ToString());
+                return String.Format("IDR:{0} - {1}: {2} - Alojamiento: {3} - NroHabitacion: {4}",id , cliente.IDcliente , cliente.NombreCompleto , alojamiento.ToString(),habitacionReservada.ToString());
         }
         public string[] ExportarCasa()
         {
@@ -202,7 +203,7 @@ namespace TP_II
             ret[1] = alojamiento.IDalojamiento.ToString();
             ret[2] = ingreso.ToString();
             ret[3] = egreso.ToString();
-            ret[4] = habitaciones[0].Numero.ToString();
+            ret[4] = habitacionReservada.Numero.ToString();
 
             if (pasajeros.Count > 0)
             {
@@ -221,11 +222,7 @@ namespace TP_II
             retorno[1] = alojamiento.IDalojamiento.ToString();
             retorno[2] = ingreso.ToString();
             retorno[3] = egreso.ToString();
-
-            if(alojamiento is Casa)
-                retorno[4]="0";
-            else
-                retorno[4] = habitaciones[0].Numero.ToString();
+            retorno[4] = habitacionReservada.Numero.ToString();
 
             if (pasajeros.Count > 0)
             {
@@ -241,7 +238,7 @@ namespace TP_II
             return this.id.CompareTo(((Reserva)o).id);
         }
         
-        public List<Habitacion> Habitaciones { get { return habitaciones; } }
+        public Habitacion HabitacionReservada { get { return habitacionReservada; } }
         public int Dias { get { return periodo.Days; } }
         public double PrecioBaseReserva { get { return precioBaseReserva; } }
         public double PrecioDia { get { return precioDia; } }
