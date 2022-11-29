@@ -31,6 +31,7 @@ namespace TP_II
             foreach (Object actual in actuales)
             {
                 lista.Add((Alojamiento)actual);
+                //sadsa
             }
 
             dataGridDisponibles.Rows.Clear();

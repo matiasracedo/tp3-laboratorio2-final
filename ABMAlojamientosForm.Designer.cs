@@ -33,6 +33,8 @@
             this.cBoxProvincia = new System.Windows.Forms.ComboBox();
             this.lbCiudad = new System.Windows.Forms.Label();
             this.lbProvincia = new System.Windows.Forms.Label();
+            this.btnExportarR = new System.Windows.Forms.Button();
+            this.btnImportarR = new System.Windows.Forms.Button();
             this.btnFotos = new System.Windows.Forms.Button();
             this.btnAltaBaja = new System.Windows.Forms.Button();
             this.labEstado = new System.Windows.Forms.Label();
@@ -86,6 +88,8 @@
             this.gbCasaHotel.Controls.Add(this.cBoxProvincia);
             this.gbCasaHotel.Controls.Add(this.lbCiudad);
             this.gbCasaHotel.Controls.Add(this.lbProvincia);
+            this.gbCasaHotel.Controls.Add(this.btnExportarR);
+            this.gbCasaHotel.Controls.Add(this.btnImportarR);
             this.gbCasaHotel.Controls.Add(this.btnFotos);
             this.gbCasaHotel.Controls.Add(this.btnAltaBaja);
             this.gbCasaHotel.Controls.Add(this.labEstado);
@@ -134,6 +138,27 @@
             this.lbProvincia.Size = new System.Drawing.Size(51, 13);
             this.lbProvincia.TabIndex = 8;
             this.lbProvincia.Text = "Provincia";
+            this.gbCasaHotel.Size = new System.Drawing.Size(547, 146);
+            this.gbCasaHotel.TabIndex = 0;
+            this.gbCasaHotel.TabStop = false;
+            // 
+            // btnExportarR
+            // 
+            this.btnExportarR.Location = new System.Drawing.Point(204, 104);
+            this.btnExportarR.Name = "btnExportarR";
+            this.btnExportarR.Size = new System.Drawing.Size(107, 23);
+            this.btnExportarR.TabIndex = 9;
+            this.btnExportarR.Text = "Exportar Reservas";
+            this.btnExportarR.UseVisualStyleBackColor = true;
+            // 
+            // btnImportarR
+            // 
+            this.btnImportarR.Location = new System.Drawing.Point(377, 104);
+            this.btnImportarR.Name = "btnImportarR";
+            this.btnImportarR.Size = new System.Drawing.Size(107, 23);
+            this.btnImportarR.TabIndex = 8;
+            this.btnImportarR.Text = "Importar Reseervas";
+            this.btnImportarR.UseVisualStyleBackColor = true;
             // 
             // btnFotos
             // 
@@ -146,9 +171,9 @@
             // 
             // btnAltaBaja
             // 
-            this.btnAltaBaja.Location = new System.Drawing.Point(202, 64);
+            this.btnAltaBaja.Location = new System.Drawing.Point(202, 62);
             this.btnAltaBaja.Name = "btnAltaBaja";
-            this.btnAltaBaja.Size = new System.Drawing.Size(109, 27);
+            this.btnAltaBaja.Size = new System.Drawing.Size(109, 25);
             this.btnAltaBaja.TabIndex = 6;
             this.btnAltaBaja.Text = "Dar de Alta";
             this.btnAltaBaja.UseVisualStyleBackColor = true;
@@ -215,7 +240,7 @@
             this.gBoxHotel.Controls.Add(this.checkB3Estrellas);
             this.gBoxHotel.Controls.Add(this.label2);
             this.gBoxHotel.Controls.Add(this.tbNombre);
-            this.gBoxHotel.Location = new System.Drawing.Point(43, 179);
+            this.gBoxHotel.Location = new System.Drawing.Point(43, 173);
             this.gBoxHotel.Name = "gBoxHotel";
             this.gBoxHotel.Size = new System.Drawing.Size(547, 145);
             this.gBoxHotel.TabIndex = 1;
@@ -361,7 +386,7 @@
             this.gBoxCasa.Controls.Add(this.numUDcamasCasa);
             this.gBoxCasa.Controls.Add(this.lbCamasCasa);
             this.gBoxCasa.Controls.Add(this.gBoxServicios);
-            this.gBoxCasa.Location = new System.Drawing.Point(43, 330);
+            this.gBoxCasa.Location = new System.Drawing.Point(43, 324);
             this.gBoxCasa.Name = "gBoxCasa";
             this.gBoxCasa.Size = new System.Drawing.Size(547, 147);
             this.gBoxCasa.TabIndex = 13;
@@ -536,7 +561,7 @@
             // btnGuardar
             // 
             this.btnGuardar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnGuardar.Location = new System.Drawing.Point(154, 501);
+            this.btnGuardar.Location = new System.Drawing.Point(154, 495);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 14;
@@ -546,7 +571,7 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(345, 501);
+            this.btnCancelar.Location = new System.Drawing.Point(345, 495);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 15;
@@ -557,7 +582,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 533);
+            this.ClientSize = new System.Drawing.Size(618, 585);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.gBoxCasa);
@@ -626,5 +651,7 @@
         private System.Windows.Forms.Label lbProvincia;
         public System.Windows.Forms.ComboBox cBoxProvincia;
         public System.Windows.Forms.ComboBox cBoxCiudad;
+        public System.Windows.Forms.Button btnExportarR;
+        public System.Windows.Forms.Button btnImportarR;
     }
 }

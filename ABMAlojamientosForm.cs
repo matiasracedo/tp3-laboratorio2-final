@@ -54,7 +54,7 @@ namespace TP_II
                 labEstado.Text = "Activado";
                 labEstado.Enabled = true;
             }
-               
+
         }
         public void cBoxProvincia_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -71,5 +71,6 @@ namespace TP_II
         {
 
         }
+
     }
 }
