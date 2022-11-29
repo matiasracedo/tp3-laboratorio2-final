@@ -31,6 +31,7 @@ namespace TP_II
             foreach (Object actual in actuales)
             {
                 lista.Add((Alojamiento)actual);
+                //sadsa
             }
 
             dataGridDisponibles.Rows.Clear();
@@ -237,9 +238,5 @@ namespace TP_II
                 gBoxFiltroFecha.Enabled= false;
         }
 
-        private void dataGridDisponibles_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

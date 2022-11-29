@@ -22,6 +22,7 @@ namespace TP_II
         bool restart = false;
         Image[] imagenes; // Imagenes de un alojamiento
         List<Cliente> pasajeros = new List<Cliente>(); // Pasajeros adicionales reserva
+        GraficoForm vGrafico;
         public Form1()
         {
             InitializeComponent();
@@ -152,7 +153,7 @@ namespace TP_II
             ArrayList a = new ArrayList();
             a.AddRange(nuevos);
 
-            c.Dispose();
+            //c.Dispose();
             return a;
         }
         public object BuscarAlojamiento(object unAlojameinto)
@@ -215,7 +216,7 @@ namespace TP_II
             ventanaABM.labEstado.Visible = false;
             ventanaABM.btnAltaBaja.Visible = false;
             // Manejo evento click del boton "Importar fotos" en ventana ABM
-            ventanaABM.btnFotos.Click += new System.EventHandler(this.btnFotos_Click);
+            ventanaABM.btnFotos.Click += new System.EventHandler(this.btnFotos_Click);       
 
             if (ventanaABM.ShowDialog() == DialogResult.OK)
             {
@@ -299,7 +300,7 @@ namespace TP_II
             }
             openImageFile.Dispose();
         }
-
+     
         private void btnModificarAloj_Click(object sender, EventArgs e)
         {
             ABMAlojamientosForm vModificacion = new ABMAlojamientosForm();
@@ -308,7 +309,10 @@ namespace TP_II
             imagenes = new Image[5];
             // Manejo evento click del boton "Importar fotos" en ventana ABM
             vModificacion.btnFotos.Click += new System.EventHandler(this.btnFotos_Click);
-
+            // Manejo evento click del boton "Exportar Reservas" en ventana ABM
+            vModificacion.btnExportarR.Click += new System.EventHandler(this.btnExportarR_Click);
+            // Manejo evento click del boton "Exportar Reservas" en ventana ABM
+            vModificacion.btnImportarR.Click += new System.EventHandler(this.btnImportarR_Click);
 
             if (alojamiento is Hotel)
             {
@@ -400,14 +404,91 @@ namespace TP_II
                     unaCasa.MinDias = Convert.ToInt32(vModificacion.numUDminimo.Value);
                     unaCasa.PrecioBaseCasa = Convert.ToInt32(vModificacion.tbPrecio.Text);
                 }
-                ActualizarListas();
-
-                cbAlojamientos.ResetText();
-                cbAlojamientos.SelectedIndex = -1;
+                
             }
+            ActualizarListas();
+            cbAlojamientos.ResetText();
+            cbAlojamientos.SelectedIndex = -1;
             // Quito evento click del boton "Importar fotos" en ventana ABM
             vModificacion.btnFotos.Click -= new System.EventHandler(this.btnFotos_Click);
+            // Quito evento click del boton "Exportar Reservas" en ventana ABM
+            vModificacion.btnExportarR.Click -= new System.EventHandler(this.btnExportarR_Click);
+            // Quito evento click del boton "Importar Reservas" en ventana ABM
+            vModificacion.btnImportarR.Click -= new System.EventHandler(this.btnImportarR_Click);
             vModificacion.Dispose();
+        }
+
+        //Evento click boton Exportar Reservas ventana ABM Alojamientos
+        private void btnExportarR_Click(object sender, EventArgs e)
+        {
+            int indice = cbAlojamientos.SelectedIndex;
+            Alojamiento alojamiento = empresa.Alojamientos[indice];
+
+            string path;
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Application.StartupPath;
+            sfd.DefaultExt = ".txt";
+            sfd.AddExtension = true;
+            if (alojamiento is Hotel)
+                sfd.FileName = string.Format("Hotel-{0}-{1}", ((Hotel)alojamiento).Nombre, ((Hotel)alojamiento).Direccion);
+            else
+                sfd.FileName = string.Format("Casa-{0}-{1}", ((Casa)alojamiento).Numero, ((Casa)alojamiento).Direccion);
+            
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    path = sfd.FileName;
+                    empresa.ExportarReservasDeAlojamiento(alojamiento, path);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        //Evento click boton Importar Reservas ventana ABM Alojamientos
+        private void btnImportarR_Click(object sender, EventArgs e)
+        {
+            Dictionary<int, string> d=new Dictionary<int, string>();
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = Application.StartupPath;
+            ofd.DefaultExt = ".txt";
+            ofd.AddExtension = true;
+
+            string path;
+
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    path = ofd.FileName;
+                    d=empresa.ImportarReservasDeAlojamiento(path);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    ofd.Dispose();
+                }     
+                AlojamientosExistentesForm vInforme = new AlojamientosExistentesForm();
+                if(d.Count > 0)
+                {
+                    vInforme.listBox1.Items.Add("SE HAN ENCONTRADO LOS SIGUIENTES ERRORES");
+                    vInforme.listBox1.Items.Add("");
+                    foreach (KeyValuePair<int, string> error in d)
+                        vInforme.listBox1.Items.Add(string.Format("Error en Linea: {0} ----- {1}",error.Key,error.Value));
+                }
+                else
+                    vInforme.listBox1.Items.Add("Carga Exitosa, no se encontraron errores");
+                vInforme.ShowDialog();
+                vInforme.Dispose();
+            }
         }
 
         //Evento click boton Agregar pasajeros ventana DatosCliente
@@ -580,7 +661,7 @@ namespace TP_II
         private void btnConsultaReserva_Click(object sender, EventArgs e)
         {
             int indice = cbReservas.SelectedIndex;
-            Reserva unaReserva = empresa.Reservas[indice];
+            Reserva unaReserva = empresa.ListaDeReservas[indice];
             Alojamiento unAlojamiento = unaReserva.Alojamiento;
             AlojamientoForm vAlojomiento = new AlojamientoForm();
             vAlojomiento.btnCancelarReserva.Enabled = false;
@@ -611,7 +692,7 @@ namespace TP_II
                 Hotel hotel = (Hotel)unAlojamiento;
                 vAlojomiento.SetAlojamiento(hotel);
                 vAlojomiento.SetConsultor(this);
-                Habitacion habitacionReservada = unaReserva.Habitaciones[0];
+                Habitacion habitacionReservada = unaReserva.HabitacionReservada;
 
                 vAlojomiento.lbDescripcion.Text = "Tipo Habitación:";
                 vAlojomiento.cBoxTipoHab.Enabled = true;
@@ -621,7 +702,7 @@ namespace TP_II
                 vAlojomiento.cBoxNroHabitaciones.Text = habitacionReservada.Numero.ToString();
 
                 DateTime[] intervaloPintar = hotel.IntervaloFechasHabitacion(habitacionReservada.Numero);
-                vAlojomiento.Calendario.BoldedDates = intervaloPintar;// REVISAR
+                vAlojomiento.Calendario.BoldedDates = intervaloPintar;
 
                 vAlojomiento.nudDias.Value = unaReserva.Dias;
                 vAlojomiento.nudDias.Minimum = 1;
@@ -636,7 +717,7 @@ namespace TP_II
         {
            
             int indice = cbReservas.SelectedIndex;
-            Reserva unaReserva = empresa.Reservas[indice];
+            Reserva unaReserva = empresa.ListaDeReservas[indice];
             Alojamiento unAlojamiento = unaReserva.Alojamiento;
             List<Cliente> acomp = unaReserva.Pasajeros;
 
@@ -648,7 +729,7 @@ namespace TP_II
             DateTime[] fechasPintar;
             vAlojomiento.Calendario.SetDate(unaReserva.Ingreso);
             vAlojomiento.Calendario.SelectionStart = unaReserva.Ingreso;
-
+            
             DialogResult dialogResult= DialogResult.Ignore;//No hace nada
 
             if (unAlojamiento is Casa)
@@ -720,8 +801,7 @@ namespace TP_II
                 }
                 empresa.OrdenarReservasPorId();
                 ActualizarListas();
-                cbReservas.ResetText();
-
+                
             }// esto si era casa
             else
             {
@@ -729,7 +809,7 @@ namespace TP_II
                 vAlojomiento.SetConsultor(this);
                 vAlojomiento.SetAlojamiento(hotel);
 
-                Habitacion habitacionReservada = unaReserva.Habitaciones[0];
+                Habitacion habitacionReservada = unaReserva.HabitacionReservada;
                 int numHabitacionAnterior = habitacionReservada.Numero;
 
                 vAlojomiento.lbDescripcion.Text = "Tipo Habitación:";
@@ -741,13 +821,13 @@ namespace TP_II
 
                 hotel.QuitarReserva(numHabitacionAnterior, unaReserva);//SE QUITA MOMENTANEAMENTE
 
-                DateTime[] intervaloPintar = hotel.IntervaloFechasHabitacion(habitacionReservada.Numero);
-                vAlojomiento.Calendario.BoldedDates = intervaloPintar;// REVISAR
+                //DateTime[] intervaloPintar = hotel.IntervaloFechasHabitacion(habitacionReservada.Numero);
+                //vAlojomiento.Calendario.BoldedDates = intervaloPintar;// REVISAR
 
                 vAlojomiento.nudDias.Value = unaReserva.Dias;
                 vAlojomiento.nudDias.Minimum = 1;
-
-                if (vAlojomiento.ShowDialog() == DialogResult.OK)
+                DialogResult resultado = vAlojomiento.ShowDialog();
+                if ( resultado == DialogResult.OK)
                 {
                     int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
                     int nroHabitacionNuevo = Convert.ToInt32(vAlojomiento.cBoxNroHabitaciones.Text);
@@ -794,7 +874,7 @@ namespace TP_II
                 }
                 else
                 {
-                    if (dialogResult != DialogResult.Abort)
+                    if (resultado == DialogResult.Abort)
                     {
                         unaReserva.QuitarHabitacion(habitacionReservada);
                         empresa.CancelarReserva(unaReserva.ID);
@@ -891,7 +971,7 @@ namespace TP_II
             cbReservas.ResetText();
             foreach (Alojamiento a in empresa.Alojamientos)
                 cbAlojamientos.Items.Add(a.ToString());
-            foreach (Reserva r in empresa.Reservas)
+            foreach (Reserva r in empresa.ListaDeReservas)
                 cbReservas.Items.Add(r.ToString());
 
         }
@@ -1445,7 +1525,7 @@ namespace TP_II
                     sw = new StreamWriter(fs);
                     sw.WriteLine("DNICLIENTE , IDALOJAMIENTO , CHECKIN , CHECKOUT , ACOMPANIANTES");
 
-                    foreach (Reserva r in empresa.Reservas)
+                    foreach (Reserva r in empresa.ListaDeReservas)
                     {
                         if (r.Alojamiento is Casa)
                         {
@@ -1485,7 +1565,7 @@ namespace TP_II
                     sw.WriteLine("DNICLIENTE , IDALOJAMIENTO , CHECKIN , CHECKOUT , NROHABITACION , ACOMPANIANTES");
 
 
-                    foreach (Reserva r in empresa.Reservas)
+                    foreach (Reserva r in empresa.ListaDeReservas)
                     {
                         if (r.Alojamiento is Hotel)
                         {
@@ -1508,7 +1588,7 @@ namespace TP_II
         {
             AlojamientosExistentesForm listaForm = new AlojamientosExistentesForm();
 
-            List<Reserva> lista = empresa.Reservas;
+            List<Reserva> lista = empresa.ListaDeReservas;
             if (lista.Count > 0)
             {
                 foreach (Reserva r in lista)
@@ -1703,24 +1783,106 @@ namespace TP_II
 
             listaForm.Dispose();
         }
-
-        
-
-
-
-
-
-
-
-        //MENU STRIP ACERCADE - INFO:::::
-        //MENU STRIP ACERCADE - INFO:::::
-        //MENU STRIP ACERCADE - INFO:::::
-        //MENU STRIP ACERCADE - INFO:::::
-        /*
-        private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
+       private void graficoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            vGrafico = new GraficoForm();
+            vGrafico.Size = new Size(688,355);
+            vGrafico.pb.Size = new Size(650,300);
+            vGrafico.pb.Paint += new PaintEventHandler(DibujarGraficoAlojamientos);
+            vGrafico.ShowDialog();
+            vGrafico.Dispose();
         }
-        */
-    }
+        private void graficoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            vGrafico = new GraficoForm();
+            vGrafico.Size = new Size(1100, 355);
+            vGrafico.pb.Size = new Size(1050, 300);
+            vGrafico.pb.Paint += new PaintEventHandler(DibujarGraficoClientes);
+            vGrafico.ShowDialog();
+            vGrafico.Dispose();
+        }
+
+        private void DibujarGraficoAlojamientos(object sender, PaintEventArgs e)
+        {
+            double[] datos = empresa.DatosGraficoAlojamientos();
+            Brush relleno;
+            Font letra = new Font("Times New Roman", 13, FontStyle.Bold);
+            int alto;
+            int ancho = 150;
+            string texto;
+            Point p;
+
+            //barra de Casas
+            relleno = new SolidBrush(Color.LightGreen);
+            alto = (int)(vGrafico.Height * datos[1]) / 100;
+            e.Graphics.FillRectangle(relleno, 50, vGrafico.pb.Height-alto, ancho, alto);         
+            relleno = new SolidBrush(Color.Black);
+            p = new Point(70, vGrafico.pb.Height - (alto/2));
+            texto = string.Format("Casas : {0} %", datos[1]);
+            e.Graphics.DrawString(texto, letra, relleno, p);
+
+            //barra de Hotel
+            relleno = new SolidBrush(Color.LightBlue);
+            alto = (int)(vGrafico.Height * datos[2]) / 100;
+            e.Graphics.FillRectangle(relleno, 250, vGrafico.pb.Height - alto, ancho, alto);
+            relleno = new SolidBrush(Color.Black);
+            p = new Point(270, vGrafico.pb.Height - (alto / 2));
+            texto = string.Format("Hoteles : {0} %", datos[2]);
+            e.Graphics.DrawString(texto, letra, relleno, p);
+
+            //barra Total
+            relleno = new SolidBrush(Color.LightSalmon);
+            alto = (int)(vGrafico.Height * datos[0]) / 100;
+            e.Graphics.FillRectangle(relleno, 450, vGrafico.pb.Height - alto, ancho, alto);
+            relleno = new SolidBrush(Color.Black);
+            p = new Point(470, vGrafico.pb.Height - (alto / 2));
+            texto = string.Format("Total : {0} %", datos[0]);
+            e.Graphics.DrawString(texto, letra, relleno, p);
+
+            relleno.Dispose();
+        }
+
+        private void DibujarGraficoClientes(object sender, PaintEventArgs e)
+        {
+            Dictionary<int, double[]> d = empresa.DatosGraficoClientes();
+            Brush relleno = new SolidBrush(Color.LightBlue);
+            Font letra = new Font("Times New Roman", 13, FontStyle.Bold);
+            int alto;
+            int ancho = 150;
+            string texto;
+            Point p;
+            double[] datos;
+            int[] puntero = {50,0};
+
+            foreach (KeyValuePair<int, double[]> pair in d)
+            {
+                datos = pair.Value;
+                relleno = new SolidBrush(Color.LightBlue);
+                alto = (int)(vGrafico.Height * datos[1]) / 100;
+                puntero[1] = vGrafico.pb.Height - alto;
+                e.Graphics.FillRectangle(relleno, puntero[0], puntero[1], ancho, alto);
+                relleno = new SolidBrush(Color.Black);
+                p = new Point(puntero[0]+20, vGrafico.pb.Height - (alto / 2));
+                texto = string.Format("{0} Cliente",pair.Key);
+                e.Graphics.DrawString(texto, letra, relleno, p);
+                p = new Point(puntero[0] + 20, (vGrafico.pb.Height - (alto / 2)) + 15);
+                texto = string.Format("Cant: {0} - {1}%", datos[0], datos[1]);
+                e.Graphics.DrawString(texto, letra, relleno, p);
+                puntero[0] += 200;
+            }
+            relleno.Dispose();
+            
+        }
+
+            //MENU STRIP ACERCADE - INFO:::::
+            //MENU STRIP ACERCADE - INFO:::::
+            //MENU STRIP ACERCADE - INFO:::::
+            //MENU STRIP ACERCADE - INFO:::::
+            /*
+            private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
+            {
+
+            }
+            */
+        }
 }

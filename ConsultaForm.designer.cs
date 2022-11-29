@@ -169,7 +169,6 @@
             this.dataGridDisponibles.RowHeadersVisible = false;
             this.dataGridDisponibles.Size = new System.Drawing.Size(684, 242);
             this.dataGridDisponibles.TabIndex = 8;
-            this.dataGridDisponibles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDisponibles_CellContentClick);
             this.dataGridDisponibles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDisponibles_CellDoubleClick);
             // 
             // columnaTipo
