@@ -89,7 +89,6 @@ namespace TP_II
             Cliente.ContIdCliente++;
             CalcularPrecioDia();
             GenerarComprobante();
-
         }
 
         public void AgregarHabitacion(Habitacion habitacion)

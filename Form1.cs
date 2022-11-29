@@ -2118,8 +2118,8 @@ namespace TP_II
         //MENU STRIP ACERCADE - INFO:::::
         //MENU STRIP ACERCADE - INFO:::::
         //MENU STRIP ACERCADE - INFO:::::
-        /*
-        private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
+ 
+        //private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
 
         private void DibujarGraficoClientes(object sender, PaintEventArgs e)
         {
