@@ -99,32 +99,32 @@
             this.gbCasaHotel.Controls.Add(this.Direccion);
             this.gbCasaHotel.Location = new System.Drawing.Point(43, 21);
             this.gbCasaHotel.Name = "gbCasaHotel";
-            this.gbCasaHotel.Size = new System.Drawing.Size(547, 152);
+            this.gbCasaHotel.Size = new System.Drawing.Size(547, 202);
             this.gbCasaHotel.TabIndex = 0;
             this.gbCasaHotel.TabStop = false;
             // 
             // cBoxCiudad
             // 
             this.cBoxCiudad.FormattingEnabled = true;
-            this.cBoxCiudad.Location = new System.Drawing.Point(345, 112);
+            this.cBoxCiudad.Location = new System.Drawing.Point(313, 153);
             this.cBoxCiudad.Name = "cBoxCiudad";
-            this.cBoxCiudad.Size = new System.Drawing.Size(182, 21);
+            this.cBoxCiudad.Size = new System.Drawing.Size(214, 21);
             this.cBoxCiudad.TabIndex = 11;
             // 
             // cBoxProvincia
             // 
             this.cBoxProvincia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxProvincia.FormattingEnabled = true;
-            this.cBoxProvincia.Location = new System.Drawing.Point(80, 112);
+            this.cBoxProvincia.Location = new System.Drawing.Point(313, 111);
             this.cBoxProvincia.Name = "cBoxProvincia";
-            this.cBoxProvincia.Size = new System.Drawing.Size(182, 21);
+            this.cBoxProvincia.Size = new System.Drawing.Size(214, 21);
             this.cBoxProvincia.TabIndex = 10;
             this.cBoxProvincia.SelectedValueChanged += new System.EventHandler(this.cBoxProvincia_SelectedValueChanged);
             // 
             // lbCiudad
             // 
             this.lbCiudad.AutoSize = true;
-            this.lbCiudad.Location = new System.Drawing.Point(289, 115);
+            this.lbCiudad.Location = new System.Drawing.Point(243, 158);
             this.lbCiudad.Name = "lbCiudad";
             this.lbCiudad.Size = new System.Drawing.Size(40, 13);
             this.lbCiudad.TabIndex = 9;
@@ -133,45 +133,42 @@
             // lbProvincia
             // 
             this.lbProvincia.AutoSize = true;
-            this.lbProvincia.Location = new System.Drawing.Point(18, 115);
+            this.lbProvincia.Location = new System.Drawing.Point(243, 111);
             this.lbProvincia.Name = "lbProvincia";
             this.lbProvincia.Size = new System.Drawing.Size(51, 13);
             this.lbProvincia.TabIndex = 8;
             this.lbProvincia.Text = "Provincia";
-            this.gbCasaHotel.Size = new System.Drawing.Size(547, 146);
-            this.gbCasaHotel.TabIndex = 0;
-            this.gbCasaHotel.TabStop = false;
             // 
             // btnExportarR
             // 
-            this.btnExportarR.Location = new System.Drawing.Point(204, 104);
+            this.btnExportarR.Location = new System.Drawing.Point(18, 106);
             this.btnExportarR.Name = "btnExportarR";
-            this.btnExportarR.Size = new System.Drawing.Size(107, 23);
+            this.btnExportarR.Size = new System.Drawing.Size(158, 23);
             this.btnExportarR.TabIndex = 9;
             this.btnExportarR.Text = "Exportar Reservas";
             this.btnExportarR.UseVisualStyleBackColor = true;
             // 
             // btnImportarR
             // 
-            this.btnImportarR.Location = new System.Drawing.Point(377, 104);
+            this.btnImportarR.Location = new System.Drawing.Point(18, 149);
             this.btnImportarR.Name = "btnImportarR";
-            this.btnImportarR.Size = new System.Drawing.Size(107, 23);
+            this.btnImportarR.Size = new System.Drawing.Size(158, 23);
             this.btnImportarR.TabIndex = 8;
             this.btnImportarR.Text = "Importar Reseervas";
             this.btnImportarR.UseVisualStyleBackColor = true;
             // 
             // btnFotos
             // 
-            this.btnFotos.Location = new System.Drawing.Point(377, 64);
+            this.btnFotos.Location = new System.Drawing.Point(18, 66);
             this.btnFotos.Name = "btnFotos";
-            this.btnFotos.Size = new System.Drawing.Size(107, 23);
+            this.btnFotos.Size = new System.Drawing.Size(158, 23);
             this.btnFotos.TabIndex = 7;
             this.btnFotos.Text = "Importar Fotos";
             this.btnFotos.UseVisualStyleBackColor = true;
             // 
             // btnAltaBaja
             // 
-            this.btnAltaBaja.Location = new System.Drawing.Point(202, 62);
+            this.btnAltaBaja.Location = new System.Drawing.Point(321, 22);
             this.btnAltaBaja.Name = "btnAltaBaja";
             this.btnAltaBaja.Size = new System.Drawing.Size(109, 25);
             this.btnAltaBaja.TabIndex = 6;
@@ -182,7 +179,7 @@
             // labEstado
             // 
             this.labEstado.AutoSize = true;
-            this.labEstado.Location = new System.Drawing.Point(124, 69);
+            this.labEstado.Location = new System.Drawing.Point(243, 28);
             this.labEstado.Name = "labEstado";
             this.labEstado.Size = new System.Drawing.Size(40, 13);
             this.labEstado.TabIndex = 5;
@@ -191,7 +188,7 @@
             // rbHotel
             // 
             this.rbHotel.AutoSize = true;
-            this.rbHotel.Location = new System.Drawing.Point(16, 59);
+            this.rbHotel.Location = new System.Drawing.Point(99, 30);
             this.rbHotel.Name = "rbHotel";
             this.rbHotel.Size = new System.Drawing.Size(50, 17);
             this.rbHotel.TabIndex = 4;
@@ -203,7 +200,7 @@
             // rbCasa
             // 
             this.rbCasa.AutoSize = true;
-            this.rbCasa.Location = new System.Drawing.Point(16, 32);
+            this.rbCasa.Location = new System.Drawing.Point(18, 30);
             this.rbCasa.Name = "rbCasa";
             this.rbCasa.Size = new System.Drawing.Size(49, 17);
             this.rbCasa.TabIndex = 2;
@@ -214,15 +211,15 @@
             // 
             // tBdireccion
             // 
-            this.tBdireccion.Location = new System.Drawing.Point(202, 37);
+            this.tBdireccion.Location = new System.Drawing.Point(313, 67);
             this.tBdireccion.Name = "tBdireccion";
-            this.tBdireccion.Size = new System.Drawing.Size(282, 20);
+            this.tBdireccion.Size = new System.Drawing.Size(214, 20);
             this.tBdireccion.TabIndex = 2;
             // 
             // Direccion
             // 
             this.Direccion.AutoSize = true;
-            this.Direccion.Location = new System.Drawing.Point(124, 40);
+            this.Direccion.Location = new System.Drawing.Point(242, 70);
             this.Direccion.Name = "Direccion";
             this.Direccion.Size = new System.Drawing.Size(52, 13);
             this.Direccion.TabIndex = 0;
@@ -240,7 +237,7 @@
             this.gBoxHotel.Controls.Add(this.checkB3Estrellas);
             this.gBoxHotel.Controls.Add(this.label2);
             this.gBoxHotel.Controls.Add(this.tbNombre);
-            this.gBoxHotel.Location = new System.Drawing.Point(43, 173);
+            this.gBoxHotel.Location = new System.Drawing.Point(43, 241);
             this.gBoxHotel.Name = "gBoxHotel";
             this.gBoxHotel.Size = new System.Drawing.Size(547, 145);
             this.gBoxHotel.TabIndex = 1;
@@ -386,7 +383,7 @@
             this.gBoxCasa.Controls.Add(this.numUDcamasCasa);
             this.gBoxCasa.Controls.Add(this.lbCamasCasa);
             this.gBoxCasa.Controls.Add(this.gBoxServicios);
-            this.gBoxCasa.Location = new System.Drawing.Point(43, 324);
+            this.gBoxCasa.Location = new System.Drawing.Point(43, 392);
             this.gBoxCasa.Name = "gBoxCasa";
             this.gBoxCasa.Size = new System.Drawing.Size(547, 147);
             this.gBoxCasa.TabIndex = 13;
@@ -561,7 +558,7 @@
             // btnGuardar
             // 
             this.btnGuardar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnGuardar.Location = new System.Drawing.Point(154, 495);
+            this.btnGuardar.Location = new System.Drawing.Point(398, 567);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 14;
@@ -571,7 +568,7 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(345, 495);
+            this.btnCancelar.Location = new System.Drawing.Point(515, 567);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 15;
@@ -582,7 +579,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 585);
+            this.ClientSize = new System.Drawing.Size(608, 606);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.gBoxCasa);
