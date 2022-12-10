@@ -47,7 +47,7 @@ namespace TP_II
             }
             return retorno.ToArray();
         }
-
+        
         public abstract double PrecioDia(Reserva r);
         public abstract bool CheckFecha(DateTime inicio, DateTime final);
         public abstract string[] Exportar();

@@ -72,5 +72,19 @@ namespace TP_II
 
         }
 
+        private void btnFotos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExportarR_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnImportarR_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
