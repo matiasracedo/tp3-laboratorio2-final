@@ -867,12 +867,13 @@ namespace TP_II
 
                 hotel.QuitarReserva(numHabitacionAnterior, unaReserva);//SE QUITA MOMENTANEAMENTE
 
-                //DateTime[] intervaloPintar = hotel.IntervaloFechasHabitacion(habitacionReservada.Numero);
-                //vAlojomiento.Calendario.BoldedDates = intervaloPintar;// REVISAR
+                DateTime[] intervaloPintar = hotel.IntervaloFechasHabitacion(habitacionReservada.Numero);
+                vAlojomiento.Calendario.BoldedDates = intervaloPintar; // ESTO VA PORQUE NO SE DISPARA EL EVENTO DE CAMBIO DE HABITACION EN COMBOBOX
 
                 vAlojomiento.nudDias.Value = unaReserva.Dias;
                 vAlojomiento.nudDias.Minimum = 1;
                 DialogResult resultado = vAlojomiento.ShowDialog();
+
                 if ( resultado == DialogResult.OK)
                 {
                     int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
