@@ -194,7 +194,15 @@ namespace TP_II
                 return null;
             }
         }
+        public bool VerificarJurisdiccion(string jurisdiccion)
+        {
+            bool verificado = false;
 
+            if (lugares!=null && lugares.ContainsKey(jurisdiccion))
+                verificado = true;
+
+            return verificado;
+        }
         public string[] GenerarComprobante(Reserva reserva)
         {
             return reserva.DatosComprobante;

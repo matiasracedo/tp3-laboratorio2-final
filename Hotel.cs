@@ -35,7 +35,7 @@ namespace TP_II
         bool tresEstrellas = false;
 
         public Hotel(string direccion,string jurisdiccion,string ciudad, string nombre, bool tresEstrellas, int cantSimples,int cantDobles, int cantTriples)
-            :base(direccion.TrimEnd(' ').TrimStart(' '), jurisdiccion, ciudad.TrimEnd(' ').TrimStart(' '))
+            :base(direccion.TrimEnd(' ').TrimStart(' '), jurisdiccion.Trim(' '), ciudad.Trim(' '))
         {
             this.nombre = nombre.TrimEnd(' ').TrimStart(' ');
             this.tresEstrellas = tresEstrellas;
@@ -205,13 +205,15 @@ namespace TP_II
 
         public override string[] Exportar()
         {
-            string[] campos = new string[6];
+            string[] campos = new string[8];
             campos[0] = direccion;
-            campos[1] = nombre;
-            campos[2] = tresEstrellas.ToString().ToLower();
-            campos[3] = simples.Count.ToString();
-            campos[4] = dobles.Count.ToString();
-            campos[5] = triples.Count.ToString();
+            campos[1] = Jurisdiccion;
+            campos[2] = Ciudad;
+            campos[3] = nombre;
+            campos[4] = tresEstrellas.ToString().ToLower();
+            campos[5] = simples.Count.ToString();
+            campos[6] = dobles.Count.ToString();
+            campos[7] = triples.Count.ToString();
 
             return campos;            
         }
