@@ -37,18 +37,27 @@ namespace TP_II
 
             if (File.Exists(nombreArchivo))
             {
-                FileStream fs = new FileStream(nombreArchivo, FileMode.Open, FileAccess.Read);
-                BinaryFormatter bf = new BinaryFormatter();
+                FileStream fs;
+                try
+                {
+                    fs = new FileStream(nombreArchivo, FileMode.Open, FileAccess.Read);
+                    BinaryFormatter bf = new BinaryFormatter();
 
-                empresa = (Empresa)bf.Deserialize(fs);
-                Reserva.ContIdReservas = empresa.contBackReservas;
-                Cliente.ContIdCliente = empresa.contBackCliente;
-                Alojamiento.ContIdAlojamiento = empresa.contBackAlojamientos;
-                Casa.ContCasa = empresa.contBackCasas;
-
-                fs.Close();
-                ActualizarListas();
-               
+                    empresa = (Empresa)bf.Deserialize(fs);
+                    Reserva.ContIdReservas = empresa.contBackReservas;
+                    Cliente.ContIdCliente = empresa.contBackCliente;
+                    Alojamiento.ContIdAlojamiento = empresa.contBackAlojamientos;
+                    Casa.ContCasa = empresa.contBackCasas;
+                    fs.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    ActualizarListas();
+                }        
             }
             else
             {
@@ -100,14 +109,22 @@ namespace TP_II
         {
             if (!restart)
             {
-                FileStream archivo = new FileStream(nombreArchivo, FileMode.Create, FileAccess.Write);
-                BinaryFormatter bf = new BinaryFormatter();
-                empresa.contBackReservas = Reserva.ContIdReservas;
-                empresa.contBackCliente = Cliente.ContIdCliente;
-                empresa.contBackAlojamientos = Alojamiento.ContIdAlojamiento;
-                empresa.contBackCasas = Casa.ContCasa;
-                bf.Serialize(archivo, empresa);
-                archivo.Close();
+                FileStream archivo;
+                try
+                {
+                    archivo = new FileStream(nombreArchivo, FileMode.Create, FileAccess.Write);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    empresa.contBackReservas = Reserva.ContIdReservas;
+                    empresa.contBackCliente = Cliente.ContIdCliente;
+                    empresa.contBackAlojamientos = Alojamiento.ContIdAlojamiento;
+                    empresa.contBackCasas = Casa.ContCasa;
+                    bf.Serialize(archivo, empresa);
+                    archivo.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }  
             }
         }
 
