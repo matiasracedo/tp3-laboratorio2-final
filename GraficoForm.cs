@@ -10,12 +10,16 @@ using System.Windows.Forms;
 
 namespace TP_II
 {
-    public partial class DatosClienteForm : Form
+    public partial class GraficoForm : Form
     {
-        public DatosClienteForm()
+        public GraficoForm()
         {
             InitializeComponent();
         }
 
+        private void GraficoForm_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
