@@ -550,8 +550,8 @@ namespace TP_II
                 string nombre = vPasajero.tbNombre.Text;
                 string apellido = vPasajero.tbApellido.Text;
                 int dni = Convert.ToInt32(vPasajero.tbDni.Text);
-                int edad = Convert.ToInt32(vPasajero.tbEdad.Text);
-                Cliente cliente = new Cliente(nombre, apellido, dni, edad);
+                DateTime fNacimiento = vPasajero.fNacimiento.Value;
+                Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
                 pasajeros.Add(cliente);
             }
         }
@@ -601,8 +601,8 @@ namespace TP_II
                             string nombre = vCliente.tbNombre.Text;
                             string apellido = vCliente.tbApellido.Text;
                             int dni = Convert.ToInt32(vCliente.tbDni.Text);
-                            int edad = Convert.ToInt32(vCliente.tbEdad.Text);
-                            Cliente cliente = new Cliente(nombre, apellido, dni, edad);
+                            DateTime fNacimiento = vCliente.fNacimiento.Value;
+                            Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
                             Reserva reserva;
                             if (pasajeros.Count > 0)
                             {
@@ -656,12 +656,12 @@ namespace TP_II
                                 string nombre = vCliente.tbNombre.Text;
                                 string apellido = vCliente.tbApellido.Text;
                                 int dni = Convert.ToInt32(vCliente.tbDni.Text);
-                                int edad = Convert.ToInt32(vCliente.tbEdad.Text);
+                                DateTime fNacimiento = vCliente.fNacimiento.Value;
 
                                 try
                                 {
                                     Habitacion reservada = hotel.GetHabitacion(nroHabitacion);
-                                    Cliente cliente = new Cliente(nombre, apellido, dni, edad);
+                                    Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
                                     Reserva reserva;
                                     if (pasajeros.Count > 0)
                                     {
@@ -818,16 +818,16 @@ namespace TP_II
                         vCliente.tbNombre.Text = unaReserva.getCliente.Nombre;
                         vCliente.tbApellido.Text = unaReserva.getCliente.Apellido;
                         vCliente.tbDni.Text = unaReserva.getCliente.DNI.ToString();
-                        vCliente.tbEdad.Text = unaReserva.getCliente.Edad.ToString();
+                        vCliente.fNacimiento.Value = unaReserva.getCliente.FechaNacimiento;
 
                         if (vCliente.ShowDialog() == DialogResult.OK)
                         {
                             string nombre = vCliente.tbNombre.Text;
                             string apellido = vCliente.tbApellido.Text;
                             int dni = Convert.ToInt32(vCliente.tbDni.Text);
-                            int edad = Convert.ToInt32(vCliente.tbEdad.Text);
-                            
-                            Cliente cliente = new Cliente(nombre, apellido, dni, edad);
+                            DateTime fNacimiento = vCliente.fNacimiento.Value;
+
+                            Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
 
                             unaReserva.Modificar(cliente, inicio, fin, acomp);
                             this.AgregarReserva(unaReserva);
@@ -897,17 +897,17 @@ namespace TP_II
                         vCliente.tbNombre.Text = unaReserva.getCliente.Nombre;
                         vCliente.tbApellido.Text = unaReserva.getCliente.Apellido;
                         vCliente.tbDni.Text = unaReserva.getCliente.DNI.ToString();
-                        vCliente.tbEdad.Text = unaReserva.getCliente.Edad.ToString();
+                        vCliente.fNacimiento.Value = unaReserva.getCliente.FechaNacimiento;
 
                         if (vCliente.ShowDialog() == DialogResult.OK)
                         {
                             string nombre = vCliente.tbNombre.Text;
                             string apellido = vCliente.tbApellido.Text;
                             int dni = Convert.ToInt32(vCliente.tbDni.Text);
-                            int edad = Convert.ToInt32(vCliente.tbEdad.Text);
+                            DateTime fNacimiento = vCliente.fNacimiento.Value;
 
 
-                            Cliente cliente = new Cliente(nombre, apellido, dni, edad);
+                            Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
                             unaReserva.Modificar(cliente, inicio, fin, acomp);
 
                             if (numHabitacionAnterior != nroHabitacionNuevo)
@@ -1519,7 +1519,7 @@ namespace TP_II
 
 
                         Reserva nuevaReserva;
-                        Cliente cliente = new Cliente("", "", dni, 1);
+                        Cliente cliente = new Cliente("", "", dni, new DateTime(1990,1,1));
 
                         if(empresa.ExisteCliente(ref cliente)) //se actualiza por referencia en el método
                         {
@@ -1753,7 +1753,7 @@ namespace TP_II
                         }
 
                         Reserva nuevaReserva;
-                        Cliente cliente = new Cliente("", "", dni, 1);
+                        Cliente cliente = new Cliente("", "", dni, new DateTime(1900,1,1));
 
                         if (empresa.ExisteCliente(ref cliente)) //se actualiza por referencia en el método
                         {
@@ -2066,7 +2066,7 @@ namespace TP_II
                     string nombre;
                     string apellido;
                     int dni;
-                    int edad;
+                    DateTime fNacimiento;
 
 
                     if(campos.Length==5)
@@ -2075,9 +2075,9 @@ namespace TP_II
                         nombre=campos[1];
                         apellido=campos[2];
                         dni= Convert.ToInt32(campos[3]);
-                        edad=Convert.ToInt32(campos[4]);
+                        fNacimiento=DateTime.Parse(campos[4]);
 
-                        Cliente nuevo=new Cliente(nombre,apellido,dni,edad);
+                        Cliente nuevo=new Cliente(nombre,apellido,dni,fNacimiento);
 
                         int index=-1;
                         if (empresa.GetClientesHistoricos.Count > 0)
@@ -2167,7 +2167,7 @@ namespace TP_II
             {
                 fs = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write);
                 sw = new StreamWriter(fs);
-                sw.WriteLine("ID , NOMBRE , APELLIDO , DNI , EDAD");
+                sw.WriteLine("ID , NOMBRE , APELLIDO , DNI , FECHA NACIMIENTO");
 
                 if(empresa.GetClientesHistoricos.Count>0)
                 {
@@ -2326,15 +2326,20 @@ namespace TP_II
             
         }
 
-            //MENU STRIP ACERCADE - INFO:::::
-            //MENU STRIP ACERCADE - INFO:::::
-            //MENU STRIP ACERCADE - INFO:::::
-            //MENU STRIP ACERCADE - INFO:::::
-            /*
-            private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
-            {
+        private void ayudaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
-            }
-            */
         }
+
+        //MENU STRIP ACERCADE - INFO:::::
+        //MENU STRIP ACERCADE - INFO:::::
+        //MENU STRIP ACERCADE - INFO:::::
+        //MENU STRIP ACERCADE - INFO:::::
+        /*
+        private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        */
+    }
 }

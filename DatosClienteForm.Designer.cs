@@ -33,19 +33,19 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbApellido = new System.Windows.Forms.TextBox();
             this.Edad = new System.Windows.Forms.Label();
-            this.tbEdad = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tbDni = new System.Windows.Forms.TextBox();
             this.bnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnPasajeros = new System.Windows.Forms.Button();
+            this.fNacimiento = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // tbNombre
             // 
             this.tbNombre.Location = new System.Drawing.Point(13, 32);
             this.tbNombre.Name = "tbNombre";
-            this.tbNombre.Size = new System.Drawing.Size(135, 20);
+            this.tbNombre.Size = new System.Drawing.Size(185, 20);
             this.tbNombre.TabIndex = 0;
             // 
             // label1
@@ -70,7 +70,7 @@
             // 
             this.tbApellido.Location = new System.Drawing.Point(13, 78);
             this.tbApellido.Name = "tbApellido";
-            this.tbApellido.Size = new System.Drawing.Size(135, 20);
+            this.tbApellido.Size = new System.Drawing.Size(185, 20);
             this.tbApellido.TabIndex = 2;
             // 
             // Edad
@@ -78,16 +78,9 @@
             this.Edad.AutoSize = true;
             this.Edad.Location = new System.Drawing.Point(13, 155);
             this.Edad.Name = "Edad";
-            this.Edad.Size = new System.Drawing.Size(32, 13);
+            this.Edad.Size = new System.Drawing.Size(108, 13);
             this.Edad.TabIndex = 5;
-            this.Edad.Text = "Edad";
-            // 
-            // tbEdad
-            // 
-            this.tbEdad.Location = new System.Drawing.Point(13, 171);
-            this.tbEdad.Name = "tbEdad";
-            this.tbEdad.Size = new System.Drawing.Size(135, 20);
-            this.tbEdad.TabIndex = 4;
+            this.Edad.Text = "Fecha de Nacimiento";
             // 
             // label4
             // 
@@ -102,16 +95,16 @@
             // 
             this.tbDni.Location = new System.Drawing.Point(13, 126);
             this.tbDni.Name = "tbDni";
-            this.tbDni.Size = new System.Drawing.Size(135, 20);
+            this.tbDni.Size = new System.Drawing.Size(185, 20);
             this.tbDni.TabIndex = 6;
             // 
             // bnAceptar
             // 
             this.bnAceptar.BackColor = System.Drawing.Color.LightBlue;
             this.bnAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.bnAceptar.Location = new System.Drawing.Point(12, 248);
+            this.bnAceptar.Location = new System.Drawing.Point(12, 261);
             this.bnAceptar.Name = "bnAceptar";
-            this.bnAceptar.Size = new System.Drawing.Size(132, 23);
+            this.bnAceptar.Size = new System.Drawing.Size(183, 23);
             this.bnAceptar.TabIndex = 8;
             this.bnAceptar.Text = "Aceptar";
             this.bnAceptar.UseVisualStyleBackColor = false;
@@ -120,34 +113,41 @@
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.IndianRed;
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(12, 277);
+            this.btnCancelar.Location = new System.Drawing.Point(12, 290);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(132, 23);
+            this.btnCancelar.Size = new System.Drawing.Size(183, 23);
             this.btnCancelar.TabIndex = 9;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             // 
             // btnPasajeros
             // 
-            this.btnPasajeros.Location = new System.Drawing.Point(12, 209);
+            this.btnPasajeros.Location = new System.Drawing.Point(12, 222);
             this.btnPasajeros.Name = "btnPasajeros";
-            this.btnPasajeros.Size = new System.Drawing.Size(132, 23);
+            this.btnPasajeros.Size = new System.Drawing.Size(183, 23);
             this.btnPasajeros.TabIndex = 10;
             this.btnPasajeros.Text = "Agregar pasajeros";
             this.btnPasajeros.UseVisualStyleBackColor = true;
+            // 
+            // fNacimiento
+            // 
+            this.fNacimiento.Location = new System.Drawing.Point(13, 181);
+            this.fNacimiento.Name = "fNacimiento";
+            this.fNacimiento.Size = new System.Drawing.Size(182, 20);
+            this.fNacimiento.TabIndex = 11;
             // 
             // DatosClienteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(167, 312);
+            this.ClientSize = new System.Drawing.Size(210, 328);
+            this.Controls.Add(this.fNacimiento);
             this.Controls.Add(this.btnPasajeros);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.bnAceptar);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbDni);
             this.Controls.Add(this.Edad);
-            this.Controls.Add(this.tbEdad);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbApellido);
             this.Controls.Add(this.label1);
@@ -166,11 +166,11 @@
         public System.Windows.Forms.TextBox tbNombre;
         public System.Windows.Forms.TextBox tbApellido;
         private System.Windows.Forms.Label Edad;
-        public System.Windows.Forms.TextBox tbEdad;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.TextBox tbDni;
         private System.Windows.Forms.Button bnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         public System.Windows.Forms.Button btnPasajeros;
+        public System.Windows.Forms.DateTimePicker fNacimiento;
     }
 }

@@ -133,8 +133,8 @@ namespace TP_II
                             string nombre = vCliente.tbNombre.Text;
                             string apellido = vCliente.tbApellido.Text;
                             int dni = Convert.ToInt32(vCliente.tbDni.Text);
-                            int edad = Convert.ToInt32(vCliente.tbEdad.Text);
-                            Cliente cliente = new Cliente(nombre,apellido,dni, edad);
+                            DateTime fNacimiento = vCliente.fNacimiento.Value;
+                            Cliente cliente = new Cliente(nombre,apellido,dni, fNacimiento);
                             List<Cliente> pasajeros = form1.GetPasajeros();
 
                             Reserva reserva;
@@ -189,12 +189,12 @@ namespace TP_II
                                 string nombre = vCliente.tbNombre.Text;
                                 string apellido = vCliente.tbApellido.Text;
                                 int dni = Convert.ToInt32(vCliente.tbDni.Text);
-                                int edad = Convert.ToInt32(vCliente.tbEdad.Text);
+                                DateTime fNacimiento = vCliente.fNacimiento.Value;
 
                                 try
                                 {
                                     Habitacion reservada = hotel.GetHabitacion(nroHabitacion);
-                                    Cliente cliente = new Cliente(nombre, apellido, dni, edad);
+                                    Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
                                     List<Cliente> pasajeros = form1.GetPasajeros();
                                     Reserva reserva;
                                     if (pasajeros.Count > 0)

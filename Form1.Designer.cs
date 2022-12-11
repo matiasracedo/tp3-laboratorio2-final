@@ -76,6 +76,7 @@
             this.informacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gBreservas.SuspendLayout();
@@ -448,35 +449,36 @@
             // importarToolStripMenuItem2
             // 
             this.importarToolStripMenuItem2.Name = "importarToolStripMenuItem2";
-            this.importarToolStripMenuItem2.Size = new System.Drawing.Size(129, 22);
+            this.importarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.importarToolStripMenuItem2.Text = "Importar...";
             this.importarToolStripMenuItem2.Click += new System.EventHandler(this.importarToolStripMenuItem2_Click);
             // 
             // exportarToolStripMenuItem2
             // 
             this.exportarToolStripMenuItem2.Name = "exportarToolStripMenuItem2";
-            this.exportarToolStripMenuItem2.Size = new System.Drawing.Size(129, 22);
+            this.exportarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.exportarToolStripMenuItem2.Text = "Exportar...";
             this.exportarToolStripMenuItem2.Click += new System.EventHandler(this.exportarToolStripMenuItem2_Click);
             // 
             // verListaToolStripMenuItem2
             // 
             this.verListaToolStripMenuItem2.Name = "verListaToolStripMenuItem2";
-            this.verListaToolStripMenuItem2.Size = new System.Drawing.Size(129, 22);
+            this.verListaToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.verListaToolStripMenuItem2.Text = "Ver lista";
             this.verListaToolStripMenuItem2.Click += new System.EventHandler(this.verListaToolStripMenuItem2_Click);
             // 
             // graficoToolStripMenuItem1
             // 
             this.graficoToolStripMenuItem1.Name = "graficoToolStripMenuItem1";
-            this.graficoToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
+            this.graficoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.graficoToolStripMenuItem1.Text = "Grafico";
             this.graficoToolStripMenuItem1.Click += new System.EventHandler(this.graficoToolStripMenuItem1_Click);
             // 
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.informacionToolStripMenuItem});
+            this.informacionToolStripMenuItem,
+            this.ayudaToolStripMenuItem});
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
             this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
@@ -485,7 +487,7 @@
             // 
             this.informacionToolStripMenuItem.Name = "informacionToolStripMenuItem";
             this.informacionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
-            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.informacionToolStripMenuItem.Text = "Informacion";
             // 
             // printDialog1
@@ -495,6 +497,13 @@
             // printDocument1
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+            // 
+            // ayudaToolStripMenuItem
+            // 
+            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ayudaToolStripMenuItem.Text = "Ayuda";
+            this.ayudaToolStripMenuItem.Click += new System.EventHandler(this.ayudaToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -571,6 +580,7 @@
         private System.Windows.Forms.ToolStripMenuItem graficoToolStripMenuItem1;
         private System.Windows.Forms.PrintDialog printDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
     }
 }
 
