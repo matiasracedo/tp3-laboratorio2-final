@@ -98,7 +98,6 @@ namespace TP_II
             if(habitacionReservas[nroHabitacion] == null)
             {
                 habitacionReservas[nroHabitacion]=new List<Reserva>();
-                habitacionReservas[nroHabitacion].Add(reserva);
             }
             habitacionReservas[nroHabitacion].Add(reserva);
         }
