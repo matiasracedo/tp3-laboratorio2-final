@@ -91,14 +91,15 @@ namespace TP_II
         {
             string[] campos = new string[12];
             campos[0] = direccion;
-            campos[1] = minDias.ToString();
-            campos[2] = camas.ToString();
-            campos[3] = precioBaseCasa.ToString();
-
+            campos[1] = Jurisdiccion;
+            campos[2] = Ciudad;
+            campos[3] = minDias.ToString();
+            campos[4] = camas.ToString();
+            campos[5] = precioBaseCasa.ToString();
         
             int contThisServicios = 0;
 
-            for (int i = 4; i < 10; i++)
+            for (int i = 6; i < 12; i++)
             {
                 if(contThisServicios<servicios.Length)
                 {

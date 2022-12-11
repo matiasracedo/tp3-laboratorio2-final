@@ -203,7 +203,7 @@ namespace TP_II
                                     }
                                     else
                                         reserva = new Reserva(cliente, hotel, inicio, fin, form1.GetPrecioBaseHoteles(), reservada);
-                                    hotel.AgregarReserva(nroHabitacion, reserva);
+                                    
                                     form1.AgregarReserva(reserva);
                                     form1.EmitirComprobante(reserva);
                                 }

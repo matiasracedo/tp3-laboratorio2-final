@@ -38,18 +38,27 @@ namespace TP_II
 
             if (File.Exists(nombreArchivo))
             {
-                FileStream fs = new FileStream(nombreArchivo, FileMode.Open, FileAccess.Read);
-                BinaryFormatter bf = new BinaryFormatter();
+                FileStream fs;
+                try
+                {
+                    fs = new FileStream(nombreArchivo, FileMode.Open, FileAccess.Read);
+                    BinaryFormatter bf = new BinaryFormatter();
 
-                empresa = (Empresa)bf.Deserialize(fs);
-                Reserva.ContIdReservas = empresa.contBackReservas;
-                Cliente.ContIdCliente = empresa.contBackCliente;
-                Alojamiento.ContIdAlojamiento = empresa.contBackAlojamientos;
-                Casa.ContCasa = empresa.contBackCasas;
-
-                fs.Close();
-                ActualizarListas();
-               
+                    empresa = (Empresa)bf.Deserialize(fs);
+                    Reserva.ContIdReservas = empresa.contBackReservas;
+                    Cliente.ContIdCliente = empresa.contBackCliente;
+                    Alojamiento.ContIdAlojamiento = empresa.contBackAlojamientos;
+                    Casa.ContCasa = empresa.contBackCasas;
+                    fs.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    ActualizarListas();
+                }        
             }
             else
             {
@@ -101,14 +110,22 @@ namespace TP_II
         {
             if (!restart)
             {
-                FileStream archivo = new FileStream(nombreArchivo, FileMode.Create, FileAccess.Write);
-                BinaryFormatter bf = new BinaryFormatter();
-                empresa.contBackReservas = Reserva.ContIdReservas;
-                empresa.contBackCliente = Cliente.ContIdCliente;
-                empresa.contBackAlojamientos = Alojamiento.ContIdAlojamiento;
-                empresa.contBackCasas = Casa.ContCasa;
-                bf.Serialize(archivo, empresa);
-                archivo.Close();
+                FileStream archivo;
+                try
+                {
+                    archivo = new FileStream(nombreArchivo, FileMode.Create, FileAccess.Write);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    empresa.contBackReservas = Reserva.ContIdReservas;
+                    empresa.contBackCliente = Cliente.ContIdCliente;
+                    empresa.contBackAlojamientos = Alojamiento.ContIdAlojamiento;
+                    empresa.contBackCasas = Casa.ContCasa;
+                    bf.Serialize(archivo, empresa);
+                    archivo.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }  
             }
         }
 
@@ -850,12 +867,13 @@ namespace TP_II
 
                 hotel.QuitarReserva(numHabitacionAnterior, unaReserva);//SE QUITA MOMENTANEAMENTE
 
-                //DateTime[] intervaloPintar = hotel.IntervaloFechasHabitacion(habitacionReservada.Numero);
-                //vAlojomiento.Calendario.BoldedDates = intervaloPintar;// REVISAR
+                DateTime[] intervaloPintar = hotel.IntervaloFechasHabitacion(habitacionReservada.Numero);
+                vAlojomiento.Calendario.BoldedDates = intervaloPintar; // ESTO VA PORQUE NO SE DISPARA EL EVENTO DE CAMBIO DE HABITACION EN COMBOBOX
 
                 vAlojomiento.nudDias.Value = unaReserva.Dias;
                 vAlojomiento.nudDias.Minimum = 1;
                 DialogResult resultado = vAlojomiento.ShowDialog();
+
                 if ( resultado == DialogResult.OK)
                 {
                     int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
@@ -1151,7 +1169,7 @@ namespace TP_II
                 string linea;
                 string[] campos;
                 Dictionary<int, Alojamiento> lineaExistentes = new Dictionary<int,Alojamiento>();
-               
+                Dictionary<int, string> jurisdiccionNoExistente = new Dictionary<int, string>();
                 int contLinea = 0;
                 while(!sr.EndOfStream)
                 {
@@ -1159,45 +1177,48 @@ namespace TP_II
                     linea = sr.ReadLine();
                     campos = linea.Split(';');
                     Alojamiento nuevo=null;
+                    string jurisdiccion = null;
 
                     if (campos.Length == 12)
                     {
-                        string direc = campos[0];
-                        int minDias = Convert.ToInt32(campos[1]);
-                        int camas = Convert.ToInt32(campos[2]);
-                        double precioBaseCasa = Convert.ToDouble(campos[3]);
+                        string direc= campos[0];
+                        jurisdiccion= campos[1];
+                        string ciudad = campos[2];
+                        int minDias= Convert.ToInt32(campos[3]);
+                        int camas = Convert.ToInt32(campos[4]);
+                        double precioBaseCasa= Convert.ToDouble(campos[5]);
 
                         string[] servicios;
                         linea = null;
 
-                        for (int i = 4; i < campos.Length; i++)
+                        for(int i=6; i<campos.Length; i++)
                         {
                             linea += campos[i] + ";";
                         }
                         servicios = linea.Trim(';').Split(';');
-
-                        string provincia = campos[10];
-                        string ciudad = campos[11];
-                        nuevo= new Casa(direc,provincia,ciudad,minDias,camas,servicios,precioBaseCasa);
+                        nuevo= new Casa(direc,jurisdiccion,ciudad,minDias,camas,servicios,precioBaseCasa);
                     }
                     if(campos.Length==8)
                     {
                         string direc = campos[0];
-                        string nombre= campos[1];
-                        bool tresEstrellas= Convert.ToBoolean(campos[2]);
-                        int cantSimples= Convert.ToInt32(campos[3]);
-                        int cantDobles= Convert.ToInt32(campos[4]);
-                        int cantTriples= Convert.ToInt32(campos[5]);
-                        string provincia = campos[6];
-                        string ciudad = campos[7];
+                        jurisdiccion = campos[1];
+                        string ciudad = campos[2];
+                        string nombre= campos[3];
+                        bool tresEstrellas= Convert.ToBoolean(campos[4]);
+                        int cantSimples= Convert.ToInt32(campos[5]);
+                        int cantDobles= Convert.ToInt32(campos[6]);
+                        int cantTriples= Convert.ToInt32(campos[7]);
 
-                        nuevo = new Hotel(direc,provincia,ciudad, nombre, tresEstrellas, cantSimples, cantDobles, cantTriples);
+                        nuevo = new Hotel(direc,jurisdiccion,ciudad, nombre, tresEstrellas, cantSimples, cantDobles, cantTriples);
                     }
 
                     Alojamiento comparador = empresa[nuevo.Direccion];
                     if (comparador ==null)
                     {
-                        empresa.AgregarAlojamiento(nuevo);
+                        if (empresa.VerificarJurisdiccion(jurisdiccion))
+                            empresa.AgregarAlojamiento(nuevo);
+                        else
+                            jurisdiccionNoExistente.Add(contLinea, "La jurisdicción no existe");
                     }
                     else
                     {
@@ -1207,10 +1228,12 @@ namespace TP_II
                         
                 }
 
+                AlojamientosExistentesForm exists = new AlojamientosExistentesForm();
+                exists.listBox1.Items.Add("No hay errores.");
+
                 if (lineaExistentes.Count > 0)
                 {
-                    AlojamientosExistentesForm exists = new AlojamientosExistentesForm();
-
+                    exists.listBox1.Items.Clear();
                     exists.listBox1.Items.Add("Se han encontrado alojamientos que ya estaban cargados o que la dirección ");
                     exists.listBox1.Items.Add("coincide con alguno de los cargados");
                     exists.listBox1.Items.Add("");
@@ -1218,9 +1241,30 @@ namespace TP_II
                     {
                         exists.listBox1.Items.Add(pareja.Value.ToString() + " // LINEA: " + pareja.Key);
                     }
-                    exists.Show();
+                    exists.listBox1.Items.Add("");
+                    exists.listBox1.Items.Add("");
+                    exists.listBox1.Items.Add("");
                 }
-                if(contLinea==lineaExistentes.Count)
+
+                if (jurisdiccionNoExistente.Count > 0)
+                {
+                    if (lineaExistentes.Count == 0)
+                        exists.listBox1.Items.Clear();
+
+                    exists.listBox1.Items.Add("Se han encontrado jurisdicciones inexistentes ");
+                    exists.listBox1.Items.Add("");
+                    foreach (var pareja in jurisdiccionNoExistente)
+                    {
+                        exists.listBox1.Items.Add(pareja.Value.ToString() + " // LINEA: " + pareja.Key);
+                    }
+                    exists.listBox1.Items.Add("");
+                    exists.listBox1.Items.Add("");
+                    exists.listBox1.Items.Add("");
+                }
+
+                exists.Show();
+
+                if (contLinea==lineaExistentes.Count)
                 {
                     MessageBox.Show("Todos los alojamientos estaban cargados previamente");
                 }
@@ -1251,8 +1295,8 @@ namespace TP_II
                 fs = new FileStream(sfd.FileName, FileMode.Create,FileAccess.Write);
                 sw = new StreamWriter(fs);
 
-                sw.WriteLine("direccion; minDias; camas; precioBaseCasa; s1; s2; s3; s4; s5; s6; provincia,ciudad //Para casas");
-                sw.WriteLine("direccion; nombre; tresEstrellas; cantSimples; cantDobles; cantTriples; provincia; ciudad //Para Hoteles");
+                sw.WriteLine("direccion; jurisdiccion; ciudad; minDias; camas; precioBaseCasa; s1; s2; s3; s4; s5; s6 //Para casas");
+                sw.WriteLine("direccion, jurisdiccion, ciudad, nombre, tresEstrellas, cantSimples, cantDobles, cantTriples //Para Hoteles");
                 foreach(Alojamiento a in empresa.Alojamientos)
                 {
                     string[] campos= a.Exportar();
