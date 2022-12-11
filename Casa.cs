@@ -110,6 +110,9 @@ namespace TP_II
                     campos[i] = "";
             }
 
+            campos[10] = lugar[0];
+            campos[11] = lugar[1];
+
             return campos;
         }
 

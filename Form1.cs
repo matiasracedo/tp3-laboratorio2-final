@@ -477,9 +477,9 @@ namespace TP_II
             sfd.DefaultExt = ".txt";
             sfd.AddExtension = true;
             if (alojamiento is Hotel)
-                sfd.FileName = string.Format("Hotel-{0}-{1}", ((Hotel)alojamiento).Nombre, ((Hotel)alojamiento).Direccion);
+                sfd.FileName = string.Format("Exportacion Reservas de Hotel-{0}-{1}", ((Hotel)alojamiento).Nombre, ((Hotel)alojamiento).Direccion);
             else
-                sfd.FileName = string.Format("Casa-{0}-{1}", ((Casa)alojamiento).Numero, ((Casa)alojamiento).Direccion);
+                sfd.FileName = string.Format("Exportacion Reservas de Casa-{0}-{1}", ((Casa)alojamiento).Numero, ((Casa)alojamiento).Direccion);
             
 
             if (sfd.ShowDialog() == DialogResult.OK)
@@ -1147,14 +1147,15 @@ namespace TP_II
             btnConsultaAloj.PerformClick();
         }
 
+        //Importar Alojamiento
         private void importarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string path = Application.StartupPath;
             OpenFileDialog ofd = new OpenFileDialog();
 
             ofd.InitialDirectory = path;
-            ofd.DefaultExt = ".txt"; ofd.AddExtension = true;
-            //ofd.Filter = "texto |.txt";
+            ofd.DefaultExt = ".txt";
+            ofd.AddExtension = true;
             FileStream fs;
             StreamReader sr;
 
@@ -1192,10 +1193,9 @@ namespace TP_II
 
                         for(int i=6; i<campos.Length; i++)
                         {
-                            linea += campos[i]+";";
+                            linea += campos[i] + ";";
                         }
-                        servicios=linea.Trim(';').Split(';');
-
+                        servicios = linea.Trim(';').Split(';');
                         nuevo= new Casa(direc,jurisdiccion,ciudad,minDias,camas,servicios,precioBaseCasa);
                     }
                     if(campos.Length==8)
@@ -1284,8 +1284,9 @@ namespace TP_II
             SaveFileDialog sfd = new SaveFileDialog();
 
             sfd.InitialDirectory = path;
-            sfd.DefaultExt = ".txt";  sfd.AddExtension = true;
-            //ofd.Filter = "texto |.txt";
+            sfd.DefaultExt = ".txt";
+            sfd.AddExtension = true;
+            sfd.FileName = string.Format("Exportacion Alojamientos - {0}",DateTime.Now.ToLongDateString()); ;
             FileStream fs;
             StreamWriter sw;
 
@@ -1314,8 +1315,7 @@ namespace TP_II
                 }
                 sw.Close();
                 fs.Close();
-            }
-            
+            }        
         }
 
         private void verListaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1355,6 +1355,7 @@ namespace TP_II
         {
             btnConsultaReserva.PerformClick();
         }
+        //Importar Reservas Casas
         private void casasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string path = Application.StartupPath;
@@ -1587,6 +1588,8 @@ namespace TP_II
                 ActualizarListas();
             }
         }
+
+        // Importar Reservas Hoteles
         private void hotelesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string path = Application.StartupPath;
@@ -1628,7 +1631,6 @@ namespace TP_II
                     DateTime egreso;
                     int nroHabitacion;
                     List<Cliente> acompaniantes = new List<Cliente>();
-
 
                     if (campos.Length == 6)
                     {
@@ -1833,7 +1835,7 @@ namespace TP_II
 
             sfd.InitialDirectory = path;
             sfd.DefaultExt = ".txt"; sfd.AddExtension = true;
-            //ofd.Filter = "texto |.txt";
+            sfd.FileName = string.Format("Exportacion Reservas Casas - {0}", DateTime.Now.ToLongDateString());
             FileStream fs;
             StreamWriter sw;
             if (empresa.HayReservasCasas)
@@ -1871,7 +1873,7 @@ namespace TP_II
 
             sfd.InitialDirectory = path;
             sfd.DefaultExt = ".txt"; sfd.AddExtension = true;
-            //ofd.Filter = "texto |.txt";
+            string.Format("Exportacion Reservas Casas - {0}", DateTime.Now.ToLongDateString());
             FileStream fs;
             StreamWriter sw;
 
@@ -2102,6 +2104,8 @@ namespace TP_II
 
             listaForm.Dispose();
         }
+
+        //GRAFICA DE ALOJAMIENTOS
        private void graficoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             vGrafico = new GraficoForm();
@@ -2111,11 +2115,12 @@ namespace TP_II
             vGrafico.ShowDialog();
             vGrafico.Dispose();
         }
+        //GRAFICA DE CLIENTES
         private void graficoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             vGrafico = new GraficoForm();
-            vGrafico.Size = new Size(1100, 355);
-            vGrafico.pb.Size = new Size(1050, 300);
+            vGrafico.Size = new Size(1300, 355);
+            vGrafico.pb.Size = new Size(1250, 300);
             vGrafico.pb.Paint += new PaintEventHandler(DibujarGraficoClientes);
             vGrafico.ShowDialog();
             vGrafico.Dispose();
@@ -2136,7 +2141,10 @@ namespace TP_II
             alto = (int)(vGrafico.Height * datos[1]) / 100;
             e.Graphics.FillRectangle(relleno, 50, vGrafico.pb.Height-alto, ancho, alto);         
             relleno = new SolidBrush(Color.Black);
-            p = new Point(70, vGrafico.pb.Height - (alto/2));
+            if (datos[1]>=10.0)
+                p = new Point(65, vGrafico.pb.Height - (alto/2));
+            else
+                p = new Point(65, vGrafico.pb.Height - (alto-5));
             texto = string.Format("Casas : {0} %", datos[1]);
             e.Graphics.DrawString(texto, letra, relleno, p);
 
@@ -2145,7 +2153,10 @@ namespace TP_II
             alto = (int)(vGrafico.Height * datos[2]) / 100;
             e.Graphics.FillRectangle(relleno, 250, vGrafico.pb.Height - alto, ancho, alto);
             relleno = new SolidBrush(Color.Black);
-            p = new Point(270, vGrafico.pb.Height - (alto / 2));
+            if (datos[2] >= 10.0)
+                p = new Point(265, vGrafico.pb.Height - (alto / 2));
+            else
+                p = new Point(265, vGrafico.pb.Height - (alto - 5));
             texto = string.Format("Hoteles : {0} %", datos[2]);
             e.Graphics.DrawString(texto, letra, relleno, p);
 
@@ -2154,7 +2165,10 @@ namespace TP_II
             alto = (int)(vGrafico.Height * datos[0]) / 100;
             e.Graphics.FillRectangle(relleno, 450, vGrafico.pb.Height - alto, ancho, alto);
             relleno = new SolidBrush(Color.Black);
-            p = new Point(470, vGrafico.pb.Height - (alto / 2));
+            if (datos[2] >= 10.0)
+                p = new Point(465, vGrafico.pb.Height - (alto / 2));
+            else
+                p = new Point(465, vGrafico.pb.Height - (alto - 5));
             texto = string.Format("Total : {0} %", datos[0]);
             e.Graphics.DrawString(texto, letra, relleno, p);
 
@@ -2178,7 +2192,8 @@ namespace TP_II
             int alto;
             int ancho = 150;
             string texto;
-            Point p;
+            Point p1;
+            Point p2;
             double[] datos;
             int[] puntero = {50,0};
 
@@ -2190,12 +2205,23 @@ namespace TP_II
                 puntero[1] = vGrafico.pb.Height - alto;
                 e.Graphics.FillRectangle(relleno, puntero[0], puntero[1], ancho, alto);
                 relleno = new SolidBrush(Color.Black);
-                p = new Point(puntero[0]+20, vGrafico.pb.Height - (alto / 2));
-                texto = string.Format("{0} Cliente",pair.Key);
-                e.Graphics.DrawString(texto, letra, relleno, p);
-                p = new Point(puntero[0] + 20, (vGrafico.pb.Height - (alto / 2)) + 15);
+
+                //Texto
+                if (pair.Value[1] >=20.0)
+                {
+                    p1 = new Point(puntero[0] + 20, vGrafico.pb.Height - (alto / 2));
+                    p2 = new Point(puntero[0] + 15, (vGrafico.pb.Height - (alto / 2)) + 15);
+                }        
+                else
+                {
+                    p1 = new Point(puntero[0] + 20, vGrafico.pb.Height - (alto -5));
+                    p2 = new Point(puntero[0] + 15, (vGrafico.pb.Height - (alto -5)) + 15);
+                }
+                texto = string.Format("{0} Cliente", pair.Key);
+                e.Graphics.DrawString(texto, letra, relleno, p1);
                 texto = string.Format("Cant: {0} - {1}%", datos[0], datos[1]);
-                e.Graphics.DrawString(texto, letra, relleno, p);
+                e.Graphics.DrawString(texto, letra, relleno, p2);
+
                 puntero[0] += 200;
             }
             relleno.Dispose();

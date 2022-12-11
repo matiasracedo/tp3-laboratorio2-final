@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TP_II
 {
     [Serializable]
-    public class Reserva:IComparable
+    public class Reserva:IComparable,IExportable
     {
         
         private static int contIdReservas = 1000;
@@ -213,7 +213,7 @@ namespace TP_II
 
             return ret;
         }
-        public string[] ExportarDatosReserva()
+        public string[] Exportar()
         {
             string[] retorno = new string[6];
             retorno[0] = cliente.DNI.ToString();
