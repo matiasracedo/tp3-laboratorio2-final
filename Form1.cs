@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 
 namespace TP_II
@@ -22,6 +23,7 @@ namespace TP_II
         bool restart = false;
         Image[] imagenes; // Imagenes de un alojamiento
         List<Cliente> pasajeros = new List<Cliente>(); // Pasajeros adicionales reserva
+        Reserva temp = null; // Objeto auxiliar para imprimir comprobante 
         GraficoForm vGrafico;
         public Form1()
         {
@@ -1027,6 +1029,10 @@ namespace TP_II
         {
             ComprobanteForm comprobante = new ComprobanteForm();
             string[] datos = r.DatosComprobante;
+            temp = r;
+
+            // Manejo evento click del boton "Imprimir" en ventana ComprobanteForm
+            comprobante.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
 
             comprobante.lbComprobante.Items.Add("Fecha: "+datos[3]);
             comprobante.lbComprobante.Items.Add("");
@@ -1063,6 +1069,98 @@ namespace TP_II
 
             comprobante.ShowDialog();
             comprobante.Dispose();
+            // Quito evento click del boton "Imprimir" en ventana ComprobanteForm
+            comprobante.btnImprimir.Click -= new System.EventHandler(this.btnImprimir_Click);
+            temp = null;
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            if (printDialog1.ShowDialog() == DialogResult.OK)
+            {
+                printDocument1.PrinterSettings = printDialog1.PrinterSettings;
+                printDocument1.Print();
+            }
+
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Font font = new Font("Arial", 10);
+            Brush brush = new SolidBrush(Color.Black);
+            float x, y;
+            int margSup = 50;
+            int margIzq = 50;
+            int[] anchoColumn = new int[] { 100, 250, 150, 100, 100};
+            int altoColumn = 20;
+            y = margSup;
+
+            //lista de vectores de string, cada vector representa una línea del comprobante
+            //cada elemento de cada vector representa una celda.
+            List<string[]> lineas = new List<string[]>();
+
+            //cabecera de la factura
+    
+            //variables auxiliares
+            string razonSocial = "TuAlquilerYa.com S.A.";
+            string tipoComprobante = "Aca va la imagen";
+            string nombClient = temp.getCliente.NombreCompleto;
+            string dniClient = temp.getCliente.DNI.ToString();
+            string fecha = temp.DatosComprobante[3];
+            //línea 1
+            lineas.Add(new[] { razonSocial, "", tipoComprobante, "", fecha });
+            //línea 2
+            lineas.Add(new[] { "", "", "", "", "" });
+            //línea 3
+            lineas.Add(new[] { "Ap., Nomb.:", nombClient, "", "", "" });
+            //línea 4
+            lineas.Add(new[] { "CUIT", dniClient, "", "", "" });
+            //línea 5 - línea en blanco adicional.
+            lineas.Add(new[] { "", "", "", "", "" });
+            //línea 6
+            lineas.Add(new[] { "Cod.", "Descripción", "cantidad", "precio / noche", "Total" });
+            //fin de cabecera de la factura
+            //
+            //detalle
+                //variables auxiliares - realizar las conversiones y formateos necesarios.
+                string cod = "1";
+                string desc = temp.DatosComprobante[0];
+                string cant = temp.Dias.ToString() + " noches";
+                string precU = temp.DatosComprobante[5].ToString();
+                string subtot = String.Format("{0:C2}", temp.DatosComprobante[6]);
+                string iva = String.Format("{0:C2}", (Convert.ToDouble(temp.DatosComprobante[6])*0.105));
+                double total = Convert.ToDouble(temp.DatosComprobante[6]) + (Convert.ToDouble(temp.DatosComprobante[6]) * 0.105);
+                string tot = String.Format("{0:C2}", total);
+            //línea 6 + n-ésimo detalle
+            lineas.Add(new[] { cod, desc, cant, precU, tot });
+            //fin del detalle
+
+            //sumary o footer
+            //variables auxiliares - realizar las conversiones y formateos necesarios.
+            //string subtotal = venta.SubTotal;
+            //línea 6 + n-ésimo detalle + 1
+            lineas.Add(new[] { "", "", "", "Sub-Total", subtot });
+            lineas.Add(new[] { "", "", "", "IVA 10,5 %", iva });
+            lineas.Add(new[] { "", "", "", "TOTAL", tot });
+            //fin
+
+            foreach (string[] fila in lineas)
+            {
+                int column = 1;
+                x = margIzq;
+                foreach (string columna in fila)
+                {
+                    string campo = columna;
+                    int anchoColumna = anchoColumn[column-1];
+                    g.DrawString(campo, font, brush, x, y);
+                    x += anchoColumna;
+                    column++;
+                }
+                y += altoColumn;
+            }
+            font.Dispose();
+            brush.Dispose();
         }
 
         public List<Cliente> GetPasajeros()
