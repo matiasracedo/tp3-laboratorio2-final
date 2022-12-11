@@ -363,13 +363,13 @@ namespace TP_II
         {
             bool ret = false;
             List<Reserva> reservas = hotel.GetReservasDeHabitacion(nroHabitacion);
-            if(reservas.Count > 0)
+            if(reservas.Count>0)
             {
                 foreach (Reserva r in reservas)
                 {
                     if (cliente.CompareTo(r.getCliente) == 0 && DateTime.Compare(ingreso, r.Ingreso) == 0 && DateTime.Compare(egreso, r.Egreso) == 0)
                         ret = true;
-                }  
+                }
             }
             return ret;
         }
@@ -422,7 +422,7 @@ namespace TP_II
 
                 foreach (Reserva r in alojamiento.Reservas)
                 {
-                    campos = r.ExportarDatosReserva();
+                    campos = r.Exportar();
                     linea = campos[0] + "," + campos[1] + "," + campos[2] + "," + campos[3] + "," + campos[4] + "," + campos[5];
                     sw.WriteLine(linea);
                 }
@@ -444,7 +444,9 @@ namespace TP_II
 
         public Dictionary<int, string> ImportarReservasDeAlojamiento(string path)
         {
-            Dictionary<int, string> d = new Dictionary<int, string>();
+            /*      linea - descripcion        */
+            Dictionary<int, string> errores = new Dictionary<int, string>();
+            Dictionary<int, string> aciertos = new Dictionary<int, string>();
             FileStream fs = null;
             StreamReader sr = null;
             int contLinea = 1;
@@ -495,39 +497,44 @@ namespace TP_II
                     a = ExisteAlojamiento(id);
                     if (a != null) // si existe
                     {
-                        c = ExisteCliente(dni);
-                        if (c != null) // si existe
+                        r = ExisteReserva(c, a, ingreso, egreso, nroHabitacion);
+                        if (r == null) //No existe
                         {
-                            r = ExisteReserva(c, a, ingreso, egreso, nroHabitacion);
-                            if (r == null) //No existe
+                            c = ExisteCliente(dni);
+                            if (c == null) // No Existe
                             {
-                                if (nroHabitacion >= 0)
+                                c = new Cliente("Generico","Generico",dni,30);
+                                clientesHistorico.Add(c);
+                            }
+                                
+                            if (nroHabitacion >= 0)
+                            {
+                                Hotel ah = (Hotel)a;
+                                h = ah.GetHabitacion(nroHabitacion);
+                                if (ah.CheckFechaHabitacion(ingreso,egreso,nroHabitacion))
                                 {
-                                    h = ((Hotel)a).GetHabitacion(nroHabitacion);
-                                    if (!h.GetEstado())
-                                    {
-                                        r = new Reserva(c, a, ingreso, egreso, precioBaseHotel, h, acompañantes);
-                                        AgregarReservas(r);
-                                    }
-                                    else
-                                        d.Add(contLinea, "La Habitacion se encuentra ocupada");
-                                }
-                                else
-                                {
-                                    h = new Habitacion(-1, Habitacion.Tipos.Simple);
                                     r = new Reserva(c, a, ingreso, egreso, precioBaseHotel, h, acompañantes);
                                     AgregarReservas(r);
+                                    aciertos.Add(contLinea,String.Format("Alojamiento: {0} -- Ingreso: {1} -- Egreso: {2}",r.Alojamiento.ToString(),r.Ingreso,r.Egreso));
                                 }
-
+                                else
+                                    errores.Add(contLinea, "La Habitacion se encuentra ocupada");
                             }
                             else
-                                d.Add(contLinea, "La Reserva ya Existe");
+                            {
+                                h = new Habitacion(-1, Habitacion.Tipos.Simple);
+                                r = new Reserva(c, a, ingreso, egreso, precioBaseHotel, h, acompañantes);
+                                AgregarReservas(r);
+                                aciertos.Add(contLinea, String.Format("Alojamiento: {0} -- Ingreso: {1} -- Egreso: {2}", r.Alojamiento.ToString(), r.Ingreso, r.Egreso));
+                            }
+
                         }
                         else
-                            d.Add(contLinea, "El Cliente No Existe");
+                            errores.Add(contLinea, "La Reserva ya Existe");
+                       
                     }
                     else
-                        d.Add(contLinea, "El Alojamiento No Existe");
+                        errores.Add(contLinea, "El Alojamiento No Existe");
                     contLinea++;
 
                 }
@@ -545,7 +552,7 @@ namespace TP_II
                     fs.Close();
                 }
             }
-            return d;
+            return errores;
         }
 
         public double[] DatosGraficoAlojamientos()
@@ -579,74 +586,65 @@ namespace TP_II
         }
         public Dictionary<int, double[]> DatosGraficoClientes()
         {
-            //    key    -----    value
-            //  Clientes -----  [Cant]-[%]
+            //        key    -----    value
+            //   N° Clientes -----  [Cant]-[%]
             Dictionary<int, double[]> retorno = new Dictionary<int, double[]>();
             double[] aux = { 0, 0 };
-            int contClientes = 0;
 
-            for (int i = 1; i < 8; i++)
+            for (int i = 1; i < 7; i++)
                 retorno.Add(i, new double[] {0,0});
 
             foreach (Reserva r in reservas)
             {
-                contClientes += r.Pasajeros.Count + 1;
                 switch (r.Pasajeros.Count)
                 {
                     case 0:
                         {
                             aux = retorno[1];
                             aux[0] += 1;
-                            //retorno[1] = aux;
                         }
                         break;
                     case 1:
                         {
                             aux = retorno[2];
                             aux[0] += 1;
-                            //retorno[2] = aux;
                         }
                         break;
                     case 2:
                         {
                             aux = retorno[3];
                             aux[0] += 1;
-                            //retorno[3] = aux;
                         }
                         break;
                     case 3:
                         {
                             aux = retorno[4];
                             aux[0] += 1;
-                            //retorno[4] = aux;
                         }
                         break;
                     case 4:
                         {
                             aux = retorno[5];
                             aux[0] += 1;
-                            //retorno[5] = aux;
                         }
                         break;
                     case 5:
                         {
                             aux = retorno[6];
                             aux[0] += 1;
-                            //retorno[6] = aux;
                         }
                         break;
                     default:
                         {
                             aux = retorno[6];
                             aux[0] += 1;
-                            //retorno[6] = aux;
                         }
                         break;
                 }
             }
             foreach (KeyValuePair<int, double[]> pair in retorno)
             {
-                pair.Value[1] = Math.Round((pair.Value[0] * 100.0) / contClientes, 2);
+                pair.Value[1] = Math.Round((pair.Value[0] * 100.0) / reservas.Count, 2);
             }
             return retorno;
         }

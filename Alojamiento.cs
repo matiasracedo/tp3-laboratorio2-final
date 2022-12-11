@@ -8,35 +8,35 @@ using System.Drawing;
 namespace TP_II
 {
     [Serializable]
-    public abstract class Alojamiento:IComparable
+    public abstract class Alojamiento : IComparable
     {
         protected string direccion;
         private bool alta;
-        
+
         protected List<Reserva> reservas = new List<Reserva>();
         protected Image[] imagenes;
         private int idAlojamiento;
         private static int contIdAlojamiento = 1;
 
-        private string[] lugar=new string[2];
+        protected string[] lugar = new string[2];
 
         public Alojamiento(string direccion, string jurisdiccion, string ciudad)
         {
             this.direccion = direccion;
             alta = true;
-            idAlojamiento=contIdAlojamiento;
+            idAlojamiento = contIdAlojamiento;
             contIdAlojamiento++;
 
             lugar[0] = jurisdiccion; lugar[1] = ciudad;
         }
-               
+
         public DateTime[] IntervaloFechasReservadas()
         {
             List<DateTime> retorno = new List<DateTime>();
             foreach (Reserva r in reservas)
             {
                 TimeSpan periodoEvaluar = r.Egreso.Subtract(r.Ingreso);
-                int dias = periodoEvaluar.Days +1;
+                int dias = periodoEvaluar.Days + 1;
 
                 DateTime[] diasCheck = new DateTime[dias];
                 for (int i = 0; i < dias; i++)
@@ -50,16 +50,16 @@ namespace TP_II
 
         public abstract double PrecioDia(Reserva r);
         public abstract bool CheckFecha(DateTime inicio, DateTime final);
-        public abstract string[] Exportar();
 
         public int CompareTo(object o)
         {
             int retorno = 1;
-            if(o!=null)
-                retorno= this.direccion.CompareTo(((Alojamiento)o).Direccion);
+            if (o != null)
+                retorno = this.direccion.CompareTo(((Alojamiento)o).Direccion);
             return retorno;
         }
 
+        public abstract string[] Exportar();
 
         public List<Reserva> Reservas { get { return reservas; } }
         public string Direccion { get { return direccion; } set { direccion = value; } }

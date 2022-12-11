@@ -89,11 +89,12 @@ namespace TP_II
 
         public override string[] Exportar()
         {
-            string[] campos = new string[10];
+            string[] campos = new string[12];
             campos[0] = direccion;
             campos[1] = minDias.ToString();
             campos[2] = camas.ToString();
             campos[3] = precioBaseCasa.ToString();
+
         
             int contThisServicios = 0;
 
@@ -107,6 +108,9 @@ namespace TP_II
                 else
                     campos[i] = "";
             }
+
+            campos[10] = lugar[0];
+            campos[11] = lugar[1];
 
             return campos;
         }

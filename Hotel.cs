@@ -174,7 +174,7 @@ namespace TP_II
             return retorno.ToArray();
         }
 
-
+        // Si eesta disponible devuelve true
         public bool CheckFechaHabitacion(DateTime inicio, DateTime final,int nroHabitacion)
         {
             TimeSpan periodoEvaluar = final.Subtract(inicio);
@@ -205,13 +205,15 @@ namespace TP_II
 
         public override string[] Exportar()
         {
-            string[] campos = new string[6];
+            string[] campos = new string[8];
             campos[0] = direccion;
             campos[1] = nombre;
             campos[2] = tresEstrellas.ToString().ToLower();
             campos[3] = simples.Count.ToString();
             campos[4] = dobles.Count.ToString();
             campos[5] = triples.Count.ToString();
+            campos[6] = lugar[0];
+            campos[7] = lugar[1];
 
             return campos;            
         }
