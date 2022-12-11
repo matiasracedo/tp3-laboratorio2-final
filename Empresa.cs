@@ -280,7 +280,7 @@ namespace TP_II
         {
             Cliente retorno = null;
             clientesHistorico.Sort();
-            Cliente c = new Cliente("a", "a", dni, 1);
+            Cliente c = new Cliente("a", "a", dni,new DateTime(1990,1,1));
             int indice = clientesHistorico.BinarySearch(c);
             if (indice > -1)
                 retorno = clientesHistorico[indice];
@@ -511,7 +511,7 @@ namespace TP_II
                             c = ExisteCliente(dni);
                             if (c == null) // No Existe
                             {
-                                c = new Cliente("Generico","Generico",dni,30);
+                                c = new Cliente("Generico","Generico");
                                 clientesHistorico.Add(c);
                             }
                                 

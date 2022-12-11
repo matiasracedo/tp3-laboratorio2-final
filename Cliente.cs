@@ -12,16 +12,16 @@ namespace TP_II
         private string nombre;
         private string apellido;
         private int dni;
-        private int edad;
+        private DateTime fNacimiento;
         private static int contIdCliente=1;
         private int idCliente;
 
-        public Cliente(string nombre,string apellido, int dni, int edad)
+        public Cliente(string nombre,string apellido, int dni, DateTime fNacimiento)
         {
             this.nombre = nombre.TrimEnd(' ').TrimStart(' ');
             this.apellido = apellido.TrimEnd(' ').TrimStart(' ');
             this.dni = dni;
-            this.edad = edad;
+            this.fNacimiento = fNacimiento;
             idCliente = contIdCliente;//el contador se incrementa en solo en la creacion de la reserva
         }
         public Cliente(string nombre,string apellido)
@@ -29,7 +29,7 @@ namespace TP_II
             this.nombre = nombre.TrimEnd(' ').TrimStart(' ');
             this.apellido = apellido.TrimEnd(' ').TrimStart(' ');
             this.dni = 0;
-            this.edad = 0;
+            fNacimiento = new DateTime(1990,1,1);
             idCliente = contIdCliente;
         }
 
@@ -37,12 +37,12 @@ namespace TP_II
         public string Apellido { get { return apellido; } }
         public string NombreCompleto { get { return nombre+" "+apellido; } }
         public int DNI { get { return dni; } }
-        public int Edad { get { return edad; } }
+        public DateTime FechaNacimiento { get { return fNacimiento; } }
         public static int ContIdCliente { get{ return contIdCliente; }set { contIdCliente = value; } }
         public int IDcliente { get { return idCliente; }set { idCliente = value; } }
         public override string ToString()
         {
-            return string.Format("ID: {0} -- Nombre: {1} -- DNI: {2} -- Edad: {3} años",IDcliente,NombreCompleto,DNI,Edad);
+            return string.Format("DNI: {0} -- Nombre: {1} -- F. Nacimiento: {2}",DNI,NombreCompleto,FechaNacimiento);
             //return NombreCompleto +", DNI "+ dni+ ", "+edad + " años.";
         }
         public string[] Exportar()
@@ -52,7 +52,7 @@ namespace TP_II
             ret[1] = nombre;
             ret[2] = Apellido;
             ret[3] = DNI.ToString();
-            ret[4] = edad.ToString();
+            ret[4] = fNacimiento.ToShortDateString();
 
             return ret;
         }
