@@ -147,7 +147,6 @@
             this.btnExportarR.TabIndex = 9;
             this.btnExportarR.Text = "Exportar Reservas";
             this.btnExportarR.UseVisualStyleBackColor = true;
-            this.btnExportarR.Click += new System.EventHandler(this.btnExportarR_Click);
             // 
             // btnImportarR
             // 
@@ -157,7 +156,6 @@
             this.btnImportarR.TabIndex = 8;
             this.btnImportarR.Text = "Importar Reseervas";
             this.btnImportarR.UseVisualStyleBackColor = true;
-            this.btnImportarR.Click += new System.EventHandler(this.btnImportarR_Click);
             // 
             // btnFotos
             // 
@@ -167,7 +165,6 @@
             this.btnFotos.TabIndex = 7;
             this.btnFotos.Text = "Importar Fotos";
             this.btnFotos.UseVisualStyleBackColor = true;
-            this.btnFotos.Click += new System.EventHandler(this.btnFotos_Click);
             // 
             // btnAltaBaja
             // 
@@ -591,7 +588,6 @@
             this.Name = "ABMAlojamientosForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Altas, Bajas, Modificaciones";
-            this.Load += new System.EventHandler(this.ABMAlojamientosForm_Load);
             this.gbCasaHotel.ResumeLayout(false);
             this.gbCasaHotel.PerformLayout();
             this.gBoxHotel.ResumeLayout(false);
