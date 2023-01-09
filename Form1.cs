@@ -348,7 +348,7 @@ namespace TP_II
 
             // Manejo evento click del boton "Exportar Reservas" en ventana ABM
             vModificacion.btnExportarR.Click += new System.EventHandler(this.btnExportarR_Click);
-            // Manejo evento click del boton "Exportar Reservas" en ventana ABM
+            // Manejo evento click del boton "Importar Reservas" en ventana ABM
             vModificacion.btnImportarR.Click += new System.EventHandler(this.btnImportarR_Click);
 
             if (alojamiento is Hotel)
@@ -481,8 +481,7 @@ namespace TP_II
             if (alojamiento is Hotel)
                 sfd.FileName = string.Format("Exportacion Reservas de Hotel-{0}-{1}", ((Hotel)alojamiento).Nombre, ((Hotel)alojamiento).Direccion);
             else
-                sfd.FileName = string.Format("Exportacion Reservas de Casa-{0}-{1}", ((Casa)alojamiento).Numero, ((Casa)alojamiento).Direccion);
-            
+                sfd.FileName = string.Format("Exportacion Reservas de Casa-{0}-{1}", ((Casa)alojamiento).Numero, ((Casa)alojamiento).Direccion);  
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {

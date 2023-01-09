@@ -505,16 +505,15 @@ namespace TP_II
                     a = ExisteAlojamiento(id);
                     if (a != null) // si existe
                     {
+                        c = ExisteCliente(dni);
+                        if (c == null) // No Existe
+                        {
+                            c = new Cliente("Generico", "Generico");
+                            clientesHistorico.Add(c);
+                        }
                         r = ExisteReserva(c, a, ingreso, egreso, nroHabitacion);
                         if (r == null) //No existe
-                        {
-                            c = ExisteCliente(dni);
-                            if (c == null) // No Existe
-                            {
-                                c = new Cliente("Generico","Generico");
-                                clientesHistorico.Add(c);
-                            }
-                                
+                        {        
                             if (nroHabitacion >= 0)
                             {
                                 Hotel ah = (Hotel)a;
