@@ -84,6 +84,11 @@ namespace TP_II
         {
             gBoxFiltroFecha.Enabled=false;
         }
+        /*-------------------------------------------------- EVENTO DOBLE CLICK DATAGRIDVIEW ----------------------------------------------*/
+        /*-------------------------------------------------- EVENTO DOBLE CLICK DATAGRIDVIEW ----------------------------------------------*/
+        /*-------------------------------------------------- EVENTO DOBLE CLICK DATAGRIDVIEW ----------------------------------------------*/
+        /*-------------------------------------------------- EVENTO DOBLE CLICK DATAGRIDVIEW ----------------------------------------------*/
+        /*-------------------------------------------------- EVENTO DOBLE CLICK DATAGRIDVIEW ----------------------------------------------*/
 
         private void dataGridDisponibles_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

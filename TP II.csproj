@@ -65,6 +65,12 @@
     <Compile Include="AlojamientosExistentesForm.Designer.cs">
       <DependentUpon>AlojamientosExistentesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AyudaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AyudaForm.Designer.cs">
+      <DependentUpon>AyudaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Casa.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="ComprobanteForm.cs">
@@ -127,6 +133,9 @@
     <EmbeddedResource Include="AlojamientosExistentesForm.resx">
       <DependentUpon>AlojamientosExistentesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AyudaForm.resx">
+      <DependentUpon>AyudaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ComprobanteForm.resx">
       <DependentUpon>ComprobanteForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -169,6 +178,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Ayuda Web\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
