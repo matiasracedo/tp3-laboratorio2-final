@@ -2327,7 +2327,8 @@ namespace TP_II
 
         private void ayudaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            AyudaForm vAyuda = new AyudaForm();
+            vAyuda.ShowDialog();
         }
 
         //MENU STRIP ACERCADE - INFO:::::
