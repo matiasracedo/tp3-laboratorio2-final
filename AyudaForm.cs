@@ -12,16 +12,21 @@ namespace TP_II
 {
     public partial class AyudaForm : Form
     {
+        Uri fileURI = new Uri(Application.StartupPath + @"/html/index.html");
         public AyudaForm()
         {
             InitializeComponent();  
-            Uri fileURI = new Uri(Application.StartupPath + @"/html/index.html");
             webBrowser1.Navigate(fileURI);
         }
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
 
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Navigate(fileURI);
         }
     }
 }
