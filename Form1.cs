@@ -23,6 +23,7 @@ namespace TP_II
         bool restart = false;
         Image[] imagenes; // Imagenes de un alojamiento
         List<Cliente> pasajeros = new List<Cliente>(); // Pasajeros adicionales reserva
+        int capacidad = 0; // Auxiliar para evento click agregar pasajeros
         Reserva temp = null; // Objeto auxiliar para imprimir comprobante 
         GraficoForm vGrafico;
         public Form1()
@@ -541,18 +542,23 @@ namespace TP_II
         //Evento click boton Agregar pasajeros ventana DatosCliente
         public void btnPasajeros_Click(object sender, EventArgs e)
         {
-            DatosClienteForm vPasajero = new DatosClienteForm();
-            vPasajero.btnPasajeros.Visible = false;
-
-            if (vPasajero.ShowDialog() == DialogResult.OK)
+            if (pasajeros.Count < (capacidad - 1)) 
             {
-                string nombre = vPasajero.tbNombre.Text;
-                string apellido = vPasajero.tbApellido.Text;
-                int dni = Convert.ToInt32(vPasajero.tbDni.Text);
-                DateTime fNacimiento = vPasajero.fNacimiento.Value;
-                Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
-                pasajeros.Add(cliente);
+                DatosClienteForm vPasajero = new DatosClienteForm();
+                vPasajero.btnPasajeros.Visible = false;
+
+                if (vPasajero.ShowDialog() == DialogResult.OK)
+                {
+                    string nombre = vPasajero.tbNombre.Text;
+                    string apellido = vPasajero.tbApellido.Text;
+                    int dni = Convert.ToInt32(vPasajero.tbDni.Text);
+                    DateTime fNacimiento = vPasajero.fNacimiento.Value;
+                    Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
+                    pasajeros.Add(cliente);
+                    capacidad -= 1;
+                }
             }
+            else MessageBox.Show("Capacidad del alojamiento alcanzada.");  
         }
 
         private void btnConsultaAloj_Click(object sender, EventArgs e)
@@ -580,6 +586,7 @@ namespace TP_II
                 vAlojomiento.cBoxNroHabitaciones.Enabled = false;
                 vAlojomiento.cBoxTipoHab.Enabled = false;
                 vAlojomiento.lbNumHabitacion.Text = "Capacidad: " + casa.Camas.ToString() + " personas";
+                capacidad = casa.Camas;
 
                 if (vAlojomiento.ShowDialog() == DialogResult.OK)
                 {
@@ -628,6 +635,7 @@ namespace TP_II
                 vAlojomiento.lbDescripcion.Text = "Tipo Habitación:";
                 vAlojomiento.cBoxTipoHab.Enabled = true;
                 vAlojomiento.cBoxNroHabitaciones.Enabled = true;
+                
 
                 if (vAlojomiento.ShowDialog() == DialogResult.OK)
                 {
@@ -646,7 +654,18 @@ namespace TP_II
                         else
                         {
                             DatosClienteForm vCliente = new DatosClienteForm();
-
+                            switch (vAlojomiento.cBoxTipoHab.Text)
+                            {
+                                case "Simple":
+                                    capacidad = 1;
+                                    break;
+                                case "Doble":
+                                    capacidad = 2;
+                                    break;
+                                case "Triple":
+                                    capacidad = 3;
+                                    break;
+                            }
                             // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
                             vCliente.btnPasajeros.Click += new System.EventHandler(this.btnPasajeros_Click);
 
@@ -1168,6 +1187,11 @@ namespace TP_II
             pasajeros.ForEach(acomp => resultado.Add(acomp));
             pasajeros.Clear();
             return resultado;
+        }
+
+        public void SetCapacidad(int capac)
+        {
+            capacidad = capac;
         }
 
         public string[] ActualizarComboBoxCiudades(string jurisdiccion)
