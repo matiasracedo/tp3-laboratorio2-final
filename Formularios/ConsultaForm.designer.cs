@@ -38,12 +38,6 @@
             this.gBoxFecha = new System.Windows.Forms.GroupBox();
             this.checkB3Estrellas = new System.Windows.Forms.CheckBox();
             this.dataGridDisponibles = new System.Windows.Forms.DataGridView();
-            this.columnaTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnaDirección = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnaNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnaEstrellas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnaCapacidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.minDias = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gBoxCasa = new System.Windows.Forms.GroupBox();
             this.numUDcamasCasa = new System.Windows.Forms.NumericUpDown();
             this.lbCamasCasa = new System.Windows.Forms.Label();
@@ -56,6 +50,12 @@
             this.checkBCochera = new System.Windows.Forms.CheckBox();
             this.gBoxFiltroFecha = new System.Windows.Forms.GroupBox();
             this.chechBoxFiltrarPorFecha = new System.Windows.Forms.CheckBox();
+            this.columnaTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnaDirección = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnaNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnaEstrellas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnaCapacidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.minDias = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gBoxFecha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDisponibles)).BeginInit();
             this.gBoxCasa.SuspendLayout();
@@ -115,6 +115,8 @@
             // 
             // dtPickerInicio
             // 
+            this.dtPickerInicio.CalendarMonthBackground = System.Drawing.SystemColors.HotTrack;
+            this.dtPickerInicio.CalendarTrailingForeColor = System.Drawing.Color.HotPink;
             this.dtPickerInicio.Location = new System.Drawing.Point(155, 31);
             this.dtPickerInicio.Name = "dtPickerInicio";
             this.dtPickerInicio.Size = new System.Drawing.Size(126, 20);
@@ -156,6 +158,7 @@
             this.dataGridDisponibles.AllowUserToDeleteRows = false;
             this.dataGridDisponibles.AllowUserToResizeColumns = false;
             this.dataGridDisponibles.AllowUserToResizeRows = false;
+            this.dataGridDisponibles.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridDisponibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridDisponibles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnaTipo,
@@ -164,47 +167,12 @@
             this.columnaEstrellas,
             this.columnaCapacidad,
             this.minDias});
-            this.dataGridDisponibles.Location = new System.Drawing.Point(12, 315);
+            this.dataGridDisponibles.Location = new System.Drawing.Point(14, 315);
             this.dataGridDisponibles.Name = "dataGridDisponibles";
             this.dataGridDisponibles.RowHeadersVisible = false;
             this.dataGridDisponibles.Size = new System.Drawing.Size(684, 242);
             this.dataGridDisponibles.TabIndex = 8;
             this.dataGridDisponibles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDisponibles_CellDoubleClick);
-            // 
-            // columnaTipo
-            // 
-            this.columnaTipo.HeaderText = "Tipo";
-            this.columnaTipo.Name = "columnaTipo";
-            this.columnaTipo.ReadOnly = true;
-            // 
-            // columnaDirección
-            // 
-            this.columnaDirección.HeaderText = "Dirección";
-            this.columnaDirección.Name = "columnaDirección";
-            this.columnaDirección.ReadOnly = true;
-            // 
-            // columnaNombre
-            // 
-            this.columnaNombre.HeaderText = "Nombre";
-            this.columnaNombre.Name = "columnaNombre";
-            this.columnaNombre.ReadOnly = true;
-            // 
-            // columnaEstrellas
-            // 
-            this.columnaEstrellas.HeaderText = "Status";
-            this.columnaEstrellas.Name = "columnaEstrellas";
-            this.columnaEstrellas.ReadOnly = true;
-            // 
-            // columnaCapacidad
-            // 
-            this.columnaCapacidad.HeaderText = "Capacidad";
-            this.columnaCapacidad.Name = "columnaCapacidad";
-            this.columnaCapacidad.ReadOnly = true;
-            // 
-            // minDias
-            // 
-            this.minDias.HeaderText = "Mínimo de días";
-            this.minDias.Name = "minDias";
             // 
             // gBoxCasa
             // 
@@ -348,6 +316,41 @@
             this.chechBoxFiltrarPorFecha.Text = "Filtrar por fecha";
             this.chechBoxFiltrarPorFecha.UseVisualStyleBackColor = true;
             this.chechBoxFiltrarPorFecha.CheckedChanged += new System.EventHandler(this.chechBoxFiltrarPorFecha_CheckedChanged);
+            // 
+            // columnaTipo
+            // 
+            this.columnaTipo.HeaderText = "Tipo";
+            this.columnaTipo.Name = "columnaTipo";
+            this.columnaTipo.Width = 110;
+            // 
+            // columnaDirección
+            // 
+            this.columnaDirección.HeaderText = "Dirección";
+            this.columnaDirección.Name = "columnaDirección";
+            this.columnaDirección.Width = 140;
+            // 
+            // columnaNombre
+            // 
+            this.columnaNombre.HeaderText = "Nombre";
+            this.columnaNombre.Name = "columnaNombre";
+            this.columnaNombre.Width = 110;
+            // 
+            // columnaEstrellas
+            // 
+            this.columnaEstrellas.HeaderText = "Status";
+            this.columnaEstrellas.Name = "columnaEstrellas";
+            this.columnaEstrellas.Width = 110;
+            // 
+            // columnaCapacidad
+            // 
+            this.columnaCapacidad.HeaderText = "Capacidad";
+            this.columnaCapacidad.Name = "columnaCapacidad";
+            this.columnaCapacidad.Width = 110;
+            // 
+            // minDias
+            // 
+            this.minDias.HeaderText = "Mínimo de días";
+            this.minDias.Name = "minDias";
             // 
             // ConsultaForm
             // 

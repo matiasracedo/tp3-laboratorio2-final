@@ -18,14 +18,12 @@ namespace TP_II
         private List<Casa> casas = new List<Casa>();
         private List<Hotel> hoteles = new List<Hotel>();
         private List<Cliente> clientesHistorico = new List<Cliente>();
-
         public int contBackReservas;
         public int contBackCliente;
         public int contBackAlojamientos;
         public int contBackCasas;
-
         private bool preguntar = true;
-
+        private int indiceColor;    
         private double precioBaseHotel;
         private SortedList<string,List<string>> lugares = new SortedList<string,List<string>>(); // son objects
 
@@ -670,5 +668,6 @@ namespace TP_II
         {
                 return lugares[jurisdiccion];
         }
+        public int IndiceColor { get { return indiceColor;} set { indiceColor = value; } }
     }
 }

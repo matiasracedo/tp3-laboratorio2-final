@@ -12,6 +12,7 @@ namespace TP_II
     {
         List<Cliente> GetPasajeros();
         ArrayList ActualizarConsulta();
+        void Pintarcontroles(Form f);
         object BuscarAlojamiento(object aBuscar);
         void AgregarReserva(object r);
         int[] ListaHabitaciones(int tipo, Object hotel);

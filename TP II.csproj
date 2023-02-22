@@ -46,62 +46,62 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ABMAlojamientosForm.cs">
+    <Compile Include="Formularios\ABMAlojamientosForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABMAlojamientosForm.Designer.cs">
+    <Compile Include="Formularios\ABMAlojamientosForm.Designer.cs">
       <DependentUpon>ABMAlojamientosForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Alojamiento.cs" />
-    <Compile Include="AlojamientoForm.cs">
+    <Compile Include="Formularios\AlojamientoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AlojamientoForm.designer.cs">
+    <Compile Include="Formularios\AlojamientoForm.designer.cs">
       <DependentUpon>AlojamientoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AlojamientosExistentesForm.cs">
+    <Compile Include="Formularios\AlojamientosExistentesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AlojamientosExistentesForm.Designer.cs">
+    <Compile Include="Formularios\AlojamientosExistentesForm.Designer.cs">
       <DependentUpon>AlojamientosExistentesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AyudaForm.cs">
+    <Compile Include="Formularios\AyudaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AyudaForm.Designer.cs">
+    <Compile Include="Formularios\AyudaForm.Designer.cs">
       <DependentUpon>AyudaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Casa.cs" />
     <Compile Include="Cliente.cs" />
-    <Compile Include="ComprobanteForm.cs">
+    <Compile Include="Formularios\ComprobanteForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ComprobanteForm.Designer.cs">
+    <Compile Include="Formularios\ComprobanteForm.Designer.cs">
       <DependentUpon>ComprobanteForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConsultaForm.cs">
+    <Compile Include="Formularios\ConsultaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConsultaForm.designer.cs">
+    <Compile Include="Formularios\ConsultaForm.designer.cs">
       <DependentUpon>ConsultaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DatosClienteForm.cs">
+    <Compile Include="Formularios\DatosClienteForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DatosClienteForm.Designer.cs">
+    <Compile Include="Formularios\DatosClienteForm.Designer.cs">
       <DependentUpon>DatosClienteForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Empresa.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Formularios\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Formularios\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GraficoForm.cs">
+    <Compile Include="Formularios\GraficoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GraficoForm.Designer.cs">
+    <Compile Include="Formularios\GraficoForm.Designer.cs">
       <DependentUpon>GraficoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Habitacion.cs" />
@@ -109,50 +109,50 @@
     <Compile Include="IExportable.cs" />
     <Compile Include="IInteractuable.cs" />
     <Compile Include="MiException.cs" />
-    <Compile Include="PrecioBaseForm.cs">
+    <Compile Include="Formularios\InicioForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrecioBaseForm.Designer.cs">
-      <DependentUpon>PrecioBaseForm.cs</DependentUpon>
+    <Compile Include="Formularios\InicioForm.Designer.cs">
+      <DependentUpon>InicioForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reserva.cs" />
-    <Compile Include="RestartConfirmation.cs">
+    <Compile Include="Formularios\RestartConfirmation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RestartConfirmation.Designer.cs">
+    <Compile Include="Formularios\RestartConfirmation.Designer.cs">
       <DependentUpon>RestartConfirmation.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ABMAlojamientosForm.resx">
+    <EmbeddedResource Include="Formularios\ABMAlojamientosForm.resx">
       <DependentUpon>ABMAlojamientosForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AlojamientoForm.resx">
+    <EmbeddedResource Include="Formularios\AlojamientoForm.resx">
       <DependentUpon>AlojamientoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AlojamientosExistentesForm.resx">
+    <EmbeddedResource Include="Formularios\AlojamientosExistentesForm.resx">
       <DependentUpon>AlojamientosExistentesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AyudaForm.resx">
+    <EmbeddedResource Include="Formularios\AyudaForm.resx">
       <DependentUpon>AyudaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ComprobanteForm.resx">
+    <EmbeddedResource Include="Formularios\ComprobanteForm.resx">
       <DependentUpon>ComprobanteForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConsultaForm.resx">
+    <EmbeddedResource Include="Formularios\ConsultaForm.resx">
       <DependentUpon>ConsultaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DatosClienteForm.resx">
+    <EmbeddedResource Include="Formularios\DatosClienteForm.resx">
       <DependentUpon>DatosClienteForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Formularios\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GraficoForm.resx">
+    <EmbeddedResource Include="Formularios\GraficoForm.resx">
       <DependentUpon>GraficoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PrecioBaseForm.resx">
-      <DependentUpon>PrecioBaseForm.cs</DependentUpon>
+    <EmbeddedResource Include="Formularios\InicioForm.resx">
+      <DependentUpon>InicioForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -163,7 +163,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RestartConfirmation.resx">
+    <EmbeddedResource Include="Formularios\RestartConfirmation.resx">
       <DependentUpon>RestartConfirmation.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
