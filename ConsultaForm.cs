@@ -118,8 +118,9 @@ namespace TP_II
                 vAlojomiento.cBoxNroHabitaciones.Enabled = false;
                 vAlojomiento.cBoxTipoHab.Enabled = false;
                 vAlojomiento.lbNumHabitacion.Text= "Capacidad: "+ casa.Camas.ToString() + " personas";
+                form1.SetCapacidad(casa.Camas);
 
-                if(vAlojomiento.ShowDialog()==DialogResult.OK)
+                if (vAlojomiento.ShowDialog()==DialogResult.OK)
                 {
                     int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
                     DateTime inicio = vAlojomiento.Calendario.SelectionStart;
@@ -185,6 +186,18 @@ namespace TP_II
                         else
                         {
                             DatosClienteForm vCliente = new DatosClienteForm();
+                            switch (vAlojomiento.cBoxTipoHab.Text)
+                            {
+                                case "Simple":
+                                    form1.SetCapacidad(1);
+                                    break;
+                                case "Doble":
+                                    form1.SetCapacidad(2);
+                                    break;
+                                case "Triple":
+                                    form1.SetCapacidad(3);
+                                    break;
+                            }
 
                             // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
                             vCliente.btnPasajeros.Click += new System.EventHandler(form1.btnPasajeros_Click);
