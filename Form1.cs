@@ -25,6 +25,7 @@ namespace TP_II
         List<Cliente> pasajeros = new List<Cliente>(); // Pasajeros adicionales reserva
         int capacidad = 0; // Auxiliar para evento click agregar pasajeros
         Reserva temp = null; // Objeto auxiliar para imprimir comprobante 
+        int copia = 0; // Para comprobante duplicado                          
         GraficoForm vGrafico;
         public Form1()
         {
@@ -1122,10 +1123,12 @@ namespace TP_II
     
             //variables auxiliares
             string razonSocial = "TuAlquilerYa.com S.A.";
-            string tipoComprobante = "Aca va la imagen";
+            string tipoComprobante = "Recibo X";
             string nombClient = temp.getCliente.NombreCompleto;
             string dniClient = temp.getCliente.DNI.ToString();
             string fecha = temp.DatosComprobante[3];
+            string fNacimiento = temp.getCliente.FechaNacimiento.ToShortDateString();
+
             //línea 1
             lineas.Add(new[] { razonSocial, "", tipoComprobante, "", fecha });
             //línea 2
@@ -1134,13 +1137,14 @@ namespace TP_II
             lineas.Add(new[] { "Ap., Nomb.:", nombClient, "", "", "" });
             //línea 4
             lineas.Add(new[] { "CUIT", dniClient, "", "", "" });
-            //línea 5 - línea en blanco adicional.
+            //línea 5
+            lineas.Add(new[] { "F. Nac.", fNacimiento, "", "", "" });
+            //línea 6 - línea en blanco adicional.
             lineas.Add(new[] { "", "", "", "", "" });
-            //línea 6
-            lineas.Add(new[] { "Cod.", "Descripción", "cantidad", "precio / noche", "Total" });
+            //línea 7
+            lineas.Add(new[] { "Cod.", "Descripción", "Cantidad", "Precio / noche", "Total" });
             //fin de cabecera de la factura
             //
-            //detalle
                 //variables auxiliares - realizar las conversiones y formateos necesarios.
                 string cod = "1";
                 string desc = temp.DatosComprobante[0];
@@ -1150,8 +1154,19 @@ namespace TP_II
                 string iva = String.Format("{0:C2}", (Convert.ToDouble(temp.DatosComprobante[6])*0.105));
                 double total = Convert.ToDouble(temp.DatosComprobante[6]) + (Convert.ToDouble(temp.DatosComprobante[6]) * 0.105);
                 string tot = String.Format("{0:C2}", total);
-            //línea 6 + n-ésimo detalle
+            //línea 8 detalle
             lineas.Add(new[] { cod, desc, cant, precU, tot });
+            //linea 9 acompanantes
+            if (temp.Pasajeros.Count > 0)
+            {
+                lineas.Add(new[] { "", "Acompañantes:", "", "", "" });
+                foreach (Cliente pasajero in temp.Pasajeros)
+                {
+                    lineas.Add(new[] { "", pasajero.NombreCompleto, "", "", "" });
+                    lineas.Add(new[] { "", pasajero.DNI.ToString(), "", "", "" });
+                    lineas.Add(new[] { "", pasajero.FechaNacimiento.ToShortDateString(), "", "", "" });
+                }
+            }
             //fin del detalle
 
             //sumary o footer
@@ -1176,6 +1191,15 @@ namespace TP_II
                     column++;
                 }
                 y += altoColumn;
+            }
+            if (copia < 1)
+            {
+                copia++;
+                e.HasMorePages = true;
+            } else
+            {
+                copia = 0;
+                e.HasMorePages = false;
             }
             font.Dispose();
             brush.Dispose();
