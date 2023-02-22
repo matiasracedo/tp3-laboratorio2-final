@@ -166,6 +166,15 @@ namespace TP_II
                 nuevos.AddRange(empresa.FiltrarCasas(Convert.ToInt16(c.numUDcamasCasa.Value), servicios));
                 nuevos.AddRange(empresa.FiltrarHoteles(c.checkB3Estrellas.Checked));
             }
+            if (c.checkBoxFiltrarPorLugar.Checked == true)
+            {
+                string ciudad= c.cBoxCiudad.Text.Trim(' ');
+                if (ciudad != "")
+                    empresa.FiltrarLugarRango(nuevos, c.cBoxProvincia.Text, ciudad);
+                else
+                    MessageBox.Show("No hay establecimientos en la provincia solicitada");
+
+            }
 
             if (c.chechBoxFiltrarPorFecha.Checked)
             {
@@ -719,6 +728,7 @@ namespace TP_II
             vConsulta = new ConsultaForm();
             vConsulta.gBoxFiltroFecha.Enabled = false;
             vConsulta.SetConsultor(this);
+            vConsulta.cBoxProvincia.Items.AddRange(empresa.Jurisdicciones.ToArray());
             vConsulta.ShowDialog();
             ActualizarListas();
             vConsulta.Dispose();

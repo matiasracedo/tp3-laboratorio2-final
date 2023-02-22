@@ -67,6 +67,9 @@ namespace TP_II
                 cBoxCiudad.SelectedIndex = 0;
         }
 
+        private void ABMAlojamientosForm_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }
