@@ -588,6 +588,7 @@
             this.Name = "ABMAlojamientosForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Altas, Bajas, Modificaciones";
+            this.Load += new System.EventHandler(this.ABMAlojamientosForm_Load);
             this.gbCasaHotel.ResumeLayout(false);
             this.gbCasaHotel.PerformLayout();
             this.gBoxHotel.ResumeLayout(false);
