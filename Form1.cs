@@ -736,9 +736,6 @@ namespace TP_II
             vPasajero.btnPasajeros.Visible = false;
             if (pasajeros.Count < (capacidad - 1)) 
             {
-                DatosClienteForm vPasajero = new DatosClienteForm();
-                vPasajero.btnPasajeros.Visible = false;
-
                 if (vPasajero.ShowDialog() == DialogResult.OK)
                 {
                     string nombre = vPasajero.tbNombre.Text;
