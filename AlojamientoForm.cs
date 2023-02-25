@@ -52,11 +52,6 @@ namespace TP_II
   
         }
 
-        private void btnReservar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cBoxTipoHab_SelectedIndexChanged(object sender, EventArgs e)
         {
             int[] numeros = form1.ListaHabitaciones(cBoxTipoHab.SelectedIndex, aConsultar);

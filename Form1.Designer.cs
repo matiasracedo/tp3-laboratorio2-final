@@ -34,9 +34,6 @@
             this.btnConsultaAloj = new System.Windows.Forms.Button();
             this.btnModificarAloj = new System.Windows.Forms.Button();
             this.cbAlojamientos = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnBusqueda = new System.Windows.Forms.Button();
             this.gBreservas = new System.Windows.Forms.GroupBox();
             this.btnConsultaReserva = new System.Windows.Forms.Button();
             this.btnModificarReserva = new System.Windows.Forms.Button();
@@ -74,11 +71,9 @@
             this.graficoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gBreservas.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -92,123 +87,123 @@
             // 
             // btnAgregarAloj
             // 
-            this.btnAgregarAloj.Location = new System.Drawing.Point(713, 29);
+            this.btnAgregarAloj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
+            this.btnAgregarAloj.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarAloj.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAgregarAloj.Location = new System.Drawing.Point(27, 61);
             this.btnAgregarAloj.Name = "btnAgregarAloj";
-            this.btnAgregarAloj.Size = new System.Drawing.Size(75, 46);
+            this.btnAgregarAloj.Size = new System.Drawing.Size(100, 70);
             this.btnAgregarAloj.TabIndex = 0;
             this.btnAgregarAloj.Text = "Agregar Alojamiento";
-            this.btnAgregarAloj.UseVisualStyleBackColor = true;
+            this.btnAgregarAloj.UseVisualStyleBackColor = false;
             this.btnAgregarAloj.Click += new System.EventHandler(this.btnAgregarAloj_Click);
+            this.btnAgregarAloj.MouseEnter += new System.EventHandler(this.btnAgregarAloj_MouseEnter);
+            this.btnAgregarAloj.MouseLeave += new System.EventHandler(this.btnAgregarAloj_MouseLeave);
             // 
             // btnConsultaAloj
             // 
-            this.btnConsultaAloj.Location = new System.Drawing.Point(875, 29);
+            this.btnConsultaAloj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
+            this.btnConsultaAloj.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsultaAloj.Location = new System.Drawing.Point(239, 62);
             this.btnConsultaAloj.Name = "btnConsultaAloj";
-            this.btnConsultaAloj.Size = new System.Drawing.Size(75, 46);
+            this.btnConsultaAloj.Size = new System.Drawing.Size(100, 70);
             this.btnConsultaAloj.TabIndex = 1;
             this.btnConsultaAloj.Text = "Consultar Alojamiento";
-            this.btnConsultaAloj.UseVisualStyleBackColor = true;
+            this.btnConsultaAloj.UseVisualStyleBackColor = false;
             this.btnConsultaAloj.Click += new System.EventHandler(this.btnConsultaAloj_Click);
+            this.btnConsultaAloj.MouseEnter += new System.EventHandler(this.btnAgregarAloj_MouseEnter);
+            this.btnConsultaAloj.MouseLeave += new System.EventHandler(this.btnAgregarAloj_MouseLeave);
             // 
             // btnModificarAloj
             // 
-            this.btnModificarAloj.Location = new System.Drawing.Point(794, 29);
+            this.btnModificarAloj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
+            this.btnModificarAloj.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificarAloj.Location = new System.Drawing.Point(133, 62);
             this.btnModificarAloj.Name = "btnModificarAloj";
-            this.btnModificarAloj.Size = new System.Drawing.Size(75, 46);
+            this.btnModificarAloj.Size = new System.Drawing.Size(100, 70);
             this.btnModificarAloj.TabIndex = 2;
             this.btnModificarAloj.Text = "Modificar Alojamiento";
-            this.btnModificarAloj.UseVisualStyleBackColor = true;
+            this.btnModificarAloj.UseVisualStyleBackColor = false;
             this.btnModificarAloj.Click += new System.EventHandler(this.btnModificarAloj_Click);
+            this.btnModificarAloj.MouseEnter += new System.EventHandler(this.btnAgregarAloj_MouseEnter);
+            this.btnModificarAloj.MouseLeave += new System.EventHandler(this.btnAgregarAloj_MouseLeave);
             // 
             // cbAlojamientos
             // 
             this.cbAlojamientos.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbAlojamientos.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbAlojamientos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
             this.cbAlojamientos.FormattingEnabled = true;
-            this.cbAlojamientos.Location = new System.Drawing.Point(22, 29);
+            this.cbAlojamientos.Location = new System.Drawing.Point(22, 19);
             this.cbAlojamientos.Name = "cbAlojamientos";
             this.cbAlojamientos.Size = new System.Drawing.Size(654, 21);
             this.cbAlojamientos.TabIndex = 3;
             this.cbAlojamientos.SelectedIndexChanged += new System.EventHandler(this.cbAlojamientos_SelectedIndexChanged);
             this.cbAlojamientos.TextChanged += new System.EventHandler(this.cbAlojamientos_TextChanged);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.pictureBox1);
-            this.groupBox1.Controls.Add(this.btnBusqueda);
-            this.groupBox1.Location = new System.Drawing.Point(28, 266);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(607, 115);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Consulta general";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(22, 24);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(158, 72);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-            // 
-            // btnBusqueda
-            // 
-            this.btnBusqueda.Location = new System.Drawing.Point(512, 50);
-            this.btnBusqueda.Name = "btnBusqueda";
-            this.btnBusqueda.Size = new System.Drawing.Size(75, 46);
-            this.btnBusqueda.TabIndex = 5;
-            this.btnBusqueda.Text = "Buscar Alojamiento";
-            this.btnBusqueda.UseVisualStyleBackColor = true;
-            // 
             // gBreservas
             // 
+            this.gBreservas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(195)))), ((int)(((byte)(181)))));
             this.gBreservas.Controls.Add(this.btnConsultaReserva);
             this.gBreservas.Controls.Add(this.btnModificarReserva);
             this.gBreservas.Controls.Add(this.btnAgregarReserva);
             this.gBreservas.Controls.Add(this.cbReservas);
-            this.gBreservas.Location = new System.Drawing.Point(19, 147);
+            this.gBreservas.Location = new System.Drawing.Point(19, 226);
             this.gBreservas.Name = "gBreservas";
-            this.gBreservas.Size = new System.Drawing.Size(965, 93);
+            this.gBreservas.Size = new System.Drawing.Size(706, 167);
             this.gBreservas.TabIndex = 5;
             this.gBreservas.TabStop = false;
             this.gBreservas.Text = "Reservas";
             // 
             // btnConsultaReserva
             // 
-            this.btnConsultaReserva.Location = new System.Drawing.Point(875, 33);
+            this.btnConsultaReserva.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
+            this.btnConsultaReserva.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsultaReserva.Location = new System.Drawing.Point(239, 67);
             this.btnConsultaReserva.Name = "btnConsultaReserva";
-            this.btnConsultaReserva.Size = new System.Drawing.Size(75, 46);
+            this.btnConsultaReserva.Size = new System.Drawing.Size(100, 70);
             this.btnConsultaReserva.TabIndex = 6;
             this.btnConsultaReserva.Text = "Consultar Reserva";
-            this.btnConsultaReserva.UseVisualStyleBackColor = true;
+            this.btnConsultaReserva.UseVisualStyleBackColor = false;
             this.btnConsultaReserva.Click += new System.EventHandler(this.btnConsultaReserva_Click);
+            this.btnConsultaReserva.MouseEnter += new System.EventHandler(this.btnAgregarAloj_MouseEnter);
+            this.btnConsultaReserva.MouseLeave += new System.EventHandler(this.btnAgregarAloj_MouseLeave);
             // 
             // btnModificarReserva
             // 
-            this.btnModificarReserva.Location = new System.Drawing.Point(794, 33);
+            this.btnModificarReserva.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
+            this.btnModificarReserva.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificarReserva.Location = new System.Drawing.Point(133, 67);
             this.btnModificarReserva.Name = "btnModificarReserva";
-            this.btnModificarReserva.Size = new System.Drawing.Size(75, 46);
+            this.btnModificarReserva.Size = new System.Drawing.Size(100, 70);
             this.btnModificarReserva.TabIndex = 2;
             this.btnModificarReserva.Text = "Modoficar Reserva";
-            this.btnModificarReserva.UseVisualStyleBackColor = true;
+            this.btnModificarReserva.UseVisualStyleBackColor = false;
             this.btnModificarReserva.Click += new System.EventHandler(this.btnModificarReserva_Click);
+            this.btnModificarReserva.MouseEnter += new System.EventHandler(this.btnAgregarAloj_MouseEnter);
+            this.btnModificarReserva.MouseLeave += new System.EventHandler(this.btnAgregarAloj_MouseLeave);
             // 
             // btnAgregarReserva
             // 
-            this.btnAgregarReserva.Location = new System.Drawing.Point(713, 33);
+            this.btnAgregarReserva.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
+            this.btnAgregarReserva.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarReserva.Location = new System.Drawing.Point(27, 67);
             this.btnAgregarReserva.Name = "btnAgregarReserva";
-            this.btnAgregarReserva.Size = new System.Drawing.Size(75, 46);
+            this.btnAgregarReserva.Size = new System.Drawing.Size(100, 70);
             this.btnAgregarReserva.TabIndex = 1;
             this.btnAgregarReserva.Text = "Agregar Reserva";
-            this.btnAgregarReserva.UseVisualStyleBackColor = true;
+            this.btnAgregarReserva.UseVisualStyleBackColor = false;
             this.btnAgregarReserva.Click += new System.EventHandler(this.btnAgregarReserva_Click);
+            this.btnAgregarReserva.MouseEnter += new System.EventHandler(this.btnAgregarAloj_MouseEnter);
+            this.btnAgregarReserva.MouseLeave += new System.EventHandler(this.btnAgregarAloj_MouseLeave);
             // 
             // cbReservas
             // 
             this.cbReservas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbReservas.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbReservas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
             this.cbReservas.FormattingEnabled = true;
-            this.cbReservas.Location = new System.Drawing.Point(22, 33);
+            this.cbReservas.Location = new System.Drawing.Point(22, 19);
             this.cbReservas.Name = "cbReservas";
             this.cbReservas.Size = new System.Drawing.Size(654, 21);
             this.cbReservas.TabIndex = 0;
@@ -217,13 +212,14 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(195)))), ((int)(((byte)(181)))));
             this.groupBox2.Controls.Add(this.cbAlojamientos);
             this.groupBox2.Controls.Add(this.btnAgregarAloj);
             this.groupBox2.Controls.Add(this.btnModificarAloj);
             this.groupBox2.Controls.Add(this.btnConsultaAloj);
-            this.groupBox2.Location = new System.Drawing.Point(19, 27);
+            this.groupBox2.Location = new System.Drawing.Point(19, 46);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(965, 100);
+            this.groupBox2.Size = new System.Drawing.Size(706, 161);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Alojamientos";
@@ -238,7 +234,7 @@
             this.acercaDeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(996, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(740, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -449,28 +445,28 @@
             // importarToolStripMenuItem2
             // 
             this.importarToolStripMenuItem2.Name = "importarToolStripMenuItem2";
-            this.importarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.importarToolStripMenuItem2.Size = new System.Drawing.Size(129, 22);
             this.importarToolStripMenuItem2.Text = "Importar...";
             this.importarToolStripMenuItem2.Click += new System.EventHandler(this.importarToolStripMenuItem2_Click);
             // 
             // exportarToolStripMenuItem2
             // 
             this.exportarToolStripMenuItem2.Name = "exportarToolStripMenuItem2";
-            this.exportarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.exportarToolStripMenuItem2.Size = new System.Drawing.Size(129, 22);
             this.exportarToolStripMenuItem2.Text = "Exportar...";
             this.exportarToolStripMenuItem2.Click += new System.EventHandler(this.exportarToolStripMenuItem2_Click);
             // 
             // verListaToolStripMenuItem2
             // 
             this.verListaToolStripMenuItem2.Name = "verListaToolStripMenuItem2";
-            this.verListaToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.verListaToolStripMenuItem2.Size = new System.Drawing.Size(129, 22);
             this.verListaToolStripMenuItem2.Text = "Ver lista";
             this.verListaToolStripMenuItem2.Click += new System.EventHandler(this.verListaToolStripMenuItem2_Click);
             // 
             // graficoToolStripMenuItem1
             // 
             this.graficoToolStripMenuItem1.Name = "graficoToolStripMenuItem1";
-            this.graficoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.graficoToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
             this.graficoToolStripMenuItem1.Text = "Grafico";
             this.graficoToolStripMenuItem1.Click += new System.EventHandler(this.graficoToolStripMenuItem1_Click);
             // 
@@ -487,8 +483,15 @@
             // 
             this.informacionToolStripMenuItem.Name = "informacionToolStripMenuItem";
             this.informacionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
-            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.informacionToolStripMenuItem.Text = "Informacion";
+            // 
+            // ayudaToolStripMenuItem
+            // 
+            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.ayudaToolStripMenuItem.Text = "Ayuda";
+            this.ayudaToolStripMenuItem.Click += new System.EventHandler(this.ayudaToolStripMenuItem_Click);
             // 
             // printDialog1
             // 
@@ -498,21 +501,14 @@
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
-            // ayudaToolStripMenuItem
-            // 
-            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ayudaToolStripMenuItem.Text = "Ayuda";
-            this.ayudaToolStripMenuItem.Click += new System.EventHandler(this.ayudaToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(996, 258);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(97)))), ((int)(((byte)(104)))));
+            this.ClientSize = new System.Drawing.Size(740, 410);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gBreservas);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -520,8 +516,6 @@
             this.Text = "Reservas 1.0";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gBreservas.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -537,9 +531,6 @@
         private System.Windows.Forms.Button btnAgregarAloj;
         private System.Windows.Forms.Button btnConsultaAloj;
         private System.Windows.Forms.Button btnModificarAloj;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnBusqueda;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox gBreservas;
         private System.Windows.Forms.Button btnConsultaReserva;
         private System.Windows.Forms.Button btnModificarReserva;

@@ -17,29 +17,33 @@ namespace TP_II
 {
     public partial class Form1 : Form, IInterectuable
     {
+
+        Color[] paleta= new Color[5];
         Empresa empresa;
         ConsultaForm vConsulta = null;
         string nombreArchivo = Application.StartupPath + @"\persistencia.dat";
         bool restart = false;
+        bool primeraVez = false;
         Image[] imagenes; // Imagenes de un alojamiento
         List<Cliente> pasajeros = new List<Cliente>(); // Pasajeros adicionales reserva
         int capacidad = 0; // Auxiliar para evento click agregar pasajeros
         Reserva temp = null; // Objeto auxiliar para imprimir comprobante 
         int copia = 0; // Para comprobante duplicado                          
         GraficoForm vGrafico;
+       
         public Form1()
         {
             InitializeComponent();
             btnModificarAloj.Enabled = false;
             btnModificarReserva.Enabled = false;
             btnConsultaAloj.Enabled = false;
-            btnConsultaReserva.Enabled = false;    
+            btnConsultaReserva.Enabled = false;
+            
         }
-
+       
         private void Form1_Load(object sender, EventArgs e)
         {
-            bool primeraVez = false;
-
+          
             if (File.Exists(nombreArchivo))
             {
                 FileStream fs;
@@ -70,45 +74,8 @@ namespace TP_II
                 primeraVez = true;
                 ActualizarListas();
             }
-
-
-            PrecioBaseForm vInicio = new PrecioBaseForm();
-
-            if (empresa.Preguntar)
-            {
-                if (primeraVez)
-                {
-                    vInicio.rbSi.Checked = true;
-                    vInicio.rbNo.Enabled = false;
-                }
-
-                vInicio.btnContinuar.Enabled = false;
-
-                if (vInicio.ShowDialog() == DialogResult.OK)
-                {
-                    empresa.Preguntar = !vInicio.cbPreguntar.Checked;
-                    if (vInicio.rbSi.Checked)
-                        empresa.PrecioBaseHotel = Convert.ToDouble(vInicio.tbPrecio.Text);
-                }
-            }
-
-            vInicio.Dispose();
-
-            if (cbAlojamientos.Text != "" || cbAlojamientos.SelectedIndex != -1)
-            {
-                btnModificarAloj.Enabled = true;
-                btnConsultaAloj.Enabled = true;
-                modificarToolStripMenuItem.Enabled = true;
-                consultarToolStripMenuItem.Enabled = true;
-
-            }
-            else
-            {
-                btnConsultaAloj.Enabled = false;
-                btnModificarAloj.Enabled = false;
-                modificarToolStripMenuItem.Enabled = false;
-                consultarToolStripMenuItem.Enabled = false;
-            }
+            Form_Inicio();
+            Pintarcontroles(this);    
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -130,6 +97,129 @@ namespace TP_II
                 {
                     MessageBox.Show(ex.Message);
                 }  
+            }
+        }
+        private void Form_Inicio()
+        {
+            InicioForm vInicio = new InicioForm();
+            if (empresa.Preguntar)
+            {
+                if (primeraVez)
+                {
+                    vInicio.rbSi.Checked = true;
+                    vInicio.rbNo.Enabled = false;
+                }
+                vInicio.btnContinuar.Enabled = false;
+                vInicio.rb5.Checked = true;
+                SetColors(1);
+                vInicio.p1.BackColor = GetColors(5);
+                SetColors(2);
+                vInicio.p2.BackColor = GetColors(5);
+                SetColors(3);
+                vInicio.p3.BackColor = GetColors(5);
+                SetColors(4);
+                vInicio.p4.BackColor = GetColors(4);
+                vInicio.p5.BackColor = GetColors(2);
+                SetColors(5);
+                vInicio.p6.BackColor = GetColors(5);
+                vInicio.p7.BackColor = GetColors(2);
+                Pintarcontroles(vInicio);
+
+                if (vInicio.ShowDialog() == DialogResult.OK)
+                {
+                    empresa.Preguntar = !vInicio.cbPreguntar.Checked;
+                    if (vInicio.rbSi.Checked)
+                        empresa.PrecioBaseHotel = Convert.ToDouble(vInicio.tbPrecio.Text);
+
+                    if (vInicio.rb1.Checked)
+                        SetColors(1);
+                    if (vInicio.rb2.Checked)
+                        SetColors(2);
+                    if (vInicio.rb3.Checked)
+                        SetColors(3);
+                    if (vInicio.rb4.Checked)
+                        SetColors(4);
+                    if (vInicio.rb5.Checked)
+                        SetColors(5);
+                }
+            }
+            else
+            {
+                SetColors(empresa.IndiceColor);
+            }
+
+            if (cbAlojamientos.Text != "" || cbAlojamientos.SelectedIndex != -1)
+            {
+                btnModificarAloj.Enabled = true;
+                btnConsultaAloj.Enabled = true;
+                modificarToolStripMenuItem.Enabled = true;
+                consultarToolStripMenuItem.Enabled = true;
+
+            }
+            else
+            {
+                btnConsultaAloj.Enabled = false;
+                btnModificarAloj.Enabled = false;
+                modificarToolStripMenuItem.Enabled = false;
+                consultarToolStripMenuItem.Enabled = false;
+            }
+            vInicio.Dispose();
+        }
+        public Color GetColors(int i)
+        {
+            return paleta[i - 1];
+        }
+        public void SetColors(int i)
+        {
+            empresa.IndiceColor = i;
+            switch (i)
+            {
+                case 1:
+                    {
+                        paleta[0] = Color.FromArgb(255, 212, 165, 189);
+                        paleta[1] = Color.FromArgb(255, 194, 148, 171);
+                        paleta[2] = Color.FromArgb(255, 175, 130, 154);
+                        paleta[3] = Color.FromArgb(255, 157, 113, 136);
+                        paleta[4] = Color.FromArgb(255, 138, 95, 118);
+                    }
+                    break;
+                case 2:
+                    {
+                        paleta[4] = Color.FromArgb(255, 165, 183, 149);
+                        paleta[3] = Color.FromArgb(255, 185, 201, 174);
+                        paleta[2] = Color.FromArgb(255, 208, 219, 199);
+                        paleta[1] = Color.FromArgb(255, 232, 237, 224);
+                        paleta[0] = Color.FromArgb(255, 255, 255, 249);
+                    }
+                    break;
+                case 3:
+                    {
+                        paleta[0] = Color.FromArgb(255, 255, 255, 161);
+                        paleta[1] = Color.FromArgb(255, 248, 209, 113);
+                        paleta[2] = Color.FromArgb(255, 88, 122, 168);
+                        paleta[3] = Color.FromArgb(255, 245, 186, 88);
+                        paleta[4] = Color.FromArgb(255, 241, 163, 64);
+                    }
+                    break;
+                case 4:
+                    {
+                        paleta[0] = Color.FromArgb(255, 76, 167, 203);
+                        paleta[1] = Color.FromArgb(255, 57, 150, 185);
+                        paleta[2] = Color.FromArgb(255, 38, 133, 167);
+                        paleta[3] = Color.FromArgb(255, 19, 115, 149);
+                        paleta[4] = Color.FromArgb(255, 76, 86, 84);
+                    }
+                    break;
+                case 5:
+                    {
+                        paleta[0] = Color.FromArgb(255, 255, 248, 212);
+                        paleta[1] = Color.FromArgb(255, 245, 223, 152);
+                        paleta[2] = Color.FromArgb(255, 175, 130, 154);
+                        paleta[3] = Color.FromArgb(255, 192, 209, 194);
+                        paleta[4] = Color.FromArgb(255, 46, 67, 71);
+
+                    }
+                    break;
             }
         }
 
@@ -167,6 +257,15 @@ namespace TP_II
                 nuevos.AddRange(empresa.FiltrarCasas(Convert.ToInt16(c.numUDcamasCasa.Value), servicios));
                 nuevos.AddRange(empresa.FiltrarHoteles(c.checkB3Estrellas.Checked));
             }
+            if (c.checkBoxFiltrarPorLugar.Checked == true)
+            {
+                string ciudad= c.cBoxCiudad.Text.Trim(' ');
+                if (ciudad != "")
+                    empresa.FiltrarLugarRango(nuevos, c.cBoxProvincia.Text, ciudad);
+                else
+                    MessageBox.Show("No hay establecimientos en la provincia solicitada");
+
+            }
 
             if (c.chechBoxFiltrarPorFecha.Checked)
             {
@@ -176,6 +275,91 @@ namespace TP_II
             a.AddRange(nuevos);
 
             return a;
+        }
+        public void Pintarcontroles(Form f)
+        {
+            // ----------------------- Color set -------------------------------- //
+            // -------------------------------------------------------------------//
+            f.BackColor = GetColors(5);
+
+            foreach (Control control in f.Controls)
+            {
+                if (control is MenuStrip || control is Button)
+                { control.BackColor = GetColors(2); }
+                if (control is DataGridView)
+                { control.BackColor = GetColors(1); }
+
+                if (control is GroupBox)
+                {
+                    control.BackColor = GetColors(4);
+                    foreach (Control subControl in control.Controls)
+                    {
+                        if (subControl is Button || subControl is ComboBox)
+                        { subControl.BackColor = GetColors(2); }
+
+                        if (subControl is TextBox || subControl is NumericUpDown)
+                        { subControl.BackColor = GetColors(1); }
+
+                        if (subControl is DateTimePicker)
+                        {
+                            ((DateTimePicker)subControl).CalendarMonthBackground = GetColors(1);
+                        }
+                    }
+                }
+
+            }
+
+            // -------------------------------------------------------------------//
+            // ----------------------- Color set -------------------------------- //
+        }
+        public void EmitirComprobante(Reserva r)
+        {
+            ComprobanteForm comprobante = new ComprobanteForm();
+            Pintarcontroles(comprobante);
+            string[] datos = r.DatosComprobante;
+            temp = r;
+
+            // Manejo evento click del boton "Imprimir" en ventana ComprobanteForm
+            comprobante.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+
+            comprobante.lbComprobante.Items.Add("Fecha: " + datos[3]);
+            comprobante.lbComprobante.Items.Add("");
+            comprobante.lbComprobante.Items.Add(datos[0]);
+            comprobante.lbComprobante.Items.Add("");
+            comprobante.lbComprobante.Items.Add(datos[2]);
+            comprobante.lbComprobante.Items.Add("");
+            comprobante.lbComprobante.Items.Add("Pasajeros admitidos: " + datos[1]);
+            comprobante.lbComprobante.Items.Add("");
+            comprobante.lbComprobante.Items.Add("Acompañantes: ");
+
+            string acom = datos[7].TrimEnd('-');
+            if (acom != "")
+            {
+
+                List<string> nombres = new List<string>();
+                if (acom.Contains('-'))
+                    nombres.AddRange(acom.Split('-'));
+                else
+                    nombres.Add(acom);
+
+                foreach (string s in nombres)
+                    comprobante.lbComprobante.Items.Add("             -" + s);
+            }
+            else
+                comprobante.lbComprobante.Items.Add("          --- No hay --");
+            //comprobante.lbComprobante.Items.Add(datos[7]);
+            comprobante.lbComprobante.Items.Add("");
+            comprobante.lbComprobante.Items.Add(datos[4]);
+            comprobante.lbComprobante.Items.Add("");
+            comprobante.lbComprobante.Items.Add("Costo por dia " + String.Format("${0:C2}", datos[5]));
+            comprobante.lbComprobante.Items.Add("");
+            comprobante.lbComprobante.Items.Add("Precio total " + String.Format("${0:C2}", datos[6]));
+
+            comprobante.ShowDialog();
+            comprobante.Dispose();
+            // Quito evento click del boton "Imprimir" en ventana ComprobanteForm
+            comprobante.btnImprimir.Click -= new System.EventHandler(this.btnImprimir_Click);
+            temp = null;
         }
         public object BuscarAlojamiento(object unAlojameinto)
         {
@@ -210,6 +394,10 @@ namespace TP_II
         {
             return empresa.PrecioBaseHotel;
         }
+
+        
+
+
         ///------------------------------------------------------------------------------------------------
 
 
@@ -244,7 +432,7 @@ namespace TP_II
 
             ventanaABM.cBoxProvincia.Items.AddRange(empresa.Jurisdicciones.ToArray());
             ventanaABM.tbNumCasa.Text = numCasa.ToString();
-        
+            Pintarcontroles(ventanaABM);
 
             if (ventanaABM.ShowDialog() == DialogResult.OK)
             {
@@ -334,6 +522,7 @@ namespace TP_II
         private void btnModificarAloj_Click(object sender, EventArgs e)
         {
             ABMAlojamientosForm vModificacion = new ABMAlojamientosForm();
+            Pintarcontroles(vModificacion);
             vModificacion.setInteractor(this);
 
             int indice = cbAlojamientos.SelectedIndex;
@@ -543,11 +732,11 @@ namespace TP_II
         //Evento click boton Agregar pasajeros ventana DatosCliente
         public void btnPasajeros_Click(object sender, EventArgs e)
         {
+            DatosClienteForm vPasajero = new DatosClienteForm();
+            Pintarcontroles(vPasajero);
+            vPasajero.btnPasajeros.Visible = false;
             if (pasajeros.Count < (capacidad - 1)) 
             {
-                DatosClienteForm vPasajero = new DatosClienteForm();
-                vPasajero.btnPasajeros.Visible = false;
-
                 if (vPasajero.ShowDialog() == DialogResult.OK)
                 {
                     string nombre = vPasajero.tbNombre.Text;
@@ -565,6 +754,7 @@ namespace TP_II
         private void btnConsultaAloj_Click(object sender, EventArgs e)
         {
             AlojamientoForm vAlojomiento = new AlojamientoForm();
+            Pintarcontroles(vAlojomiento);
             vAlojomiento.btnCancelarReserva.Visible = false;
             string[] campos = new string[2];
             campos = cbAlojamientos.Text.Split('-');
@@ -599,7 +789,7 @@ namespace TP_II
                     else
                     {
                         DatosClienteForm vCliente = new DatosClienteForm();
-                        
+                        Pintarcontroles(vCliente);
                         // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
                         vCliente.btnPasajeros.Click += new System.EventHandler(this.btnPasajeros_Click);
 
@@ -718,8 +908,11 @@ namespace TP_II
         private void btnAgregarReserva_Click(object sender, EventArgs e)
         {
             vConsulta = new ConsultaForm();
+            Pintarcontroles(vConsulta);
             vConsulta.gBoxFiltroFecha.Enabled = false;
+
             vConsulta.SetConsultor(this);
+            vConsulta.cBoxProvincia.Items.AddRange(empresa.Jurisdicciones.ToArray());
             vConsulta.ShowDialog();
             ActualizarListas();
             vConsulta.Dispose();
@@ -731,6 +924,7 @@ namespace TP_II
             Reserva unaReserva = empresa.ListaDeReservas[indice];
             Alojamiento unAlojamiento = unaReserva.Alojamiento;
             AlojamientoForm vAlojomiento = new AlojamientoForm();
+            Pintarcontroles(vAlojomiento);
             vAlojomiento.btnCancelarReserva.Enabled = false;
             vAlojomiento.btnReservar.Enabled = false;
             vAlojomiento.btnImprimir.Enabled = true;
@@ -789,6 +983,7 @@ namespace TP_II
             List<Cliente> acomp = unaReserva.Pasajeros;
 
             AlojamientoForm vAlojomiento = new AlojamientoForm();
+            Pintarcontroles(vAlojomiento);
             vAlojomiento.btnCancelarReserva.Enabled = true;
             vAlojomiento.btnReservar.Enabled = true;
             vAlojomiento.btnImprimir.Enabled = false;
@@ -832,8 +1027,8 @@ namespace TP_II
                     else
                     {
                         DatosClienteForm vCliente = new DatosClienteForm();
+                        Pintarcontroles(vCliente);
                         vCliente.btnPasajeros.Visible = false;
-
                         vCliente.tbNombre.Text = unaReserva.getCliente.Nombre;
                         vCliente.tbApellido.Text = unaReserva.getCliente.Apellido;
                         vCliente.tbDni.Text = unaReserva.getCliente.DNI.ToString();
@@ -911,6 +1106,7 @@ namespace TP_II
                     else
                     {
                         DatosClienteForm vCliente = new DatosClienteForm();
+                        Pintarcontroles(vCliente);
                         vCliente.btnPasajeros.Visible = false;
 
                         vCliente.tbNombre.Text = unaReserva.getCliente.Nombre;
@@ -972,6 +1168,7 @@ namespace TP_II
         // BLOQUEAR Y DESBLOQUEAR CONTROLES ALOJAMIENTO::
         // BLOQUEAR Y DESBLOQUEAR CONTROLES ALOJAMIENTO::
 
+        
         private void cbAlojamientos_SelectedIndexChanged(object sender, EventArgs e)
         {
             BloquearControlesAlojamiento();
@@ -1044,54 +1241,7 @@ namespace TP_II
 
         }
 
-        public void EmitirComprobante(Reserva r)
-        {
-            ComprobanteForm comprobante = new ComprobanteForm();
-            string[] datos = r.DatosComprobante;
-            temp = r;
-
-            // Manejo evento click del boton "Imprimir" en ventana ComprobanteForm
-            comprobante.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
-
-            comprobante.lbComprobante.Items.Add("Fecha: "+datos[3]);
-            comprobante.lbComprobante.Items.Add("");
-            comprobante.lbComprobante.Items.Add(datos[0]);
-            comprobante.lbComprobante.Items.Add("");
-            comprobante.lbComprobante.Items.Add(datos[2]);
-            comprobante.lbComprobante.Items.Add("");
-            comprobante.lbComprobante.Items.Add("Pasajeros admitidos: "+ datos[1]);
-            comprobante.lbComprobante.Items.Add("");
-            comprobante.lbComprobante.Items.Add("Acompañantes: ");
-
-            string acom = datos[7].TrimEnd('-');
-            if (acom != "")
-            {
-                
-                List<string> nombres = new List<string>();
-                if (acom.Contains('-'))
-                    nombres.AddRange(acom.Split('-'));
-                else
-                    nombres.Add(acom);
-
-                foreach (string s in nombres)
-                    comprobante.lbComprobante.Items.Add("             -" + s);
-            }
-            else
-                comprobante.lbComprobante.Items.Add("          --- No hay --");
-            //comprobante.lbComprobante.Items.Add(datos[7]);
-            comprobante.lbComprobante.Items.Add("");
-            comprobante.lbComprobante.Items.Add(datos[4]);
-            comprobante.lbComprobante.Items.Add("");
-            comprobante.lbComprobante.Items.Add("Costo por dia "+ String.Format("${0:C2}", datos[5]));
-            comprobante.lbComprobante.Items.Add("");
-            comprobante.lbComprobante.Items.Add("Precio total "+ String.Format("${0:C2}", datos[6]));
-
-            comprobante.ShowDialog();
-            comprobante.Dispose();
-            // Quito evento click del boton "Imprimir" en ventana ComprobanteForm
-            comprobante.btnImprimir.Click -= new System.EventHandler(this.btnImprimir_Click);
-            temp = null;
-        }
+        
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
@@ -1258,19 +1408,8 @@ namespace TP_II
 
         private void precioBaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrecioBaseForm vInicio = new PrecioBaseForm();
-            vInicio.Text = "Modificar Precio Base de Hoteles";
-
-            vInicio.rbSi.Checked = true;
-            vInicio.btnContinuar.Enabled = false;
-
-            if (vInicio.ShowDialog() == DialogResult.OK)
-            {
-                empresa.Preguntar = !vInicio.cbPreguntar.Checked;
-                if (vInicio.rbSi.Checked)
-                    empresa.PrecioBaseHotel = Convert.ToDouble(vInicio.tbPrecio.Text);
-            }
-            vInicio.Dispose();
+            empresa.Preguntar = true;
+            Form_Inicio();          
         }
 
         //MENU STRIP ALOJAMIENTO:::::
@@ -1431,7 +1570,7 @@ namespace TP_II
             sfd.InitialDirectory = path;
             sfd.DefaultExt = ".txt";
             sfd.AddExtension = true;
-            sfd.FileName = string.Format("Exportacion Alojamientos - {0}",DateTime.Now.ToLongDateString()); ;
+            sfd.FileName = string.Format("Exportacion Alojamientos - {0}",DateTime.Now.ToLongDateString());
             FileStream fs;
             StreamWriter sw;
 
@@ -2205,7 +2344,9 @@ namespace TP_II
             SaveFileDialog sfd = new SaveFileDialog();
 
             sfd.InitialDirectory = path;
-            sfd.DefaultExt = ".txt"; sfd.AddExtension = true;
+            sfd.DefaultExt = ".txt";
+            sfd.AddExtension = true;
+            sfd.FileName = string.Format("Exportacion Clientes - {0}", DateTime.Now.ToLongDateString());
             //ofd.Filter = "texto |.txt";
             FileStream fs;
             StreamWriter sw;
@@ -2332,8 +2473,8 @@ namespace TP_II
         private void DibujarGraficoClientes(object sender, PaintEventArgs e)
         {
             Dictionary<int, double[]> d = empresa.DatosGraficoClientes();
-            Brush relleno = new SolidBrush(Color.LightBlue);
-            Font letra = new Font("Times New Roman", 13, FontStyle.Bold);
+            Brush relleno=null;
+            Font letra = null;
             int alto;
             int ancho = 150;
             string texto;
@@ -2356,11 +2497,13 @@ namespace TP_II
                 {
                     p1 = new Point(puntero[0] + 20, vGrafico.pb.Height - (alto / 2));
                     p2 = new Point(puntero[0] + 15, (vGrafico.pb.Height - (alto / 2)) + 15);
+                    letra = new Font("Times New Roman", 13, FontStyle.Bold);
                 }        
                 else
                 {
                     p1 = new Point(puntero[0] + 20, vGrafico.pb.Height - (alto -5));
                     p2 = new Point(puntero[0] + 15, (vGrafico.pb.Height - (alto -5)) + 15);
+                    letra = new Font("Times New Roman", 10, FontStyle.Bold);
                 }
                 texto = string.Format("{0} Cliente", pair.Key);
                 e.Graphics.DrawString(texto, letra, relleno, p1);
@@ -2377,17 +2520,25 @@ namespace TP_II
         {
             AyudaForm vAyuda = new AyudaForm();
             vAyuda.ShowDialog();
+            vAyuda.Dispose();
         }
 
-        //MENU STRIP ACERCADE - INFO:::::
-        //MENU STRIP ACERCADE - INFO:::::
-        //MENU STRIP ACERCADE - INFO:::::
-        //MENU STRIP ACERCADE - INFO:::::
-        /*
-        private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
+
+
+        //    Efecto para botones
+
+        private void btnAgregarAloj_MouseEnter(object sender, EventArgs e)
+        {    
+            // 215; 199; 190
+            ((Button)sender).BackColor=GetColors(1);
+        }
+
+        private void btnAgregarAloj_MouseLeave(object sender, EventArgs e)
         {
+            // 179; 197; 186
 
+            ((Button)sender).BackColor = GetColors(2);
         }
-        */
+
     }
 }

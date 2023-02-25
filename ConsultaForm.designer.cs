@@ -38,12 +38,6 @@
             this.gBoxFecha = new System.Windows.Forms.GroupBox();
             this.checkB3Estrellas = new System.Windows.Forms.CheckBox();
             this.dataGridDisponibles = new System.Windows.Forms.DataGridView();
-            this.columnaTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnaDirección = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnaNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnaEstrellas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnaCapacidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.minDias = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gBoxCasa = new System.Windows.Forms.GroupBox();
             this.numUDcamasCasa = new System.Windows.Forms.NumericUpDown();
             this.lbCamasCasa = new System.Windows.Forms.Label();
@@ -56,12 +50,27 @@
             this.checkBCochera = new System.Windows.Forms.CheckBox();
             this.gBoxFiltroFecha = new System.Windows.Forms.GroupBox();
             this.chechBoxFiltrarPorFecha = new System.Windows.Forms.CheckBox();
+            this.columnaTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnaDirección = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnaNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnaEstrellas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnaCapacidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.minDias = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Provincia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkBoxFiltrarPorLugar = new System.Windows.Forms.CheckBox();
+            this.gbFiltroLugar = new System.Windows.Forms.GroupBox();
+            this.lbProvincia = new System.Windows.Forms.Label();
+            this.lbCiudad = new System.Windows.Forms.Label();
+            this.cBoxCiudad = new System.Windows.Forms.ComboBox();
+            this.cBoxProvincia = new System.Windows.Forms.ComboBox();
             this.gBoxFecha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDisponibles)).BeginInit();
             this.gBoxCasa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUDcamasCasa)).BeginInit();
             this.gBoxServicios.SuspendLayout();
             this.gBoxFiltroFecha.SuspendLayout();
+            this.gbFiltroLugar.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxCasa
@@ -76,7 +85,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(586, 248);
+            this.btnBuscar.Location = new System.Drawing.Point(747, 262);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(110, 36);
             this.btnBuscar.TabIndex = 1;
@@ -98,7 +107,7 @@
             // lbFechaInicio
             // 
             this.lbFechaInicio.AutoSize = true;
-            this.lbFechaInicio.Location = new System.Drawing.Point(72, 34);
+            this.lbFechaInicio.Location = new System.Drawing.Point(101, 25);
             this.lbFechaInicio.Name = "lbFechaInicio";
             this.lbFechaInicio.Size = new System.Drawing.Size(68, 13);
             this.lbFechaInicio.TabIndex = 3;
@@ -107,7 +116,7 @@
             // lbFechaFinal
             // 
             this.lbFechaFinal.AutoSize = true;
-            this.lbFechaFinal.Location = new System.Drawing.Point(301, 34);
+            this.lbFechaFinal.Location = new System.Drawing.Point(441, 25);
             this.lbFechaFinal.Name = "lbFechaFinal";
             this.lbFechaFinal.Size = new System.Drawing.Size(65, 13);
             this.lbFechaFinal.TabIndex = 4;
@@ -115,7 +124,9 @@
             // 
             // dtPickerInicio
             // 
-            this.dtPickerInicio.Location = new System.Drawing.Point(155, 31);
+            this.dtPickerInicio.CalendarMonthBackground = System.Drawing.SystemColors.HotTrack;
+            this.dtPickerInicio.CalendarTrailingForeColor = System.Drawing.Color.HotPink;
+            this.dtPickerInicio.Location = new System.Drawing.Point(184, 22);
             this.dtPickerInicio.Name = "dtPickerInicio";
             this.dtPickerInicio.Size = new System.Drawing.Size(126, 20);
             this.dtPickerInicio.TabIndex = 5;
@@ -123,7 +134,7 @@
             // 
             // dtPickerFinal
             // 
-            this.dtPickerFinal.Location = new System.Drawing.Point(386, 32);
+            this.dtPickerFinal.Location = new System.Drawing.Point(526, 23);
             this.dtPickerFinal.Name = "dtPickerFinal";
             this.dtPickerFinal.Size = new System.Drawing.Size(126, 20);
             this.dtPickerFinal.TabIndex = 6;
@@ -156,6 +167,7 @@
             this.dataGridDisponibles.AllowUserToDeleteRows = false;
             this.dataGridDisponibles.AllowUserToResizeColumns = false;
             this.dataGridDisponibles.AllowUserToResizeRows = false;
+            this.dataGridDisponibles.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridDisponibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridDisponibles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnaTipo,
@@ -163,48 +175,15 @@
             this.columnaNombre,
             this.columnaEstrellas,
             this.columnaCapacidad,
-            this.minDias});
+            this.minDias,
+            this.Provincia,
+            this.ciudad});
             this.dataGridDisponibles.Location = new System.Drawing.Point(12, 315);
             this.dataGridDisponibles.Name = "dataGridDisponibles";
             this.dataGridDisponibles.RowHeadersVisible = false;
-            this.dataGridDisponibles.Size = new System.Drawing.Size(684, 242);
+            this.dataGridDisponibles.Size = new System.Drawing.Size(845, 242);
             this.dataGridDisponibles.TabIndex = 8;
             this.dataGridDisponibles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDisponibles_CellDoubleClick);
-            // 
-            // columnaTipo
-            // 
-            this.columnaTipo.HeaderText = "Tipo";
-            this.columnaTipo.Name = "columnaTipo";
-            this.columnaTipo.ReadOnly = true;
-            // 
-            // columnaDirección
-            // 
-            this.columnaDirección.HeaderText = "Dirección";
-            this.columnaDirección.Name = "columnaDirección";
-            this.columnaDirección.ReadOnly = true;
-            // 
-            // columnaNombre
-            // 
-            this.columnaNombre.HeaderText = "Nombre";
-            this.columnaNombre.Name = "columnaNombre";
-            this.columnaNombre.ReadOnly = true;
-            // 
-            // columnaEstrellas
-            // 
-            this.columnaEstrellas.HeaderText = "Status";
-            this.columnaEstrellas.Name = "columnaEstrellas";
-            this.columnaEstrellas.ReadOnly = true;
-            // 
-            // columnaCapacidad
-            // 
-            this.columnaCapacidad.HeaderText = "Capacidad";
-            this.columnaCapacidad.Name = "columnaCapacidad";
-            this.columnaCapacidad.ReadOnly = true;
-            // 
-            // minDias
-            // 
-            this.minDias.HeaderText = "Mínimo de días";
-            this.minDias.Name = "minDias";
             // 
             // gBoxCasa
             // 
@@ -213,7 +192,7 @@
             this.gBoxCasa.Controls.Add(this.gBoxServicios);
             this.gBoxCasa.Location = new System.Drawing.Point(12, 83);
             this.gBoxCasa.Name = "gBoxCasa";
-            this.gBoxCasa.Size = new System.Drawing.Size(684, 147);
+            this.gBoxCasa.Size = new System.Drawing.Size(558, 147);
             this.gBoxCasa.TabIndex = 12;
             this.gBoxCasa.TabStop = false;
             this.gBoxCasa.Text = "Filtro Casa";
@@ -222,7 +201,7 @@
             // 
             this.numUDcamasCasa.Location = new System.Drawing.Point(118, 35);
             this.numUDcamasCasa.Maximum = new decimal(new int[] {
-            20,
+            999,
             0,
             0,
             0});
@@ -257,7 +236,7 @@
             this.gBoxServicios.Controls.Add(this.checkBMascota);
             this.gBoxServicios.Controls.Add(this.checkBPileta);
             this.gBoxServicios.Controls.Add(this.checkBCochera);
-            this.gBoxServicios.Location = new System.Drawing.Point(210, 19);
+            this.gBoxServicios.Location = new System.Drawing.Point(223, 19);
             this.gBoxServicios.Name = "gBoxServicios";
             this.gBoxServicios.Size = new System.Drawing.Size(317, 112);
             this.gBoxServicios.TabIndex = 8;
@@ -332,7 +311,7 @@
             this.gBoxFiltroFecha.Controls.Add(this.lbFechaFinal);
             this.gBoxFiltroFecha.Location = new System.Drawing.Point(13, 237);
             this.gBoxFiltroFecha.Name = "gBoxFiltroFecha";
-            this.gBoxFiltroFecha.Size = new System.Drawing.Size(526, 60);
+            this.gBoxFiltroFecha.Size = new System.Drawing.Size(722, 60);
             this.gBoxFiltroFecha.TabIndex = 14;
             this.gBoxFiltroFecha.TabStop = false;
             this.gBoxFiltroFecha.Text = "Filtro Fecha";
@@ -341,7 +320,7 @@
             // 
             this.chechBoxFiltrarPorFecha.AutoSize = true;
             this.chechBoxFiltrarPorFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chechBoxFiltrarPorFecha.Location = new System.Drawing.Point(597, 59);
+            this.chechBoxFiltrarPorFecha.Location = new System.Drawing.Point(636, 50);
             this.chechBoxFiltrarPorFecha.Name = "chechBoxFiltrarPorFecha";
             this.chechBoxFiltrarPorFecha.Size = new System.Drawing.Size(99, 17);
             this.chechBoxFiltrarPorFecha.TabIndex = 15;
@@ -349,11 +328,130 @@
             this.chechBoxFiltrarPorFecha.UseVisualStyleBackColor = true;
             this.chechBoxFiltrarPorFecha.CheckedChanged += new System.EventHandler(this.chechBoxFiltrarPorFecha_CheckedChanged);
             // 
+            // columnaTipo
+            // 
+            this.columnaTipo.HeaderText = "Tipo";
+            this.columnaTipo.Name = "columnaTipo";
+
+            this.columnaTipo.ReadOnly = true;
+
+            // 
+            // columnaDirección
+            // 
+            this.columnaDirección.HeaderText = "Dirección";
+            this.columnaDirección.Name = "columnaDirección";
+            this.columnaDirección.ReadOnly = true;
+            // 
+            // columnaNombre
+            // 
+            this.columnaNombre.HeaderText = "Nombre";
+            this.columnaNombre.Name = "columnaNombre";
+            this.columnaNombre.ReadOnly = true;
+            // 
+            // columnaEstrellas
+            // 
+            this.columnaEstrellas.HeaderText = "Status";
+            this.columnaEstrellas.Name = "columnaEstrellas";
+
+            this.columnaEstrellas.ReadOnly = true;
+
+            // 
+            // columnaCapacidad
+            // 
+            this.columnaCapacidad.HeaderText = "Capacidad";
+            this.columnaCapacidad.Name = "columnaCapacidad";
+
+            this.columnaCapacidad.ReadOnly = true;
+
+            // 
+            // minDias
+            // 
+            this.minDias.HeaderText = "Mínimo de días";
+            this.minDias.Name = "minDias";
+            this.minDias.ReadOnly = true;
+            // 
+            // Provincia
+            // 
+            this.Provincia.HeaderText = "Provincia";
+            this.Provincia.Name = "Provincia";
+            this.Provincia.ReadOnly = true;
+            // 
+            // ciudad
+            // 
+            this.ciudad.HeaderText = "Ciudad";
+            this.ciudad.Name = "ciudad";
+            this.ciudad.ReadOnly = true;
+            // 
+            // checkBoxFiltrarPorLugar
+            // 
+            this.checkBoxFiltrarPorLugar.AutoSize = true;
+            this.checkBoxFiltrarPorLugar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxFiltrarPorLugar.Location = new System.Drawing.Point(762, 50);
+            this.checkBoxFiltrarPorLugar.Name = "checkBoxFiltrarPorLugar";
+            this.checkBoxFiltrarPorLugar.Size = new System.Drawing.Size(95, 17);
+            this.checkBoxFiltrarPorLugar.TabIndex = 16;
+            this.checkBoxFiltrarPorLugar.Text = "Filtrar por lugar";
+            this.checkBoxFiltrarPorLugar.UseVisualStyleBackColor = true;
+            this.checkBoxFiltrarPorLugar.CheckedChanged += new System.EventHandler(this.checkBoxFiltrarPorLugar_CheckedChanged);
+            // 
+            // gbFiltroLugar
+            // 
+            this.gbFiltroLugar.Controls.Add(this.cBoxCiudad);
+            this.gbFiltroLugar.Controls.Add(this.cBoxProvincia);
+            this.gbFiltroLugar.Controls.Add(this.lbCiudad);
+            this.gbFiltroLugar.Controls.Add(this.lbProvincia);
+            this.gbFiltroLugar.Location = new System.Drawing.Point(577, 83);
+            this.gbFiltroLugar.Name = "gbFiltroLugar";
+            this.gbFiltroLugar.Size = new System.Drawing.Size(280, 147);
+            this.gbFiltroLugar.TabIndex = 17;
+            this.gbFiltroLugar.TabStop = false;
+            this.gbFiltroLugar.Text = "Filtro Lugar";
+            // 
+            // lbProvincia
+            // 
+            this.lbProvincia.AutoSize = true;
+            this.lbProvincia.Location = new System.Drawing.Point(30, 19);
+            this.lbProvincia.Name = "lbProvincia";
+            this.lbProvincia.Size = new System.Drawing.Size(54, 13);
+            this.lbProvincia.TabIndex = 4;
+            this.lbProvincia.Text = "Provincia:";
+            // 
+            // lbCiudad
+            // 
+            this.lbCiudad.AutoSize = true;
+            this.lbCiudad.Location = new System.Drawing.Point(30, 73);
+            this.lbCiudad.Name = "lbCiudad";
+            this.lbCiudad.Size = new System.Drawing.Size(43, 13);
+            this.lbCiudad.TabIndex = 5;
+            this.lbCiudad.Text = "Ciudad:";
+            // 
+            // cBoxCiudad
+            // 
+            this.cBoxCiudad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxCiudad.FormattingEnabled = true;
+            this.cBoxCiudad.Location = new System.Drawing.Point(33, 100);
+            this.cBoxCiudad.Name = "cBoxCiudad";
+            this.cBoxCiudad.Size = new System.Drawing.Size(214, 21);
+            this.cBoxCiudad.TabIndex = 13;
+            // 
+            // cBoxProvincia
+            // 
+            this.cBoxProvincia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxProvincia.FormattingEnabled = true;
+            this.cBoxProvincia.Location = new System.Drawing.Point(33, 47);
+            this.cBoxProvincia.Name = "cBoxProvincia";
+            this.cBoxProvincia.Size = new System.Drawing.Size(214, 21);
+            this.cBoxProvincia.TabIndex = 12;
+            this.cBoxProvincia.SelectedIndexChanged += new System.EventHandler(this.cBoxProvincia_SelectedIndexChanged);
+
+            // 
             // ConsultaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(710, 569);
+            this.ClientSize = new System.Drawing.Size(869, 569);
+            this.Controls.Add(this.gbFiltroLugar);
+            this.Controls.Add(this.checkBoxFiltrarPorLugar);
             this.Controls.Add(this.chechBoxFiltrarPorFecha);
             this.Controls.Add(this.gBoxFiltroFecha);
             this.Controls.Add(this.gBoxCasa);
@@ -374,6 +472,8 @@
             this.gBoxServicios.PerformLayout();
             this.gBoxFiltroFecha.ResumeLayout(false);
             this.gBoxFiltroFecha.PerformLayout();
+            this.gbFiltroLugar.ResumeLayout(false);
+            this.gbFiltroLugar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,5 +508,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnaEstrellas;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnaCapacidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn minDias;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Provincia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ciudad;
+        public System.Windows.Forms.CheckBox checkBoxFiltrarPorLugar;
+        private System.Windows.Forms.GroupBox gbFiltroLugar;
+        private System.Windows.Forms.Label lbCiudad;
+        private System.Windows.Forms.Label lbProvincia;
+        public System.Windows.Forms.ComboBox cBoxCiudad;
+        public System.Windows.Forms.ComboBox cBoxProvincia;
     }
 }

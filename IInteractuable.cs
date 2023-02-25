@@ -15,6 +15,7 @@ namespace TP_II
         void SetCapacidad(int capac);
 
         ArrayList ActualizarConsulta();
+        void Pintarcontroles(Form f);
         object BuscarAlojamiento(object aBuscar);
         void AgregarReserva(object r);
         int[] ListaHabitaciones(int tipo, Object hotel);

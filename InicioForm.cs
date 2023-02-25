@@ -10,13 +10,12 @@ using System.Windows.Forms;
 
 namespace TP_II
 {
-    public partial class PrecioBaseForm : Form
+    public partial class InicioForm : Form
     {
-        public PrecioBaseForm()
+        public InicioForm()
         {
             InitializeComponent();
-        }
-
+        } 
 
         private void rbNo_CheckedChanged(object sender, EventArgs e)
         {
@@ -30,6 +29,7 @@ namespace TP_II
                     btnContinuar.Enabled=false;
                 else btnContinuar.Enabled=true;
             }
+            
         }
 
         private void tbPrecio_KeyPress(object sender, KeyPressEventArgs e)
@@ -46,6 +46,16 @@ namespace TP_II
             if (tbPrecio.Text == "")
                 btnContinuar.Enabled = false;
             else btnContinuar.Enabled = true;
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
