@@ -124,6 +124,8 @@
             // 
             // dtPickerInicio
             // 
+            this.dtPickerInicio.CalendarMonthBackground = System.Drawing.SystemColors.HotTrack;
+            this.dtPickerInicio.CalendarTrailingForeColor = System.Drawing.Color.HotPink;
             this.dtPickerInicio.Location = new System.Drawing.Point(184, 22);
             this.dtPickerInicio.Name = "dtPickerInicio";
             this.dtPickerInicio.Size = new System.Drawing.Size(126, 20);
@@ -165,6 +167,7 @@
             this.dataGridDisponibles.AllowUserToDeleteRows = false;
             this.dataGridDisponibles.AllowUserToResizeColumns = false;
             this.dataGridDisponibles.AllowUserToResizeRows = false;
+            this.dataGridDisponibles.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridDisponibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridDisponibles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnaTipo,
@@ -329,7 +332,9 @@
             // 
             this.columnaTipo.HeaderText = "Tipo";
             this.columnaTipo.Name = "columnaTipo";
+
             this.columnaTipo.ReadOnly = true;
+
             // 
             // columnaDirección
             // 
@@ -347,13 +352,17 @@
             // 
             this.columnaEstrellas.HeaderText = "Status";
             this.columnaEstrellas.Name = "columnaEstrellas";
+
             this.columnaEstrellas.ReadOnly = true;
+
             // 
             // columnaCapacidad
             // 
             this.columnaCapacidad.HeaderText = "Capacidad";
             this.columnaCapacidad.Name = "columnaCapacidad";
+
             this.columnaCapacidad.ReadOnly = true;
+
             // 
             // minDias
             // 
@@ -434,6 +443,7 @@
             this.cBoxProvincia.Size = new System.Drawing.Size(214, 21);
             this.cBoxProvincia.TabIndex = 12;
             this.cBoxProvincia.SelectedIndexChanged += new System.EventHandler(this.cBoxProvincia_SelectedIndexChanged);
+
             // 
             // ConsultaForm
             // 

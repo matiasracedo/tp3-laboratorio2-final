@@ -109,11 +109,11 @@
     <Compile Include="IExportable.cs" />
     <Compile Include="IInteractuable.cs" />
     <Compile Include="MiException.cs" />
-    <Compile Include="PrecioBaseForm.cs">
+    <Compile Include="InicioForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrecioBaseForm.Designer.cs">
-      <DependentUpon>PrecioBaseForm.cs</DependentUpon>
+    <Compile Include="InicioForm.Designer.cs">
+      <DependentUpon>InicioForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -151,8 +151,8 @@
     <EmbeddedResource Include="GraficoForm.resx">
       <DependentUpon>GraficoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PrecioBaseForm.resx">
-      <DependentUpon>PrecioBaseForm.cs</DependentUpon>
+    <EmbeddedResource Include="InicioForm.resx">
+      <DependentUpon>InicioForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

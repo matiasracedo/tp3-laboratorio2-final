@@ -68,13 +68,15 @@ namespace TP_II
                 //dataGridDisponibles.Rows.Clear();
                 dataGridDisponibles.Rows.Add(campos);
             }
-
         }
 
         private void checkBoxHotel_CheckedChanged(object sender, EventArgs e)
         {
             if(checkBoxHotel.Checked)
+            {
                 checkB3Estrellas.Visible = true;
+            }
+                
             else
             {
                 checkB3Estrellas.Visible=false;
@@ -96,11 +98,11 @@ namespace TP_II
         private void dataGridDisponibles_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             AlojamientoForm vAlojomiento = new AlojamientoForm();
+            form1.Pintarcontroles(vAlojomiento);
             vAlojomiento.btnCancelarReserva.Enabled = false;
             vAlojomiento.btnReservar.Enabled = true;
             vAlojomiento.btnImprimir.Enabled = false;
             vAlojomiento.SetConsultor(form1);
-
             int indiceC = 1;
             int indeceR = e.RowIndex;           
             string direccion = dataGridDisponibles[indiceC, indeceR].Value.ToString();
@@ -133,7 +135,7 @@ namespace TP_II
                     else
                     {
                         DatosClienteForm vCliente = new DatosClienteForm();
-
+                        form1.Pintarcontroles(vCliente);
                         // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
                         vCliente.btnPasajeros.Click += new System.EventHandler(form1.btnPasajeros_Click);
 
@@ -166,7 +168,6 @@ namespace TP_II
             {
                 Hotel hotel = (Hotel)aBuscar;
                 vAlojomiento.SetAlojamiento(hotel);
-
                 vAlojomiento.lbDescripcion.Text = "Tipo Habitación:";
                 vAlojomiento.cBoxTipoHab.Enabled = true;
                 vAlojomiento.cBoxNroHabitaciones.Enabled = true;
@@ -189,6 +190,8 @@ namespace TP_II
                         else
                         {
                             DatosClienteForm vCliente = new DatosClienteForm();
+
+                            form1.Pintarcontroles(vCliente);
                             switch (vAlojomiento.cBoxTipoHab.Text)
                             {
                                 case "Simple":
