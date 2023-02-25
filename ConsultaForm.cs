@@ -35,14 +35,17 @@ namespace TP_II
             }
 
             dataGridDisponibles.Rows.Clear();
-            string[] campos = new string[6];
+            string[] campos = new string[8];
 
             foreach (Alojamiento a in actuales)
             {
+                campos[1] = a.Direccion;
+                campos[6] = a.Jurisdiccion;
+                campos[7] = a.Ciudad;
+
                 if (a is Casa)
                 {
                     campos[0] = "Casa";
-                    campos[1] = a.Direccion;
                     campos[2] = "-";
                     campos[3] = "-";
                     campos[4] = ((Casa)a).Camas + " personas";
@@ -57,7 +60,6 @@ namespace TP_II
                         status = "2 Estrellas";
 
                     campos[0] = "Hotel";
-                    campos[1] = a.Direccion;
                     campos[2] = ((Hotel)a).Nombre;
                     campos[3] = status;
                     campos[4] = ((Hotel)a).TotalCamas + " personas";
@@ -85,6 +87,7 @@ namespace TP_II
         private void ConsultaForm_Load(object sender, EventArgs e)
         {
             gBoxFiltroFecha.Enabled=false;
+            gbFiltroLugar.Enabled=false;
         }
         /*-------------------------------------------------- EVENTO DOBLE CLICK DATAGRIDVIEW ----------------------------------------------*/
         /*-------------------------------------------------- EVENTO DOBLE CLICK DATAGRIDVIEW ----------------------------------------------*/
@@ -120,8 +123,9 @@ namespace TP_II
                 vAlojomiento.cBoxNroHabitaciones.Enabled = false;
                 vAlojomiento.cBoxTipoHab.Enabled = false;
                 vAlojomiento.lbNumHabitacion.Text= "Capacidad: "+ casa.Camas.ToString() + " personas";
+                form1.SetCapacidad(casa.Camas);
 
-                if(vAlojomiento.ShowDialog()==DialogResult.OK)
+                if (vAlojomiento.ShowDialog()==DialogResult.OK)
                 {
                     int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
                     DateTime inicio = vAlojomiento.Calendario.SelectionStart;
@@ -186,7 +190,21 @@ namespace TP_II
                         else
                         {
                             DatosClienteForm vCliente = new DatosClienteForm();
+
                             form1.Pintarcontroles(vCliente);
+                            switch (vAlojomiento.cBoxTipoHab.Text)
+                            {
+                                case "Simple":
+                                    form1.SetCapacidad(1);
+                                    break;
+                                case "Doble":
+                                    form1.SetCapacidad(2);
+                                    break;
+                                case "Triple":
+                                    form1.SetCapacidad(3);
+                                    break;
+                            }
+
                             // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
                             vCliente.btnPasajeros.Click += new System.EventHandler(form1.btnPasajeros_Click);
 
@@ -244,6 +262,28 @@ namespace TP_II
                 gBoxFiltroFecha.Enabled= false;
         }
 
- 
+        private void cBoxProvincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cBoxCiudad.Items.Clear();
+            cBoxCiudad.SelectedIndex = -1;
+            cBoxCiudad.Text = "";
+            cBoxCiudad.Items.AddRange(form1.ActualizarComboBoxCiudades(cBoxProvincia.Text));
+
+            if (cBoxCiudad.Items.Count > 0)
+            {
+                cBoxCiudad.SelectedIndex = 0;
+                cBoxCiudad.Enabled = true;
+            }  
+            else
+                cBoxCiudad.Enabled = false;
+        }
+
+        private void checkBoxFiltrarPorLugar_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxFiltrarPorLugar.Checked)
+                gbFiltroLugar.Enabled = true;
+            else
+                gbFiltroLugar.Enabled= false;
+        }
     }
 }

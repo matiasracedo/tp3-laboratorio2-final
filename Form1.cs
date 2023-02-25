@@ -26,6 +26,7 @@ namespace TP_II
         bool primeraVez = false;
         Image[] imagenes; // Imagenes de un alojamiento
         List<Cliente> pasajeros = new List<Cliente>(); // Pasajeros adicionales reserva
+        int capacidad = 0; // Auxiliar para evento click agregar pasajeros
         Reserva temp = null; // Objeto auxiliar para imprimir comprobante 
         GraficoForm vGrafico;
        
@@ -254,6 +255,15 @@ namespace TP_II
             {
                 nuevos.AddRange(empresa.FiltrarCasas(Convert.ToInt16(c.numUDcamasCasa.Value), servicios));
                 nuevos.AddRange(empresa.FiltrarHoteles(c.checkB3Estrellas.Checked));
+            }
+            if (c.checkBoxFiltrarPorLugar.Checked == true)
+            {
+                string ciudad= c.cBoxCiudad.Text.Trim(' ');
+                if (ciudad != "")
+                    empresa.FiltrarLugarRango(nuevos, c.cBoxProvincia.Text, ciudad);
+                else
+                    MessageBox.Show("No hay establecimientos en la provincia solicitada");
+
             }
 
             if (c.chechBoxFiltrarPorFecha.Checked)
@@ -724,16 +734,23 @@ namespace TP_II
             DatosClienteForm vPasajero = new DatosClienteForm();
             Pintarcontroles(vPasajero);
             vPasajero.btnPasajeros.Visible = false;
-
-            if (vPasajero.ShowDialog() == DialogResult.OK)
+            if (pasajeros.Count < (capacidad - 1)) 
             {
-                string nombre = vPasajero.tbNombre.Text;
-                string apellido = vPasajero.tbApellido.Text;
-                int dni = Convert.ToInt32(vPasajero.tbDni.Text);
-                DateTime fNacimiento = vPasajero.fNacimiento.Value;
-                Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
-                pasajeros.Add(cliente);
+                DatosClienteForm vPasajero = new DatosClienteForm();
+                vPasajero.btnPasajeros.Visible = false;
+
+                if (vPasajero.ShowDialog() == DialogResult.OK)
+                {
+                    string nombre = vPasajero.tbNombre.Text;
+                    string apellido = vPasajero.tbApellido.Text;
+                    int dni = Convert.ToInt32(vPasajero.tbDni.Text);
+                    DateTime fNacimiento = vPasajero.fNacimiento.Value;
+                    Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
+                    pasajeros.Add(cliente);
+                    capacidad -= 1;
+                }
             }
+            else MessageBox.Show("Capacidad del alojamiento alcanzada.");  
         }
 
         private void btnConsultaAloj_Click(object sender, EventArgs e)
@@ -762,6 +779,7 @@ namespace TP_II
                 vAlojomiento.cBoxNroHabitaciones.Enabled = false;
                 vAlojomiento.cBoxTipoHab.Enabled = false;
                 vAlojomiento.lbNumHabitacion.Text = "Capacidad: " + casa.Camas.ToString() + " personas";
+                capacidad = casa.Camas;
 
                 if (vAlojomiento.ShowDialog() == DialogResult.OK)
                 {
@@ -810,6 +828,7 @@ namespace TP_II
                 vAlojomiento.lbDescripcion.Text = "Tipo Habitación:";
                 vAlojomiento.cBoxTipoHab.Enabled = true;
                 vAlojomiento.cBoxNroHabitaciones.Enabled = true;
+                
 
                 if (vAlojomiento.ShowDialog() == DialogResult.OK)
                 {
@@ -828,7 +847,18 @@ namespace TP_II
                         else
                         {
                             DatosClienteForm vCliente = new DatosClienteForm();
-
+                            switch (vAlojomiento.cBoxTipoHab.Text)
+                            {
+                                case "Simple":
+                                    capacidad = 1;
+                                    break;
+                                case "Doble":
+                                    capacidad = 2;
+                                    break;
+                                case "Triple":
+                                    capacidad = 3;
+                                    break;
+                            }
                             // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
                             vCliente.btnPasajeros.Click += new System.EventHandler(this.btnPasajeros_Click);
 
@@ -882,7 +912,9 @@ namespace TP_II
             vConsulta = new ConsultaForm();
             Pintarcontroles(vConsulta);
             vConsulta.gBoxFiltroFecha.Enabled = false;
-            vConsulta.SetConsultor(this);           
+
+            vConsulta.SetConsultor(this);
+            vConsulta.cBoxProvincia.Items.AddRange(empresa.Jurisdicciones.ToArray());
             vConsulta.ShowDialog();
             ActualizarListas();
             vConsulta.Dispose();
@@ -1308,6 +1340,11 @@ namespace TP_II
             pasajeros.ForEach(acomp => resultado.Add(acomp));
             pasajeros.Clear();
             return resultado;
+        }
+
+        public void SetCapacidad(int capac)
+        {
+            capacidad = capac;
         }
 
         public string[] ActualizarComboBoxCiudades(string jurisdiccion)

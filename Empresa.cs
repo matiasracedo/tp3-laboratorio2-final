@@ -162,6 +162,18 @@ namespace TP_II
             }
             return rango;
         }
+        public List<Alojamiento> FiltrarLugarRango(List<Alojamiento> rango, string jur, string ciudad)
+        {
+            Alojamiento[] copia = new Alojamiento[rango.Count];
+            rango.CopyTo(copia);
+
+            foreach (Alojamiento a in copia)
+            {
+                if (a.Jurisdiccion!=jur || a.Ciudad!=ciudad)
+                    rango.Remove(a);
+            }
+            return rango;
+        }
         public void DisminuirContadorCasas()
         {
             Casa.ContCasa--;

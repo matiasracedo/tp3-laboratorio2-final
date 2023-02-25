@@ -11,6 +11,9 @@ namespace TP_II
     public interface IInterectuable
     {
         List<Cliente> GetPasajeros();
+
+        void SetCapacidad(int capac);
+
         ArrayList ActualizarConsulta();
         void Pintarcontroles(Form f);
         object BuscarAlojamiento(object aBuscar);
