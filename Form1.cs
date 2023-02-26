@@ -11,7 +11,7 @@ using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-
+using System.Drawing.Imaging;
 
 namespace TP_II
 {
@@ -1270,14 +1270,19 @@ namespace TP_II
             List<string[]> lineas = new List<string[]>();
 
             //cabecera de la factura
-    
+
             //variables auxiliares
+            Image imagen = null;
             string razonSocial = "TuAlquilerYa.com S.A.";
             string tipoComprobante = "Recibo X";
             string nombClient = temp.getCliente.NombreCompleto;
             string dniClient = temp.getCliente.DNI.ToString();
             string fecha = temp.DatosComprobante[3];
             string fNacimiento = temp.getCliente.FechaNacimiento.ToShortDateString();
+            if (temp.Alojamiento.Imagenes.Length > 0)
+            {
+                imagen = temp.Alojamiento.Imagenes[0];
+            }
 
             //línea 1
             lineas.Add(new[] { razonSocial, "", tipoComprobante, "", fecha });
@@ -1327,7 +1332,7 @@ namespace TP_II
             lineas.Add(new[] { "", "", "", "IVA 10,5 %", iva });
             lineas.Add(new[] { "", "", "", "TOTAL", tot });
             //fin
-
+ 
             foreach (string[] fila in lineas)
             {
                 int column = 1;
@@ -1342,6 +1347,11 @@ namespace TP_II
                 }
                 y += altoColumn;
             }
+            if (imagen != null)
+            {
+                g.DrawImage(imagen, new Rectangle(margIzq, (Int32)y, 300, 300));
+            }
+                
             if (copia < 1)
             {
                 copia++;
