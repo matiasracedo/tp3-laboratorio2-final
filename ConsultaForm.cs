@@ -25,49 +25,60 @@ namespace TP_II
         }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            ArrayList actuales = form1.ActualizarConsulta();
-            List<Alojamiento> lista = new List<Alojamiento>();
-
-            foreach (Object actual in actuales)
+            ArrayList actuales = null;
+            try
             {
-                lista.Add((Alojamiento)actual);
-                //sadsa
-            }
+                actuales = form1.ActualizarConsulta();
+                List<Alojamiento> lista = new List<Alojamiento>();
 
-            dataGridDisponibles.Rows.Clear();
-            string[] campos = new string[8];
-
-            foreach (Alojamiento a in actuales)
-            {
-                campos[1] = a.Direccion;
-                campos[6] = a.Jurisdiccion;
-                campos[7] = a.Ciudad;
-
-                if (a is Casa)
+                foreach (Object actual in actuales)
                 {
-                    campos[0] = "Casa";
-                    campos[2] = "-";
-                    campos[3] = "-";
-                    campos[4] = ((Casa)a).Camas + " personas";
-                    campos[5] = ((Casa)a).MinDias.ToString();
+                    lista.Add((Alojamiento)actual);
+                    //sadsa
                 }
-                else
+
+                dataGridDisponibles.Rows.Clear();
+                string[] campos = new string[8];
+
+                foreach (Alojamiento a in actuales)
                 {
-                    string status;
-                    if (((Hotel)a).TresEstrellas)
-                        status = "3 Estrellas";
+                    campos[1] = a.Direccion;
+                    campos[6] = a.Jurisdiccion;
+                    campos[7] = a.Ciudad;
+
+                    if (a is Casa)
+                    {
+                        campos[0] = "Casa";
+                        campos[2] = "-";
+                        campos[3] = "-";
+                        campos[4] = ((Casa)a).Camas + " personas";
+                        campos[5] = ((Casa)a).MinDias.ToString();
+                    }
                     else
-                        status = "2 Estrellas";
+                    {
+                        string status;
+                        if (((Hotel)a).TresEstrellas)
+                            status = "3 Estrellas";
+                        else
+                            status = "2 Estrellas";
 
-                    campos[0] = "Hotel";
-                    campos[2] = ((Hotel)a).Nombre;
-                    campos[3] = status;
-                    campos[4] = ((Hotel)a).TotalCamas + " personas";
-                    campos[5] = "-";
+                        campos[0] = "Hotel";
+                        campos[2] = ((Hotel)a).Nombre;
+                        campos[3] = status;
+                        campos[4] = ((Hotel)a).TotalCamas + " personas";
+                        campos[5] = "-";
+                    }
+                    //dataGridDisponibles.Rows.Clear();
+                    dataGridDisponibles.Rows.Add(campos);
                 }
-                //dataGridDisponibles.Rows.Clear();
-                dataGridDisponibles.Rows.Add(campos);
             }
+            catch (Exception ex)
+            {
+                dataGridDisponibles.Rows.Clear();
+                MessageBox.Show(ex.Message);
+            }
+            
+            
         }
 
         private void checkBoxHotel_CheckedChanged(object sender, EventArgs e)

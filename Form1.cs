@@ -791,6 +791,8 @@ namespace TP_II
             campos = cbAlojamientos.Text.Split('-');
             string direccion = campos[1].TrimEnd(' ').TrimStart(' ');
 
+           
+
             try
             {
                 Alojamiento aBuscar = new Casa(direccion, "a", "a", 1, 1, null, 1.0);
@@ -949,6 +951,8 @@ namespace TP_II
             vConsulta = new ConsultaForm();
             Pintarcontroles(vConsulta);
             vConsulta.gBoxFiltroFecha.Enabled = false;
+            vConsulta.dtPickerInicio.Value = DateTime.Now;
+            vConsulta.dtPickerFinal.Value = DateTime.Now.AddDays(20);
 
             vConsulta.SetConsultor(this);
             vConsulta.cBoxProvincia.Items.AddRange(empresa.Jurisdicciones.ToArray());
