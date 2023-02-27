@@ -54,7 +54,7 @@ namespace TP_II
                     comparador = r.Ingreso.AddDays(i);
                     foreach (DateTime dia in diasCheck)
                     {
-                        if (DateTime.Compare(comparador, dia) == 0)
+                        if (DateTime.Compare(comparador, dia.Date) == 0)
                             return false;
                     }
                 }

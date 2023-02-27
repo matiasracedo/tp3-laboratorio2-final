@@ -252,7 +252,7 @@
             // 
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
             this.guardarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.guardarToolStripMenuItem.Text = "Guardar";
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
@@ -260,7 +260,7 @@
             // 
             this.restarToolStripMenuItem.Name = "restarToolStripMenuItem";
             this.restarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.restarToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.restarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.restarToolStripMenuItem.Text = "Restar...";
             this.restarToolStripMenuItem.Click += new System.EventHandler(this.restarToolStripMenuItem_Click);
             // 
@@ -269,7 +269,7 @@
             this.precioBaseToolStripMenuItem.Name = "precioBaseToolStripMenuItem";
             this.precioBaseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
             this.precioBaseToolStripMenuItem.ShowShortcutKeys = false;
-            this.precioBaseToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.precioBaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.precioBaseToolStripMenuItem.Text = "Precio Base";
             this.precioBaseToolStripMenuItem.Click += new System.EventHandler(this.precioBaseToolStripMenuItem_Click);
             // 

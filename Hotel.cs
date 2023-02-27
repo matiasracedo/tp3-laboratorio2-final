@@ -38,7 +38,10 @@ namespace TP_II
             :base(direccion.TrimEnd(' ').TrimStart(' '), jurisdiccion.Trim(' '), ciudad.Trim(' '))
         {
             this.nombre = nombre.TrimEnd(' ').TrimStart(' ');
+
             this.tresEstrellas = tresEstrellas;
+            if(nombre=="")
+                throw new DatosIncompletosException();
 
             int nro = 1;
             
@@ -132,7 +135,7 @@ namespace TP_II
                             comparador = r.Ingreso.AddDays(j);
                             foreach (DateTime dia in diasCheck)
                             {
-                                if (DateTime.Compare(comparador, dia) == 0)
+                                if (DateTime.Compare(comparador, dia.Date) == 0)
                                     ocupada = true;
                             }
                         }
@@ -220,7 +223,17 @@ namespace TP_II
         public int TotalHabitaciones { get { return simples.Count+dobles.Count+triples.Count; } }
         public int TotalCamas { get { return simples.Count + dobles.Count * 2 + triples.Count * 3; } }
         public bool TresEstrellas { get { return tresEstrellas; } set { tresEstrellas = value; } }
-        public string Nombre { get { return nombre; } set { nombre = value; } }
+        public string Nombre 
+        { 
+            get { return nombre; } 
+            set 
+            { 
+                if(value=="")
+                    throw new DatosIncompletosException();
+                    
+                nombre = value; 
+            }
+        }
         public List<Habitacion> Simples { get { return simples; } }
         public List<Habitacion> Dobles { get { return dobles; } }
         public List<Habitacion> Triples { get { return triples; } }

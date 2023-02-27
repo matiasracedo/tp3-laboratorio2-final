@@ -153,9 +153,14 @@ namespace TP_II
         }
         public List<Alojamiento> FiltrarFechaRango(List<Alojamiento> rango, DateTime fechaInicio, DateTime fechaFinal)
         {
+            int res = fechaInicio.Date.CompareTo(fechaFinal.Date);
+            int res2 = fechaInicio.Date.CompareTo(DateTime.Now.Date);
+            if (res > 0 || res2 < 0 )
+                throw new Exception("Error en la fecha de reserva");
+
             Alojamiento[] copia = new Alojamiento[rango.Count];
             rango.CopyTo(copia);
-
+            
             foreach (Alojamiento a in copia)
             {
                 if (a.CheckFecha(fechaInicio, fechaFinal) == false)
@@ -219,7 +224,11 @@ namespace TP_II
             return reserva.DatosComprobante;
         }
         public double PrecioBaseHotel { get { return precioBaseHotel; } set { precioBaseHotel = value; } }
-        public string RazonSocial { get { return razonSocial; } set { razonSocial = value; } }
+        public string RazonSocial { get { return razonSocial; } set {
+                string r = value.Trim();
+                if (r == "")
+                    throw new DatosIncompletosException();
+                razonSocial = value; } }
         public bool Preguntar { get { return preguntar; } set { preguntar = value; } }
         public int NumeroCasaSiguiente { get { return Casa.ContCasa; } }
         public List<Cliente> GetClientesHistoricos { get { return clientesHistorico; } }
