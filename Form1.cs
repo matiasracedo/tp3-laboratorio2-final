@@ -12,6 +12,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Drawing.Imaging;
+using System.Diagnostics;
 
 namespace TP_II
 {
@@ -2557,9 +2558,8 @@ namespace TP_II
 
         private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutForm vAcercaDe = new AboutForm();
-            vAcercaDe.ShowDialog();
-            vAcercaDe.Dispose();
+            string path = Application.StartupPath + @"/html/about.html";
+            Process.Start(path);
         }
     }
 }
