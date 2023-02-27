@@ -152,9 +152,14 @@ namespace TP_II
         }
         public List<Alojamiento> FiltrarFechaRango(List<Alojamiento> rango, DateTime fechaInicio, DateTime fechaFinal)
         {
+            int res = fechaInicio.Date.CompareTo(fechaFinal.Date);
+            int res2 = fechaInicio.Date.CompareTo(DateTime.Now.Date);
+            if (res > 0 || res2 < 0 )
+                throw new Exception("Error en la fecha de reserva");
+
             Alojamiento[] copia = new Alojamiento[rango.Count];
             rango.CopyTo(copia);
-
+            
             foreach (Alojamiento a in copia)
             {
                 if (a.CheckFecha(fechaInicio, fechaFinal) == false)

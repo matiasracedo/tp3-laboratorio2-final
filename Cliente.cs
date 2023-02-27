@@ -18,6 +18,11 @@ namespace TP_II
 
         public Cliente(string nombre,string apellido, int dni, DateTime fNacimiento)
         {
+            if(nombre==""||apellido=="")
+                throw new DatosIncompletosException();
+            if(dni<1000000 || dni>99999999)
+                throw new DniException();
+
             this.nombre = nombre.TrimEnd(' ').TrimStart(' ');
             this.apellido = apellido.TrimEnd(' ').TrimStart(' ');
             this.dni = dni;
@@ -26,6 +31,8 @@ namespace TP_II
         }
         public Cliente(string nombre,string apellido)
         {
+            if (nombre == "" || apellido == "")
+                throw new DatosIncompletosException();
             this.nombre = nombre.TrimEnd(' ').TrimStart(' ');
             this.apellido = apellido.TrimEnd(' ').TrimStart(' ');
             this.dni = 0;

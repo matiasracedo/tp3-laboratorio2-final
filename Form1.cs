@@ -125,23 +125,34 @@ namespace TP_II
                 vInicio.p7.BackColor = GetColors(2);
                 Pintarcontroles(vInicio);
 
-                if (vInicio.ShowDialog() == DialogResult.OK)
+                try
                 {
-                    empresa.Preguntar = !vInicio.cbPreguntar.Checked;
-                    if (vInicio.rbSi.Checked)
-                        empresa.PrecioBaseHotel = Convert.ToDouble(vInicio.tbPrecio.Text);
+                    if (vInicio.ShowDialog() == DialogResult.OK)
+                    {
+                        empresa.Preguntar = !vInicio.cbPreguntar.Checked;
+                        if (vInicio.rbSi.Checked)
+                            empresa.PrecioBaseHotel = Convert.ToDouble(vInicio.tbPrecio.Text);
 
-                    if (vInicio.rb1.Checked)
-                        SetColors(1);
-                    if (vInicio.rb2.Checked)
-                        SetColors(2);
-                    if (vInicio.rb3.Checked)
-                        SetColors(3);
-                    if (vInicio.rb4.Checked)
-                        SetColors(4);
-                    if (vInicio.rb5.Checked)
-                        SetColors(5);
+                        if (vInicio.rb1.Checked)
+                            SetColors(1);
+                        if (vInicio.rb2.Checked)
+                            SetColors(2);
+                        if (vInicio.rb3.Checked)
+                            SetColors(3);
+                        if (vInicio.rb4.Checked)
+                            SetColors(4);
+                        if (vInicio.rb5.Checked)
+                            SetColors(5);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    empresa.Preguntar = true;
+                    Form_Inicio();
+                    
+                }
+
             }
             else
             {
@@ -407,7 +418,8 @@ namespace TP_II
         {
             ABMAlojamientosForm ventanaABM = new ABMAlojamientosForm();
             ventanaABM.setInteractor(this);
-
+            ventanaABM.btnExportarR.Enabled = false;
+            ventanaABM.btnImportarR.Enabled = false;
             bool hotel;
             string direccion;
             string nombre;
@@ -436,49 +448,59 @@ namespace TP_II
 
             if (ventanaABM.ShowDialog() == DialogResult.OK)
             {
-                Alojamiento alojamiento;
-
-                direccion = ventanaABM.tBdireccion.Text;
-                hotel = ventanaABM.rbHotel.Checked;
-                jurisdiccion = ventanaABM.cBoxProvincia.Text;
-                ciudad = ventanaABM.cBoxCiudad.Text;
-
-                if (hotel)
+                try
                 {
-                    nombre = ventanaABM.tbNombre.Text;
-                    tresEstrellas = ventanaABM.checkB3Estrellas.Checked;
-                    simples = Convert.ToInt32(ventanaABM.nUsimples.Value);
-                    dobles = Convert.ToInt32(ventanaABM.nUdobles.Value);
-                    triples = Convert.ToInt32(ventanaABM.nUtriples.Value);
-                    alojamiento = new Hotel(direccion,jurisdiccion,ciudad, nombre, tresEstrellas, simples, dobles, triples);
+                    Alojamiento alojamiento = null;
 
+                    direccion = ventanaABM.tBdireccion.Text;
+                    hotel = ventanaABM.rbHotel.Checked;
+                    jurisdiccion = ventanaABM.cBoxProvincia.Text;
+                    ciudad = ventanaABM.cBoxCiudad.Text;
+
+                    if (hotel)
+                    {
+                        nombre = ventanaABM.tbNombre.Text;
+                        tresEstrellas = ventanaABM.checkB3Estrellas.Checked;
+                        simples = Convert.ToInt32(ventanaABM.nUsimples.Value);
+                        dobles = Convert.ToInt32(ventanaABM.nUdobles.Value);
+                        triples = Convert.ToInt32(ventanaABM.nUtriples.Value);
+                    
+                        alojamiento = new Hotel(direccion, jurisdiccion, ciudad, nombre, tresEstrellas, simples, dobles, triples);
+                    }
+                    else
+                    {
+                        ventanaABM.tbNumCasa.Text = numCasa.ToString();
+                        cantCamas = Convert.ToInt32(ventanaABM.numUDcamasCasa.Value);
+                        minDias = Convert.ToInt32(ventanaABM.numUDminimo.Value);
+                        precioBase = Convert.ToDouble(ventanaABM.tbPrecio.Text);
+
+
+
+                        List<string> s = new List<string>();
+                        if (ventanaABM.checkBCochera.Checked) s.Add(ventanaABM.checkBCochera.Text);
+                        if (ventanaABM.checkBPileta.Checked) s.Add(ventanaABM.checkBPileta.Text);
+                        if (ventanaABM.checkBWiFi.Checked) s.Add(ventanaABM.checkBWiFi.Text);
+                        if (ventanaABM.checkBLimpieza.Checked) s.Add(ventanaABM.checkBLimpieza.Text);
+                        if (ventanaABM.checkBDesayuno.Checked) s.Add(ventanaABM.checkBDesayuno.Text);
+                        if (ventanaABM.checkBMascota.Checked) s.Add(ventanaABM.checkBMascota.Text);
+
+                        servicios = new string[s.Count];
+                        for (int i = 0; i < s.Count; i++)
+                            servicios[i] = s[i];
+
+                        alojamiento = new Casa(direccion, jurisdiccion, ciudad, minDias, cantCamas, servicios, precioBase);
+        
+                    }
+                    alojamiento.Imagenes = imagenes;
+
+                    empresa.AgregarAlojamiento(alojamiento);
+                    ActualizarListas();
                 }
-                else
+                catch(Exception ex)
                 {
-                    ventanaABM.tbNumCasa.Text = numCasa.ToString();
-                    cantCamas = Convert.ToInt32(ventanaABM.numUDcamasCasa.Value);
-                    minDias = Convert.ToInt32(ventanaABM.numUDminimo.Value);
-                    precioBase = Convert.ToDouble(ventanaABM.tbPrecio.Text);
-
-
-
-                    List<string> s = new List<string>();
-                    if (ventanaABM.checkBCochera.Checked) s.Add(ventanaABM.checkBCochera.Text);
-                    if (ventanaABM.checkBPileta.Checked) s.Add(ventanaABM.checkBPileta.Text);
-                    if (ventanaABM.checkBWiFi.Checked) s.Add(ventanaABM.checkBWiFi.Text);
-                    if (ventanaABM.checkBLimpieza.Checked) s.Add(ventanaABM.checkBLimpieza.Text);
-                    if (ventanaABM.checkBDesayuno.Checked) s.Add(ventanaABM.checkBDesayuno.Text);
-                    if (ventanaABM.checkBMascota.Checked) s.Add(ventanaABM.checkBMascota.Text);
-
-                    servicios = new string[s.Count];
-                    for (int i = 0; i < s.Count; i++)
-                        servicios[i] = s[i];
-                    alojamiento = new Casa(direccion,jurisdiccion,ciudad, minDias, cantCamas, servicios, precioBase);
+                    MessageBox.Show(ex.Message);
                 }
-                alojamiento.Imagenes = imagenes;
-
-                empresa.AgregarAlojamiento(alojamiento);
-                ActualizarListas();
+                
             }
             // Quito evento click del boton "Importar fotos" en ventana ABM
             ventanaABM.btnFotos.Click -= new System.EventHandler(this.btnFotos_Click);
@@ -592,57 +614,65 @@ namespace TP_II
 
             if (vModificacion.ShowDialog() == DialogResult.OK)
             {
-                // Reemplazo las imagenes si seleccione nuevas
-                if (imagenes.Length > 0)
-                    alojamiento.Imagenes = imagenes;
-
-                bool esHotel = vModificacion.rbHotel.Checked;
-
-                if (vModificacion.labEstado.Text == "Activado")
-                    alojamiento.Alta = true;
-                else
-                    alojamiento.Alta = false;
-
-                string jurisd = vModificacion.cBoxProvincia.Text;
-                string ciudad = vModificacion.cBoxCiudad.Text;
-
-                if (jurisd != "")
-                    alojamiento.Jurisdiccion =jurisd;
-                if(ciudad!="")
-                    alojamiento.Ciudad= ciudad;
-
-                empresa.AgregarLugar(jurisd,ciudad);// si se repite lo resuelve el método
-
-                if (esHotel)
+                try
                 {
-                    Hotel unHotel = (Hotel)alojamiento;
-                    unHotel.Direccion = vModificacion.tBdireccion.Text;
-                    unHotel.Nombre = vModificacion.tbNombre.Text;
-                    unHotel.TresEstrellas = vModificacion.checkB3Estrellas.Checked;
-                }
-                else
-                {
-                    Casa unaCasa = (Casa)alojamiento;
-                    List<string> s = new List<string>();
-                    if (vModificacion.checkBCochera.Checked) s.Add(vModificacion.checkBCochera.Text);
-                    if (vModificacion.checkBPileta.Checked) s.Add(vModificacion.checkBPileta.Text);
-                    if (vModificacion.checkBWiFi.Checked) s.Add(vModificacion.checkBWiFi.Text);
-                    if (vModificacion.checkBLimpieza.Checked) s.Add(vModificacion.checkBLimpieza.Text);
-                    if (vModificacion.checkBDesayuno.Checked) s.Add(vModificacion.checkBDesayuno.Text);
-                    if (vModificacion.checkBMascota.Checked) s.Add(vModificacion.checkBMascota.Text);
+                    // Reemplazo las imagenes si seleccione nuevas
+                    if (imagenes.Length > 0)
+                        alojamiento.Imagenes = imagenes;
 
-                    string[] servicios = new string[s.Count];
-                    for (int i = 0; i < s.Count; i++)
+                    bool esHotel = vModificacion.rbHotel.Checked;
+
+                    if (vModificacion.labEstado.Text == "Activado")
+                        alojamiento.Alta = true;
+                    else
+                        alojamiento.Alta = false;
+
+                    string jurisd = vModificacion.cBoxProvincia.Text.Trim();
+                    string ciudad = vModificacion.cBoxCiudad.Text.Trim();
+
+
+                        alojamiento.Jurisdiccion = jurisd;
+
+                        alojamiento.Ciudad = ciudad;
+
+                    empresa.AgregarLugar(jurisd, ciudad);// si se repite lo resuelve el método
+
+                    if (esHotel)
                     {
-                        servicios[i] = s[i];
+                        Hotel unHotel = (Hotel)alojamiento;
+                        unHotel.Direccion = vModificacion.tBdireccion.Text.Trim();
+                        unHotel.Nombre = vModificacion.tbNombre.Text.Trim();
+                        unHotel.TresEstrellas = vModificacion.checkB3Estrellas.Checked;
                     }
+                    else
+                    {
+                        Casa unaCasa = (Casa)alojamiento;
+                        List<string> s = new List<string>();
+                        if (vModificacion.checkBCochera.Checked) s.Add(vModificacion.checkBCochera.Text);
+                        if (vModificacion.checkBPileta.Checked) s.Add(vModificacion.checkBPileta.Text);
+                        if (vModificacion.checkBWiFi.Checked) s.Add(vModificacion.checkBWiFi.Text);
+                        if (vModificacion.checkBLimpieza.Checked) s.Add(vModificacion.checkBLimpieza.Text);
+                        if (vModificacion.checkBDesayuno.Checked) s.Add(vModificacion.checkBDesayuno.Text);
+                        if (vModificacion.checkBMascota.Checked) s.Add(vModificacion.checkBMascota.Text);
 
-                    unaCasa.Direccion = vModificacion.tBdireccion.Text;
-                    unaCasa.Servicios = servicios;
-                    unaCasa.Camas = Convert.ToInt32(vModificacion.numUDcamasCasa.Value);
-                    unaCasa.MinDias = Convert.ToInt32(vModificacion.numUDminimo.Value);
-                    unaCasa.PrecioBaseCasa = Convert.ToInt32(vModificacion.tbPrecio.Text);
+                        string[] servicios = new string[s.Count];
+                        for (int i = 0; i < s.Count; i++)
+                        {
+                            servicios[i] = s[i];
+                        }
+
+                        unaCasa.Direccion = vModificacion.tBdireccion.Text.Trim();
+                        unaCasa.Servicios = servicios;
+                        unaCasa.Camas = Convert.ToInt32(vModificacion.numUDcamasCasa.Value);
+                        unaCasa.MinDias = Convert.ToInt32(vModificacion.numUDminimo.Value);
+                        unaCasa.PrecioBaseCasa = Convert.ToInt32(vModificacion.tbPrecio.Text);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
                 
             }
             ActualizarListas();
@@ -754,109 +784,47 @@ namespace TP_II
         private void btnConsultaAloj_Click(object sender, EventArgs e)
         {
             AlojamientoForm vAlojomiento = new AlojamientoForm();
+
             Pintarcontroles(vAlojomiento);
             vAlojomiento.btnCancelarReserva.Visible = false;
             string[] campos = new string[2];
             campos = cbAlojamientos.Text.Split('-');
             string direccion = campos[1].TrimEnd(' ').TrimStart(' ');
 
-            Alojamiento aBuscar = new Casa(direccion,"","", 1, 1,null, 1.0);
-            aBuscar = (Alojamiento)this.BuscarAlojamiento(aBuscar);
-            DateTime[] fechas;
-            vAlojomiento.SetAlojamiento(aBuscar);
+           
 
-            if (aBuscar is Casa)
+            try
             {
-                fechas = aBuscar.IntervaloFechasReservadas();
-                Casa casa = (Casa)aBuscar;
-                vAlojomiento.nudDias.Minimum = casa.MinDias;
-                vAlojomiento.nudDias.Value = casa.MinDias;
-                vAlojomiento.Calendario.BoldedDates = fechas;//pintar calendario casa
+                Alojamiento aBuscar = new Casa(direccion, "a", "a", 1, 1, null, 1.0);
+                aBuscar = (Alojamiento)this.BuscarAlojamiento(aBuscar);
+                DateTime[] fechas;
+                vAlojomiento.SetAlojamiento(aBuscar);
 
-                vAlojomiento.lbDescripcion.Text = casa.ToString();
-                vAlojomiento.cBoxNroHabitaciones.Enabled = false;
-                vAlojomiento.cBoxTipoHab.Enabled = false;
-                vAlojomiento.lbNumHabitacion.Text = "Capacidad: " + casa.Camas.ToString() + " personas";
-                capacidad = casa.Camas;
-
-                if (vAlojomiento.ShowDialog() == DialogResult.OK)
+                if (aBuscar is Casa)
                 {
-                    int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
-                    DateTime inicio = vAlojomiento.Calendario.SelectionStart;
-                    DateTime fin = inicio.AddDays(dias-1);
-                    if (!casa.CheckFecha(inicio, fin))
-                        MessageBox.Show("Rango de fecha invalido");
-                    else
+                    fechas = aBuscar.IntervaloFechasReservadas();
+                    Casa casa = (Casa)aBuscar;
+                    vAlojomiento.nudDias.Minimum = casa.MinDias;
+                    vAlojomiento.nudDias.Value = casa.MinDias;
+                    vAlojomiento.Calendario.BoldedDates = fechas;//pintar calendario casa
+
+                    vAlojomiento.lbDescripcion.Text = casa.ToString();
+                    vAlojomiento.cBoxNroHabitaciones.Enabled = false;
+                    vAlojomiento.cBoxTipoHab.Enabled = false;
+                    vAlojomiento.lbNumHabitacion.Text = "Capacidad: " + casa.Camas.ToString() + " personas";
+                    capacidad = casa.Camas;
+
+                    if (vAlojomiento.ShowDialog() == DialogResult.OK)
                     {
-                        DatosClienteForm vCliente = new DatosClienteForm();
-                        Pintarcontroles(vCliente);
-                        // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
-                        vCliente.btnPasajeros.Click += new System.EventHandler(this.btnPasajeros_Click);
-
-                        if (vCliente.ShowDialog() == DialogResult.OK)
-                        {
-                            string nombre = vCliente.tbNombre.Text;
-                            string apellido = vCliente.tbApellido.Text;
-                            int dni = Convert.ToInt32(vCliente.tbDni.Text);
-                            DateTime fNacimiento = vCliente.fNacimiento.Value;
-                            Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
-                            Reserva reserva;
-                            if (pasajeros.Count > 0)
-                            {
-                                reserva = new Reserva(cliente, casa, inicio, fin, casa.PrecioBaseCasa, pasajeros);
-                                pasajeros.Clear();
-                            }
-                            else
-                                reserva = new Reserva(cliente, casa, inicio, fin, casa.PrecioBaseCasa);
-                            this.AgregarReserva(reserva);
-                            EmitirComprobante(reserva);
-                        }
-
-                        // Quito evento click del boton "Agregar pasajeros" en ventana DatosCliente
-                        vCliente.btnPasajeros.Click -= new System.EventHandler(this.btnPasajeros_Click);
-                    }
-                }
-            }
-            else
-            {
-                Hotel hotel = (Hotel)aBuscar;
-                vAlojomiento.SetConsultor(this);
-                vAlojomiento.SetAlojamiento(hotel);
-
-                vAlojomiento.lbDescripcion.Text = "Tipo Habitación:";
-                vAlojomiento.cBoxTipoHab.Enabled = true;
-                vAlojomiento.cBoxNroHabitaciones.Enabled = true;
-                
-
-                if (vAlojomiento.ShowDialog() == DialogResult.OK)
-                {
-                    int dias = 0;
-                    int nroHabitacion = 0;
-                    DateTime inicio = new DateTime();
-                    DateTime fin = new DateTime();
-                    try
-                    {
-                        dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
-                        nroHabitacion = Convert.ToInt32(vAlojomiento.cBoxNroHabitaciones.Text);
-                        inicio = vAlojomiento.Calendario.SelectionStart;
-                        fin = inicio.AddDays(dias - 1);
-                        if (!hotel.CheckFechaHabitacion(inicio, fin, nroHabitacion))
-                            MessageBox.Show("Rango de fecha invalido para la habitación nro " + nroHabitacion);
+                        int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
+                        DateTime inicio = vAlojomiento.Calendario.SelectionStart;
+                        DateTime fin = inicio.AddDays(dias - 1);
+                        if (!casa.CheckFecha(inicio, fin))
+                            MessageBox.Show("Rango de fecha invalido");
                         else
                         {
                             DatosClienteForm vCliente = new DatosClienteForm();
-                            switch (vAlojomiento.cBoxTipoHab.Text)
-                            {
-                                case "Simple":
-                                    capacidad = 1;
-                                    break;
-                                case "Doble":
-                                    capacidad = 2;
-                                    break;
-                                case "Triple":
-                                    capacidad = 3;
-                                    break;
-                            }
+                            Pintarcontroles(vCliente);
                             // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
                             vCliente.btnPasajeros.Click += new System.EventHandler(this.btnPasajeros_Click);
 
@@ -866,41 +834,114 @@ namespace TP_II
                                 string apellido = vCliente.tbApellido.Text;
                                 int dni = Convert.ToInt32(vCliente.tbDni.Text);
                                 DateTime fNacimiento = vCliente.fNacimiento.Value;
-
-                                try
+                                Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
+                                Reserva reserva;
+                                if (pasajeros.Count > 0)
                                 {
-                                    Habitacion reservada = hotel.GetHabitacion(nroHabitacion);
-                                    Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
-                                    Reserva reserva;
-                                    if (pasajeros.Count > 0)
-                                    {
-                                        reserva = new Reserva(cliente, hotel, inicio, fin, GetPrecioBaseHoteles(), reservada, pasajeros);
-                                        pasajeros.Clear();
-                                    }
-                                    else
-                                        reserva = new Reserva(cliente, hotel, inicio, fin, GetPrecioBaseHoteles(), reservada);
-                                    hotel.AgregarReserva(nroHabitacion, reserva);
-                                    AgregarReserva(reserva);
-                                    EmitirComprobante(reserva);
+                                    reserva = new Reserva(cliente, casa, inicio, fin, casa.PrecioBaseCasa, pasajeros);
+                                    pasajeros.Clear();
                                 }
-                                catch (Exception)
-                                {
-
-                                    MessageBox.Show("Error en los Datos ingresados");
-                                }
-
+                                else
+                                    reserva = new Reserva(cliente, casa, inicio, fin, casa.PrecioBaseCasa);
+                                this.AgregarReserva(reserva);
+                                EmitirComprobante(reserva);
                             }
+
                             // Quito evento click del boton "Agregar pasajeros" en ventana DatosCliente
                             vCliente.btnPasajeros.Click -= new System.EventHandler(this.btnPasajeros_Click);
-                            vCliente.Dispose();
                         }
                     }
-                    catch (Exception)
+                }
+                else
+                {
+                    Hotel hotel = (Hotel)aBuscar;
+                    vAlojomiento.SetConsultor(this);
+                    vAlojomiento.SetAlojamiento(hotel);
+
+                    vAlojomiento.lbDescripcion.Text = "Tipo Habitación:";
+                    vAlojomiento.cBoxTipoHab.Enabled = true;
+                    vAlojomiento.cBoxNroHabitaciones.Enabled = true;
+
+
+                    if (vAlojomiento.ShowDialog() == DialogResult.OK)
                     {
-                        MessageBox.Show("Error en el Ingreso de datos para la reserva");
+                        int dias = 0;
+                        int nroHabitacion = 0;
+                        DateTime inicio = new DateTime();
+                        DateTime fin = new DateTime();
+                        try
+                        {
+                            dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
+                            nroHabitacion = Convert.ToInt32(vAlojomiento.cBoxNroHabitaciones.Text);
+                            inicio = vAlojomiento.Calendario.SelectionStart;
+                            fin = inicio.AddDays(dias - 1);
+                            if (!hotel.CheckFechaHabitacion(inicio, fin, nroHabitacion))
+                                MessageBox.Show("Rango de fecha invalido para la habitación nro " + nroHabitacion);
+                            else
+                            {
+                                DatosClienteForm vCliente = new DatosClienteForm();
+                                switch (vAlojomiento.cBoxTipoHab.Text)
+                                {
+                                    case "Simple":
+                                        capacidad = 1;
+                                        break;
+                                    case "Doble":
+                                        capacidad = 2;
+                                        break;
+                                    case "Triple":
+                                        capacidad = 3;
+                                        break;
+                                }
+                                // Manejo evento click del boton "Agregar pasajeros" en ventana DatosCliente
+                                vCliente.btnPasajeros.Click += new System.EventHandler(this.btnPasajeros_Click);
+
+                                if (vCliente.ShowDialog() == DialogResult.OK)
+                                {
+                                    string nombre = vCliente.tbNombre.Text;
+                                    string apellido = vCliente.tbApellido.Text;
+                                    int dni = Convert.ToInt32(vCliente.tbDni.Text);
+                                    DateTime fNacimiento = vCliente.fNacimiento.Value;
+
+                                    try
+                                    {
+                                        Habitacion reservada = hotel.GetHabitacion(nroHabitacion);
+                                        Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
+                                        Reserva reserva;
+                                        if (pasajeros.Count > 0)
+                                        {
+                                            reserva = new Reserva(cliente, hotel, inicio, fin, GetPrecioBaseHoteles(), reservada, pasajeros);
+                                            pasajeros.Clear();
+                                        }
+                                        else
+                                            reserva = new Reserva(cliente, hotel, inicio, fin, GetPrecioBaseHoteles(), reservada);
+                                        hotel.AgregarReserva(nroHabitacion, reserva);
+                                        AgregarReserva(reserva);
+                                        EmitirComprobante(reserva);
+                                    }
+                                    catch (Exception)
+                                    {
+
+                                        MessageBox.Show("Error en los Datos ingresados");
+                                    }
+
+                                }
+                                // Quito evento click del boton "Agregar pasajeros" en ventana DatosCliente
+                                vCliente.btnPasajeros.Click -= new System.EventHandler(this.btnPasajeros_Click);
+                                vCliente.Dispose();
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Error en el Ingreso de datos para la reserva");
+                        }
                     }
                 }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
             vAlojomiento.Dispose();
             ActualizarListas();
         }
@@ -910,6 +951,8 @@ namespace TP_II
             vConsulta = new ConsultaForm();
             Pintarcontroles(vConsulta);
             vConsulta.gBoxFiltroFecha.Enabled = false;
+            vConsulta.dtPickerInicio.Value = DateTime.Now;
+            vConsulta.dtPickerFinal.Value = DateTime.Now.AddDays(20);
 
             vConsulta.SetConsultor(this);
             vConsulta.cBoxProvincia.Items.AddRange(empresa.Jurisdicciones.ToArray());
@@ -928,6 +971,9 @@ namespace TP_II
             vAlojomiento.btnCancelarReserva.Enabled = false;
             vAlojomiento.btnReservar.Enabled = false;
             vAlojomiento.btnImprimir.Enabled = true;
+
+            vAlojomiento.Calendario.SetDate(unaReserva.Ingreso);
+            vAlojomiento.Calendario.SelectionStart = unaReserva.Ingreso;
 
             if (unAlojamiento is Casa)
             {
@@ -1001,69 +1047,77 @@ namespace TP_II
                 vAlojomiento.SetAlojamiento(casa);
                 vAlojomiento.nudDias.Minimum = casa.MinDias;
                 vAlojomiento.nudDias.Value = unaReserva.Dias;
-
-                empresa.CancelarReserva(unaReserva.ID);//Se cancela momentaneamente hasta que se confirme o no
-
-                fechasPintar = unAlojamiento.IntervaloFechasReservadas();
-                vAlojomiento.Calendario.BoldedDates = fechasPintar; //pintar calendario casa
-
-                vAlojomiento.lbDescripcion.Text = casa.ToString();
-                vAlojomiento.cBoxNroHabitaciones.Enabled = false;
-                vAlojomiento.cBoxTipoHab.Enabled = false;
-                vAlojomiento.lbNumHabitacion.Text = "Capacidad: " + casa.Camas.ToString() + " personas";
-
-                dialogResult = vAlojomiento.ShowDialog();
-                if (dialogResult == DialogResult.OK)
+                try
                 {
-                    int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
-                    DateTime inicio = vAlojomiento.Calendario.SelectionStart;
-                    DateTime fin = inicio.AddDays(dias - 1); // -1 porque se cuenta el dia mismo de inicio
+                    empresa.CancelarReserva(unaReserva.ID);//Se cancela momentaneamente hasta que se confirme o no
 
-                    if (!casa.CheckFecha(inicio, fin))
-                    {
-                        MessageBox.Show("Rango de fecha invalido");
-                        this.AgregarReserva(unaReserva);  
-                    }
-                    else
-                    {
-                        DatosClienteForm vCliente = new DatosClienteForm();
-                        Pintarcontroles(vCliente);
-                        vCliente.btnPasajeros.Visible = false;
-                        vCliente.tbNombre.Text = unaReserva.getCliente.Nombre;
-                        vCliente.tbApellido.Text = unaReserva.getCliente.Apellido;
-                        vCliente.tbDni.Text = unaReserva.getCliente.DNI.ToString();
-                        vCliente.fNacimiento.Value = unaReserva.getCliente.FechaNacimiento;
+                    fechasPintar = unAlojamiento.IntervaloFechasReservadas();
+                    vAlojomiento.Calendario.BoldedDates = fechasPintar; //pintar calendario casa
 
-                        if (vCliente.ShowDialog() == DialogResult.OK)
+                    vAlojomiento.lbDescripcion.Text = casa.ToString();
+                    vAlojomiento.cBoxNroHabitaciones.Enabled = false;
+                    vAlojomiento.cBoxTipoHab.Enabled = false;
+                    vAlojomiento.lbNumHabitacion.Text = "Capacidad: " + casa.Camas.ToString() + " personas";
+
+                    dialogResult = vAlojomiento.ShowDialog();
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
+                        DateTime inicio = vAlojomiento.Calendario.SelectionStart;
+                        DateTime fin = inicio.AddDays(dias - 1); // -1 porque se cuenta el dia mismo de inicio
+
+                        if (!casa.CheckFecha(inicio, fin))
                         {
-                            string nombre = vCliente.tbNombre.Text;
-                            string apellido = vCliente.tbApellido.Text;
-                            int dni = Convert.ToInt32(vCliente.tbDni.Text);
-                            DateTime fNacimiento = vCliente.fNacimiento.Value;
-
-                            Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
-
-                            unaReserva.Modificar(cliente, inicio, fin, acomp);
+                            MessageBox.Show("Rango de fecha invalido");
                             this.AgregarReserva(unaReserva);
-                            EmitirComprobante(unaReserva);
                         }
-                        vCliente.Dispose();
-                    }
-                }
-                else
-                {
-                    if (dialogResult != DialogResult.Abort)//Si no aprieta el boton cancelar
-                    {
-                        this.AgregarReserva(unaReserva);//PORQUE CIERRA DESDE LA BARRA, NO CANCELA LA RESERVA                                                       
+                        else
+                        {
+                            DatosClienteForm vCliente = new DatosClienteForm();
+                            Pintarcontroles(vCliente);
+                            vCliente.btnPasajeros.Visible = false;
+                            vCliente.tbNombre.Text = unaReserva.getCliente.Nombre;
+                            vCliente.tbApellido.Text = unaReserva.getCliente.Apellido;
+                            vCliente.tbDni.Text = unaReserva.getCliente.DNI.ToString();
+                            vCliente.fNacimiento.Value = unaReserva.getCliente.FechaNacimiento;
+
+                            if (vCliente.ShowDialog() == DialogResult.OK)
+                            {
+                                string nombre = vCliente.tbNombre.Text;
+                                string apellido = vCliente.tbApellido.Text;
+                                int dni = Convert.ToInt32(vCliente.tbDni.Text);
+                                DateTime fNacimiento = vCliente.fNacimiento.Value;
+
+                                Cliente cliente = new Cliente(nombre.Trim(), apellido.Trim(), dni, fNacimiento);
+
+                                unaReserva.Modificar(cliente, inicio, fin, acomp);
+                                this.AgregarReserva(unaReserva);
+                                EmitirComprobante(unaReserva);
+                            }
+                            vCliente.Dispose();
+                        }
                     }
                     else
                     {
-                        // SE MANTIENE ELIMINADA,NO SE AGREGA DE NUEVO
+                        if (dialogResult != DialogResult.Abort)//Si no aprieta el boton cancelar
+                        {
+                            this.AgregarReserva(unaReserva);//PORQUE CIERRA DESDE LA BARRA, NO CANCELA LA RESERVA                                                       
+                        }
+                        else
+                        {
+                            // SE MANTIENE ELIMINADA,NO SE AGREGA DE NUEVO
+                        }
                     }
                 }
+                catch(Exception ex)
+                {
+                    this.AgregarReserva(unaReserva);
+                    MessageBox.Show(ex.Message);
+                }
+                
                 empresa.OrdenarReservasPorId();
                 ActualizarListas();
-                
+
             }// esto si era casa
             else
             {
@@ -1073,82 +1127,91 @@ namespace TP_II
 
                 Habitacion habitacionReservada = unaReserva.HabitacionReservada;
                 int numHabitacionAnterior = habitacionReservada.Numero;
-
-                vAlojomiento.lbDescripcion.Text = "Tipo Habitación:";
-                vAlojomiento.cBoxTipoHab.Enabled = true;
-                vAlojomiento.cBoxNroHabitaciones.Enabled = true;
-
-                vAlojomiento.cBoxTipoHab.SelectedIndex = habitacionReservada.Tipo - 1;
-                vAlojomiento.cBoxNroHabitaciones.Text = habitacionReservada.Numero.ToString();
-
-                hotel.QuitarReserva(numHabitacionAnterior, unaReserva);//SE QUITA MOMENTANEAMENTE
-
-                DateTime[] intervaloPintar = hotel.IntervaloFechasHabitacion(habitacionReservada.Numero);
-                vAlojomiento.Calendario.BoldedDates = intervaloPintar; // ESTO VA PORQUE NO SE DISPARA EL EVENTO DE CAMBIO DE HABITACION EN COMBOBOX
-
-                vAlojomiento.nudDias.Value = unaReserva.Dias;
-                vAlojomiento.nudDias.Minimum = 1;
-                DialogResult resultado = vAlojomiento.ShowDialog();
-
-                if ( resultado == DialogResult.OK)
+                try
                 {
-                    int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
-                    int nroHabitacionNuevo = Convert.ToInt32(vAlojomiento.cBoxNroHabitaciones.Text);
+                    vAlojomiento.lbDescripcion.Text = "Tipo Habitación:";
+                    vAlojomiento.cBoxTipoHab.Enabled = true;
+                    vAlojomiento.cBoxNroHabitaciones.Enabled = true;
 
-                    DateTime inicio = vAlojomiento.Calendario.SelectionStart;
-                    DateTime fin = inicio.AddDays(dias - 1);
+                    vAlojomiento.cBoxTipoHab.SelectedIndex = habitacionReservada.Tipo - 1;
+                    vAlojomiento.cBoxNroHabitaciones.Text = habitacionReservada.Numero.ToString();
 
-                    if (!hotel.CheckFechaHabitacion(inicio, fin, nroHabitacionNuevo))
+                    hotel.QuitarReserva(numHabitacionAnterior, unaReserva);//SE QUITA MOMENTANEAMENTE
+
+                    DateTime[] intervaloPintar = hotel.IntervaloFechasHabitacion(habitacionReservada.Numero);
+                    vAlojomiento.Calendario.BoldedDates = intervaloPintar; // ESTO VA PORQUE NO SE DISPARA EL EVENTO DE CAMBIO DE HABITACION EN COMBOBOX
+
+                    vAlojomiento.nudDias.Value = unaReserva.Dias;
+                    vAlojomiento.nudDias.Minimum = 1;
+                    DialogResult resultado = vAlojomiento.ShowDialog();
+
+                    if (resultado == DialogResult.OK)
                     {
-                        MessageBox.Show("Rango de fecha invalido para la habitación nro " + nroHabitacionNuevo);
-                        hotel.AgregarReserva(numHabitacionAnterior, unaReserva);//SE VUELVE A AGREGAR 
+                        int dias = Convert.ToInt32(vAlojomiento.nudDias.Value);
+                        int nroHabitacionNuevo = Convert.ToInt32(vAlojomiento.cBoxNroHabitaciones.Text);
+
+                        DateTime inicio = vAlojomiento.Calendario.SelectionStart;
+                        DateTime fin = inicio.AddDays(dias - 1);
+
+                        if (!hotel.CheckFechaHabitacion(inicio, fin, nroHabitacionNuevo))
+                        {
+                            MessageBox.Show("Rango de fecha invalido para la habitación nro " + nroHabitacionNuevo);
+                            hotel.AgregarReserva(numHabitacionAnterior, unaReserva);//SE VUELVE A AGREGAR 
+                        }
+                        else
+                        {
+                            DatosClienteForm vCliente = new DatosClienteForm();
+                            Pintarcontroles(vCliente);
+                            vCliente.btnPasajeros.Visible = false;
+
+                            vCliente.tbNombre.Text = unaReserva.getCliente.Nombre;
+                            vCliente.tbApellido.Text = unaReserva.getCliente.Apellido;
+                            vCliente.tbDni.Text = unaReserva.getCliente.DNI.ToString();
+                            vCliente.fNacimiento.Value = unaReserva.getCliente.FechaNacimiento;
+
+                            if (vCliente.ShowDialog() == DialogResult.OK)
+                            {
+                                string nombre = vCliente.tbNombre.Text;
+                                string apellido = vCliente.tbApellido.Text;
+                                int dni = Convert.ToInt32(vCliente.tbDni.Text);
+                                DateTime fNacimiento = vCliente.fNacimiento.Value;
+
+
+                                Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
+                                unaReserva.Modificar(cliente, inicio, fin, acomp);
+
+                                if (numHabitacionAnterior != nroHabitacionNuevo)
+                                {
+                                    unaReserva.QuitarHabitacion(habitacionReservada);
+                                    unaReserva.AgregarHabitacion(hotel.GetHabitacion(nroHabitacionNuevo));
+
+                                }
+                                hotel.AgregarReserva(nroHabitacionNuevo, unaReserva);
+                                EmitirComprobante(unaReserva);
+                            }
+                        }
                     }
                     else
                     {
-                        DatosClienteForm vCliente = new DatosClienteForm();
-                        Pintarcontroles(vCliente);
-                        vCliente.btnPasajeros.Visible = false;
-
-                        vCliente.tbNombre.Text = unaReserva.getCliente.Nombre;
-                        vCliente.tbApellido.Text = unaReserva.getCliente.Apellido;
-                        vCliente.tbDni.Text = unaReserva.getCliente.DNI.ToString();
-                        vCliente.fNacimiento.Value = unaReserva.getCliente.FechaNacimiento;
-
-                        if (vCliente.ShowDialog() == DialogResult.OK)
+                        if (resultado == DialogResult.Abort)
                         {
-                            string nombre = vCliente.tbNombre.Text;
-                            string apellido = vCliente.tbApellido.Text;
-                            int dni = Convert.ToInt32(vCliente.tbDni.Text);
-                            DateTime fNacimiento = vCliente.fNacimiento.Value;
-
-
-                            Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
-                            unaReserva.Modificar(cliente, inicio, fin, acomp);
-
-                            if (numHabitacionAnterior != nroHabitacionNuevo)
-                            {
-                                unaReserva.QuitarHabitacion(habitacionReservada);
-                                unaReserva.AgregarHabitacion(hotel.GetHabitacion(nroHabitacionNuevo));
-
-                            }
-                            hotel.AgregarReserva(nroHabitacionNuevo,unaReserva);
-                            EmitirComprobante(unaReserva);
+                            unaReserva.QuitarHabitacion(habitacionReservada);
+                            empresa.CancelarReserva(unaReserva.ID);
+                        }
+                        else
+                        {
+                            hotel.AgregarReserva(numHabitacionAnterior, unaReserva);
                         }
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    if (resultado == DialogResult.Abort)
-                    {
-                        unaReserva.QuitarHabitacion(habitacionReservada);
-                        empresa.CancelarReserva(unaReserva.ID);
-                    }
-                    else
-                    {
-                        hotel.AgregarReserva(numHabitacionAnterior, unaReserva);
-                    }
+                    hotel.AgregarReserva(numHabitacionAnterior, unaReserva);
+                    MessageBox.Show(ex.Message);
                 }
+                    
             }
+            
             ActualizarListas();
             vAlojomiento.Dispose();
         }
@@ -1419,7 +1482,8 @@ namespace TP_II
         private void precioBaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             empresa.Preguntar = true;
-            Form_Inicio();          
+            Form_Inicio();
+            Pintarcontroles(this);
         }
 
         //MENU STRIP ALOJAMIENTO:::::
@@ -1715,11 +1779,11 @@ namespace TP_II
 
 
                         Reserva nuevaReserva;
-                        Cliente cliente = new Cliente("", "", dni, new DateTime(1990,1,1));
+                        Cliente cliente = new Cliente("a", "a", dni, new DateTime(1990,1,1));
 
                         if(empresa.ExisteCliente(ref cliente)) //se actualiza por referencia en el método
                         {
-                            Alojamiento buscado = new Casa("","","", 1, 1, null, 1);
+                            Alojamiento buscado = new Casa("a","a","a", 1, 1, null, 1);
                             Casa casita;
                             if (empresa.ExisteAlojamiento(idAlojamiento, ref buscado)) //si existe actualiza por referencia en el método
                             {
@@ -1949,11 +2013,11 @@ namespace TP_II
                         }
 
                         Reserva nuevaReserva;
-                        Cliente cliente = new Cliente("", "", dni, new DateTime(1900,1,1));
+                        Cliente cliente = new Cliente("a", "a", dni, new DateTime(1900,1,1));
 
                         if (empresa.ExisteCliente(ref cliente)) //se actualiza por referencia en el método
                         {
-                            Alojamiento buscado = new Hotel("","","","", false, 1, 1, 1);
+                            Alojamiento buscado = new Hotel("a","a","a","a", false, 1, 1, 1);
                             Hotel hotelcito;
                             if (empresa.ExisteAlojamiento(idAlojamiento, ref buscado, nroHabitacion)) //si existe actualiza por referencia en el método
                             {
@@ -2525,7 +2589,12 @@ namespace TP_II
             relleno.Dispose();
             
         }
-
+        private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InfoForm info = new InfoForm();
+            info.ShowDialog();
+            info.Dispose();
+        }
         private void ayudaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AyudaForm vAyuda = new AyudaForm();
@@ -2550,5 +2619,6 @@ namespace TP_II
             ((Button)sender).BackColor = GetColors(2);
         }
 
+        
     }
 }

@@ -22,12 +22,24 @@ namespace TP_II
 
         public Alojamiento(string direccion, string jurisdiccion, string ciudad)
         {
-            this.direccion = direccion;
-            alta = true;
-            idAlojamiento = contIdAlojamiento;
-            contIdAlojamiento++;
+            try
+            {
+                
+                this.direccion = direccion.Trim() ;
+                alta = true;
+                idAlojamiento = contIdAlojamiento;
+                lugar[0] = jurisdiccion.Trim(); lugar[1] = ciudad.Trim();
 
-            lugar[0] = jurisdiccion; lugar[1] = ciudad;
+                if (this.direccion == "" || lugar[0] == "" || lugar[1] == "")
+                    throw new DatosIncompletosException();
+
+                contIdAlojamiento++;
+      
+            }
+            catch
+            {
+                throw;
+            }            
         }
 
         public DateTime[] IntervaloFechasReservadas()
@@ -62,7 +74,19 @@ namespace TP_II
         public abstract string[] Exportar();
 
         public List<Reserva> Reservas { get { return reservas; } }
-        public string Direccion { get { return direccion; } set { direccion = value; } }
+        public string Direccion 
+        { 
+            get 
+            { 
+                return direccion; 
+            } 
+            set 
+            {
+                if (value == "")
+                    throw new DatosIncompletosException();
+                direccion = value; 
+            }
+        }
         public bool Alta { set { alta = value; } get { return alta; } }
         public string Estado 
         {          
@@ -81,7 +105,16 @@ namespace TP_II
         public Image[] Imagenes { get { return imagenes; } set { imagenes = value; } }
         public static int ContIdAlojamiento { get { return contIdAlojamiento; } set { contIdAlojamiento = value; } }
         public int IDalojamiento { get { return idAlojamiento; } }
-        public string Jurisdiccion { get { return lugar[0]; } set { lugar[0] = value; } }
-        public string Ciudad { get { return lugar[1]; } set { lugar[1] = value; } }
+        public string Jurisdiccion { get { return lugar[0]; } 
+            set 
+            {
+                if (value == "")
+                    throw new DatosIncompletosException();
+                lugar[0] = value; 
+            } 
+        }
+        public string Ciudad { get { return lugar[1]; } set { 
+                
+                lugar[1] = value; } }
     }
 }

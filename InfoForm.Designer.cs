@@ -1,6 +1,6 @@
 ﻿namespace TP_II
 {
-    partial class AyudaForm
+    partial class InfoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,32 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AyudaForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InfoForm));
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // webBrowser1
             // 
             this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.Location = new System.Drawing.Point(0, 25);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(694, 655);
-            this.webBrowser1.TabIndex = 0;
-            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(694, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
+            this.webBrowser1.Size = new System.Drawing.Size(620, 522);
+            this.webBrowser1.TabIndex = 2;
             // 
             // toolStripButton1
             // 
@@ -64,16 +53,26 @@
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // AyudaForm
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(620, 25);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // InfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 655);
-            this.Controls.Add(this.toolStrip1);
+            this.ClientSize = new System.Drawing.Size(620, 547);
             this.Controls.Add(this.webBrowser1);
-            this.Name = "AyudaForm";
-            this.Text = "AyudaForm";
-            this.Load += new System.EventHandler(this.AyudaForm_Load);
+            this.Controls.Add(this.toolStrip1);
+            this.Name = "InfoForm";
+            this.Text = "InfoForm";
+            this.Load += new System.EventHandler(this.InfoForm_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -84,7 +83,7 @@
         #endregion
 
         private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
     }
 }

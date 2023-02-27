@@ -80,6 +80,9 @@ namespace TP_II
             Calendario.BoldedDates = fechas;//pintar calendario habitacion
         }
 
+        private void btnReservar_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

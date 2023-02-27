@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace TP_II
 {
-    public partial class AyudaForm : Form
+    public partial class InfoForm : Form
     {
-        Uri fileURI = new Uri(Application.StartupPath + @"/html/index.html");
-        public AyudaForm()
+        Uri fileURI = new Uri(Application.StartupPath + @"/html/acercaDe.html");
+        public InfoForm()
         {
-            InitializeComponent();  
+            InitializeComponent();
             webBrowser1.Navigate(fileURI);
         }
 
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void InfoForm_Load(object sender, EventArgs e)
         {
 
         }
@@ -27,11 +27,6 @@ namespace TP_II
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             webBrowser1.Navigate(fileURI);
-        }
-
-        private void AyudaForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
