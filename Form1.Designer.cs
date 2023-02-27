@@ -88,7 +88,7 @@
             // btnAgregarAloj
             // 
             this.btnAgregarAloj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
-            this.btnAgregarAloj.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarAloj.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarAloj.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnAgregarAloj.Location = new System.Drawing.Point(27, 61);
             this.btnAgregarAloj.Name = "btnAgregarAloj";
@@ -103,7 +103,7 @@
             // btnConsultaAloj
             // 
             this.btnConsultaAloj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
-            this.btnConsultaAloj.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsultaAloj.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConsultaAloj.Location = new System.Drawing.Point(239, 62);
             this.btnConsultaAloj.Name = "btnConsultaAloj";
             this.btnConsultaAloj.Size = new System.Drawing.Size(100, 70);
@@ -117,7 +117,7 @@
             // btnModificarAloj
             // 
             this.btnModificarAloj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
-            this.btnModificarAloj.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificarAloj.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificarAloj.Location = new System.Drawing.Point(133, 62);
             this.btnModificarAloj.Name = "btnModificarAloj";
             this.btnModificarAloj.Size = new System.Drawing.Size(100, 70);
@@ -158,7 +158,7 @@
             // btnConsultaReserva
             // 
             this.btnConsultaReserva.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
-            this.btnConsultaReserva.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsultaReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConsultaReserva.Location = new System.Drawing.Point(239, 67);
             this.btnConsultaReserva.Name = "btnConsultaReserva";
             this.btnConsultaReserva.Size = new System.Drawing.Size(100, 70);
@@ -172,7 +172,7 @@
             // btnModificarReserva
             // 
             this.btnModificarReserva.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
-            this.btnModificarReserva.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificarReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificarReserva.Location = new System.Drawing.Point(133, 67);
             this.btnModificarReserva.Name = "btnModificarReserva";
             this.btnModificarReserva.Size = new System.Drawing.Size(100, 70);
@@ -186,7 +186,7 @@
             // btnAgregarReserva
             // 
             this.btnAgregarReserva.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(197)))), ((int)(((byte)(186)))));
-            this.btnAgregarReserva.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarReserva.Location = new System.Drawing.Point(27, 67);
             this.btnAgregarReserva.Name = "btnAgregarReserva";
             this.btnAgregarReserva.Size = new System.Drawing.Size(100, 70);
@@ -483,13 +483,14 @@
             // 
             this.informacionToolStripMenuItem.Name = "informacionToolStripMenuItem";
             this.informacionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
-            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.informacionToolStripMenuItem.Text = "Informacion";
+            this.informacionToolStripMenuItem.Click += new System.EventHandler(this.informacionToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ayudaToolStripMenuItem.Text = "Ayuda";
             this.ayudaToolStripMenuItem.Click += new System.EventHandler(this.ayudaToolStripMenuItem_Click);
             // 

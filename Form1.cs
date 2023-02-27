@@ -124,12 +124,16 @@ namespace TP_II
                 vInicio.p6.BackColor = GetColors(5);
                 vInicio.p7.BackColor = GetColors(2);
                 Pintarcontroles(vInicio);
+                vInicio.tbRazonSocial.Text = empresa.RazonSocial;
 
                 if (vInicio.ShowDialog() == DialogResult.OK)
                 {
                     empresa.Preguntar = !vInicio.cbPreguntar.Checked;
                     if (vInicio.rbSi.Checked)
+                    {
                         empresa.PrecioBaseHotel = Convert.ToDouble(vInicio.tbPrecio.Text);
+                        empresa.RazonSocial = vInicio.tbRazonSocial.Text;
+                    }
 
                     if (vInicio.rb1.Checked)
                         SetColors(1);
@@ -1273,7 +1277,8 @@ namespace TP_II
 
             //variables auxiliares
             Image imagen = null;
-            string razonSocial = "TuAlquilerYa.com S.A.";
+            string razonSocial = empresa.RazonSocial;
+            //string razonSocial = "TuAlquilerYa.com S.A.";
             string tipoComprobante = "Recibo X";
             string nombClient = temp.getCliente.NombreCompleto;
             string dniClient = temp.getCliente.DNI.ToString();
@@ -2550,5 +2555,11 @@ namespace TP_II
             ((Button)sender).BackColor = GetColors(2);
         }
 
+        private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm vAcercaDe = new AboutForm();
+            vAcercaDe.ShowDialog();
+            vAcercaDe.Dispose();
+        }
     }
 }

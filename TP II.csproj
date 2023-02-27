@@ -52,6 +52,12 @@
     <Compile Include="ABMAlojamientosForm.Designer.cs">
       <DependentUpon>ABMAlojamientosForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Alojamiento.cs" />
     <Compile Include="AlojamientoForm.cs">
       <SubType>Form</SubType>
@@ -126,6 +132,9 @@
     </Compile>
     <EmbeddedResource Include="ABMAlojamientosForm.resx">
       <DependentUpon>ABMAlojamientosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AlojamientoForm.resx">
       <DependentUpon>AlojamientoForm.cs</DependentUpon>
