@@ -418,7 +418,8 @@ namespace TP_II
         {
             ABMAlojamientosForm ventanaABM = new ABMAlojamientosForm();
             ventanaABM.setInteractor(this);
-
+            ventanaABM.btnExportarR.Enabled = false;
+            ventanaABM.btnImportarR.Enabled = false;
             bool hotel;
             string direccion;
             string nombre;
@@ -447,49 +448,59 @@ namespace TP_II
 
             if (ventanaABM.ShowDialog() == DialogResult.OK)
             {
-                Alojamiento alojamiento;
-
-                direccion = ventanaABM.tBdireccion.Text;
-                hotel = ventanaABM.rbHotel.Checked;
-                jurisdiccion = ventanaABM.cBoxProvincia.Text;
-                ciudad = ventanaABM.cBoxCiudad.Text;
-
-                if (hotel)
+                try
                 {
-                    nombre = ventanaABM.tbNombre.Text;
-                    tresEstrellas = ventanaABM.checkB3Estrellas.Checked;
-                    simples = Convert.ToInt32(ventanaABM.nUsimples.Value);
-                    dobles = Convert.ToInt32(ventanaABM.nUdobles.Value);
-                    triples = Convert.ToInt32(ventanaABM.nUtriples.Value);
-                    alojamiento = new Hotel(direccion,jurisdiccion,ciudad, nombre, tresEstrellas, simples, dobles, triples);
+                    Alojamiento alojamiento = null;
 
+                    direccion = ventanaABM.tBdireccion.Text;
+                    hotel = ventanaABM.rbHotel.Checked;
+                    jurisdiccion = ventanaABM.cBoxProvincia.Text;
+                    ciudad = ventanaABM.cBoxCiudad.Text;
+
+                    if (hotel)
+                    {
+                        nombre = ventanaABM.tbNombre.Text;
+                        tresEstrellas = ventanaABM.checkB3Estrellas.Checked;
+                        simples = Convert.ToInt32(ventanaABM.nUsimples.Value);
+                        dobles = Convert.ToInt32(ventanaABM.nUdobles.Value);
+                        triples = Convert.ToInt32(ventanaABM.nUtriples.Value);
+                    
+                        alojamiento = new Hotel(direccion, jurisdiccion, ciudad, nombre, tresEstrellas, simples, dobles, triples);
+                    }
+                    else
+                    {
+                        ventanaABM.tbNumCasa.Text = numCasa.ToString();
+                        cantCamas = Convert.ToInt32(ventanaABM.numUDcamasCasa.Value);
+                        minDias = Convert.ToInt32(ventanaABM.numUDminimo.Value);
+                        precioBase = Convert.ToDouble(ventanaABM.tbPrecio.Text);
+
+
+
+                        List<string> s = new List<string>();
+                        if (ventanaABM.checkBCochera.Checked) s.Add(ventanaABM.checkBCochera.Text);
+                        if (ventanaABM.checkBPileta.Checked) s.Add(ventanaABM.checkBPileta.Text);
+                        if (ventanaABM.checkBWiFi.Checked) s.Add(ventanaABM.checkBWiFi.Text);
+                        if (ventanaABM.checkBLimpieza.Checked) s.Add(ventanaABM.checkBLimpieza.Text);
+                        if (ventanaABM.checkBDesayuno.Checked) s.Add(ventanaABM.checkBDesayuno.Text);
+                        if (ventanaABM.checkBMascota.Checked) s.Add(ventanaABM.checkBMascota.Text);
+
+                        servicios = new string[s.Count];
+                        for (int i = 0; i < s.Count; i++)
+                            servicios[i] = s[i];
+
+                        alojamiento = new Casa(direccion, jurisdiccion, ciudad, minDias, cantCamas, servicios, precioBase);
+        
+                    }
+                    alojamiento.Imagenes = imagenes;
+
+                    empresa.AgregarAlojamiento(alojamiento);
+                    ActualizarListas();
                 }
-                else
+                catch(Exception ex)
                 {
-                    ventanaABM.tbNumCasa.Text = numCasa.ToString();
-                    cantCamas = Convert.ToInt32(ventanaABM.numUDcamasCasa.Value);
-                    minDias = Convert.ToInt32(ventanaABM.numUDminimo.Value);
-                    precioBase = Convert.ToDouble(ventanaABM.tbPrecio.Text);
-
-
-
-                    List<string> s = new List<string>();
-                    if (ventanaABM.checkBCochera.Checked) s.Add(ventanaABM.checkBCochera.Text);
-                    if (ventanaABM.checkBPileta.Checked) s.Add(ventanaABM.checkBPileta.Text);
-                    if (ventanaABM.checkBWiFi.Checked) s.Add(ventanaABM.checkBWiFi.Text);
-                    if (ventanaABM.checkBLimpieza.Checked) s.Add(ventanaABM.checkBLimpieza.Text);
-                    if (ventanaABM.checkBDesayuno.Checked) s.Add(ventanaABM.checkBDesayuno.Text);
-                    if (ventanaABM.checkBMascota.Checked) s.Add(ventanaABM.checkBMascota.Text);
-
-                    servicios = new string[s.Count];
-                    for (int i = 0; i < s.Count; i++)
-                        servicios[i] = s[i];
-                    alojamiento = new Casa(direccion,jurisdiccion,ciudad, minDias, cantCamas, servicios, precioBase);
+                    MessageBox.Show(ex.Message);
                 }
-                alojamiento.Imagenes = imagenes;
-
-                empresa.AgregarAlojamiento(alojamiento);
-                ActualizarListas();
+                
             }
             // Quito evento click del boton "Importar fotos" en ventana ABM
             ventanaABM.btnFotos.Click -= new System.EventHandler(this.btnFotos_Click);
@@ -603,57 +614,65 @@ namespace TP_II
 
             if (vModificacion.ShowDialog() == DialogResult.OK)
             {
-                // Reemplazo las imagenes si seleccione nuevas
-                if (imagenes.Length > 0)
-                    alojamiento.Imagenes = imagenes;
-
-                bool esHotel = vModificacion.rbHotel.Checked;
-
-                if (vModificacion.labEstado.Text == "Activado")
-                    alojamiento.Alta = true;
-                else
-                    alojamiento.Alta = false;
-
-                string jurisd = vModificacion.cBoxProvincia.Text;
-                string ciudad = vModificacion.cBoxCiudad.Text;
-
-                if (jurisd != "")
-                    alojamiento.Jurisdiccion =jurisd;
-                if(ciudad!="")
-                    alojamiento.Ciudad= ciudad;
-
-                empresa.AgregarLugar(jurisd,ciudad);// si se repite lo resuelve el método
-
-                if (esHotel)
+                try
                 {
-                    Hotel unHotel = (Hotel)alojamiento;
-                    unHotel.Direccion = vModificacion.tBdireccion.Text;
-                    unHotel.Nombre = vModificacion.tbNombre.Text;
-                    unHotel.TresEstrellas = vModificacion.checkB3Estrellas.Checked;
-                }
-                else
-                {
-                    Casa unaCasa = (Casa)alojamiento;
-                    List<string> s = new List<string>();
-                    if (vModificacion.checkBCochera.Checked) s.Add(vModificacion.checkBCochera.Text);
-                    if (vModificacion.checkBPileta.Checked) s.Add(vModificacion.checkBPileta.Text);
-                    if (vModificacion.checkBWiFi.Checked) s.Add(vModificacion.checkBWiFi.Text);
-                    if (vModificacion.checkBLimpieza.Checked) s.Add(vModificacion.checkBLimpieza.Text);
-                    if (vModificacion.checkBDesayuno.Checked) s.Add(vModificacion.checkBDesayuno.Text);
-                    if (vModificacion.checkBMascota.Checked) s.Add(vModificacion.checkBMascota.Text);
+                    // Reemplazo las imagenes si seleccione nuevas
+                    if (imagenes.Length > 0)
+                        alojamiento.Imagenes = imagenes;
 
-                    string[] servicios = new string[s.Count];
-                    for (int i = 0; i < s.Count; i++)
+                    bool esHotel = vModificacion.rbHotel.Checked;
+
+                    if (vModificacion.labEstado.Text == "Activado")
+                        alojamiento.Alta = true;
+                    else
+                        alojamiento.Alta = false;
+
+                    string jurisd = vModificacion.cBoxProvincia.Text.Trim();
+                    string ciudad = vModificacion.cBoxCiudad.Text.Trim();
+
+
+                        alojamiento.Jurisdiccion = jurisd;
+
+                        alojamiento.Ciudad = ciudad;
+
+                    empresa.AgregarLugar(jurisd, ciudad);// si se repite lo resuelve el método
+
+                    if (esHotel)
                     {
-                        servicios[i] = s[i];
+                        Hotel unHotel = (Hotel)alojamiento;
+                        unHotel.Direccion = vModificacion.tBdireccion.Text.Trim();
+                        unHotel.Nombre = vModificacion.tbNombre.Text.Trim();
+                        unHotel.TresEstrellas = vModificacion.checkB3Estrellas.Checked;
                     }
+                    else
+                    {
+                        Casa unaCasa = (Casa)alojamiento;
+                        List<string> s = new List<string>();
+                        if (vModificacion.checkBCochera.Checked) s.Add(vModificacion.checkBCochera.Text);
+                        if (vModificacion.checkBPileta.Checked) s.Add(vModificacion.checkBPileta.Text);
+                        if (vModificacion.checkBWiFi.Checked) s.Add(vModificacion.checkBWiFi.Text);
+                        if (vModificacion.checkBLimpieza.Checked) s.Add(vModificacion.checkBLimpieza.Text);
+                        if (vModificacion.checkBDesayuno.Checked) s.Add(vModificacion.checkBDesayuno.Text);
+                        if (vModificacion.checkBMascota.Checked) s.Add(vModificacion.checkBMascota.Text);
 
-                    unaCasa.Direccion = vModificacion.tBdireccion.Text;
-                    unaCasa.Servicios = servicios;
-                    unaCasa.Camas = Convert.ToInt32(vModificacion.numUDcamasCasa.Value);
-                    unaCasa.MinDias = Convert.ToInt32(vModificacion.numUDminimo.Value);
-                    unaCasa.PrecioBaseCasa = Convert.ToInt32(vModificacion.tbPrecio.Text);
+                        string[] servicios = new string[s.Count];
+                        for (int i = 0; i < s.Count; i++)
+                        {
+                            servicios[i] = s[i];
+                        }
+
+                        unaCasa.Direccion = vModificacion.tBdireccion.Text.Trim();
+                        unaCasa.Servicios = servicios;
+                        unaCasa.Camas = Convert.ToInt32(vModificacion.numUDcamasCasa.Value);
+                        unaCasa.MinDias = Convert.ToInt32(vModificacion.numUDminimo.Value);
+                        unaCasa.PrecioBaseCasa = Convert.ToInt32(vModificacion.tbPrecio.Text);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
                 
             }
             ActualizarListas();
@@ -771,7 +790,7 @@ namespace TP_II
             campos = cbAlojamientos.Text.Split('-');
             string direccion = campos[1].TrimEnd(' ').TrimStart(' ');
 
-            Alojamiento aBuscar = new Casa(direccion,"","", 1, 1,null, 1.0);
+            Alojamiento aBuscar = new Casa(direccion,"a","a", 1, 1,null, 1.0);
             aBuscar = (Alojamiento)this.BuscarAlojamiento(aBuscar);
             DateTime[] fechas;
             vAlojomiento.SetAlojamiento(aBuscar);
