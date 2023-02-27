@@ -12,6 +12,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Drawing.Imaging;
+using System.Diagnostics;
 
 namespace TP_II
 {
@@ -124,25 +125,31 @@ namespace TP_II
                 vInicio.p6.BackColor = GetColors(5);
                 vInicio.p7.BackColor = GetColors(2);
                 Pintarcontroles(vInicio);
+                vInicio.tbRazonSocial.Text = empresa.RazonSocial;
 
                 try
                 {
                     if (vInicio.ShowDialog() == DialogResult.OK)
                     {
                         empresa.Preguntar = !vInicio.cbPreguntar.Checked;
-                        if (vInicio.rbSi.Checked)
-                            empresa.PrecioBaseHotel = Convert.ToDouble(vInicio.tbPrecio.Text);
 
-                        if (vInicio.rb1.Checked)
-                            SetColors(1);
-                        if (vInicio.rb2.Checked)
-                            SetColors(2);
-                        if (vInicio.rb3.Checked)
-                            SetColors(3);
-                        if (vInicio.rb4.Checked)
-                            SetColors(4);
-                        if (vInicio.rb5.Checked)
-                            SetColors(5);
+                            if (vInicio.rbSi.Checked)
+                            {
+                                empresa.PrecioBaseHotel = Convert.ToDouble(vInicio.tbPrecio.Text);
+                                empresa.RazonSocial = vInicio.tbRazonSocial.Text;
+                            }
+
+                            if (vInicio.rb1.Checked)
+                                SetColors(1);
+                            if (vInicio.rb2.Checked)
+                                SetColors(2);
+                            if (vInicio.rb3.Checked)
+                                SetColors(3);
+                            if (vInicio.rb4.Checked)
+                                SetColors(4);
+                            if (vInicio.rb5.Checked)
+                                SetColors(5);
+            
                     }
                 }
                 catch (Exception ex)
@@ -150,7 +157,7 @@ namespace TP_II
                     MessageBox.Show(ex.Message);
                     empresa.Preguntar = true;
                     Form_Inicio();
-                    
+
                 }
 
             }
@@ -1336,7 +1343,8 @@ namespace TP_II
 
             //variables auxiliares
             Image imagen = null;
-            string razonSocial = "TuAlquilerYa.com S.A.";
+            string razonSocial = empresa.RazonSocial;
+            //string razonSocial = "TuAlquilerYa.com S.A.";
             string tipoComprobante = "Recibo X";
             string nombClient = temp.getCliente.NombreCompleto;
             string dniClient = temp.getCliente.DNI.ToString();
@@ -2589,12 +2597,7 @@ namespace TP_II
             relleno.Dispose();
             
         }
-        private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            InfoForm info = new InfoForm();
-            info.ShowDialog();
-            info.Dispose();
-        }
+
         private void ayudaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AyudaForm vAyuda = new AyudaForm();
@@ -2619,6 +2622,10 @@ namespace TP_II
             ((Button)sender).BackColor = GetColors(2);
         }
 
-        
+        private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = Application.StartupPath + @"/html/about.html";
+            Process.Start(path);
+        }
     }
 }

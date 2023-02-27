@@ -36,7 +36,14 @@
             this.cbPreguntar = new System.Windows.Forms.CheckBox();
             this.gb1 = new System.Windows.Forms.GroupBox();
             this.gb2 = new System.Windows.Forms.GroupBox();
+            this.p7 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.p6 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.p5 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.p4 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.p3 = new System.Windows.Forms.Panel();
             this.p2 = new System.Windows.Forms.Panel();
             this.p1 = new System.Windows.Forms.Panel();
@@ -45,19 +52,15 @@
             this.rb3 = new System.Windows.Forms.RadioButton();
             this.rb2 = new System.Windows.Forms.RadioButton();
             this.rb1 = new System.Windows.Forms.RadioButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.p5 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.p7 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.p6 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbRazonSocial = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.gb1.SuspendLayout();
             this.gb2.SuspendLayout();
-            this.p4.SuspendLayout();
-            this.p5.SuspendLayout();
             this.p7.SuspendLayout();
             this.p6.SuspendLayout();
+            this.p5.SuspendLayout();
+            this.p4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -65,13 +68,13 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(196, 13);
+            this.label1.Size = new System.Drawing.Size(144, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "¿Desea ingresar un nuevo precio base?";
+            this.label1.Text = "¿Desea reingresar los datos?";
             // 
             // tbPrecio
             // 
-            this.tbPrecio.Location = new System.Drawing.Point(81, 86);
+            this.tbPrecio.Location = new System.Drawing.Point(115, 92);
             this.tbPrecio.Name = "tbPrecio";
             this.tbPrecio.Size = new System.Drawing.Size(75, 20);
             this.tbPrecio.TabIndex = 1;
@@ -103,7 +106,7 @@
             // btnContinuar
             // 
             this.btnContinuar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnContinuar.Location = new System.Drawing.Point(79, 421);
+            this.btnContinuar.Location = new System.Drawing.Point(77, 504);
             this.btnContinuar.Name = "btnContinuar";
             this.btnContinuar.Size = new System.Drawing.Size(75, 37);
             this.btnContinuar.TabIndex = 4;
@@ -113,7 +116,7 @@
             // cbPreguntar
             // 
             this.cbPreguntar.AutoSize = true;
-            this.cbPreguntar.Location = new System.Drawing.Point(49, 381);
+            this.cbPreguntar.Location = new System.Drawing.Point(47, 464);
             this.cbPreguntar.Name = "cbPreguntar";
             this.cbPreguntar.Size = new System.Drawing.Size(129, 17);
             this.cbPreguntar.TabIndex = 5;
@@ -122,16 +125,19 @@
             // 
             // gb1
             // 
+            this.gb1.Controls.Add(this.label3);
+            this.gb1.Controls.Add(this.tbRazonSocial);
+            this.gb1.Controls.Add(this.label2);
             this.gb1.Controls.Add(this.label1);
             this.gb1.Controls.Add(this.tbPrecio);
             this.gb1.Controls.Add(this.rbNo);
             this.gb1.Controls.Add(this.rbSi);
             this.gb1.Location = new System.Drawing.Point(12, 12);
             this.gb1.Name = "gb1";
-            this.gb1.Size = new System.Drawing.Size(217, 130);
+            this.gb1.Size = new System.Drawing.Size(217, 204);
             this.gb1.TabIndex = 6;
             this.gb1.TabStop = false;
-            this.gb1.Text = "Precio base";
+            this.gb1.Text = "Datos Empresa";
             // 
             // gb2
             // 
@@ -147,12 +153,58 @@
             this.gb2.Controls.Add(this.rb3);
             this.gb2.Controls.Add(this.rb2);
             this.gb2.Controls.Add(this.rb1);
-            this.gb2.Location = new System.Drawing.Point(14, 148);
+            this.gb2.Location = new System.Drawing.Point(12, 231);
             this.gb2.Name = "gb2";
             this.gb2.Size = new System.Drawing.Size(215, 212);
             this.gb2.TabIndex = 7;
             this.gb2.TabStop = false;
             this.gb2.Text = "Estilos";
+            // 
+            // p7
+            // 
+            this.p7.Controls.Add(this.panel5);
+            this.p7.Location = new System.Drawing.Point(149, 170);
+            this.p7.Name = "p7";
+            this.p7.Size = new System.Drawing.Size(51, 18);
+            this.p7.TabIndex = 12;
+            // 
+            // panel5
+            // 
+            this.panel5.Location = new System.Drawing.Point(55, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(56, 18);
+            this.panel5.TabIndex = 10;
+            // 
+            // p6
+            // 
+            this.p6.Controls.Add(this.panel7);
+            this.p6.Location = new System.Drawing.Point(98, 170);
+            this.p6.Name = "p6";
+            this.p6.Size = new System.Drawing.Size(56, 18);
+            this.p6.TabIndex = 11;
+            // 
+            // panel7
+            // 
+            this.panel7.Location = new System.Drawing.Point(55, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(56, 18);
+            this.panel7.TabIndex = 10;
+            // 
+            // p5
+            // 
+            this.p5.Controls.Add(this.panel3);
+            this.p5.Location = new System.Drawing.Point(149, 137);
+            this.p5.Name = "p5";
+            this.p5.Size = new System.Drawing.Size(51, 18);
+            this.p5.TabIndex = 10;
+            this.p5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // panel3
+            // 
+            this.panel3.Location = new System.Drawing.Point(55, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(56, 18);
+            this.panel3.TabIndex = 10;
             // 
             // p4
             // 
@@ -161,6 +213,13 @@
             this.p4.Name = "p4";
             this.p4.Size = new System.Drawing.Size(56, 18);
             this.p4.TabIndex = 8;
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(55, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(56, 18);
+            this.panel1.TabIndex = 10;
             // 
             // p3
             // 
@@ -240,64 +299,36 @@
             this.rb1.Text = "Estilo 1";
             this.rb1.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // label2
             // 
-            this.panel1.Location = new System.Drawing.Point(55, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(56, 18);
-            this.panel1.TabIndex = 10;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 125);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Razon Social";
             // 
-            // p5
+            // tbRazonSocial
             // 
-            this.p5.Controls.Add(this.panel3);
-            this.p5.Location = new System.Drawing.Point(149, 137);
-            this.p5.Name = "p5";
-            this.p5.Size = new System.Drawing.Size(51, 18);
-            this.p5.TabIndex = 10;
-            this.p5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            this.tbRazonSocial.Location = new System.Drawing.Point(6, 157);
+            this.tbRazonSocial.Name = "tbRazonSocial";
+            this.tbRazonSocial.Size = new System.Drawing.Size(191, 20);
+            this.tbRazonSocial.TabIndex = 1;
             // 
-            // panel3
+            // label3
             // 
-            this.panel3.Location = new System.Drawing.Point(55, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(56, 18);
-            this.panel3.TabIndex = 10;
-            // 
-            // p7
-            // 
-            this.p7.Controls.Add(this.panel5);
-            this.p7.Location = new System.Drawing.Point(149, 170);
-            this.p7.Name = "p7";
-            this.p7.Size = new System.Drawing.Size(51, 18);
-            this.p7.TabIndex = 12;
-            // 
-            // panel5
-            // 
-            this.panel5.Location = new System.Drawing.Point(55, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(56, 18);
-            this.panel5.TabIndex = 10;
-            // 
-            // p6
-            // 
-            this.p6.Controls.Add(this.panel7);
-            this.p6.Location = new System.Drawing.Point(98, 170);
-            this.p6.Name = "p6";
-            this.p6.Size = new System.Drawing.Size(56, 18);
-            this.p6.TabIndex = 11;
-            // 
-            // panel7
-            // 
-            this.panel7.Location = new System.Drawing.Point(55, 0);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(56, 18);
-            this.panel7.TabIndex = 10;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 95);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Precio base";
             // 
             // InicioForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 474);
+            this.ClientSize = new System.Drawing.Size(244, 552);
             this.Controls.Add(this.gb2);
             this.Controls.Add(this.gb1);
             this.Controls.Add(this.cbPreguntar);
@@ -309,10 +340,10 @@
             this.gb1.PerformLayout();
             this.gb2.ResumeLayout(false);
             this.gb2.PerformLayout();
-            this.p4.ResumeLayout(false);
-            this.p5.ResumeLayout(false);
             this.p7.ResumeLayout(false);
             this.p6.ResumeLayout(false);
+            this.p5.ResumeLayout(false);
+            this.p4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,5 +374,8 @@
         public System.Windows.Forms.Panel panel5;
         public System.Windows.Forms.Panel p6;
         public System.Windows.Forms.Panel panel7;
+        public System.Windows.Forms.Label label2;
+        public System.Windows.Forms.TextBox tbRazonSocial;
+        public System.Windows.Forms.Label label3;
     }
 }

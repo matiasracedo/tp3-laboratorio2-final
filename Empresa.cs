@@ -25,6 +25,7 @@ namespace TP_II
         private bool preguntar = true;
         private int indiceColor;    
         private double precioBaseHotel;
+        private string razonSocial = "";
         private SortedList<string,List<string>> lugares = new SortedList<string,List<string>>(); // son objects
 
         public Empresa(List<string> lugares)
@@ -223,6 +224,11 @@ namespace TP_II
             return reserva.DatosComprobante;
         }
         public double PrecioBaseHotel { get { return precioBaseHotel; } set { precioBaseHotel = value; } }
+        public string RazonSocial { get { return razonSocial; } set {
+                string r = value.Trim();
+                if (r == "")
+                    throw new DatosIncompletosException();
+                razonSocial = value; } }
         public bool Preguntar { get { return preguntar; } set { preguntar = value; } }
         public int NumeroCasaSiguiente { get { return Casa.ContCasa; } }
         public List<Cliente> GetClientesHistoricos { get { return clientesHistorico; } }

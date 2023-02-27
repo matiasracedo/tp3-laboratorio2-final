@@ -22,10 +22,12 @@ namespace TP_II
             if(rbNo.Checked)
             {
                 btnContinuar.Enabled = true;
+                tbRazonSocial.ReadOnly = true;
             }
             else
             {
-                if(tbPrecio.Text=="")
+                tbRazonSocial.ReadOnly = false;
+                if (tbPrecio.Text=="" || tbRazonSocial.Text=="")
                     btnContinuar.Enabled=false;
                 else btnContinuar.Enabled=true;
             }
