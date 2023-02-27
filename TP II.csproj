@@ -92,6 +92,7 @@
       <DependentUpon>DatosClienteForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DatosIncompletosException.cs" />
+    <Compile Include="DniException.cs" />
     <Compile Include="Empresa.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
