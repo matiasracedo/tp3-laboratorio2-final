@@ -19,10 +19,6 @@ namespace TP_II
             webBrowser1.Navigate(fileURI);
         }
 
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-
-        }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
