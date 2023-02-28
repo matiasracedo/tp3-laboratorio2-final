@@ -113,8 +113,9 @@ namespace TP_II
                 lugar[0] = value; 
             } 
         }
-        public string Ciudad { get { return lugar[1]; } set { 
-                
+        public string Ciudad { get { return lugar[1]; } set {
+                if (value == "")
+                    throw new DatosIncompletosException();
                 lugar[1] = value; } }
     }
 }

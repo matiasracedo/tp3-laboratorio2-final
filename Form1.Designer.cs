@@ -261,16 +261,15 @@
             this.restarToolStripMenuItem.Name = "restarToolStripMenuItem";
             this.restarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
             this.restarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.restarToolStripMenuItem.Text = "Restar...";
+            this.restarToolStripMenuItem.Text = "Restart...";
             this.restarToolStripMenuItem.Click += new System.EventHandler(this.restarToolStripMenuItem_Click);
             // 
             // precioBaseToolStripMenuItem
             // 
             this.precioBaseToolStripMenuItem.Name = "precioBaseToolStripMenuItem";
-            this.precioBaseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.precioBaseToolStripMenuItem.ShowShortcutKeys = false;
+            this.precioBaseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.precioBaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.precioBaseToolStripMenuItem.Text = "Precio Base";
+            this.precioBaseToolStripMenuItem.Text = "Settings";
             this.precioBaseToolStripMenuItem.Click += new System.EventHandler(this.precioBaseToolStripMenuItem_Click);
             // 
             // alojamientosStripMenu
@@ -355,9 +354,11 @@
             // 
             // agregarToolStripMenuItem1
             // 
+            this.agregarToolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.agregarToolStripMenuItem1.Name = "agregarToolStripMenuItem1";
             this.agregarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.agregarToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
+            this.agregarToolStripMenuItem1.ShowShortcutKeys = false;
+            this.agregarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.agregarToolStripMenuItem1.Text = "Agregar...";
             this.agregarToolStripMenuItem1.Click += new System.EventHandler(this.agregarToolStripMenuItem1_Click);
             // 
@@ -365,7 +366,8 @@
             // 
             this.modificarToolStripMenuItem1.Name = "modificarToolStripMenuItem1";
             this.modificarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
-            this.modificarToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
+            this.modificarToolStripMenuItem1.ShowShortcutKeys = false;
+            this.modificarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.modificarToolStripMenuItem1.Text = "Modificar...";
             this.modificarToolStripMenuItem1.Click += new System.EventHandler(this.modificarToolStripMenuItem1_Click);
             // 
@@ -383,7 +385,8 @@
             this.hotelesToolStripMenuItem});
             this.importarToolStripMenuItem1.Name = "importarToolStripMenuItem1";
             this.importarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.I)));
-            this.importarToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
+            this.importarToolStripMenuItem1.ShowShortcutKeys = false;
+            this.importarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.importarToolStripMenuItem1.Text = "Importar...";
             // 
             // casasToolStripMenuItem
@@ -407,7 +410,8 @@
             this.hotelesToolStripMenuItem1});
             this.exportarToolStripMenuItem1.Name = "exportarToolStripMenuItem1";
             this.exportarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.exportarToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
+            this.exportarToolStripMenuItem1.ShowShortcutKeys = false;
+            this.exportarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.exportarToolStripMenuItem1.Text = "Exportar...";
             // 
             // casasToolStripMenuItem1
@@ -483,14 +487,14 @@
             // 
             this.informacionToolStripMenuItem.Name = "informacionToolStripMenuItem";
             this.informacionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
-            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.informacionToolStripMenuItem.Text = "Informacion";
             this.informacionToolStripMenuItem.Click += new System.EventHandler(this.informacionToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.ayudaToolStripMenuItem.Text = "Ayuda";
             this.ayudaToolStripMenuItem.Click += new System.EventHandler(this.ayudaToolStripMenuItem_Click);
             // 

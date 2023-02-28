@@ -44,10 +44,9 @@ namespace TP_II
        
         private void Form1_Load(object sender, EventArgs e)
         {
-          
+            FileStream fs = null;
             if (File.Exists(nombreArchivo))
             {
-                FileStream fs;
                 try
                 {
                     fs = new FileStream(nombreArchivo, FileMode.Open, FileAccess.Read);
@@ -58,7 +57,6 @@ namespace TP_II
                     Cliente.ContIdCliente = empresa.contBackCliente;
                     Alojamiento.ContIdAlojamiento = empresa.contBackAlojamientos;
                     Casa.ContCasa = empresa.contBackCasas;
-                    fs.Close();
                 }
                 catch (Exception ex)
                 {
@@ -67,6 +65,8 @@ namespace TP_II
                 finally
                 {
                     ActualizarListas();
+                    if (fs != null)
+                        fs.Close();
                 }        
             }
             else
@@ -80,9 +80,9 @@ namespace TP_II
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            FileStream archivo = null;
             if (!restart)
             {
-                FileStream archivo;
                 try
                 {
                     archivo = new FileStream(nombreArchivo, FileMode.Create, FileAccess.Write);
@@ -92,12 +92,17 @@ namespace TP_II
                     empresa.contBackAlojamientos = Alojamiento.ContIdAlojamiento;
                     empresa.contBackCasas = Casa.ContCasa;
                     bf.Serialize(archivo, empresa);
-                    archivo.Close();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                }  
+                }
+                finally
+                {
+                    ActualizarListas();
+                    if (archivo != null)
+                        archivo.Close();
+                }
             }
         }
         private void Form_Inicio()
@@ -1362,7 +1367,7 @@ namespace TP_II
             //línea 3
             lineas.Add(new[] { "Ap., Nomb.:", nombClient, "", "", "" });
             //línea 4
-            lineas.Add(new[] { "CUIT", dniClient, "", "", "" });
+            lineas.Add(new[] { "DNI", dniClient, "", "", "" });
             //línea 5
             lineas.Add(new[] { "F. Nac.", fNacimiento, "", "", "" });
             //línea 6 - línea en blanco adicional.
@@ -1462,11 +1467,23 @@ namespace TP_II
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileStream archivo = new FileStream(nombreArchivo, FileMode.Create, FileAccess.Write);
-            BinaryFormatter bf = new BinaryFormatter();
-
-            bf.Serialize(archivo, empresa);
-            archivo.Close();
+            FileStream archivo = null;
+            try
+            {
+                archivo = new FileStream(nombreArchivo, FileMode.Create, FileAccess.Write);
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(archivo, empresa);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                ActualizarListas();
+                if (archivo != null)
+                    archivo.Close();
+            }
         }
         private void restarToolStripMenuItem_Click(object sender, EventArgs e)
         {
