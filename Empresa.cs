@@ -481,8 +481,7 @@ namespace TP_II
             int contLinea = 1;
             string[] campos;
 
-            try
-            {
+
                 fs = new FileStream(path, FileMode.Open, FileAccess.Read);
                 sr = new StreamReader(fs);
 
@@ -565,21 +564,8 @@ namespace TP_II
                         errores.Add(contLinea, "El Alojamiento No Existe");
                     contLinea++;
 
-                }
             }
-            catch (Exception ex)
-            {
-
-                throw new Exception("Error en la Importacion: " + ex.Message);
-            }
-            finally
-            {
-                if (fs != null)
-                {
-                    sr.Close();
-                    fs.Close();
-                }
-            }
+           
             return errores;
         }
 

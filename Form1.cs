@@ -743,9 +743,15 @@ namespace TP_II
 
             if(ofd.ShowDialog() == DialogResult.OK)
             {
-                
-                path = ofd.FileName;
-                d=empresa.ImportarReservasDeAlojamiento(path);
+                try
+                {
+                    path = ofd.FileName;
+                    d = empresa.ImportarReservasDeAlojamiento(path);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 
                 ofd.Dispose();
                   
