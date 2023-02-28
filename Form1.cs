@@ -2494,6 +2494,7 @@ namespace TP_II
        private void graficoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             vGrafico = new GraficoForm();
+            vGrafico.Text = "Grafico Ocupacion (Reservas)";
             vGrafico.Size = new Size(688,355);
             vGrafico.pb.Size = new Size(650,300);
             vGrafico.pb.Paint += new PaintEventHandler(DibujarGraficoAlojamientos);
@@ -2504,6 +2505,7 @@ namespace TP_II
         private void graficoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             vGrafico = new GraficoForm();
+            vGrafico.Text = "Grafico Clientes por reserva";
             vGrafico.Size = new Size(1300, 355);
             vGrafico.pb.Size = new Size(1250, 300);
             vGrafico.pb.Paint += new PaintEventHandler(DibujarGraficoClientes);

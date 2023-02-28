@@ -47,7 +47,7 @@
             this.ClientSize = new System.Drawing.Size(672, 316);
             this.Controls.Add(this.pb);
             this.Name = "GraficoForm";
-            this.Text = "GraficoForm";
+            this.Text = "Grafico";
             this.Load += new System.EventHandler(this.GraficoForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
             this.ResumeLayout(false);
