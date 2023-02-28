@@ -71,7 +71,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.webBrowser1);
             this.Name = "AyudaForm";
-            this.Text = "AyudaForm";
+            this.Text = "Ayuda";
             this.Load += new System.EventHandler(this.AyudaForm_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
