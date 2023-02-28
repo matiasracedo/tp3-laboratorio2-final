@@ -122,6 +122,7 @@ namespace TP_II
                 int indeceR = e.RowIndex;
                 string direccion = dataGridDisponibles[indiceC, indeceR].Value.ToString();
                 Alojamiento aBuscar = new Casa(direccion, "a", "a", 1, 1, null, 1.0);
+
                 aBuscar = (Alojamiento)form1.BuscarAlojamiento(aBuscar);
                 DateTime[] fechas;
 
