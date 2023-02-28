@@ -2427,10 +2427,13 @@ namespace TP_II
             alto = (int)(vGrafico.Height * datos[0]) / 100;
             e.Graphics.FillRectangle(relleno, 450, vGrafico.pb.Height - alto, ancho, alto);
             relleno = new SolidBrush(Color.Black);
+
             if (datos[2] >= 10.0)
                 p = new Point(465, vGrafico.pb.Height - (alto / 2));
             else
-                p = new Point(465, vGrafico.pb.Height - (alto - 5));
+            { p = new Point(465, vGrafico.pb.Height - (alto - 5)); }
+                
+
             texto = string.Format("Total : {0} %", datos[0]);
             e.Graphics.DrawString(texto, letra, relleno, p);
 
