@@ -290,7 +290,7 @@
             // 
             this.agregarAlojStripMenu.Name = "agregarAlojStripMenu";
             this.agregarAlojStripMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.agregarAlojStripMenu.Size = new System.Drawing.Size(179, 22);
+            this.agregarAlojStripMenu.Size = new System.Drawing.Size(180, 22);
             this.agregarAlojStripMenu.Text = "Agregar...";
             this.agregarAlojStripMenu.Click += new System.EventHandler(this.agregarAlojStripMenu_Click);
             // 
@@ -298,14 +298,14 @@
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
             this.modificarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.modificarToolStripMenuItem.Text = "Modificar...";
             this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
             // 
             // consultarToolStripMenuItem
             // 
             this.consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.consultarToolStripMenuItem.Text = "Consultar...";
             this.consultarToolStripMenuItem.Click += new System.EventHandler(this.consultarToolStripMenuItem_Click);
             // 
@@ -313,7 +313,7 @@
             // 
             this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
             this.importarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.importarToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importarToolStripMenuItem.Text = "Importar...";
             this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
             // 
@@ -321,21 +321,21 @@
             // 
             this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
             this.exportarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportarToolStripMenuItem.Text = "Exportar...";
             this.exportarToolStripMenuItem.Click += new System.EventHandler(this.exportarToolStripMenuItem_Click);
             // 
             // verListaToolStripMenuItem
             // 
             this.verListaToolStripMenuItem.Name = "verListaToolStripMenuItem";
-            this.verListaToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.verListaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.verListaToolStripMenuItem.Text = "Ver Lista";
             this.verListaToolStripMenuItem.Click += new System.EventHandler(this.verListaToolStripMenuItem_Click);
             // 
             // graficoToolStripMenuItem
             // 
             this.graficoToolStripMenuItem.Name = "graficoToolStripMenuItem";
-            this.graficoToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.graficoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.graficoToolStripMenuItem.Text = "Grafico";
             this.graficoToolStripMenuItem.Click += new System.EventHandler(this.graficoToolStripMenuItem_Click);
             // 
@@ -374,7 +374,9 @@
             // consultarToolStripMenuItem1
             // 
             this.consultarToolStripMenuItem1.Name = "consultarToolStripMenuItem1";
-            this.consultarToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
+
+            this.consultarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+
             this.consultarToolStripMenuItem1.Text = "Consultar...";
             this.consultarToolStripMenuItem1.Click += new System.EventHandler(this.consultarToolStripMenuItem1_Click);
             // 
@@ -388,18 +390,19 @@
             this.importarToolStripMenuItem1.ShowShortcutKeys = false;
             this.importarToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.importarToolStripMenuItem1.Text = "Importar...";
+            this.importarToolStripMenuItem1.Click += new System.EventHandler(this.importarToolStripMenuItem1_Click);
             // 
             // casasToolStripMenuItem
             // 
             this.casasToolStripMenuItem.Name = "casasToolStripMenuItem";
-            this.casasToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.casasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.casasToolStripMenuItem.Text = "Casas";
             this.casasToolStripMenuItem.Click += new System.EventHandler(this.casasToolStripMenuItem_Click);
             // 
             // hotelesToolStripMenuItem
             // 
             this.hotelesToolStripMenuItem.Name = "hotelesToolStripMenuItem";
-            this.hotelesToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.hotelesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.hotelesToolStripMenuItem.Text = "Hoteles";
             this.hotelesToolStripMenuItem.Click += new System.EventHandler(this.hotelesToolStripMenuItem_Click);
             // 
@@ -431,7 +434,8 @@
             // verListaToolStripMenuItem1
             // 
             this.verListaToolStripMenuItem1.Name = "verListaToolStripMenuItem1";
-            this.verListaToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
+
+            this.verListaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.verListaToolStripMenuItem1.Text = "Ver Lista";
             this.verListaToolStripMenuItem1.Click += new System.EventHandler(this.verListaToolStripMenuItem1_Click);
             // 
