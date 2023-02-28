@@ -1704,6 +1704,7 @@ namespace TP_II
         private void verListaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AlojamientosExistentesForm listaForm = new AlojamientosExistentesForm();
+            listaForm.Text = "Lista de Alojamientos";
 
             List<Alojamiento> lista = empresa.Alojamientos;
             if (lista.Count > 0)
@@ -2291,6 +2292,7 @@ namespace TP_II
         private void verListaToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             AlojamientosExistentesForm listaForm = new AlojamientosExistentesForm();
+            listaForm.Text = "Lista de Reservas";
 
             List<Reserva> lista = empresa.ListaDeReservas;
             if (lista.Count > 0)
@@ -2475,6 +2477,7 @@ namespace TP_II
         private void verListaToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             AlojamientosExistentesForm listaForm= new AlojamientosExistentesForm();
+            listaForm.Text = "Lista de Clientes";
 
             List<Cliente> lista = empresa.GetClientesHistoricos;
             if (lista.Count> 0)

@@ -47,7 +47,7 @@
             this.Controls.Add(this.listBox1);
             this.Name = "AlojamientosExistentesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AlojamientosExistentesForm";
+            this.Text = "Alojamientos Existentes";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AlojamientosExistentesForm_FormClosed);
             this.Load += new System.EventHandler(this.AlojamientosExistentesForm_Load);
             this.ResumeLayout(false);
