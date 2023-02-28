@@ -177,7 +177,7 @@
             this.btnModificarReserva.Name = "btnModificarReserva";
             this.btnModificarReserva.Size = new System.Drawing.Size(100, 70);
             this.btnModificarReserva.TabIndex = 2;
-            this.btnModificarReserva.Text = "Modoficar Reserva";
+            this.btnModificarReserva.Text = "Modificar Reserva";
             this.btnModificarReserva.UseVisualStyleBackColor = false;
             this.btnModificarReserva.Click += new System.EventHandler(this.btnModificarReserva_Click);
             this.btnModificarReserva.MouseEnter += new System.EventHandler(this.btnAgregarAloj_MouseEnter);
@@ -358,7 +358,7 @@
             this.agregarToolStripMenuItem1.Name = "agregarToolStripMenuItem1";
             this.agregarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
             this.agregarToolStripMenuItem1.ShowShortcutKeys = false;
-            this.agregarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.agregarToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.agregarToolStripMenuItem1.Text = "Agregar...";
             this.agregarToolStripMenuItem1.Click += new System.EventHandler(this.agregarToolStripMenuItem1_Click);
             // 
@@ -367,14 +367,16 @@
             this.modificarToolStripMenuItem1.Name = "modificarToolStripMenuItem1";
             this.modificarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
             this.modificarToolStripMenuItem1.ShowShortcutKeys = false;
-            this.modificarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.modificarToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.modificarToolStripMenuItem1.Text = "Modificar...";
             this.modificarToolStripMenuItem1.Click += new System.EventHandler(this.modificarToolStripMenuItem1_Click);
             // 
             // consultarToolStripMenuItem1
             // 
             this.consultarToolStripMenuItem1.Name = "consultarToolStripMenuItem1";
+
             this.consultarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+
             this.consultarToolStripMenuItem1.Text = "Consultar...";
             this.consultarToolStripMenuItem1.Click += new System.EventHandler(this.consultarToolStripMenuItem1_Click);
             // 
@@ -386,7 +388,7 @@
             this.importarToolStripMenuItem1.Name = "importarToolStripMenuItem1";
             this.importarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.I)));
             this.importarToolStripMenuItem1.ShowShortcutKeys = false;
-            this.importarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.importarToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.importarToolStripMenuItem1.Text = "Importar...";
             this.importarToolStripMenuItem1.Click += new System.EventHandler(this.importarToolStripMenuItem1_Click);
             // 
@@ -412,7 +414,7 @@
             this.exportarToolStripMenuItem1.Name = "exportarToolStripMenuItem1";
             this.exportarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
             this.exportarToolStripMenuItem1.ShowShortcutKeys = false;
-            this.exportarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.exportarToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.exportarToolStripMenuItem1.Text = "Exportar...";
             // 
             // casasToolStripMenuItem1
@@ -432,6 +434,7 @@
             // verListaToolStripMenuItem1
             // 
             this.verListaToolStripMenuItem1.Name = "verListaToolStripMenuItem1";
+
             this.verListaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.verListaToolStripMenuItem1.Text = "Ver Lista";
             this.verListaToolStripMenuItem1.Click += new System.EventHandler(this.verListaToolStripMenuItem1_Click);

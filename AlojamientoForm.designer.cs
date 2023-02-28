@@ -153,7 +153,7 @@
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(113, 23);
             this.btnImprimir.TabIndex = 11;
-            this.btnImprimir.Text = "Imprimir Cmprobante";
+            this.btnImprimir.Text = "Imprimir Comprobante";
             this.btnImprimir.UseVisualStyleBackColor = true;
             // 
             // AlojamientoForm
