@@ -743,19 +743,12 @@ namespace TP_II
 
             if(ofd.ShowDialog() == DialogResult.OK)
             {
-                try
-                {
-                    path = ofd.FileName;
-                    d=empresa.ImportarReservasDeAlojamiento(path);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    ofd.Dispose();
-                }     
+                
+                path = ofd.FileName;
+                d=empresa.ImportarReservasDeAlojamiento(path);
+                
+                ofd.Dispose();
+                  
                 AlojamientosExistentesForm vInforme = new AlojamientosExistentesForm();
                 if(d.Count > 0)
                 {
@@ -2372,8 +2365,12 @@ namespace TP_II
                         apellido=campos[2];
                         dni= Convert.ToInt32(campos[3]);
                         fNacimiento=DateTime.Parse(campos[4]);
+                        Cliente nuevo=null;
 
-                        Cliente nuevo=new Cliente(nombre,apellido,dni,fNacimiento);
+                        if(dni >= 1000000 && dni <= 99999999)
+                            nuevo=new Cliente(nombre,apellido,dni,fNacimiento);
+                        else
+                            nuevo = new Cliente(nombre, apellido, 99999999, fNacimiento);
 
                         int index=-1;
                         if (empresa.GetClientesHistoricos.Count > 0)
@@ -2660,6 +2657,11 @@ namespace TP_II
         {
             string path = Application.StartupPath + @"/html/about.html";
             Process.Start(path);
+        }
+
+        private void importarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

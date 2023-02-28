@@ -1,0 +1,11 @@
+direccion; jurisdiccion; ciudad; minDias; camas; precioBaseCasa; s1; s2; s3; s4; s5; s6 //Para casas
+direccion, jurisdiccion; ciudad; nombre, tresEstrellas, cantSimples, cantDobles, cantTriples //Para Hoteles
+Chubut 2290;Chubut;Sucutrucu;5;10;4000;Cochera;Pileta;WI-FI;Limpieza;Desayuno;Admite Mascota
+Catamarca 456;Chubut;Sucutrucu;4;5;6000;Pileta;Desayuno;Admite Mascota;;;
+Jujuy 789;Chubut;Sucutrucu;4;5;6000;Admite Mascota;;;;;
+Ibicuy 2222;Chubut;Sucutrucu;Gran Hotel I;true;10;10;10
+Los Álamos 34;Chubut;Sucutrucu;Álamo;true;35;20;10
+Los Álamos 3245;Chubut;Sucutrucu;Puesta Del Sol;false;35;20;10
+Los Álamos 3245;Chuubut;Sucutrucu;Puesta Del Sol;false;35;20;10
+Los Álamos 324;Chaco;Resistencia;Puesta Del Sol;false;35;20;10
+Los Álamos 32;Misiones;PAPAPA;Puesta Del Sol;false;35;20;10
