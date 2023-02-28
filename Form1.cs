@@ -2356,8 +2356,12 @@ namespace TP_II
                         apellido=campos[2];
                         dni= Convert.ToInt32(campos[3]);
                         fNacimiento=DateTime.Parse(campos[4]);
+                        Cliente nuevo=null;
 
-                        Cliente nuevo=new Cliente(nombre,apellido,dni,fNacimiento);
+                        if(dni >= 1000000 && dni <= 99999999)
+                            nuevo=new Cliente(nombre,apellido,dni,fNacimiento);
+                        else
+                            nuevo = new Cliente(nombre, apellido, 99999999, fNacimiento);
 
                         int index=-1;
                         if (empresa.GetClientesHistoricos.Count > 0)
