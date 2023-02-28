@@ -772,16 +772,26 @@ namespace TP_II
             vPasajero.btnPasajeros.Visible = false;
             if (pasajeros.Count < (capacidad - 1)) 
             {
-                if (vPasajero.ShowDialog() == DialogResult.OK)
+                try
                 {
-                    string nombre = vPasajero.tbNombre.Text;
-                    string apellido = vPasajero.tbApellido.Text;
-                    int dni = Convert.ToInt32(vPasajero.tbDni.Text);
-                    DateTime fNacimiento = vPasajero.fNacimiento.Value;
-                    Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
-                    pasajeros.Add(cliente);
-                    capacidad -= 1;
+                    if (vPasajero.ShowDialog() == DialogResult.OK)
+                    {
+                        string nombre = vPasajero.tbNombre.Text;
+                        string apellido = vPasajero.tbApellido.Text;
+                        int dni = Convert.ToInt32(vPasajero.tbDni.Text);
+                        DateTime fNacimiento = vPasajero.fNacimiento.Value;
+                        Cliente cliente = new Cliente(nombre, apellido, dni, fNacimiento);
+                        pasajeros.Add(cliente);
+                        capacidad -= 1;
+                    }
                 }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Error en los Datos ingresados");
+                    btnPasajeros_Click(sender, e);
+                }
+                
             }
             else MessageBox.Show("Capacidad del alojamiento alcanzada.");  
         }
@@ -928,7 +938,6 @@ namespace TP_II
 
                                         MessageBox.Show("Error en los Datos ingresados");
                                     }
-
                                 }
                                 // Quito evento click del boton "Agregar pasajeros" en ventana DatosCliente
                                 vCliente.btnPasajeros.Click -= new System.EventHandler(this.btnPasajeros_Click);
