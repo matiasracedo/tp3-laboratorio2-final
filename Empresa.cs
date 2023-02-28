@@ -392,7 +392,7 @@ namespace TP_II
         {
             bool ret = false;
             List<Reserva> reservas = hotel.GetReservasDeHabitacion(nroHabitacion);
-            if(reservas.Count>0)
+            if(reservas!= null &&reservas.Count>0)
             {
                 foreach (Reserva r in reservas)
                 {

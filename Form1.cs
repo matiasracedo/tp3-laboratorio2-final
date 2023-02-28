@@ -743,19 +743,12 @@ namespace TP_II
 
             if(ofd.ShowDialog() == DialogResult.OK)
             {
-                try
-                {
-                    path = ofd.FileName;
-                    d=empresa.ImportarReservasDeAlojamiento(path);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    ofd.Dispose();
-                }     
+                
+                path = ofd.FileName;
+                d=empresa.ImportarReservasDeAlojamiento(path);
+                
+                ofd.Dispose();
+                  
                 AlojamientosExistentesForm vInforme = new AlojamientosExistentesForm();
                 if(d.Count > 0)
                 {
@@ -2651,6 +2644,11 @@ namespace TP_II
         {
             string path = Application.StartupPath + @"/html/about.html";
             Process.Start(path);
+        }
+
+        private void importarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
